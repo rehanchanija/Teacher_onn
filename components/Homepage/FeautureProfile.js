@@ -13,7 +13,7 @@ const FeautureProfile = () => {
     // dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3.5,
+    slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 4000,
