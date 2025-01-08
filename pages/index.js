@@ -1,7 +1,14 @@
+import Footer from "@/components/Footer.js/Footer";
+import AdmissionEnroll from "@/components/Homepage/AdmissionEnroll";
 import CourseAdvice from "@/components/Homepage/CourseAdvice";
+import DirectionalClasses from "@/components/Homepage/DirectionalClasses";
 import FeautureProfile from "@/components/Homepage/FeautureProfile";
 import Learning from "@/components/Homepage/Learning";
 import LiveClasses from "@/components/Homepage/LiveClasses";
+import OnlineStore from "@/components/Homepage/OnlineStore";
+import Premium from "@/components/Homepage/Premium";
+import Reveiw from "@/components/Homepage/Reveiw";
+import StudentTeaching from "@/components/Homepage/StudentTeaching";
 import TutorsPage from "@/components/Homepage/TutorsPage";
 
 export default function Home() {
@@ -18,13 +25,13 @@ export default function Home() {
           <CourseAdvice />
         </div>
       </div>
-      {/* <Reveiw />
+      <Reveiw />
       <Premium />
       <StudentTeaching />
       <AdmissionEnroll />
       <OnlineStore />
       <DirectionalClasses />
-      <Footer /> */}
+      <Footer />
     </div>
   );
 }
