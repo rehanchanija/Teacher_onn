@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import CourseAdviceCard from "../Cards/CorseAdviceCard";
 
 const CourseAdvice = () => {
   return (
-    <div className="bg-white  ">
+    <div className="bg-white   ">
       <div className="flex items-center  md:px-2 ">
         <div className="pb-6">
           <Image
@@ -35,7 +36,9 @@ const CourseAdvice = () => {
           />
         </div>
       </div>
-      <div></div>
+      <div className="mx-4 md:mx-0">
+        <CourseAdviceCard />
+      </div>
     </div>
   );
 };
