@@ -9,13 +9,7 @@ const Premium = () => {
           width={351.56}
           height={490.41}
           alt=""
-        />
-        <Image
-          src="/image/home/pot.png"
-          width={202.08}
-          height={501.87}
-          alt=""
-        />
+      />
       </div>
       <div className="w-[647px] h-[479px] ">
         <div>
