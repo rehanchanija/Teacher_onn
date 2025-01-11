@@ -65,11 +65,11 @@ const Testimonals = () => {
         <p className="text-[#667681] pb-4 text-[20px]   ">
         Don’t take our word for it. Trust our customers.
         </p>
-       
+
       </div>
       <div className="flex  space-x-6 mb-4">
         <button
-          className="text-[#1268AA] py-2 border-[#1268AA] border px-4 text-[17.36px] font-bold   rounded-xl transform transition-transform duration-300 hover:scale-110"
+          className="text-[#1268AA] py-3 border-[#1268AA] border px-6 text-[17.36px] font-bold   rounded-md transform transition-transform duration-300 hover:scale-110"
           onClick={prevSlide}
         >
           <span className="px-2 font-bold">&lt;</span>
@@ -84,7 +84,7 @@ const Testimonals = () => {
         </button>
       </div>
       </div> 
-      <div className=" p   ">
+      <div className="   ">
       <AppSlider  ref={sliderRef} settings={sliderSettings}>
           {combos.map((product, index) => (
             <TestimonialsCard key={index} />

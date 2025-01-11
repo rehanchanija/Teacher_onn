@@ -9,7 +9,6 @@ import Premium from "@/components/Homepage/Premium";
 import Reveiw from "@/components/Homepage/Reveiw";
 import StudentTeaching from "@/components/Homepage/StudentTeaching";
 import Testimonals from "@/components/Homepage/Testimonal";
-// import LiveClasses from "@/components/Homepage/LiveClasses";
 
 export default function Home() {
   return (
@@ -46,3 +45,4 @@ export default function Home() {
     </div>
   );
 }
+  
