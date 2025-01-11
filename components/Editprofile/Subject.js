@@ -22,11 +22,9 @@ const Subject = () => {
     const [subject, setSubject] = useState("");
     const [fromLevel, setFromLevel] = useState("");
     const [toLevel, setToLevel] = useState("");
-    const [classLevel, setClassLevel] = useState("");
-    const [board, setBoard] = useState("");
 
     const handleSave = () => {
-        if (!subject || !fromLevel || !toLevel || !classLevel || !board) {
+        if (!subject || !fromLevel || !toLevel) {
             alert("Please fill in all the required fields.");
         } else {
             window.location.href = "/experience";
@@ -133,14 +131,26 @@ const Subject = () => {
 
                     {/* Add Education Form */}
                     <div className="p-6 bg-[#F2F6FB]">
-                        <h3 className="font-bold text-gray-800 mb-4">Please add subjects below:</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
                             {[
-                                { label: "Subject", value: subject, setter: setSubject, options: ["science", "Math", "English"] },
-                                { label: "From level", value: fromLevel, setter: setFromLevel, options: ["Class 1", "Class 2", "Class 3"] },
-                                { label: "To level", value: toLevel, setter: setToLevel, options: ["Class 1", "Class 2", "Class 3"] },
-                                { label: "Class", value: classLevel, setter: setClassLevel, options: ["Class 1", "Class 2", "Class 3"] },
-                                { label: "Board", value: board, setter: setBoard, options: ["Board A", "Board B", "Board C"] },
+                                {
+                                    label: "Subject",
+                                    value: subject,
+                                    setter: setSubject,
+                                    options: ["Science", "Math", "English", "Class", "Board"],
+                                },
+                                {
+                                    label: "From level",
+                                    value: fromLevel,
+                                    setter: setFromLevel,
+                                    options: ["Class 1", "Class 2", "Class 3"],
+                                },
+                                {
+                                    label: "To level",
+                                    value: toLevel,
+                                    setter: setToLevel,
+                                    options: ["Class 1", "Class 2", "Class 3"],
+                                },
                             ].map(({ label, value, setter, options }, idx) => (
                                 <div key={idx}>
                                     <label className="block font-bold mb-1 text-gray-800">
@@ -151,7 +161,7 @@ const Subject = () => {
                                         value={value}
                                         onChange={(e) => setter(e.target.value)}
                                     >
-                                        <option>Select here</option>
+                                        <option value="">Select here</option>
                                         {options.map((opt, i) => (
                                             <option key={i} value={opt}>
                                                 {opt}
@@ -181,11 +191,31 @@ const Subject = () => {
                                 Update &gt;&gt;
                             </button>
                         </div>
+
+                        {/* Clickable Divs */}
+                        <div className="mt-6">
+                            <h3 className="font-bold text-gray-800 mb-2">Quick Select:</h3>
+                            <div className="flex gap-4">
+                                {["Class", "Board"].map((item, idx) => (
+                                    <div
+                                        key={idx}
+                                        className="cursor-pointer border border-gray-300 rounded-md p-3 bg-white text-gray-600 hover:bg-gray-100"
+                                        onClick={() => setSubject(item)}
+                                    >
+                                        {item}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+
                     </div>
                 </div>
             </div>
         </div>
     );
 };
+
 
 export default Subject;
