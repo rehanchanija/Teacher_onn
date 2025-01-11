@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 import AdmissionEnroll from "@/components/Homepage/AdmissionEnroll";
+=======
+import Education from "@/components/Editprofile/Education";
+import PersonalInfo from "@/components/Editprofile/PersonalInfo";
+import Subject from "@/components/Editprofile/Subject";
+import Footer from "@/components/Footer.js/Footer";
+>>>>>>> fcb368989cb74daa3c84143977b956db0da92a5f
 import CourseAdvice from "@/components/Homepage/CourseAdvice";
 import DirectionalClasses from "@/components/Homepage/DirectionalClasses";
 import FeautureProfile from "@/components/Homepage/FeautureProfile";
@@ -37,9 +44,18 @@ export default function Home() {
       <AdmissionEnroll /> 
      
       <OnlineStore />
+<<<<<<< HEAD
      
      <Testimonals/> {/* <DirectionalClasses /> */}
 </div>
+=======
+      <DirectionalClasses />
+      <Footer /> */}
+      <PersonalInfo />
+      <Education />
+      <Subject />
+      <Footer />
+>>>>>>> fcb368989cb74daa3c84143977b956db0da92a5f
     </div>
   );
 }
