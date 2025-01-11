@@ -1,3 +1,7 @@
+import Education from "@/components/Editprofile/Education";
+import PersonalInfo from "@/components/Editprofile/PersonalInfo";
+import Subject from "@/components/Editprofile/Subject";
+import Footer from "@/components/Footer.js/Footer";
 import CourseAdvice from "@/components/Homepage/CourseAdvice";
 import LiveClasses from "@/components/Homepage/LiveClasses";
 
@@ -22,6 +26,10 @@ export default function Home() {
       <OnlineStore />
       <DirectionalClasses />
       <Footer /> */}
+      <PersonalInfo />
+      <Education />
+      <Subject />
+      <Footer />
     </div>
   );
 }
