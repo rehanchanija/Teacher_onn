@@ -39,7 +39,7 @@ const LiveClasses = () => {
           />
         </div>
       </div>
-      <div className="flex flex-wrap md:  mx-6    px-2 md:px-0">
+      <div className="flex flex-wrap md:mx-6    px-2 md:px-0">
         {combos.map((product, index) => (
           <LiveClassesCard key={index} />
         ))}

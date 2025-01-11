@@ -4,7 +4,7 @@ import Link from "next/link";
 const OnlineStore = () => {
   return (
     <div>
-      <div className="bg-[#146DB2] md:flex justify-between md:p-12 rounded-xl ">
+      <div className="bg-[#146DB2] md:flex justify-between md:p-8 rounded-2xl ">
         <div className="pt-4">
           <Image
             src="/image/home/onlinestore.png"
@@ -35,14 +35,7 @@ const OnlineStore = () => {
               alt="reload"
             />
           </div>
-          <div className="absolute ">
-            <Image
-              src="/image/home/planet.png"
-              width={106}
-              height={60}
-              alt="reload"
-            />
-          </div>
+        
         </div>
       </div>
     </div>
