@@ -1,12 +1,13 @@
 import Education from "@/components/Editprofile/Education";
-import PersonalInfo from "@/components/Editprofile/PersonalInfo";
 import Subject from "@/components/Editprofile/Subject";
-import Footer from "@/components/Footer.js/Footer";
+import AdmissionEnroll from "@/components/Homepage/AdmissionEnroll";
 import CourseAdvice from "@/components/Homepage/CourseAdvice";
 import DirectionalClasses from "@/components/Homepage/DirectionalClasses";
-import FeautureProfile from "@/components/Homepage/FeautureProfile";
-import Learning from "@/components/Homepage/Learning";
 import LiveClasses from "@/components/Homepage/LiveClasses";
+import OnlineStore from "@/components/Homepage/OnlineStore";
+import Premium from "@/components/Homepage/Premium";
+import StudentTeaching from "@/components/Homepage/StudentTeaching";
+import Testimonals from "@/components/Homepage/Testimonal";
 
 export default function Home() {
   return (
@@ -36,11 +37,10 @@ export default function Home() {
         <Testimonals />
       </div>
       <DirectionalClasses />
-      {/* <PersonalInfo />
+      {/* {/* <PersonalInfo /> */}
       <Education />
       <Subject />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
-  
