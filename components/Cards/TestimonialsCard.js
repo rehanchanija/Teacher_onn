@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const TestimonialsCard = () => {
   return (
-    <div className="bg-[#FFFFFF] shadow-xl  shadow-[#E5ECF2]  md:mb-16 border space-y-2 border-blue-100 p-4 w-[360px]   rounded-lg ">
+    <div className="bg-[#FFFFFF] shadow-xl  shadow-[#E5ECF2]  md:mb-16 border space-y-2 border-blue-100 p-4 md:w-[360px]   rounded-lg ">
 
       <div className='flex'>
 

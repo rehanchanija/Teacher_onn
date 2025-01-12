@@ -9,7 +9,7 @@ const LiveClasses = () => {
     <div className="bg-white ">
       <div className="flex items-center  md:mb-6"
       >
-        <div className="pb-6">
+        <div className="pb-6 hidden md:block ">
           <Image
             src="/image/home/live1.png"
             width={191.37}
@@ -30,7 +30,7 @@ const LiveClasses = () => {
             needs of students..
           </p>
         </div>
-        <div className="pb-6">
+        <div className="pb-6 hidden md:block">
           <Image
             src="/image/home/live2.png"
             width={191.37}
@@ -39,7 +39,7 @@ const LiveClasses = () => {
           />
         </div>
       </div>
-      <div className="flex flex-wrap     px-2 md:px-0">
+      <div className="flex flex-wrap     px-3 md:px-0">
         {combos.map((product, index) => (
           <LiveClassesCard key={index} />
         ))}

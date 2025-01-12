@@ -18,8 +18,8 @@ const CourseAdvice = () => {
           <Link href="" className="text-[#1BADFF]  text-[18px]">
             ~ COURSE ADVICE ~
           </Link>
-          <h1 className="md:text-[50px] text-[30px] pb-4 flex md:block text-center font-semibold leading-[63.1px] text-[#0F283C]">
-            Experience <span className="text-[#7296b1] pl-3">Categories</span>
+          <h1 className="md:text-[50px] px-6  md:px-0 text-[30px] pb-4 flex md:block text-center font-semibold leading-[63.1px] text-[#0F283C]">
+            Experience <span className="text-[#146DB2] pl-3">Categories</span>
           </h1>
           <p className="text-[#667681] px-4 md:text-[20px] ">
             Established with a vision to provide high-quality and accessible

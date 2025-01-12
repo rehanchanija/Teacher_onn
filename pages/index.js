@@ -18,19 +18,19 @@ export default function Home() {
         <TutorsPage />
         <Learning />
         <FeautureProfile />
-        <div className="md:mx-12 mx-2">
+        <div className="md:mx-12 ">
           <LiveClasses />
         </div>
-        <div className="md:mx-12 mx-2">
+        <div className="md:mx-12 ">
           <CourseAdvice />
         </div>
-        <div className="py-4">
+        <div className="py-4 mx-2 ">
 
           <Reveiw />
         </div>
         <Premium />
       </div>
-      <div className="md:mx-12 mx-2 md:space-y-20 space-y-8">
+      <div className="md:mx-12 mx- md:space-y-20 space-y-8">
 
 
         <StudentTeaching />

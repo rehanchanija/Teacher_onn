@@ -4,7 +4,7 @@ import Link from "next/link";
 const OnlineStore = () => {
   return (
     <div>
-      <div className="bg-[#146DB2] md:flex md:justify-between space-x-12 space-y-3 md:p-8 rounded-2xl ">
+      <div className="bg-[#146DB2] md:flex md:justify-between md:space-x-12 space-x-4 space-y-3 md:p-8 rounded-2xl ">
         <div className="pt-4">
           <Image
             src="/image/home/onlinestore.png"

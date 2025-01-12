@@ -60,7 +60,7 @@ const Testimonals = () => {
   return (
     <div className="space-y-8 mt-12 md:mt-0 md:mb-0 mb-12 mx-4">
       <div className="md:flex items-center justify-between space-y-4">
-        <div className="md:w-[729px] mt-8 text-center">
+        <div className="md:w-[729px] mt-8 text-center md:text-left ">
           <Link href="" className="text-[#1BADFF]  text-[18px]">
             ~ TESTIMONIALS ~
           </Link>
