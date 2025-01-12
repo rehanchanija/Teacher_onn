@@ -61,7 +61,7 @@ const FeautureProfile = () => {
           <h1 className="md:text-[50px] text-[30px] pb-4 font-semibold text-white ">
             Featured Profiles
           </h1>
-          <p className="text-white px-2 md:text-[20px]    ">
+          <p className="text-white px-2 md:text-[20px] text-lg   ">
             Established with a vision to provide high-quality and accessible
             education, our platform is designed to cater to the diverse learning
             needs of students.
