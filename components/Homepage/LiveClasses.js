@@ -14,8 +14,10 @@ const LiveClasses = () => {
             src="/image/home/live1.png"
             width={191.37}
             height={191.37}
+            height={191.37}
             alt="a"
           />
+        </div>
         </div>
         <div className=" pb-6 md:w-[46.3rem] text-center mx-auto ">
           <Link href="" className="text-[#1BADFF] text-[20px]">
@@ -44,7 +46,7 @@ const LiveClasses = () => {
           <LiveClassesCard key={index} />
         ))}
       </div>
-    </div>
+    </div >
   );
 };
 
