@@ -4,7 +4,7 @@ import Link from "next/link";
 const OnlineStore = () => {
   return (
     <div>
-      <div className="bg-[#146DB2] md:flex justify-between md:p-8 rounded-2xl ">
+      <div className="bg-[#146DB2] md:flex md:justify-between space-x-12 space-y-3 md:p-8 rounded-2xl ">
         <div className="pt-4">
           <Image
             src="/image/home/onlinestore.png"
@@ -13,9 +13,9 @@ const OnlineStore = () => {
             alt="reload"
           />
         </div>
-        <div className="w-[513px] text-white ">
-          <h1 className="text-[50px] pb-4  font-semibold  ">Online Store</h1>
-          <p className="text-white pb-4 text-[20px]   ">
+        <div className="md:w-[513px] text-white pb-6  ">
+          <h1 className=" text-[50px] pb-4  font-semibold  ">Online Store</h1>
+          <p className="text-white pb-4  text-[20px]   ">
             Established with a vision to provide high-quality and accessible
             education, our platform is designed to cater to the diverse learning
             needs of students..
@@ -35,7 +35,7 @@ const OnlineStore = () => {
               alt="reload"
             />
           </div>
-        
+
         </div>
       </div>
     </div>

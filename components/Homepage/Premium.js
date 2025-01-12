@@ -9,11 +9,11 @@ const Premium = () => {
           width={429}
           height={534}
           alt="Reload"
-      />
+        />
       </div>
       <div className="md:w-[647px] md:pt-2 ">
         <div>
-          <p className="md:text-[50px] text-2xl text-[#0F283C] font-extrabold md:leading-[68px]  py-8 ">
+          <p className="md:text-[50px] text-3xl text-[#0F283C] font-extrabold md:leading-[68px]  py-8 ">
             Premium <span className="text-[#146DB2]"> Learning </span>Experience
           </p>
 

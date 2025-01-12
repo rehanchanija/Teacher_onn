@@ -1,26 +1,104 @@
-import FingerIcon from "@/assets/icons/FingerIcon";
+"use client";
+
+import Image from 'next/image';
 
 const TutorsPage = () => {
   return (
-    <div className="bg-[#146DB2]    ">
-      <div className=" md:px-1 pt-6 w-">
-        <div className=" leading-[73px]  md:text-[60px] text-[30px]  text-white py-4 ">
-          <h1 className="   ">Join Live Online or</h1>
-          <span className=" font-semibold ">
-            Offline Classes with the
-            <h2 className="text-[#1BADFF] flex font-semibold">
-              Best Tutors
-              <FingerIcon />
-            </h2>
-          </span>
+    <div className="relative w-full font-gilroy overflow-hidden">
+
+      {/* Background sections */}
+      <div className="bg-[#136FB6] h-[500px] sm:h-[600px] md:h-[700px] lg:h-[700px] w-full"></div>
+
+      <div className='flex'>
+        {/* left section */}
+        <div>
+
+          <div className=" md:block absolute top-4 right-4">
+            <Image
+              src="/image/home/tutorpag.png"
+              alt="Top Right Image"
+              width={465}
+              height={684}
+              className="w-[300px] sm:w-[400px] md:w-[465px] h-auto"
+            />
+          </div>
+
+          <div className="absolute top-[150px] sm:top-[200px] md:top-[246px] right-4 sm:right-8 md:right-auto md:left-[calc(50%+10px)] bg-white w-[180px] sm:w-[200px] md:w-[214px] h-auto p-4 rounded-[20px] shadow-md">
+            <ul className="space-y-2 sm:space-y-3">
+              {["Customized Plan", "Science Lab", "Test Series", "8+ Lessons 4"].map((text, index) => (
+                <li key={index} className="flex items-center space-x-2">
+                  <Image
+                    src="/bullets.png"
+                    alt="Bullet Icon"
+                    width={20}
+                    height={20}
+                    className="w-4 h-4 sm:w-5 sm:h-5"
+                  />
+                  <span className="text-black text-[12px] sm:text-[14px] md:text-[16px]">{text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+
         </div>
-        <p className="text-white  md:text-[20px]  w-[604px]  ">
-          At Direction Classes, we believe in empowering students through
-          education and guiding them toward a successful future.
+        {/* right section */}
+        <div className="absolute top-[100px] sm:top-[150px] md:top-[200px] left-4 sm:left-8 md:left-[4rem] 
+                         text-white max-w-[90%] sm:max-w-[80%] md:max-w-[600px]">
+          <h1 className="text-[28px] sm:text-[40px] md:text-[50px] lg:text-[60px] font-gilroy leading-tight">
+            Join Live Online Or
+          </h1>
+          <p className="text-[28px] sm:text-[40px] md:text-[50px] lg:text-[60px] font-gilroy-bold">
+            <span className="border-b-4 sm:border-b-8 border-[#1BADFF]">Offline</span> Classes with
+          </p>
+          <p className="text-[28px] sm:text-[40px] md:text-[50px] lg:text-[60px] font-gilroy-bold">
+            The <span className="text-[#1BADFF]">Best Tutors</span>
+          </p>
+
+          {/* Description text */}
+          <p className="text-white text-[12px] sm:text-[14px] md:text-[16px] lg:text-[20px] mt-4 md:mt-8">
+            At Direction Classes, we believe in empowering students through education and guiding them toward a successful future.
+          </p>
+
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mt-6 md:mt-8">
+            <button className="bg-white text-[#1268AA] text-[12px] sm:text-[14px] md:text-[17px] 
+                                   w-full sm:w-[140px] md:w-[179px] h-[40px] md:h-[52px] rounded-[4px]">
+              Join as a Student
+            </button>
+            <button className="bg-[#1BADFF] text-white text-[12px] sm:text-[14px] md:text-[17px] 
+                                   w-full sm:w-[140px] md:w-[179px] h-[40px] md:h-[52px] rounded-[4px]">
+              Join as a Tutor
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div className=" max-w-7xl mx-10 rounded-lg left-4 right-4 bg-[#0F283C]  p-4 sm:p-6">
+        <p className="text-white text-[16px] sm:text-[20px] md:text-[24px] lg:text-[30px] font-gilroy-bold mb-4 sm:mb-6">
+          Find online teachers and home tutors for free!
         </p>
+
+        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+          <input
+            type="text"
+            placeholder="Subject/Skill"
+            className="w-full sm:w-1/3 h-[40px] sm:h-[52px] bg-white text-[#0F283C] px-4 rounded-[4px]"
+          />
+          <input
+            type="text"
+            placeholder="Location"
+            className="w-full sm:w-1/3 h-[40px] sm:h-[52px] bg-white text-[#0F283C] px-4 rounded-[4px]"
+          />
+          <button className="w-full sm:w-[179px] h-[40px] sm:h-[52px] bg-[#1BADFF] text-white 
+                                   text-[14px] md:text-[17px] rounded-[4px]">
+            Book Demo
+          </button>
+        </div>
       </div>
     </div>
   );
-};
-
+}
 export default TutorsPage;

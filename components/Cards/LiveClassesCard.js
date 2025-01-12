@@ -3,19 +3,14 @@ import Link from "next/link";
 
 const LiveClassesCard = () => {
   return (
-    <div className="p-3 w-[400px]  bg-white shadow-2xl  m-3  rounded-lg ">
+    <div className="p-3 md:w-[360px]  bg-white shadow-2xl  m-3  rounded-lg ">
       <Image src="/image/home/livecard.png" width={387} height={199} alt="" />
       <div className=" space-y-2 bg-white ">
         <div className="flex items-center pt-3 ">
           <span href="" className="pr-2 text-[20px] text-[#778D9E]">
-            4.9
+            4.9 <span className="text-[#F8A401]">★★★★☆</span>
           </span>
-          <Image
-            src="/image/home/rate.png"
-            width={101}
-            height={17.57}
-            alt="aaa"
-          />
+
         </div>
         <p className="text-[20px] font-bold pt-1.5  ">
           BTech Tuition - BTech 1st Year <br></br>Engineering....

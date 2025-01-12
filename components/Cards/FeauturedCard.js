@@ -8,9 +8,9 @@ const FeauturedCard = () => {
       <div className="px-6 py-3 bg-white rounded-b-lg">
         <h1 className="text-[24px] font-bold pt-1.5">Hrithik C.</h1>
         <p className="text-[18px] text-[#667681] pb-2"> Class 11 Tuition</p>
-        <span className="flex pb-4 ">
-          <Image src="/image/home/rate.png" width={100} height={17} alt="aaa" />
-          <Link href="" className="pl-2  text-[18px] text-[#146DB2]">
+        <span className="flex pb-4 items-centers ">
+          <span className="text-[#F8A401] text-2xl ">★★★★☆</span>
+          <Link href="" className="pl-2 pt-1  text-[18px] text-[#146DB2]">
             799 Reviews
           </Link>
         </span>

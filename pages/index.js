@@ -3,19 +3,23 @@ import Subject from "@/components/Editprofile/Subject";
 import AdmissionEnroll from "@/components/Homepage/AdmissionEnroll";
 import CourseAdvice from "@/components/Homepage/CourseAdvice";
 import DirectionalClasses from "@/components/Homepage/DirectionalClasses";
+import FeautureProfile from "@/components/Homepage/FeautureProfile";
+import Learning from "@/components/Homepage/Learning";
 import LiveClasses from "@/components/Homepage/LiveClasses";
 import OnlineStore from "@/components/Homepage/OnlineStore";
 import Premium from "@/components/Homepage/Premium";
+import Reveiw from "@/components/Homepage/Reveiw";
 import StudentTeaching from "@/components/Homepage/StudentTeaching";
 import Testimonals from "@/components/Homepage/Testimonal";
+import TutorsPage from "@/components/Homepage/TutorsPage";
 
 export default function Home() {
   return (
     <div>
       <div className="md:space-y-20 space-y-8">
-        {/* <TutorsPage />
+        <TutorsPage />
         <Learning />
-        <FeautureProfile /> */}
+        <FeautureProfile />
         <div className="md:mx-12 mx-2">
           <LiveClasses />
         </div>
@@ -24,11 +28,11 @@ export default function Home() {
         </div>
         <div className="py-4">
 
-          <Premium />
+          <Reveiw />
         </div>
+        <Premium />
       </div>
-      {/* <Reveiw />/ */}
-      <div className="md:mx-12 md:space-y-20">
+      <div className="md:mx-12 mx-2 md:space-y-20 space-y-8">
 
 
         <StudentTeaching />
