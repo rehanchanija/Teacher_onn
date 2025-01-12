@@ -4,7 +4,7 @@ const Reveiw = () => {
   const combos = [1, 2, 3];
 
   return (
-    <div className="bg-[#146DB2] md:flex md:px-6 md:py-12 pb-4 md:pb-0  ">
+    <div className="bg-[#146DB2] md:flex md:px-6 md:py-12 pb-4   ">
       <div className=" w-[410px] h-[189px] px-4  pt-8">
         <p className="text-[3.1rem] font-black leading-[63.1px] text-white    ">
           Over <span> 500 Plus </span>
