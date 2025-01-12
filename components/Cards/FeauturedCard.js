@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const FeauturedCard = () => {
   return (
-    <div className="px-3   py-4 rounded-lg w-[294px] ">
+    <div className="px-2   py-4 rounded-lg w-[294px] ">
       <Image src="/image/home/cards.png" width={294} height={442} alt="" />
       <div className="px-6 py-3 bg-white rounded-b-lg">
         <h1 className="text-[24px] font-bold pt-1.5">Hrithik C.</h1>

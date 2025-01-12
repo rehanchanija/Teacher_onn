@@ -9,7 +9,7 @@ const AdmissionEnroll = () => {
         <Link href="" className="text-[#1BADFF] text-[18px]">
           ~ TRENDING NOW ~
         </Link>
-        <h1 className="text-[3.1rem] pb-4  font-semibold  text-[#0F283C]">
+        <h1 className="text-[3.1rem] pb-4  font-extrabold  text-[#0F283C]">
           IGCSE & ICSE <span className="text-[#146DB2]">TUTORS</span>
         </h1>
         <p className="text-[#667681] pb-4    ">
@@ -34,26 +34,8 @@ const AdmissionEnroll = () => {
             className="p-5 "
           />
         </div>
-        <div className="absolute -bottom-[39.5rem] right-[21.5rem] ">
-          <Image
-            src="/image/home/igcse.png"
-            width={360}
-            height={220}
-            alt=""
-            className="b"
-          />
-        </div>
-        <button className="absolute -bottom-[37.2rem] right-[28rem] ">
-          <Link href="" className="text-white text-[22px]    ">
-            <Image
-              src="/image/home/youtube.png"
-              width={101}
-              height={101}
-              alt="reload"
-            />
-            Watch Video
-          </Link>
-        </button>
+        
+
       </div>
     </div>
   );

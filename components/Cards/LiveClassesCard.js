@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const LiveClassesCard = () => {
   return (
-    <div className="p-2.5 w-[370px]  bg-white shadow-2xl  m-3  rounded-lg ">
+    <div className="p-3 w-[400px]  bg-white shadow-2xl  m-3  rounded-lg ">
       <Image src="/image/home/livecard.png" width={387} height={199} alt="" />
       <div className=" space-y-2 bg-white ">
         <div className="flex items-center pt-3 ">
