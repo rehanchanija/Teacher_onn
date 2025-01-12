@@ -8,15 +8,15 @@ const LiveClasses = () => {
   return (
     <div className="bg-white ">
       <div className="flex items-center  md:px-12 md:mb-6"
-        >
+      >
         <div className="pb-6">
           <Image
             src="/image/home/live1.png"
             width={191.37}
-            height={191.37} 
+            height={191.37}
             alt="a"
           />
-        </div>  
+        </div>
         <div className=" pb-6 md:w-[46.3rem] text-center mx-auto ">
           <Link href="" className="text-[#1BADFF] text-[20px]">
             ~ Live Classes ~
