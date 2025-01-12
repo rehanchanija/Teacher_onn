@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Hamburg from "./Hamburg";
 import Logo from "./Logo";
 
 const Navbar = () => {
@@ -46,8 +47,8 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-between items-center mx-12 my-4 ">
-      <div className="flex items-center">
+    <div className="flex justify-between items-center md:mx-8 my-4 mx-4 ">
+      <div className="md:flex items-center">
         <Logo />
         <div className="font-semibold text-[18px] pl-12 text-[#515A60] ">
           <Navlinks />
@@ -74,20 +75,24 @@ const Navbar = () => {
             className="text-lg outline-none text-[#8D979E] bg-transparent w-full h-full pl-2"
           />
         </div>
-        <button className="bg-[#136FB6] text-white font-semibold px-4 py-3 rounded-[4px]">
+        <button className="bg-[#136FB6] hidden md:block text-white font-semibold md:px-5 md:py-3 rounded-[4px]">
           <Link href="">Signup as a Tutor</Link>
         </button>
-        <button className="bg-[#1BADFF] text-white font-semibold px-6 py-3 rounded-[4px] flex space-x-2">
-          <Link href="">Login</Link>
-          <Image
-            src="/image/Navbar/user.png"
-            width={22}
-            height={21}
-            alt="reload"
-          />
-        </button>
+        <div className="flex items-center space-x-4">
+
+          <button className="bg-[#1BADFF] text-white font-semibold px-6 py-3 rounded-[4px] flex items-center space-x-2">
+            <Link href="">Login</Link>
+            <Image
+              src="/image/Navbar/user.png"
+              width={22}
+              height={21}
+              alt="reload"
+            />
+          </button>
+          <div><Hamburg /></div>
+
+        </div>
       </div>
-      <div>{/* <Hamburg /> */}</div>
     </div>
   );
 };

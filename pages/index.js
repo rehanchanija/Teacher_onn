@@ -1,10 +1,3 @@
-import Course from "@/components/Editprofile/Course";
-import Education from "@/components/Editprofile/Education";
-import Experience from "@/components/Editprofile/Experience";
-import PersonalInfo from "@/components/Editprofile/PersonalInfo";
-import ProfileDescription from "@/components/Editprofile/ProfileDescription";
-import Subject from "@/components/Editprofile/Subject";
-import TeachingDetail from "@/components/Editprofile/TeachingDetail";
 import AdmissionEnroll from "@/components/Homepage/AdmissionEnroll";
 import CourseAdvice from "@/components/Homepage/CourseAdvice";
 import DirectionalClasses from "@/components/Homepage/DirectionalClasses";
@@ -16,8 +9,7 @@ import Premium from "@/components/Homepage/Premium";
 import Reveiw from "@/components/Homepage/Reveiw";
 import StudentTeaching from "@/components/Homepage/StudentTeaching";
 import Testimonals from "@/components/Homepage/Testimonal";
-import MyProfile from "@/components/MyProfile/MyProfile";
-import Store from "@/components/Store";
+import TutorsPage from "@/components/Homepage/TutorsPage";
 
 export default function Home() {
   return (
@@ -48,7 +40,7 @@ export default function Home() {
       </div>
       <DirectionalClasses />
       {/* {/* <PersonalInfo /> */}
-      <Education />
+      {/* <Education />
       <Subject />
       <Course />
       <Experience />
@@ -56,8 +48,8 @@ export default function Home() {
       <ProfileDescription />
       <Subject />
       <TeachingDetail />
-      <MyProfile />
-      <Store />
+      <MyProfile /> */}
+      {/* <Store /> */}
       {/* <Footer /> */}
     </div>
   );
