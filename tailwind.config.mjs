@@ -10,6 +10,9 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        fontFamily: {
+          gilroy: ['Gilroy', 'sans-serif'], // Add 'Gilroy' font
+        },
       },
     },
   },

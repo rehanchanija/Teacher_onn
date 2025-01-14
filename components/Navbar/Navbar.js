@@ -81,7 +81,7 @@ const Navbar = () => {
         <div className="flex items-center space-x-4">
 
           <button className="bg-[#1BADFF] text-white font-semibold px-6 py-3 rounded-[4px] flex items-center space-x-2">
-            <Link href="">Login</Link>
+            <Link href="/Login">Login</Link>
             <Image
               src="/image/Navbar/user.png"
               width={22}
