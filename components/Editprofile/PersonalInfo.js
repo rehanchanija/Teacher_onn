@@ -1,10 +1,9 @@
 'use client';
 
 import Image from "next/image";
-import { useRouter } from 'next/navigation';
 import { useState } from "react";
 
-const PersonalInfo = () => {
+const PersonalInfo = ({ handleNext, handlePrevious }) => {
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -15,7 +14,6 @@ const PersonalInfo = () => {
         address: ""
     });
 
-    const router = useRouter();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -30,7 +28,7 @@ const PersonalInfo = () => {
                 return;
             }
         }
-        router.push('/./Education');
+        handleNext();
     };
 
     return (
@@ -84,7 +82,7 @@ const PersonalInfo = () => {
                                     onClick={handleNextClick}
                                     className="bg-[#0F283C] text-white py-3 px-10 rounded text-lg font-semibold"
                                 >
-                                    Next &gt;&gt;
+                                    Next &gt;
                                 </button>
                             </div>
                         </form>

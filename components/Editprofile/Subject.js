@@ -1,9 +1,8 @@
 "use client";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const Subject = () => {
+const Subject = ({ handleNext, }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const educationData = [
         { subject: "ICSE Maths", grade: "(Grade 8 - Grade 10)" },
@@ -17,7 +16,6 @@ const Subject = () => {
         { subject: "IGCSE 9-1 Chemistry" },
     ];
 
-    const router = useRouter();
 
     const [subject, setSubject] = useState("");
     const [fromLevel, setFromLevel] = useState("");
@@ -26,13 +24,15 @@ const Subject = () => {
     const handleSave = () => {
         if (!subject || !fromLevel || !toLevel) {
             alert("Please fill in all the required fields.");
-        } else {
-            window.location.href = "/experience";
-        }
-    };
-
-    const handlePrevious = () => {
-        router.push("/Education");
+            handleNext();
+            // } else {
+            //     window.location.href = "/experience";
+            // }
+        };
+        // const handlePrevious = () => {
+        //     if (currentStep > 1) {
+        //         setCurrentStep(currentStep - 1);
+        //     }
     };
 
     return (
@@ -132,25 +132,24 @@ const Subject = () => {
                     {/* Add Education Form */}
                     <div className="p-6 bg-[#F2F6FB]">
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
-                            {[
-                                {
-                                    label: "Subject",
-                                    value: subject,
-                                    setter: setSubject,
-                                    options: ["Science", "Math", "English", "Class", "Board"],
-                                },
-                                {
-                                    label: "From level",
-                                    value: fromLevel,
-                                    setter: setFromLevel,
-                                    options: ["Class 1", "Class 2", "Class 3"],
-                                },
-                                {
-                                    label: "To level",
-                                    value: toLevel,
-                                    setter: setToLevel,
-                                    options: ["Class 1", "Class 2", "Class 3"],
-                                },
+                            {[{
+                                label: "Subject",
+                                value: subject,
+                                setter: setSubject,
+                                options: educationData.map(item => item.subject)
+                            },
+                            {
+                                label: "From level",
+                                value: fromLevel,
+                                setter: setFromLevel,
+                                options: ["Grade 1", "Grade 2", "Grade 3"],
+                            },
+                            {
+                                label: "To level",
+                                value: toLevel,
+                                setter: setToLevel,
+                                options: ["Grade 1", "Grade 2", "Grade 3"],
+                            },
                             ].map(({ label, value, setter, options }, idx) => (
                                 <div key={idx}>
                                     <label className="block font-bold mb-1 text-gray-800">
@@ -180,7 +179,7 @@ const Subject = () => {
                         <div className="flex justify-start items-center mt-6 gap-4">
                             <button
                                 className="w-40 h-12 border border-gray-700 text-gray-700 font-bold rounded-md"
-                                onClick={handlePrevious}
+                            // onClick={handlePrevious}
                             >
                                 &lt;&lt; Previous
                             </button>
@@ -208,14 +207,11 @@ const Subject = () => {
                             </div>
                         </div>
                     </div>
-                    <div>
-
-                    </div>
+                    <div></div>
                 </div>
             </div>
         </div>
     );
 };
-
 
 export default Subject;

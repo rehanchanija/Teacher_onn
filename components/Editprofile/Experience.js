@@ -1,17 +1,15 @@
-
 "use client";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react"; // Ensure useState is imported
+import { useState } from "react";
 
-const Experience = () => {
+const Experience = ({ handleNext, currentStep, setCurrentStep }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const educationData = [
-        { subject: "Teacher / Proffessor", location: "Noida, Uttar Pradesh, India · On-site", grade: "Full-time · 2 yrs 5 mos" },
-        { subject: "Teacher / Proffessor", location: "Noida, Uttar Pradesh, India · On-site", grade: "Full-time · 2 yrs 5 mos" },
-        { subject: "Teacher / Proffessor", location: "Noida, Uttar Pradesh, India · On-site", grade: "Full-time · 2 yrs 5 mos" },
+        { subject: "Teacher / Professor", location: "Noida, Uttar Pradesh, India · On-site", grade: "Full-time · 2 yrs 5 mos" },
+        { subject: "Teacher / Professor", location: "Noida, Uttar Pradesh, India · On-site", grade: "Full-time · 2 yrs 5 mos" },
+        { subject: "Teacher / Professor", location: "Noida, Uttar Pradesh, India · On-site", grade: "Full-time · 2 yrs 5 mos" },
     ];
-    const router = useRouter();
+
 
     // State for form fields
     const [organization, setOrganization] = useState("");
@@ -33,194 +31,196 @@ const Experience = () => {
             association &&
             jobDescription
         ) {
-            router.push("/Teaching_Detail_8");
         } else {
             alert("Please fill in all required fields.");
         }
+        handleNext();
+
     };
     const handlePrevious = () => {
-
-        router.push("/subjects");
-
+        if (currentStep > 2) {
+            setCurrentStep(currentStep - 1);
+        }
     };
 
     return (
-        <div className="w-full bg-white relative min-h-screen">
-
-
-            {/* Main Content Area */}
-            <div className="w-full bg-white">
-                <div className="relative max-w-[1281px] mx-auto shadow-lg -mt-8">
-
-
-                    {/* Education Cards - Responsive Grid */}
-                    <div className="p-8 bg-[#F2F6FB]">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {educationData.map((item, index) => (
-                                <div
-                                    key={index}
-                                    className="flex items-start gap-4 bg-white p-4 rounded-[2px] border border-[#B4C2D3]"
+        <div className="min-h-screen w-full bg-white">
+            <div className="relative max-w-[1281px] mx-auto shadow-lg -mt-8">
+                {/* Navigation */}
+                <div className="py-4 px-4 md:px-10 bg-white rounded-t-lg shadow">
+                    <div className="flex justify-between items-center">
+                        {/* Hamburger Icon */}
+                        <button
+                            className="text-gray-700 md:hidden focus:outline-none"
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            aria-label="Toggle Menu"
+                        >
+                            {isMenuOpen ? (
+                                <svg
+                                    className="w-8 h-8"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
                                 >
-                                    <div className="flex-grow">
-                                        <h3 className="font-bold text-[#4E5865]">{item.subject}</h3>
-                                        <p className="text-[#136AAD]" style={{ fontSize: '14px' }}>{item.location}</p>
-                                        {item.grade && <p className="text-sm text-[#8397A6]">{item.grade}</p>}
-                                    </div>
-                                    <div className="flex gap-2">
-                                        <button className=" rounded-full w-10 h-10">
-                                            <Image
-                                                src="/edit.png"
-                                                alt="Edit Icon"
-                                                width={35}
-                                                height={35}
-                                                className=" mx-auto"
-                                            />
-                                        </button>
-                                        <button className=" w-10 h-10 rounded-full">
-                                            <Image
-                                                src="/delete.png"
-                                                alt="Remove Icon"
-                                                width={35}
-                                                height={35}
-                                                className=" mx-auto"
-                                            />
-                                        </button>
-                                    </div>
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            ) : (
+                                <svg
+                                    className="w-8 h-8"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M4 6h16M4 12h16M4 18h16"
+                                    />
+                                </svg>
+                            )}
+                        </button>
+                    </div>
+                </div>
+
+                {/* Education Cards */}
+                <div className="p-6 bg-[#F2F6FB]">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {educationData.map((item, index) => (
+                            <div
+                                key={index}
+                                className="flex items-start gap-4 bg-white p-4 rounded-md border border-gray-300 shadow-sm"
+                            >
+                                <div className="flex-grow">
+                                    <h3 className="font-bold text-gray-800">{item.subject}</h3>
+                                    <p className="text-sm text-gray-600">{item.location}</p>
+                                    {item.grade && <p className="text-sm text-gray-600">{item.grade}</p>}
                                 </div>
-                            ))}
-                        </div>
+                                <div className="flex gap-2">
+                                    <button className=" text-white rounded-full focus:outline-none" aria-label="Edit">
+                                        <Image
+                                            src="/edit.png"
+                                            alt="Edit Icon"
+                                            width={42}
+                                            height={42}
+                                            className="mx-auto"
+                                        />
+                                    </button>
+                                    <button className=" text-white rounded-full focus:outline-none" aria-label="Remove">
+                                        <Image
+                                            src="/delete.png"
+                                            alt="Remove Icon"
+                                            width={42}
+                                            height={42}
+                                            className="mx-auto"
+                                        />
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Add Experience Form */}
+                <div className="p-6 bg-[#F2F6FB]">
+                    <h3 className="mb-6 text-black font-semibold text-xl">
+                        Please add Teaching and Professional Experience.
+                    </h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
+                        {[
+                            {
+                                label: "Organization",
+                                value: organization,
+                                setter: setOrganization,
+                                type: "text",
+                            },
+                            {
+                                label: "Designation",
+                                value: designation,
+                                setter: setDesignation,
+                                type: "select",
+                                options: ["Option 1", "Option 2"],
+                            },
+                            {
+                                label: "Start Date",
+                                value: { startMonth, startYear },
+                                setter: (key, value) => {
+                                    if (key === "startMonth") setStartMonth(value);
+                                    if (key === "startYear") setStartYear(value);
+                                },
+                                type: "date",
+                            },
+                            {
+                                label: "End Date",
+                                value: endDate,
+                                setter: setEndDate,
+                                type: "select",
+                                options: ["Jan 2021", "Feb 2021", "Mar 2021"],
+                            },
+                            {
+                                label: "Association",
+                                value: association,
+                                setter: setAssociation,
+                                type: "select",
+                                options: ["Option 1", "Option 2", "Option 3"],
+                            },
+                            {
+                                label: "Job Description",
+                                value: jobDescription,
+                                setter: setJobDescription,
+                                type: "text",
+                            },
+                        ].map(({ label, value, setter, type, options }, idx) => (
+                            <div key={idx}>
+                                <label className="block font-bold mb-1 text-[#4E5865]" style={{ fontSize: '16px' }}>
+                                    {label} <span className="text-red-500">*</span>
+                                </label>
+                                {type === "select" ? (
+                                    <select
+                                        className="text-black w-full border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB]"
+                                        value={value}
+                                        onChange={(e) => setter(e.target.value)}
+                                    >
+                                        {options.map((opt, i) => (
+                                            <option key={i} value={opt}>
+                                                {opt}
+                                            </option>
+                                        ))}
+                                    </select>
+                                ) : (
+                                    <input
+                                        type={type}
+                                        className="text-black w-full border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB]"
+                                        placeholder="Enter here"
+                                        value={value}
+                                        onChange={(e) => setter(e.target.value)}
+                                    />
+                                )}
+                            </div>
+                        ))}
                     </div>
 
-                    {/* Add Education Form */}
-                    <div className="p-8 bg-[#F2F6FB]">
-                        <h3 className=" mb-6 text-[black] font-semibold text-xl">Please add Teaching and Professional Experience.</h3>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
-                            <div>
-                                <label className="block font-bold mb-1 text-[#4E5865]" style={{ fontSize: '16px' }}>
-                                    Organization <span className="text-red-500">*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    className="text-black w-full border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB] text-[#8397A6]"
-                                    placeholder="Enter here"
-                                    value={organization}
-                                    onChange={(e) => setOrganization(e.target.value)}
-                                />
-                            </div>
-                            <div>
-                                <label className="block font-bold mb-1 text-[#4E5865]" style={{ fontSize: '16px' }}>
-                                    Designation <span className="text-red-500">*</span>
-                                </label>
-                                <select className=" text-black w-full border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB]" value={designation}
-                                    onChange={(e) => setDesignation(e.target.value)}>
-                                    <option >Option 1</option>
-                                    <option >Option 1</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label className="block font-bold text-sm mb-1 text-[#4E5865]">
-                                    Start Date <span className="text-red-500">*</span>
-                                </label>
-                                <div className="flex gap-4">
-                                    <div className="relative w-full lg:w-[194px]">
-                                        <select className="text-black w-full border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB] pr-10  appearance-none" value={startMonth}
-                                            onChange={(e) => setStartMonth(e.target.value)}>
-                                            <option>Jan</option>
-                                            <option>Feb</option>
-                                            <option>March</option>
-                                        </select>
-                                        <Image
-                                            src="/date.png"
-                                            alt="Calendar icon"
-                                            width={35}
-                                            height={35}
-                                            className="absolute right-2 top-1/2 transform -translate-y-1/2 w-5 h-5"
-                                        />
-                                    </div>
-                                    <div className="relative w-full lg:w-[194px]">
-                                        <select className=" text-black w-full border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB] pr-10 appearance-none" value={startYear}
-                                            onChange={(e) => setStartYear(e.target.value)}>
-                                            <option>2021</option>
-                                            <option>2022</option>
-                                            <option>2023</option>
-                                            <option>2024</option>
-                                        </select>
-                                        <Image
-                                            src="/date.png"
-                                            alt="Calendar icon"
-                                            width={35}
-                                            height={35}
-                                            className="absolute right-2 top-1/2 transform -translate-y-1/2 w-5 h-5"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <label className="block text-base font-semibold mb-1 text-[#4E5865]">
-                                    End Date <span className="text-sm font-normal">(Leave blank if not complete)</span> <span className="text-red-500">*</span>
-                                </label>
-                                <div className="relative w-full lg:w-[400px]">
-                                    <select className="text-black w-full border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB] pr-10 appearance-none">
-                                        <option value="" className="text-[#4e5865]">Enter here</option>
-                                        <option value="Jan 2021">Jan 2021</option>
-                                        <option value="Feb 2021">Feb 2021</option>
-                                        <option value="Mar 2021">Mar 2021</option>
-                                        <option value="Jan 2022">Jan 2022</option>
-                                        <option value="Feb 2022">Feb 2022</option>
-                                        <option value="Mar 2022">Mar 2022</option>
-                                        <option value="Jan 2023">Jan 2023</option>
-                                        <option value="Feb 2023">Feb 2023</option>
-                                        <option value="Mar 2023">Mar 2023</option>
-                                        <option value="Jan 2024">Jan 2024</option>
-                                        <option value="Feb 2024">Feb 2024</option>
-                                        <option value="Mar 2024">Mar 2024</option>
-                                    </select>
-                                    <Image
-                                        src="/date.png"
-                                        alt="Calendar icon"
-                                        width={20}
-                                        height={20}
-                                        className="absolute right-2 top-1/2 transform -translate-y-1/2 w-5 h-5"
-                                    />
-                                </div>
-                            </div>
-
-                            <div>
-                                <label className="block  font-bold text-sm mb-1 text-[#4E5865]">
-                                    Association <span className="text-red-500">*</span>
-                                </label>
-                                <select className="w-full text-black lg:w-[398px] border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB] text-[#8397A6]" value={association}
-                                    onChange={(e) => setAssociation(e.target.value)}>
-
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
-                                    <option>Option 3</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label className="block font-bold mb-1 text-[#4E5865]" style={{ fontSize: '16px' }}>
-                                    Job Description <span className="text-red-500">*</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    className="text-black w-full border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB] text-[#8397A6] "
-                                    placeholder="Type here"
-                                    value={jobDescription}
-                                    onChange={(e) => setJobDescription(e.target.value)}
-                                />
-                            </div>
-
-                        </div>
-
-                        {/* Buttons */}
-                        <div className="flex justify-left items-center mt-8">
-                            <button className="w-[179px] h-[52px] border border-[#0F283C] text-[#0F283C] font-bold text-sm rounded-[2px]" onClick={handlePrevious}>
-                                &lt;&lt; Previous
-                            </button>
-                            <button className="w-[179px] h-[52px] ml-4 bg-[#0B1F36] text-white font-bold text-sm rounded-[4px]" onClick={handleSave}>
-                                Save &gt;&gt;
-                            </button>
-                        </div>
+                    {/* Buttons */}
+                    <div className="flex justify-start items-center mt-6 gap-4">
+                        <button
+                            className="w-40 h-12 border border-gray-700 text-gray-700 font-bold rounded-md"
+                            onClick={handlePrevious}
+                        >
+                            &lt;&lt; Previous
+                        </button>
+                        <button
+                            className="w-40 h-12 bg-[#0F283C] text-white font-bold rounded-md"
+                            onClick={handleSave}
+                        >
+                            Save &gt;&gt;
+                        </button>
                     </div>
                 </div>
             </div>

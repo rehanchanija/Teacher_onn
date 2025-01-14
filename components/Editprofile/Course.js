@@ -1,16 +1,14 @@
 "use client";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const Course = () => {
+const Course = ({ handleSubmit }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const educationData = [
         { subject: "Course", location: "Noida, Uttar Pradesh, India · On-site" },
         { subject: "Course", location: "Noida, Uttar Pradesh, India · On-site" },
         { subject: "Course", location: "Noida, Uttar Pradesh, India · On-site" },
     ];
-    const router = useRouter();
 
     // State for form fields
     const [Course_title, setCourse_title] = useState("");
@@ -36,14 +34,18 @@ const Course = () => {
             LOI &&
             CD
         ) {
-            router.push("/store");
+            // router.push("/store");
         } else {
             alert("Please fill in all required fields.");
         }
+        handleSubmit();
+
     };
 
     const handlePrevious = () => {
-        router.push("/profile_description");
+        if (currentStep > 3) {
+            setCurrentStep(currentStep - 1);
+        }
     };
 
     return (
