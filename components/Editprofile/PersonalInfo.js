@@ -1,33 +1,37 @@
 'use client';
 
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/image";
-import { useState } from "react";
+import * as Yup from "yup";
 
 const PersonalInfo = ({ handleNext, handlePrevious }) => {
-    const [formData, setFormData] = useState({
+    // Validation schema using Yup
+    const validationSchema = Yup.object({
+        firstName: Yup.string().required("First name is required"),
+        lastName: Yup.string().required("Last name is required"),
+        mobile: Yup.string()
+            .required("Mobile is required")
+            .matches(/^\d{10}$/, "Enter a valid 10-digit mobile number"),
+        specialty: Yup.string().required("Specialty is required"),
+        email: Yup.string()
+            .email("Invalid email address")
+            .required("Email is required"),
+        city: Yup.string().required("City is required"),
+        address: Yup.string().required("Address is required"),
+    });
+
+    const initialValues = {
         firstName: "",
         lastName: "",
         mobile: "",
         specialty: "",
         email: "",
         city: "",
-        address: ""
-    });
-
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+        address: "",
     };
 
-    const handleNextClick = () => {
-        const requiredFields = ['firstName', 'lastName', 'mobile', 'specialty', 'email', 'city', 'address'];
-        for (let field of requiredFields) {
-            if (!formData[field]) {
-                alert('Please fill all the required fields.');
-                return;
-            }
-        }
+    const handleSubmit = (values) => {
+        console.log("Form Data:", values);
         handleNext();
     };
 
@@ -60,32 +64,42 @@ const PersonalInfo = ({ handleNext, handlePrevious }) => {
 
                     {/* Form Fields Section */}
                     <div className="md:w-2/3">
-                        <form className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            {["firstName", "lastName", "mobile", "specialty", "email", "city", "address"].map((field, index) => (
-                                <div key={index} className={`${field === "address" ? "sm:col-span-2" : ""}`}>
-                                    <label className="block text-sm font-medium text-gray-700">
-                                        {field.replace(/^\w/, (c) => c.toUpperCase())} *
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name={field}
-                                        value={formData[field]}
-                                        onChange={handleChange}
-                                        className="mt-1 p-2 border border-gray-300 rounded w-full bg-white"
-                                        placeholder={`Enter ${field}`}
-                                    />
-                                </div>
-                            ))}
-                            <div className="sm:col-span-2 flex justify-start">
-                                <button
-                                    type="button"
-                                    onClick={handleNextClick}
-                                    className="bg-[#0F283C] text-white py-3 px-10 rounded text-lg font-semibold"
-                                >
-                                    Next &gt;
-                                </button>
-                            </div>
-                        </form>
+                        <Formik
+                            initialValues={initialValues}
+                            validationSchema={validationSchema}
+                            onSubmit={handleSubmit}
+                        >
+                            {() => (
+                                <Form className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    {["firstName", "lastName", "mobile", "specialty", "email", "city", "address"].map((field, index) => (
+                                        <div key={index} className={`${field === "address" ? "sm:col-span-2" : ""}`}>
+                                            <label className="block text-sm font-medium text-gray-700">
+                                                {field.replace(/^\w/, (c) => c.toUpperCase())} *
+                                            </label>
+                                            <Field
+                                                name={field}
+                                                type="text"
+                                                placeholder={`Enter ${field}`}
+                                                className="mt-1 p-2 border border-gray-300 rounded w-full bg-white"
+                                            />
+                                            <ErrorMessage
+                                                name={field}
+                                                component="div"
+                                                className="text-sm text-red-500 mt-1"
+                                            />
+                                        </div>
+                                    ))}
+                                    <div className="sm:col-span-2 flex justify-start">
+                                        <button
+                                            type="submit"
+                                            className="bg-[#0F283C] text-white py-3 px-10 rounded text-lg font-semibold"
+                                        >
+                                            Next &gt;
+                                        </button>
+                                    </div>
+                                </Form>
+                            )}
+                        </Formik>
                     </div>
                 </div>
             </div>
