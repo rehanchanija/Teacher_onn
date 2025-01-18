@@ -25,6 +25,7 @@ const Experience = ({ handleNext = () => console.log("Next step"), currentStep, 
     const handleSave = (values) => {
         console.log(values);
         handleNext();
+        setCurrentStep(currentStep + 1); // Move to the next step
     };
 
     const handlePrevious = () => {
