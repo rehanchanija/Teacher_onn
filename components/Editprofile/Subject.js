@@ -1,8 +1,10 @@
 "use client";
+import { useFormik } from "formik";
 import Image from "next/image";
 import { useState } from "react";
+import * as Yup from "yup";
 
-const Subject = ({ handleNext, }) => {
+const Subject = ({ handleNext }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const educationData = [
         { subject: "ICSE Maths", grade: "(Grade 8 - Grade 10)" },
@@ -16,24 +18,23 @@ const Subject = ({ handleNext, }) => {
         { subject: "IGCSE 9-1 Chemistry" },
     ];
 
-
-    const [subject, setSubject] = useState("");
-    const [fromLevel, setFromLevel] = useState("");
-    const [toLevel, setToLevel] = useState("");
-
-    const handleSave = () => {
-        if (!subject || !fromLevel || !toLevel) {
-            alert("Please fill in all the required fields.");
+    const formik = useFormik({
+        initialValues: {
+            subject: "",
+            fromLevel: "",
+            toLevel: "",
+        },
+        validationSchema: Yup.object({
+            subject: Yup.string().required("Required"),
+            fromLevel: Yup.string().required("Required"),
+            toLevel: Yup.string().required("Required"),
+        }),
+        onSubmit: (values) => {
+            console.log("Form values:", values);
+            alert(JSON.stringify(values, null, 2));
             handleNext();
-            // } else {
-            //     window.location.href = "/experience";
-            // }
-        };
-        // const handlePrevious = () => {
-        //     if (currentStep > 1) {
-        //         setCurrentStep(currentStep - 1);
-        //     }
-    };
+        },
+    });
 
     return (
         <div className="min-h-screen w-full bg-white">
@@ -106,7 +107,6 @@ const Subject = ({ handleNext, }) => {
                                                 alt="Edit Icon"
                                                 width={42}
                                                 height={42}
-
                                                 className=" mx-auto"
                                             />
                                         </button>
@@ -119,7 +119,6 @@ const Subject = ({ handleNext, }) => {
                                                 alt="Remove Icon"
                                                 width={42}
                                                 height={42}
-
                                                 className=" mx-auto"
                                             />
                                         </button>
@@ -131,65 +130,70 @@ const Subject = ({ handleNext, }) => {
 
                     {/* Add Education Form */}
                     <div className="p-6 bg-[#F2F6FB]">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
-                            {[{
-                                label: "Subject",
-                                value: subject,
-                                setter: setSubject,
-                                options: educationData.map(item => item.subject)
-                            },
-                            {
-                                label: "From level",
-                                value: fromLevel,
-                                setter: setFromLevel,
-                                options: ["Grade 1", "Grade 2", "Grade 3"],
-                            },
-                            {
-                                label: "To level",
-                                value: toLevel,
-                                setter: setToLevel,
-                                options: ["Grade 1", "Grade 2", "Grade 3"],
-                            },
-                            ].map(({ label, value, setter, options }, idx) => (
-                                <div key={idx}>
-                                    <label className="block font-bold mb-1 text-gray-800">
-                                        {label} <span className="text-red-500">*</span>
-                                    </label>
-                                    <select
-                                        className="w-full border border-gray-300 rounded-md p-2 bg-white text-gray-600"
-                                        value={value}
-                                        onChange={(e) => setter(e.target.value)}
-                                    >
-                                        <option value="">Select here</option>
-                                        {options.map((opt, i) => (
-                                            <option key={i} value={opt}>
-                                                {opt}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-                            ))}
-                        </div>
+                        <form onSubmit={formik.handleSubmit}>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
+                                {[{
+                                    label: "Subject",
+                                    name: "subject",
+                                    options: educationData.map(item => item.subject)
+                                },
+                                {
+                                    label: "From level",
+                                    name: "fromLevel",
+                                    options: ["Grade 1", "Grade 2", "Grade 3"],
+                                },
+                                {
+                                    label: "To level",
+                                    name: "toLevel",
+                                    options: ["Grade 1", "Grade 2", "Grade 3"],
+                                },
+                                ].map(({ label, name, options }, idx) => (
+                                    <div key={idx}>
+                                        <label className="block font-bold mb-1 text-gray-800">
+                                            {label} <span className="text-red-500">*</span>
+                                        </label>
+                                        <select
+                                            className="w-full border border-gray-300 rounded-md p-2 bg-white text-gray-600"
+                                            name={name}
+                                            value={formik.values[name]}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                        >
+                                            <option value="">Select here</option>
+                                            {options.map((opt, i) => (
+                                                <option key={i} value={opt}>
+                                                    {opt}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        {formik.touched[name] && formik.errors[name] ? (
+                                            <div className="text-red-500 text-sm">{formik.errors[name]}</div>
+                                        ) : null}
+                                    </div>
+                                ))}
+                            </div>
 
-                        <p className="text-red-500 text-sm mt-2">
-                            If not in options above, add a new subject.
-                        </p>
+                            <p className="text-red-500 text-sm mt-2">
+                                If not in options above, add a new subject.
+                            </p>
 
-                        {/* Buttons */}
-                        <div className="flex justify-start items-center mt-6 gap-4">
-                            <button
-                                className="w-40 h-12 border border-gray-700 text-gray-700 font-bold rounded-md"
-                            // onClick={handlePrevious}
-                            >
-                                &lt;&lt; Previous
-                            </button>
-                            <button
-                                className="w-40 h-12 bg-[#0F283C] text-white font-bold rounded-md "
-                                onClick={handleSave}
-                            >
-                                Update &gt;&gt;
-                            </button>
-                        </div>
+                            {/* Buttons */}
+                            <div className="flex justify-start items-center mt-6 gap-4">
+                                <button
+                                    className="w-40 h-12 border border-gray-700 text-gray-700 font-bold rounded-md"
+                                    type="button"
+                                // onClick={handlePrevious}
+                                >
+                                    &lt;&lt; Previous
+                                </button>
+                                <button
+                                    className="w-40 h-12 bg-[#0F283C] text-white font-bold rounded-md"
+                                    type="submit"
+                                >
+                                    Update &gt;&gt;
+                                </button>
+                            </div>
+                        </form>
 
                         {/* Clickable Divs */}
                         <div className="mt-6">
@@ -199,7 +203,7 @@ const Subject = ({ handleNext, }) => {
                                     <div
                                         key={idx}
                                         className="cursor-pointer border border-gray-300 rounded-md p-3 bg-white text-gray-600 hover:bg-gray-100"
-                                        onClick={() => setSubject(item)}
+                                        onClick={() => formik.setFieldValue("subject", item)}
                                     >
                                         {item}
                                     </div>

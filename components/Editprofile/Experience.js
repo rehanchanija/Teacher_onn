@@ -1,8 +1,10 @@
 "use client";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/image";
 import { useState } from "react";
+import * as Yup from "yup";
 
-const Experience = ({ handleNext, currentStep, setCurrentStep }) => {
+const Experience = ({ handleNext = () => console.log("Next step"), currentStep, setCurrentStep }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const educationData = [
         { subject: "Teacher / Professor", location: "Noida, Uttar Pradesh, India · On-site", grade: "Full-time · 2 yrs 5 mos" },
@@ -10,33 +12,21 @@ const Experience = ({ handleNext, currentStep, setCurrentStep }) => {
         { subject: "Teacher / Professor", location: "Noida, Uttar Pradesh, India · On-site", grade: "Full-time · 2 yrs 5 mos" },
     ];
 
+    const validationSchema = Yup.object({
+        organization: Yup.string().required("Required"),
+        designation: Yup.string().required("Required"),
+        startMonth: Yup.string().required("Required"),
+        startYear: Yup.string().required("Required"),
+        endDate: Yup.string().required("Required"),
+        association: Yup.string().required("Required"),
+        jobDescription: Yup.string().required("Required"),
+    });
 
-    // State for form fields
-    const [organization, setOrganization] = useState("");
-    const [designation, setDesignation] = useState("");
-    const [startMonth, setStartMonth] = useState("");
-    const [startYear, setStartYear] = useState("");
-    const [endDate, setEndDate] = useState("");
-    const [association, setAssociation] = useState("");
-    const [jobDescription, setJobDescription] = useState("");
-
-    // Function to handle save button click
-    const handleSave = () => {
-        if (
-            organization &&
-            designation &&
-            startMonth &&
-            startYear &&
-            endDate &&
-            association &&
-            jobDescription
-        ) {
-        } else {
-            alert("Please fill in all required fields.");
-        }
+    const handleSave = (values) => {
+        console.log(values);
         handleNext();
-
     };
+
     const handlePrevious = () => {
         if (currentStep > 2) {
             setCurrentStep(currentStep - 1);
@@ -133,95 +123,107 @@ const Experience = ({ handleNext, currentStep, setCurrentStep }) => {
                     <h3 className="mb-6 text-black font-semibold text-xl">
                         Please add Teaching and Professional Experience.
                     </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
-                        {[
-                            {
-                                label: "Organization",
-                                value: organization,
-                                setter: setOrganization,
-                                type: "text",
-                            },
-                            {
-                                label: "Designation",
-                                value: designation,
-                                setter: setDesignation,
-                                type: "select",
-                                options: ["Option 1", "Option 2"],
-                            },
-                            {
-                                label: "Start Date",
-                                value: { startMonth, startYear },
-                                setter: (key, value) => {
-                                    if (key === "startMonth") setStartMonth(value);
-                                    if (key === "startYear") setStartYear(value);
-                                },
-                                type: "date",
-                            },
-                            {
-                                label: "End Date",
-                                value: endDate,
-                                setter: setEndDate,
-                                type: "select",
-                                options: ["Jan 2021", "Feb 2021", "Mar 2021"],
-                            },
-                            {
-                                label: "Association",
-                                value: association,
-                                setter: setAssociation,
-                                type: "select",
-                                options: ["Option 1", "Option 2", "Option 3"],
-                            },
-                            {
-                                label: "Job Description",
-                                value: jobDescription,
-                                setter: setJobDescription,
-                                type: "text",
-                            },
-                        ].map(({ label, value, setter, type, options }, idx) => (
-                            <div key={idx}>
-                                <label className="block font-bold mb-1 text-[#4E5865]" style={{ fontSize: '16px' }}>
-                                    {label} <span className="text-red-500">*</span>
-                                </label>
-                                {type === "select" ? (
-                                    <select
-                                        className="text-black w-full border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB]"
-                                        value={value}
-                                        onChange={(e) => setter(e.target.value)}
+                    <Formik
+                        initialValues={{
+                            organization: "",
+                            designation: "",
+                            startMonth: "",
+                            startYear: "",
+                            endDate: "",
+                            association: "",
+                            jobDescription: "",
+                        }}
+                        validationSchema={validationSchema}
+                        onSubmit={handleSave}
+                    >
+                        {({ setFieldValue }) => (
+                            <Form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
+                                {[
+                                    {
+                                        label: "Organization",
+                                        name: "organization",
+                                        type: "text",
+                                    },
+                                    {
+                                        label: "Designation",
+                                        name: "designation",
+                                        type: "select",
+                                        options: ["Option 1", "Option 2"],
+                                    },
+                                    {
+                                        label: "Start Date",
+                                        name: "startMonth",
+                                        type: "text",
+                                    },
+                                    {
+                                        label: "Start Year",
+                                        name: "startYear",
+                                        type: "text",
+                                    },
+                                    {
+                                        label: "End Date",
+                                        name: "endDate",
+                                        type: "select",
+                                        options: ["Jan 2021", "Feb 2021", "Mar 2021"],
+                                    },
+                                    {
+                                        label: "Association",
+                                        name: "association",
+                                        type: "select",
+                                        options: ["Option 1", "Option 2", "Option 3"],
+                                    },
+                                    {
+                                        label: "Job Description",
+                                        name: "jobDescription",
+                                        type: "text",
+                                    },
+                                ].map(({ label, name, type, options }, idx) => (
+                                    <div key={idx}>
+                                        <label className="block font-bold mb-1 text-[#4E5865]" style={{ fontSize: '16px' }}>
+                                            {label} <span className="text-red-500">*</span>
+                                        </label>
+                                        {type === "select" ? (
+                                            <Field
+                                                as="select"
+                                                name={name}
+                                                className="text-black w-full border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB]"
+                                            >
+                                                {options.map((opt, i) => (
+                                                    <option key={i} value={opt}>
+                                                        {opt}
+                                                    </option>
+                                                ))}
+                                            </Field>
+                                        ) : (
+                                            <Field
+                                                type={type}
+                                                name={name}
+                                                className="text-black w-full border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB]"
+                                                placeholder="Enter here"
+                                            />
+                                        )}
+                                        <ErrorMessage name={name} component="div" className="text-red-500 text-sm" />
+                                    </div>
+                                ))}
+                                {/* Buttons */}
+                                <div className="flex justify-start items-center mt-6 gap-4 col-span-full">
+                                    <button
+                                        type="button"
+                                        className="w-40 h-12 border border-gray-700 text-gray-700 font-bold rounded-md"
+                                        onClick={handlePrevious}
                                     >
-                                        {options.map((opt, i) => (
-                                            <option key={i} value={opt}>
-                                                {opt}
-                                            </option>
-                                        ))}
-                                    </select>
-                                ) : (
-                                    <input
-                                        type={type}
-                                        className="text-black w-full border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB]"
-                                        placeholder="Enter here"
-                                        value={value}
-                                        onChange={(e) => setter(e.target.value)}
-                                    />
-                                )}
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Buttons */}
-                    <div className="flex justify-start items-center mt-6 gap-4">
-                        <button
-                            className="w-40 h-12 border border-gray-700 text-gray-700 font-bold rounded-md"
-                            onClick={handlePrevious}
-                        >
-                            &lt;&lt; Previous
-                        </button>
-                        <button
-                            className="w-40 h-12 bg-[#0F283C] text-white font-bold rounded-md"
-                            onClick={handleSave}
-                        >
-                            Save &gt;&gt;
-                        </button>
-                    </div>
+                                        &lt;&lt; Previous
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        className="w-40 h-12 bg-[#0F283C] text-white font-bold rounded-md"
+                                    >
+                                        Save &gt;&gt;
+                                    </button>
+                                </div>
+                            </Form>
+                        )}
+                    </Formik>
                 </div>
             </div>
         </div>
