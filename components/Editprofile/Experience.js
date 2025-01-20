@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import * as Yup from "yup";
 
-const Experience = ({ handleNext = () => console.log("Next step"), currentStep, setCurrentStep }) => {
+const Experience = ({ handleNext, handlePrevious }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const educationData = [
         { subject: "Teacher / Professor", location: "Noida, Uttar Pradesh, India · On-site", grade: "Full-time · 2 yrs 5 mos" },
@@ -25,13 +25,6 @@ const Experience = ({ handleNext = () => console.log("Next step"), currentStep, 
     const handleSave = (values) => {
         console.log(values);
         handleNext();
-        setCurrentStep(currentStep + 1); // Move to the next step
-    };
-
-    const handlePrevious = () => {
-        if (currentStep > 2) {
-            setCurrentStep(currentStep - 1);
-        }
     };
 
     return (

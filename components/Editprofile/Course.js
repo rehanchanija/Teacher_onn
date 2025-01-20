@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import Image from "next/image";
 import * as Yup from "yup";
 
-const Course = ({ handleSubmit }) => {
+const Course = ({ handleSubmit, handlePrevious }) => {
     const educationData = [
         { subject: "Course", location: "Noida, Uttar Pradesh, India · On-site" },
         { subject: "Course", location: "Noida, Uttar Pradesh, India · On-site" },
@@ -37,12 +37,6 @@ const Course = ({ handleSubmit }) => {
             handleSubmit(values);
         },
     });
-
-    const handlePrevious = () => {
-        if (currentStep > 3) {
-            setCurrentStep(currentStep - 1);
-        }
-    };
 
     return (
         <div className="w-full bg-white relative min-h-screen">

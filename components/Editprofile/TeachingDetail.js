@@ -3,7 +3,7 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 
-const TeachingDetail = ({ handleNext }) => {
+const TeachingDetail = ({ handleNext,handlePrevious }) => {
     const initialValues = {
         charge: '',
         minFee: '',

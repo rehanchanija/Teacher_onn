@@ -3,7 +3,7 @@
 // components/ProfileDescriptionForm.js
 import { useState } from "react";
 
-const ProfileDescription = ({ handleNext }) => {
+const ProfileDescription = ({ handleNext,handlePrevious }) => {
     // States to track the selected radio buttons
     const [travel, setTravel] = useState(null);
     const [onlineTeaching, setOnlineTeaching] = useState(null);
@@ -76,7 +76,7 @@ const ProfileDescription = ({ handleNext }) => {
                     {/* Navigation Buttons */}
                     <div className="flex justify-start gap-2">
                         <button className="px-4 md:px-6 py-2 border border-[#0F283C] font-bold text-[#0F283C] w-[179px] h-[52px] rounded text-base"
-                        // onClick={handlePrevious}
+                        onClick={handlePrevious}
                         >
                             &lt;&lt; Previous
                         </button>

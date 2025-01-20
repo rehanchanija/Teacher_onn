@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import * as Yup from "yup";
 
-const Subject = ({ handleNext }) => {
+const Subject = ({ handleNext,handlePrevious }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const educationData = [
         { subject: "ICSE Maths", grade: "(Grade 8 - Grade 10)" },
@@ -182,7 +182,7 @@ const Subject = ({ handleNext }) => {
                                 <button
                                     className="w-40 h-12 border border-gray-700 text-gray-700 font-bold rounded-md"
                                     type="button"
-                                // onClick={handlePrevious}
+                                onClick={handlePrevious}
                                 >
                                     &lt;&lt; Previous
                                 </button>

@@ -38,13 +38,13 @@ const EditProfile = () => {
             case 2:
                 return <Subject handleNext={handleNext} handlePrevious={handlePrevious} />;
             case 3:
-                return <Experience handlePrevious={handlePrevious} handleSubmit={handleSubmit} />;
+                return <Experience handleNext={handleNext} handlePrevious={handlePrevious} />;
             case 4:
-                return <TeachingDetail handlePrevious={handlePrevious} handleSubmit={handleSubmit} />;
+                return <TeachingDetail handleNext={handleNext} handlePrevious={handlePrevious} />;
             case 5:
-                return <ProfileDescription handlePrevious={handlePrevious} handleSubmit={handleSubmit} />;
+                return <ProfileDescription handleNext={handleNext} handlePrevious={handlePrevious} />;
             case 6:
-                return <Course handlePrevious={handlePrevious} handleSubmit={handleSubmit} />;
+                return <Course handleNext={handleNext} handlePrevious={handlePrevious} />;
             default:
                 return null;
         }
@@ -52,7 +52,6 @@ const EditProfile = () => {
 
     return (
         <div className="bg-[#0F283C]  mx-12 rounded-lg ">
-            {/* <h1 className="text-3xl font-bold mb-4 text-white">Edit Profile</h1> */}
             <Breadcrumb currentStep={currentStep} steps={formSections} />
             <div className="bg-white p-6 rounded shadow-md">{renderStep()}</div>
         </div>
