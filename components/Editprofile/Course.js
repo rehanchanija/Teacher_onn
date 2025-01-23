@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import Image from "next/image";
 import * as Yup from "yup";
 
-const Course = ({ handleSubmit, handlePrevious }) => {
+const Course = ({ handleNext, handlePrevious, formData, updateFormData, handleSubmit }) => {
     const educationData = [
         { subject: "Course", location: "Noida, Uttar Pradesh, India · On-site" },
         { subject: "Course", location: "Noida, Uttar Pradesh, India · On-site" },
@@ -11,7 +11,7 @@ const Course = ({ handleSubmit, handlePrevious }) => {
     ];
 
     const formik = useFormik({
-        initialValues: {
+        initialValues: formData || {
             Course_title: "",
             Description: "",
             Price: "",
@@ -34,7 +34,8 @@ const Course = ({ handleSubmit, handlePrevious }) => {
             LOI: Yup.string().required("Required"),
         }),
         onSubmit: (values) => {
-            handleSubmit(values);
+            updateFormData('course', values);
+            handleSubmit();
         },
     });
 
@@ -82,7 +83,7 @@ const Course = ({ handleSubmit, handlePrevious }) => {
 
                     {/* Add Education Form */}
                     <div className="p-6 sm:p-8 bg-[#F2F6FB]">
-                        <h3 className="font-medium mb-6 text-black font-bold">Please add Course I teach.</h3>
+                        <h3 className=" mb-6 text-black font-bold">Please add Course I teach.</h3>
                         <form onSubmit={formik.handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             <div>
                                 <label className="block font-bold mb-2 text-[#4E5865]">

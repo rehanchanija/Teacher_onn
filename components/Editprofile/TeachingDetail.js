@@ -3,8 +3,8 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 
-const TeachingDetail = ({ handleNext,handlePrevious }) => {
-    const initialValues = {
+const TeachingDetail = ({ handleNext, handlePrevious, formData, updateFormData }) => {
+    const initialValues = formData || {
         charge: '',
         minFee: '',
         maxFee: '',
@@ -37,8 +37,9 @@ const TeachingDetail = ({ handleNext,handlePrevious }) => {
     });
 
     const handleSubmit = (values) => {
-        console.log(values);
+        updateFormData('teachingDetail', values);
         handleNext();
+        console.log(values);
     };
 
     return (

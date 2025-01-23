@@ -4,7 +4,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/image";
 import * as Yup from "yup";
 
-const PersonalInfo = ({ handleNext, handlePrevious }) => {
+const PersonalInfo = ({ handleNext,  formData, updateFormData  }) => {
     // Validation schema using Yup
     const validationSchema = Yup.object({
         firstName: Yup.string().required("First name is required"),
@@ -20,7 +20,7 @@ const PersonalInfo = ({ handleNext, handlePrevious }) => {
         address: Yup.string().required("Address is required"),
     });
 
-    const initialValues = {
+    const initialValues = formData || {
         firstName: "",
         lastName: "",
         mobile: "",
@@ -30,9 +30,11 @@ const PersonalInfo = ({ handleNext, handlePrevious }) => {
         address: "",
     };
 
+
     const handleSubmit = (values) => {
-        console.log("Form Data:", values);
+        updateFormData(values);
         handleNext();
+        console.log(values);
     };
 
     return (

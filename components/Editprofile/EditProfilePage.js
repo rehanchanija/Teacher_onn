@@ -12,6 +12,15 @@ const formSections = ['Personal Info', 'Education', 'Subject', 'Experience', 'Te
 
 const EditProfile = () => {
     const [currentStep, setCurrentStep] = useState(0);
+    const [formData, setFormData] = useState({
+        personalInfo: {},
+        education: {},
+        subject: {},
+        experience: {},
+        teachingDetail: {},
+        profileDescription: {},
+        course: {}
+    });
 
     const handleNext = () => {
         if (currentStep < formSections.length - 1) {
@@ -26,32 +35,40 @@ const EditProfile = () => {
     };
 
     const handleSubmit = () => {
+        console.log('Profile Data:', formData);
         alert('Profile updated successfully!');
+    };
+
+    const updateFormData = (section, data) => {
+        setFormData(prevData => ({
+            ...prevData,
+            [section]: data
+        }));
     };
 
     const renderStep = () => {
         switch (currentStep) {
             case 0:
-                return <PersonalInfo handleNext={handleNext} handlePrevious={handlePrevious} />;
+                return <PersonalInfo handleNext={handleNext} handlePrevious={handlePrevious} formData={formData.personalInfo} updateFormData={(data) => updateFormData('personalInfo', data)} />;
             case 1:
-                return <Education handleNext={handleNext} handlePrevious={handlePrevious} />;
+                return <Education handleNext={handleNext} handlePrevious={handlePrevious} formData={formData.education} updateFormData={(data) => updateFormData('education', data)} />;
             case 2:
-                return <Subject handleNext={handleNext} handlePrevious={handlePrevious} />;
+                return <Subject handleNext={handleNext} handlePrevious={handlePrevious} formData={formData.subject} updateFormData={(data) => updateFormData('subject', data)} />;
             case 3:
-                return <Experience handleNext={handleNext} handlePrevious={handlePrevious} />;
+                return <Experience handleNext={handleNext} handlePrevious={handlePrevious} formData={formData.experience} updateFormData={(data) => updateFormData('experience', data)} />;
             case 4:
-                return <TeachingDetail handleNext={handleNext} handlePrevious={handlePrevious} />;
+                return <TeachingDetail handleNext={handleNext} handlePrevious={handlePrevious} formData={formData.teachingDetail} updateFormData={(data) => updateFormData('teachingDetail', data)} />;
             case 5:
-                return <ProfileDescription handleNext={handleNext} handlePrevious={handlePrevious} />;
+                return <ProfileDescription handleNext={handleNext} handlePrevious={handlePrevious} formData={formData.profileDescription} updateFormData={(data) => updateFormData('profileDescription', data)} />;
             case 6:
-                return <Course handleNext={handleNext} handlePrevious={handlePrevious} />;
+                return <Course handleNext={handleNext} handlePrevious={handlePrevious} formData={formData.course} updateFormData={(data) => updateFormData('course', data)} handleSubmit={handleSubmit} />;
             default:
                 return null;
         }
     };
 
     return (
-        <div className="bg-[#0F283C]  mx-12 rounded-lg ">
+        <div className="bg-[#0F283C] mx-12 rounded-lg">
             <Breadcrumb currentStep={currentStep} steps={formSections} />
             <div className="bg-white p-6 rounded shadow-md">{renderStep()}</div>
         </div>

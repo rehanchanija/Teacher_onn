@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import * as Yup from "yup";
 
-const Experience = ({ handleNext, handlePrevious }) => {
+const Experience = ({ handleNext, handlePrevious, formData, updateFormData }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const educationData = [
         { subject: "Teacher / Professor", location: "Noida, Uttar Pradesh, India · On-site", grade: "Full-time · 2 yrs 5 mos" },
@@ -23,8 +23,9 @@ const Experience = ({ handleNext, handlePrevious }) => {
     });
 
     const handleSave = (values) => {
-        console.log(values);
+        updateFormData('experience', values);
         handleNext();
+        console.log(values);
     };
 
     return (
@@ -118,7 +119,7 @@ const Experience = ({ handleNext, handlePrevious }) => {
                         Please add Teaching and Professional Experience.
                     </h3>
                     <Formik
-                        initialValues={{
+                        initialValues={formData || {
                             organization: "",
                             designation: "",
                             startMonth: "",
@@ -224,4 +225,4 @@ const Experience = ({ handleNext, handlePrevious }) => {
     );
 };
 
-export default Experience;
+export default Experience;  
