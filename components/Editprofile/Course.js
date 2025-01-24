@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import Image from "next/image";
 import * as Yup from "yup";
 
-const Course = ({ handleNext, handlePrevious, formData, updateFormData, handleSubmit }) => {
+const Course = ({  handlePrevious, formData, updateFormData, handleSubmit }) => {
     const educationData = [
         { subject: "Course", location: "Noida, Uttar Pradesh, India · On-site" },
         { subject: "Course", location: "Noida, Uttar Pradesh, India · On-site" },
