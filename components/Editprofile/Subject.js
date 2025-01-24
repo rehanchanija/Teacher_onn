@@ -184,7 +184,7 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData }) => {
                                     type="button"
                                     onClick={handlePrevious}
                                 >
-                                    &lt;&lt; Previous
+                                      &lt;&lt; Previous
                                 </button>
                                 <button
                                     className="w-40 h-12 bg-[#0F283C] text-white font-bold rounded-md"

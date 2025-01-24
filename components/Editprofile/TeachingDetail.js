@@ -4,6 +4,13 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 
 const TeachingDetail = ({ handleNext, handlePrevious, formData, updateFormData }) => {
+   const Radiobuttons=[
+    { name: 'travel', label: 'Are you willing to travel to Student?' },
+    { name: 'onlineTeaching', label: 'Available for online teaching?' },
+    { name: 'digitalPen', label: 'Do you have a digital pen?' },
+    { name: 'homeworkHelp', label: 'Do you help with homework and assignments?' },
+    { name: 'fullTimeTeacher', label: 'Are you a full-time teacher employed by a school/college?' }
+]
     const initialValues = formData || {
         charge: '',
         minFee: '',
@@ -39,7 +46,6 @@ const TeachingDetail = ({ handleNext, handlePrevious, formData, updateFormData }
     const handleSubmit = (values) => {
         updateFormData('teachingDetail', values);
         handleNext();
-        console.log(values);
     };
 
     return (
@@ -74,33 +80,26 @@ const TeachingDetail = ({ handleNext, handlePrevious, formData, updateFormData }
                             ))}
 
                             {/* Radio Buttons */}
-                            {[
-                                { name: 'travel', label: 'Are you willing to travel to Student?' },
-                                { name: 'onlineTeaching', label: 'Available for online teaching?' },
-                                { name: 'digitalPen', label: 'Do you have a digital pen?' },
-                                { name: 'homeworkHelp', label: 'Do you help with homework and assignments?' },
-                                { name: 'fullTimeTeacher', label: 'Are you a full-time teacher employed by a school/college?' }
-                            ].map(({ name, label }) => (
+                            {Radiobuttons.map(({ name, label }) => (
                                 <div key={name} className="flex flex-col">
                                     <label className="text-gray-700 font-medium mb-2">
                                         {label} <span className="text-red-500">*</span>
                                     </label>
                                     <div className="flex items-center space-x-4">
                                         {['yes', 'no'].map((option) => (
-                                            <label className="flex items-center cursor-pointer" key={option}>
+                                            <button className='w-[178px] border px-3 py-2 rounded-md'>
+
+                                            <label key={option} className="flex items-center space-x-2">
                                                 <Field
                                                     type="radio"
                                                     name={name}
                                                     value={option}
-                                                    className="hidden"
+                                                    className=" h-5 w-5 "
                                                 />
-                                                <div
-                                                    className={`w-5 h-5 border-2 rounded-full flex justify-center items-center mr-2 ${option === 'yes' ? 'bg-blue-500 border-blue-500' : 'border-gray-500'}`}
-                                                >
-                                                    <span className="text-white text-lg">{option === 'yes' ? '✓' : ''}</span>
-                                                </div>
-                                                <span className="text-gray-600 capitalize">{option}</span>
+                                                <span className="text-gray-600 capitalize text-[16px]">{option}</span>
                                             </label>
+                                            </button>
+
                                         ))}
                                     </div>
                                     <ErrorMessage name={name} component="div" className="text-red-500 text-sm mt-1" />
@@ -129,14 +128,14 @@ const TeachingDetail = ({ handleNext, handlePrevious, formData, updateFormData }
                             <div className="flex justify-left items-center mt-8">
                                 <button
                                     type="button"
-                                    className="w-[179px] h-[52px] border border-[#0F283C] text-[#0F283C] font-bold text-sm rounded-[2px]"
+                                    className="w-[179px] h-[52px] border border-[#0F283C] text-[#0F283C] font-bold text-[17.36px]  rounded-[2px]"
                                     onClick={handlePrevious}
                                 >
-                                    &lt;&lt; Previous
+                                    &lt; &lt; Previous
                                 </button>
                                 <button
                                     type="submit"
-                                    className="w-[179px] h-[52px] ml-4 bg-[#0B1F36] text-white font-bold text-sm rounded-[4px]"
+                                    className="w-[179px] h-[52px] ml-4 bg-[#0B1F36] text-white font-bold text-[17.36px] rounded-[4px]"
                                 >
                                     Submit &gt;&gt;
                                 </button>

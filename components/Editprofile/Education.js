@@ -3,7 +3,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/image";
 import * as Yup from "yup";
 
-const Education = ({ handleNext, handlePrevious, formData, updateFormData  }) => {
+const Education = ({ handleNext, handlePrevious, formData, updateFormData }) => {
     const initialValues = formData || {
         institutionName: "",
         degreeType: "",
@@ -28,12 +28,10 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData  }) =>
 
     const handleSubmit = (values) => {
         updateFormData('education', values);
-
         handleNext();
         console.log(values);
     };
 
-  
     return (
         <div className="bg-gray-100 min-h-screen flex flex-col items-center">
             <div className="bg-[#F2F6FB] shadow-md rounded-lg p-6 w-full max-w-7xl mt-8">
@@ -83,28 +81,25 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData  }) =>
                                             <ErrorMessage name={field} component="p" className="text-red-500 text-sm" />
                                         </div>
                                     ))}
-                                    <div className="sm:col-span-2 flex justify-bewewn gap-6">
+                                    <div className="sm:col-span-2 flex justify-start gap-6">
+                                        <button
+                                            type="button"
+                                            onClick={handlePrevious}
+                                            className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 px-7 rounded-md font-bold"
+                                        >
+                                            &lt; Previous
+                                        </button>
                                         <button
                                             type="submit"
-                                            // disabled={isSubmitting}
                                             className="bg-[#0F283C] text-white py-3 px-10 rounded text-lg font-semibold"
                                         >
                                             Next &gt;
                                         </button>
-                                        <button
-                                type="button"
-                                onClick={handlePrevious}
-                                className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 px-7 rounded-md font-bold"
-                            >
-                                &gt;&gt; Previous
-                            </button>
                                     </div>
                                 </Form>
                             )}
                         </Formik>
-                        <div className="flex justify-start mt-4">
-                         
-                        </div>
+                        <div className="flex justify-start mt-4"></div>
                     </div>
                 </div>
             </div>

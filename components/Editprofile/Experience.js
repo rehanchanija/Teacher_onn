@@ -207,7 +207,7 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData }) =>
                                         className="w-40 h-12 border border-gray-700 text-gray-700 font-bold rounded-md"
                                         onClick={handlePrevious}
                                     >
-                                        &lt;&lt; Previous
+                                    &lt;&lt; Previous
                                     </button>
                                     <button
                                         type="submit"
