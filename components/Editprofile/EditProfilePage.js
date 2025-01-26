@@ -7,7 +7,7 @@ import PersonalInfo from './PersonalInfo';
 import ProfileDescription from './ProfileDescription';
 import Subject from './Subject';
 import TeachingDetail from './TeachingDetail';
-import AppSlider from '../AppSlider';
+import EditProfileHeader from '../Atoms/EditProfileHeader';
 
 const formSections = ['Personal Info', 'Education', 'Subject', 'Experience', 'Teaching Detail', 'Profile Description', 'Course'];
 
@@ -69,10 +69,13 @@ const EditProfile = () => {
     };
 
     return (
-        <div className="bg-[#0F283C] mx-12 rounded-lg md:block grid grid-cols-2">
+        <div >
 
+<EditProfileHeader/>
+        <div className=" md:mx-12  flex md:block md:-mt-16  ">
             <Breadcrumb currentStep={currentStep} steps={formSections} />
             <div className="bg-white  rounded shadow-md">{renderStep()}</div>
+        </div>
         </div>
     );
 };

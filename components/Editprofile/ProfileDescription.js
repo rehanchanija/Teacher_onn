@@ -20,11 +20,7 @@ const ProfileDescription = ({ handleNext,handlePrevious }) => {
     const handleOnlineTeachingChange = (value) => {
         setOnlineTeaching(value);
     };
-    // const handlePrevious = () => {
-    //     if (currentStep > 3) {
-    //         setCurrentStep(currentStep - 1);
-    //     }
-    // };
+   
 
     return (
         <div className="w-full bg-white relative min-h-screen">

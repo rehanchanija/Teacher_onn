@@ -37,10 +37,10 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData }) => {
     });
 
     return (
-        <div className="min-h-screen w-full bg-white">
+        <div className=" w-full bg-white">
             {/* Main Content */}
             <div className="w-full bg-white">
-                <div className="relative max-w-[1281px] mx-auto shadow-lg -mt-8">
+                <div className="relative max-w-[1281px] mx-auto shadow-lg">
                     {/* Navigation */}
                     <div className="py-4 px-4 md:px-10 bg-white rounded-t-lg shadow">
                         <div className="flex justify-between items-center">
