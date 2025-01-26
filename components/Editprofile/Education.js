@@ -57,7 +57,7 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData }) => 
                             onSubmit={handleSubmit}
                         >
                             {() => (
-                                <Form className="grid grid-cols-1 gap-4">
+                                <Form className="grid md:grid-cols-2 gap-4">
                                     {[
                                         "institutionName",
                                         "degreeType",
