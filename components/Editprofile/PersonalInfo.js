@@ -71,7 +71,7 @@ const PersonalInfo = ({ handleNext,  formData, updateFormData  }) => {
                         onSubmit={handleSubmit}
                     >
                         {() => (
-                            <Form className="grid grid-cols-2 sm:grid-cols-2 gap-4">
+                            <Form className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 {["firstName", "lastName", "mobile", "specialty", "email", "city", "address"].map((field, index) => (
                                     <div key={index} className={`${field === "address" ? "sm:col-span-2" : ""}`}>
                                         <label className="block text-[16px] font-medium text-gray-700">
