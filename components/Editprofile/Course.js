@@ -43,7 +43,7 @@ const Course = ({  handlePrevious, formData, updateFormData, handleSubmit }) => 
         <div className="w-full bg-white relative min-h-screen">
             {/* Main Content Area */}
             <div className="w-full bg-white">
-                <div className="relative max-w-[1280px] mx-auto shadow-lg -mt-8">
+                <div className="relative max-w-[1280px] mx-auto shadow-lg ">
                     {/* Education Cards - Responsive Grid */}
                     <div className="p-6 sm:p-8 bg-[#F2F6FB]">
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -33,9 +33,9 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData }) => 
     };
 
     return (
-        <div className="bg-gray-100 min-h-screen flex flex-col items-center">
-            <div className="bg-[#F2F6FB] shadow-md rounded-lg p-6 w-full max-w-7xl mt-8">
-                <div className="flex flex-col md:flex-row gap-6">
+        <div className="  flex flex-col items-center">
+            <div className="bg-[#F2F6FB] shadow-md rounded-lg p-6 w-full max-w-7xl ">
+                <div className="flex flex-col md:flex-row gap-8 my-4">
                     {/* Profile Image Section */}
                     <div className="md:w-1/3">
                         <div className="relative w-full h-60 bg-gray-200 border-dotted border-2 border-[#1BADFF] rounded-lg overflow-hidden">
@@ -56,8 +56,8 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData }) => 
                             validationSchema={validationSchema}
                             onSubmit={handleSubmit}
                         >
-                            {({ isSubmitting }) => (
-                                <Form className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {() => (
+                                <Form className="grid md:grid-cols-2 gap-4">
                                     {[
                                         "institutionName",
                                         "degreeType",
@@ -99,7 +99,6 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData }) => 
                                 </Form>
                             )}
                         </Formik>
-                        <div className="flex justify-start mt-4"></div>
                     </div>
                 </div>
             </div>

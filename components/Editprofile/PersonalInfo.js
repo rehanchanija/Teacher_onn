@@ -4,7 +4,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/image";
 import * as Yup from "yup";
 
-const PersonalInfo = ({ handleNext,  formData, updateFormData  }) => {
+const PersonalInfo = ({ handleNext, formData, updateFormData }) => {
     // Validation schema using Yup
     const validationSchema = Yup.object({
         firstName: Yup.string().required("First name is required"),
@@ -30,7 +30,6 @@ const PersonalInfo = ({ handleNext,  formData, updateFormData  }) => {
         address: "",
     };
 
-
     const handleSubmit = (values) => {
         updateFormData(values);
         handleNext();
@@ -38,10 +37,10 @@ const PersonalInfo = ({ handleNext,  formData, updateFormData  }) => {
     };
 
     return (
-        <div className="bg-gray-100 min-h-screen flex flex-col items-center">
+        <div className="bg-gray-100  flex flex-col items-center">
             {/* Form Section */}
             <div className="bg-[#F2F6FB] shadow-md rounded-lg p-6 w-full max-w-7xl mt-8">
-                <div className="flex flex-col md:flex-row gap-6">
+                <div className="flex flex-col md:flex-row gap-8">
                     {/* Profile Image Section */}
                     <div className="md:w-1/3">
                         <div className="relative w-full h-60 bg-gray-200 border-dotted border-2 border-[#1BADFF] rounded-lg overflow-hidden">
@@ -50,7 +49,7 @@ const PersonalInfo = ({ handleNext,  formData, updateFormData  }) => {
                                 alt="Profile Placeholder"
                                 width={275}
                                 height={242}
-                                className="object-cover w-full h-full"
+                                className="md:object-cover  md:w-full h-full"
                             />
                         </div>
                         <p className="text-sm text-gray-600 mt-2">Recommendation for JPG, PNG</p>
@@ -75,14 +74,14 @@ const PersonalInfo = ({ handleNext,  formData, updateFormData  }) => {
                                 <Form className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     {["firstName", "lastName", "mobile", "specialty", "email", "city", "address"].map((field, index) => (
                                         <div key={index} className={`${field === "address" ? "sm:col-span-2" : ""}`}>
-                                            <label className="block text-sm font-medium text-gray-700">
+                                            <label className="block text-sm md:text-base font-medium text-gray-700">
                                                 {field.replace(/^\w/, (c) => c.toUpperCase())} *
                                             </label>
                                             <Field
                                                 name={field}
                                                 type="text"
                                                 placeholder={`Enter ${field}`}
-                                                className="mt-1 p-2 border border-gray-300 rounded w-full bg-white"
+                                                className="mt-1 p-2 md:p-3 border border-gray-300 rounded w-full bg-white text-sm md:text-base"
                                             />
                                             <ErrorMessage
                                                 name={field}
@@ -94,7 +93,7 @@ const PersonalInfo = ({ handleNext,  formData, updateFormData  }) => {
                                     <div className="sm:col-span-2 flex justify-start">
                                         <button
                                             type="submit"
-                                            className="bg-[#0F283C] text-white py-3 px-10 rounded text-lg font-semibold"
+                                            className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
                                         >
                                             Next &gt;
                                         </button>
