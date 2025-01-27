@@ -7,7 +7,6 @@ import PersonalInfo from './PersonalInfo';
 import ProfileDescription from './ProfileDescription';
 import Subject from './Subject';
 import TeachingDetail from './TeachingDetail';
-import AppSlider from '../AppSlider';
 
 const formSections = ['Personal Info', 'Education', 'Subject', 'Experience', 'Teaching Detail', 'Profile Description', 'Course'];
 

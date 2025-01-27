@@ -1,5 +1,4 @@
 import EditProfile from "@/components/Editprofile/EditProfilePage";
-import AdmissionEnroll from "@/components/Homepage/AdmissionEnroll";
 
 export default function Home() {
   return (
@@ -42,7 +41,7 @@ export default function Home() {
       {/* <Store /> */}
       {/* <Footer /> */}
       {/* <AdmissionEnroll /> */}
-   
+
       <EditProfile />
     </div>
   );
