@@ -47,7 +47,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-between items-center md:mx-8 my-4 mx-4 ">
+    <div className="flex justify-between items-center md:mx-8 my-4 mx-3 ">
       <div className="md:flex items-center">
         <Logo />
         <div className="font-semibold text-[18px] pl-12 text-[#515A60] ">
@@ -80,7 +80,7 @@ const Navbar = () => {
         </button>
         <div className="flex items-center space-x-4">
 
-          <button className="bg-[#1BADFF] text-white font-semibold px-6 py-3 rounded-[4px] flex items-center space-x-2">
+          <button className="bg-[#1BADFF] text-white font-semibold px-6 md:py-3 py-2 rounded-[4px] flex items-center space-x-2">
             <Link href="/login/Login">Login</Link>
             <Image
               src="/image/Navbar/user.png"

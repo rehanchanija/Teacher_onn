@@ -1,10 +1,21 @@
 import EditProfile from "@/components/Editprofile/EditProfilePage";
 import AdmissionEnroll from "@/components/Homepage/AdmissionEnroll";
+import CourseAdvice from "@/components/Homepage/CourseAdvice";
+import DirectionalClasses from "@/components/Homepage/DirectionalClasses";
+import FeautureProfile from "@/components/Homepage/FeautureProfile";
+import Learning from "@/components/Homepage/Learning";
+import LiveClasses from "@/components/Homepage/LiveClasses";
+import OnlineStore from "@/components/Homepage/OnlineStore";
+import Premium from "@/components/Homepage/Premium";
+import Reveiw from "@/components/Homepage/Reveiw";
+import StudentTeaching from "@/components/Homepage/StudentTeaching";
+import Testimonals from "@/components/Homepage/Testimonal";
+import TutorsPage from "@/components/Homepage/TutorsPage";
 
 export default function Home() {
   return (
     <div>
-      {/* <div className="md:space-y-20 space-y-8">
+      <div className="md:space-y-20 space-y-8">
         <TutorsPage />
         <Learning />
         <FeautureProfile />
@@ -20,7 +31,7 @@ export default function Home() {
         </div>
         <Premium />
       </div>
-      <div className="md:mx-12 mx- md:space-y-20 space-y-8">
+      <div className="md:mx-12  md:space-y-20 space-y-8">
 
 
         <StudentTeaching />
@@ -28,22 +39,10 @@ export default function Home() {
         <OnlineStore />
         <Testimonals />
       </div>
-      <DirectionalClasses /> */}
-      {/* <PersonalInfo /> */}
-      {/* <Education />
-      <Subject />
-      <Course />
-      <Experience />
-      <PersonalInfo />
-      <ProfileDescription />
-      <Subject />
-      <TeachingDetail />
-      <MyProfile /> */}
-      {/* <Store /> */}
-      {/* <Footer /> */}
-      {/* <AdmissionEnroll /> */}
+      <DirectionalClasses />
+  
    
-      <EditProfile />
+      {/* <EditProfile /> */}
     </div>
   );
 }

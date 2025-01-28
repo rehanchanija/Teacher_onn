@@ -122,7 +122,7 @@ const Hamburg = () => {
 
                                 </div>
                                 {/* Log Out Item */}
-                                <div className="flex items-center space-x-3 bg-[#136FB6] text-white p-3  cursor-pointer w-full rounded-b-md">
+                                <button className="flex items-center space-x-3 bg-[#136FB6] text-white p-3   w-full rounded-b-md">
                                     <Image
                                         src="/logout.png" // Replace with your icon image path
                                         alt="Log Out Icon"
@@ -130,7 +130,7 @@ const Hamburg = () => {
                                         height={21}
                                     />
                                     <span className="md:text-lg">Log Out</span>
-                                </div>
+                                </button>
                             </div>
                         </div>
                     </div>
