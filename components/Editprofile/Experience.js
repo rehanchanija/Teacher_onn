@@ -3,6 +3,8 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/image";
 import { useState } from "react";
 import * as Yup from "yup";
+import { updateTutor } from "@/api/tutor.api";
+import { useMutation } from "@tanstack/react-query";
 
 const Experience = ({ handleNext, handlePrevious, formData, updateFormData }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,16 +17,36 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData }) =>
     const validationSchema = Yup.object({
         organization: Yup.string().required("Required"),
         designation: Yup.string().required("Required"),
-        startMonth: Yup.string().required("Required"),
-        startYear: Yup.string().required("Required"),
+        startDate: Yup.string().required("Required"),
         endDate: Yup.string().required("Required"),
         association: Yup.string().required("Required"),
         jobDescription: Yup.string().required("Required"),
     });
 
+    const { mutate, isPending } = useMutation({
+        mutationFn: updateTutor,
+        onSuccess: (data) => {
+            handleNext();
+            localStorage.setItem("tutor", JSON.stringify(data))
+            console.log("onSuccess", data)
+        },
+        onError: (error) => {
+            console.log("onError", error)
+        }
+    })
+
     const handleSave = (values) => {
+        mutate({
+            "experience": {
+                "organization": values.organization,
+                "designation": values.designation,
+                "startDate": values.startDate,
+                "endDate": values.endDate,
+                "association": values.association,
+                "jobDescription": values.jobDescription
+            }
+        });
         updateFormData('experience', values);
-        handleNext();
         console.log(values);
     };
 
@@ -122,8 +144,7 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData }) =>
                         initialValues={formData || {
                             organization: "",
                             designation: "",
-                            startMonth: "",
-                            startYear: "",
+                            startDate: "",
                             endDate: "",
                             association: "",
                             jobDescription: "",
@@ -146,20 +167,15 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData }) =>
                                         options: ["Option 1", "Option 2"],
                                     },
                                     {
-                                        label: "Start Date",
-                                        name: "startMonth",
+                                        label: "Start Date (DD/MM/YYYY)",
+                                        name: "startDate",
                                         type: "text",
                                     },
+                                   
                                     {
-                                        label: "Start Year",
-                                        name: "startYear",
-                                        type: "text",
-                                    },
-                                    {
-                                        label: "End Date",
+                                        label: "End Date (DD/MM/YYYY)",
                                         name: "endDate",
-                                        type: "select",
-                                        options: ["Jan 2021", "Feb 2021", "Mar 2021"],
+                                        type: "text",
                                     },
                                     {
                                         label: "Association",
@@ -201,19 +217,20 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData }) =>
                                     </div>
                                 ))}
                                 {/* Buttons */}
-                                <div className="flex justify-start items-center mt-6 gap-4 col-span-full">
+                                <div className="col-span-full flex justify-between mt-6">
                                     <button
                                         type="button"
-                                        className="w-40 h-12 border border-gray-700 text-gray-700 font-bold rounded-md"
                                         onClick={handlePrevious}
+                                        className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
                                     >
-                                    &lt;&lt; Previous
+                                        &lt; Previous
                                     </button>
                                     <button
                                         type="submit"
-                                        className="w-40 h-12 bg-[#0F283C] text-white font-bold rounded-md"
+                                        className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
+                                        disabled={isPending}
                                     >
-                                        Save &gt;&gt;
+                                        Next &gt;
                                     </button>
                                 </div>
                             </Form>

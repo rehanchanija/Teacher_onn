@@ -2,16 +2,31 @@
 import { useFormik } from "formik";
 import Image from "next/image";
 import * as Yup from "yup";
+import { updateTutor } from "@/api/tutor.api";
+import { useMutation } from "@tanstack/react-query";
 
-const Course = ({  handlePrevious, formData, updateFormData, handleSubmit }) => {
+const Course = ({ handlePrevious, formData, updateFormData, handleSubmit }) => {
     const educationData = [
         { subject: "Course", location: "Noida, Uttar Pradesh, India · On-site" },
         { subject: "Course", location: "Noida, Uttar Pradesh, India · On-site" },
         { subject: "Course", location: "Noida, Uttar Pradesh, India · On-site" },
     ];
 
+    const { mutate, isPending } = useMutation({
+        mutationFn: updateTutor,
+        onSuccess: (data) => {
+            handleSubmit();
+            localStorage.setItem("tutor", JSON.stringify(data))
+            console.log("onSuccess", data)
+        },
+        onError: (error) => {
+            console.log("onError", error)
+        }
+    })
+
     const formik = useFormik({
-        initialValues: formData || {
+        initialValues:  {
+
             Course_title: "",
             Description: "",
             Price: "",
@@ -34,19 +49,34 @@ const Course = ({  handlePrevious, formData, updateFormData, handleSubmit }) => 
             LOI: Yup.string().required("Required"),
         }),
         onSubmit: (values) => {
+            console.log(values)
+            mutate({
+                "courses": {
+                    "courseTitle": values.Course_title,
+                    "courseDescription": values.Description,
+                    "coursePrice": values.Price,
+                    "currency": values.Currency,
+                    "modeOfDelivery": values.MOD,
+                    "groupSize": values.Group,
+                    "certificateProvided": values.Cert,
+                    "courseDuration": values.CD,
+                    "language": values.LOI
+                }
+            });
             updateFormData('course', values);
-            handleSubmit();
         },
     });
+
+    console.log(formik.values)
 
     return (
         <div className="w-full bg-white relative min-h-screen">
             {/* Main Content Area */}
             <div className="w-full bg-white">
-                <div className="relative max-w-[1280px] mx-auto shadow-lg ">
+                <div className="relative max-w-[1280px] mx-auto shadow-lg">
                     {/* Education Cards - Responsive Grid */}
-                    <div className="p-6 sm:p-8 bg-[#F2F6FB]">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="p-4 sm:p-6 md:p-8 bg-[#F2F6FB]">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                             {educationData.map((item, index) => (
                                 <div
                                     key={index}
@@ -57,21 +87,21 @@ const Course = ({  handlePrevious, formData, updateFormData, handleSubmit }) => 
                                         <p className="text-[#136AAD] text-sm">{item.location}</p>
                                     </div>
                                     <div className="flex gap-2">
-                                        <button className="rounded-full w-10 h-10">
+                                        <button className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
                                             <Image
                                                 src="/edit.png"
                                                 alt="Edit Icon"
-                                                width={42}
-                                                height={42}
+                                                width={32}
+                                                height={32}
                                                 className="mx-auto"
                                             />
                                         </button>
-                                        <button className="rounded-full w-10 h-10">
+                                        <button className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
                                             <Image
                                                 src="/delete.png"
                                                 alt="Remove Icon"
-                                                width={42}
-                                                height={42}
+                                                width={32}
+                                                height={32}
                                                 className="mx-auto"
                                             />
                                         </button>
@@ -82,16 +112,16 @@ const Course = ({  handlePrevious, formData, updateFormData, handleSubmit }) => 
                     </div>
 
                     {/* Add Education Form */}
-                    <div className="p-6 sm:p-8 bg-[#F2F6FB]">
-                        <h3 className=" mb-6 text-black font-bold">Please add Course I teach.</h3>
-                        <form onSubmit={formik.handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="p-4 sm:p-6 md:p-8 bg-[#F2F6FB]">
+                        <h3 className="mb-4 sm:mb-6 text-black font-bold">Please add Course I teach.</h3>
+                        <form onSubmit={formik.handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                             <div>
                                 <label className="block font-bold mb-2 text-[#4E5865]">
                                     Course title <span className="text-red-500">*</span>
                                 </label>
                                 <input
                                     type="text"
-                                    className="w-full border border-gray-300 rounded p-2.5 bg-[#F2F6FB]"
+                                    className="w-full border border-gray-300 rounded p-2 bg-[#F2F6FB] sm:p-2.5"
                                     placeholder="Enter here"
                                     {...formik.getFieldProps('Course_title')}
                                 />
@@ -105,7 +135,7 @@ const Course = ({  handlePrevious, formData, updateFormData, handleSubmit }) => 
                                 </label>
                                 <input
                                     type="text"
-                                    className="w-full border border-gray-300 rounded p-2.5 bg-[#F2F6FB]"
+                                    className="w-full border border-gray-300 rounded p-2 bg-[#F2F6FB] sm:p-2.5"
                                     placeholder="Enter here"
                                     {...formik.getFieldProps('Description')}
                                 />
@@ -120,7 +150,7 @@ const Course = ({  handlePrevious, formData, updateFormData, handleSubmit }) => 
                                 <div className="flex border border-gray-300 rounded overflow-hidden">
                                     <input
                                         type="text"
-                                        className="flex-grow px-3 py-2 bg-[#F2F6FB] outline-none"
+                                        className="flex-grow px-2 py-1.5 bg-[#F2F6FB] outline-none sm:px-3 sm:py-2"
                                         placeholder="Enter here"
                                         {...formik.getFieldProps('Price')}
                                     />
@@ -142,7 +172,7 @@ const Course = ({  handlePrevious, formData, updateFormData, handleSubmit }) => 
                                     Mode Of Delivery <span className="text-red-500">*</span>
                                 </label>
                                 <select
-                                    className="w-full border border-gray-300 rounded p-2.5 bg-[#F2F6FB]"
+                                    className="w-full border border-gray-300 rounded p-2 bg-[#F2F6FB] sm:p-2.5"
                                     {...formik.getFieldProps('MOD')}
                                 >
                                     <option>Option 1</option>
@@ -158,7 +188,7 @@ const Course = ({  handlePrevious, formData, updateFormData, handleSubmit }) => 
                                     Group Size <span className="text-red-500">*</span>
                                 </label>
                                 <select
-                                    className="w-full border border-gray-300 rounded p-2.5 bg-[#F2F6FB]"
+                                    className="w-full border border-gray-300 rounded p-2 bg-[#F2F6FB] sm:p-2.5"
                                     {...formik.getFieldProps('Group')}
                                 >
                                     <option>Option 1</option>
@@ -174,7 +204,7 @@ const Course = ({  handlePrevious, formData, updateFormData, handleSubmit }) => 
                                     Certificate Provided <span className="text-red-500">*</span>
                                 </label>
                                 <select
-                                    className="w-full border border-gray-300 rounded p-2.5 bg-[#F2F6FB]"
+                                    className="w-full border border-gray-300 rounded p-2 bg-[#F2F6FB] sm:p-2.5"
                                     {...formik.getFieldProps('Cert')}
                                 >
                                     <option>Option 1</option>
@@ -191,7 +221,7 @@ const Course = ({  handlePrevious, formData, updateFormData, handleSubmit }) => 
                                 </label>
                                 <input
                                     type="text"
-                                    className="w-full border border-gray-300 rounded p-2.5 bg-[#F2F6FB]"
+                                    className="w-full border border-gray-300 rounded p-2 bg-[#F2F6FB] sm:p-2.5"
                                     placeholder="Enter here"
                                     {...formik.getFieldProps('LOI')}
                                 />
@@ -204,7 +234,7 @@ const Course = ({  handlePrevious, formData, updateFormData, handleSubmit }) => 
                                     Course Duration <span className="text-red-500">*</span>
                                 </label>
                                 <select
-                                    className="w-full border border-gray-300 rounded p-2.5 bg-[#F2F6FB]"
+                                    className="w-full border border-gray-300 rounded p-2 bg-[#F2F6FB] sm:p-2.5"
                                     {...formik.getFieldProps('CD')}
                                 >
                                     <option>Option 1</option>
@@ -215,25 +245,26 @@ const Course = ({  handlePrevious, formData, updateFormData, handleSubmit }) => 
                                     <div className="text-red-500">{formik.errors.CD}</div>
                                 ) : null}
                             </div>
-
                             {/* Buttons */}
-                            <div className="flex flex-wrap justify-left items-center mt-8 gap-4">
+                            <div className="col-span-full flex justify-start items-center mt-6 gap-4">
                                 <button
                                     type="button"
-                                    className="py-3 px-7 border border-[#0F283C] text-[#0F283C] font-bold rounded"
                                     onClick={handlePrevious}
+                                    className="w-40 h-12 border border-gray-700 text-gray-700 font-bold rounded-md"
                                 >
                                     &lt;&lt; Previous
                                 </button>
                                 <button
                                     type="submit"
-                                    className="py-3 px-10 bg-[#0B1F36] text-white font-bold rounded"
+                                    className="w-40 h-12 bg-[#0F283C] text-white font-bold rounded-md"
+                                    disabled={isPending}
                                 >
                                     Save &gt;&gt;
                                 </button>
                             </div>
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>
