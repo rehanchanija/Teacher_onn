@@ -7,7 +7,10 @@ import PersonalInfo from './PersonalInfo';
 import ProfileDescription from './ProfileDescription';
 import Subject from './Subject';
 import TeachingDetail from './TeachingDetail';
+<<<<<<< HEAD
+=======
 import EditProfileHeader from '../Atoms/EditProfileHeader';
+>>>>>>> 6646459ea6c369ec861d5e37468b928e3fcc7872
 
 const formSections = ['Personal Info', 'Education', 'Subject', 'Experience', 'Teaching Detail', 'Profile Description', 'Course'];
 
