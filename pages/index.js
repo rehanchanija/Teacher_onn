@@ -1,5 +1,6 @@
 import EditProfileHeader from "@/components/Atoms/EditProfileHeader";
 import EditProfile from "@/components/Editprofile/EditProfilePage";
+import MyProfile from "@/components/MyProfile/MyProfile";
 
 export default function Home() {
   return (
@@ -42,8 +43,9 @@ export default function Home() {
       {/* <Store /> */}
       {/* <Footer /> */}
       {/* <AdmissionEnroll /> */}
-      <EditProfileHeader />
-      <EditProfile />
+      <MyProfile/>
+      {/* <EditProfileHeader /> */}
+      {/* <EditProfile /> */}
     </div>
   );
 }

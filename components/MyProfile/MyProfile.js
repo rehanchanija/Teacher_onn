@@ -1,8 +1,16 @@
+import { getTutor } from "@/api/tutor.api"
+import { useQuery } from "@tanstack/react-query"
 import Image from "next/image"
 
 
+
 const MyProfile = () => {
-    // Rest of the component code remains exactly the same as before, using Image components
+
+  const {data}= useQuery({
+  querykey: ["GET_TUTOR"],
+    queryFn: getTutor
+  })
+  console.log(data)
     return (
         <div className="min-h-screen flex flex-col">
             {/* Hero Banner */}
@@ -38,10 +46,11 @@ const MyProfile = () => {
                                 <div className="flex flex-col md:flex-row justify-between items-start gap-4">
                                     <div className="flex-1">
                                         <h2 className="text-xl md:text-[20px] font-bold text-[#01354B]" style={{ fontFamily: 'Gilroy-Bold' }}>
-                                            Mohammed Salman P
+                                            {data?.personalInfo?.fullName}
                                         </h2>
                                         <p className="text-[#667681] text-base" style={{ fontFamily: 'Gilroy-Medium' }}>
-                                            Qura'an for English Speakers
+                                        {data?.personalInfo?.speciality}
+                                            
                                         </p>
 
                                         {/* Rating */}
@@ -108,7 +117,7 @@ const MyProfile = () => {
                                         <p className="text-[#81919C]">Location</p>
                                         <div className="flex items-center gap-2 mt-1">
                                             <Image src="/location.png" alt="Location" width={10} height={14} />
-                                            <span className="text-[#136FB6]">INDIA</span>
+                                            <span className="text-[#136FB6]">{data?.personalInfo?.city}</span>
                                         </div>
                                     </div>
 
@@ -116,7 +125,7 @@ const MyProfile = () => {
                                         <p className="text-[#81919C]">Email Address</p>
                                         <div className="flex items-center gap-2 mt-1">
                                             <Image src="/mail.png" alt="Email" width={15} height={10} />
-                                            <span className="text-[#136FB6]">mohammedsalman12@gmail.com</span>
+                                            <span className="text-[#136FB6]">{data?.personalInfo?.email}</span>
                                         </div>
                                     </div>
 
@@ -125,7 +134,7 @@ const MyProfile = () => {
                                         <div className="flex flex-wrap gap-2 mt-1">
                                             {["English", "Hindi", "Urdu"].map((lang) => (
                                                 <span key={lang} className="bg-[#DAE7F1] px-3 py-1 rounded text-[#475967]">
-                                                    {lang}
+                                                   {data?.courses?.[0]?.language}
                                                 </span>
                                             ))}
                                         </div>
@@ -141,15 +150,18 @@ const MyProfile = () => {
                                 <h2 className="text-xl font-bold text-[#01354B] mb-4">
                                     Education Background <span className="text-[#FF281B]">*</span>
                                 </h2>
+                                {data?.educationInfo?.map((educationInfo, index) => (
                                 <div className="flex gap-4">
                                     <Image src="/education.png" alt="Education" width={61} height={61} />
                                     <div>
-                                        <h3 className="text-[#01354B] text-xl font-bold">Saquafu</h3>
-                                        <p className="text-[#81919C]">Jamia Markazu Saquafathi Sunniyya India</p>
-                                        <p className="text-[#81919C]">Apr, 2022 – Apr, 2024</p>
+                                        <h3 className="text-[#01354B] text-xl font-bold">{educationInfo?.degreeName}</h3>
+                                        <p className="text-[#81919C]">{educationInfo?.instituteWithCity}</p>
+                                        <p className="text-[#81919C]">{educationInfo?.startDate} – {educationInfo?.endDate}</p>
                                     </div>
                                 </div>
+                        ))}
                             </div>
+
 
                             {/* Subjects */}
                             <div className="bg-white border border-[#DCE3E8] rounded-md p-4">
@@ -157,21 +169,12 @@ const MyProfile = () => {
                                     Subjects <span className="text-[#FF281B]">*</span>
                                 </h2>
                                 <div className="grid md:grid-cols-2 gap-6">
-                                    {[
-                                        {
-                                            title: "Qur'an for English Speakers",
-                                            level: "Beginner–Expert"
-                                        },
-                                        {
-                                            title: "Qur'an & Islamic duas",
-                                            level: "Beginner–Expert"
-                                        }
-                                    ].map((subject, index) => (
+                                    {data?.subjects?.map((subject, index) => (
                                         <div key={index} className="flex items-start gap-4">
                                             <Image src="/subjects.png" alt="Subject" width={61} height={61} />
                                             <div>
-                                                <h3 className="text-[#01354B] text-lg">{subject.title}</h3>
-                                                <p className="text-[#81919C]">{subject.level}</p>
+                                                <h3 className="text-[#01354B] text-lg">{subject?.subject}</h3>
+                                                <p className="text-[#81919C]">{subject?.fromLevel} - {subject?.toLevel}</p>
                                             </div>
                                         </div>
                                     ))}
