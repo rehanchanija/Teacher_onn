@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router';
 import { FaCheck } from 'react-icons/fa';
 import Checked from '@/assets/icons/Checked';
-import { Check } from 'lucide-react';
-import { useRouter } from 'next/router';
 
 const Breadcrumb = ({ steps, currentStep }) => {
     const router = useRouter();
