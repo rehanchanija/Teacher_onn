@@ -1,4 +1,4 @@
-import EditProfile from "@/components/Editprofile/EditProfilePage";
+
 import AdmissionEnroll from "@/components/Homepage/AdmissionEnroll";
 import CourseAdvice from "@/components/Homepage/CourseAdvice";
 import DirectionalClasses from "@/components/Homepage/DirectionalClasses";
@@ -16,7 +16,7 @@ import TutorsPage from "@/components/Homepage/TutorsPage";
 export default function Home() {
   return (
     <div>
-      {/* <div className="md:space-y-20 space-y-8">
+      <div className="md:space-y-20 space-y-8">
         <TutorsPage />
         <Learning />
         <FeautureProfile />
@@ -40,11 +40,12 @@ export default function Home() {
         <OnlineStore />
         <Testimonals />
       </div>
-      <DirectionalClasses /> */}
+      <DirectionalClasses />
   
    
       {/* <EditProfile /> */}
-      <TutorsJob/>
+      <TutorsJob
+      />
     </div>
   );
 }

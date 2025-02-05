@@ -2,15 +2,17 @@
 
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
+import { updateTutor } from "@/api/tutor.api";
+import { useMutation } from "@tanstack/react-query";
 
 const TeachingDetail = ({ handleNext, handlePrevious, formData, updateFormData }) => {
-   const Radiobuttons=[
-    { name: 'travel', label: 'Are you willing to travel to Student?' },
-    { name: 'onlineTeaching', label: 'Available for online teaching?' },
-    { name: 'digitalPen', label: 'Do you have a digital pen?' },
-    { name: 'homeworkHelp', label: 'Do you help with homework and assignments?' },
-    { name: 'fullTimeTeacher', label: 'Are you a full-time teacher employed by a school/college?' }
-]
+    const Radiobuttons = [
+        { name: 'travel', label: 'Are you willing to travel to Student?' },
+        { name: 'onlineTeaching', label: 'Available for online teaching?' },
+        { name: 'digitalPen', label: 'Do you have a digital pen?' },
+        { name: 'homeworkHelp', label: 'Do you help with homework and assignments?' },
+        { name: 'fullTimeTeacher', label: 'Are you a full-time teacher employed by a school/college?' }
+    ]
     const initialValues = formData || {
         charge: '',
         minFee: '',
@@ -43,18 +45,46 @@ const TeachingDetail = ({ handleNext, handlePrevious, formData, updateFormData }
         opportunities: Yup.string().required('Required')
     });
 
+    const { mutate, isPending } = useMutation({
+        mutationFn: updateTutor,
+        onSuccess: (data) => {
+            handleNext();
+            localStorage.setItem("tutor", JSON.stringify(data))
+            console.log("onSuccess", data)
+        },
+        onError: (error) => {
+            console.log("onError", error)
+        }
+    })
+
     const handleSubmit = (values) => {
+        mutate({
+            "teachingDetails": {
+                "charge": values.charge,
+                "minimumFee": values.minFee,
+                "maximumFee": values.maxFee,
+                "feeDetail": values.feeDetails,
+                "totalYearOfExperience ": values.totalExperience,
+                "yearOfOfflineTeachingExperience": values.teachingExperience,
+                "yearOfOnlineTeachingExperience": values.onlineTeachingExperience,
+                "willingToTravelToStudent": values.travel,
+                "availableForOnlineTeaching": values.onlineTeaching,
+                "haveDigitalPen": values.digitalPen,
+                "helpWithHomeworkAndAssignment": values.homeworkHelp,
+                "currentlyAFullTimeTeacher": values.fullTimeTeacher,
+                "opportunitiesIntrestedIn": values.opportunities
+            }
+        });
         updateFormData('teachingDetail', values);
-        handleNext();
     };
 
     return (
-        <div className="w-full bg-white relative min-h-screen">
-            <div className="relative max-w-[1281px] mx-auto shadow-lg -mt-8">
-                <div className="p-8 bg-[#F2F6FB]">
-                    <h3 className="mb-6 text-[black] font-semibold text-xl">Please enter your teaching details.</h3>
+        <div className="w-full bg-white relative min-h-screen ">
+            <div className="relative max-w-[1281px] mx-auto shadow-lg  sm:mt-0">
+                <div className="p-4 sm:p-8 bg-[#F2F6FB]">
+                    <h3 className="mb-4 sm:mb-6 text-[black] font-semibold text-lg sm:text-xl">Please enter your teaching details.</h3>
                     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-                        <Form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <Form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                             {/* Form Fields */}
                             {[
                                 { name: 'charge', label: 'I charge', placeholder: 'Enter here' },
@@ -66,76 +96,75 @@ const TeachingDetail = ({ handleNext, handlePrevious, formData, updateFormData }
                                 { name: 'onlineTeachingExperience', label: 'Years of online teaching experience', placeholder: 'Enter here' }
                             ].map(({ name, label, placeholder }) => (
                                 <div key={name} className="flex flex-col">
-                                    <label className="text-gray-700 font-medium mb-2">
+                                    <label className="text-gray-700 font-medium mb-1 sm:mb-2 text-sm sm:text-base">
                                         {label} <span className="text-red-500">*</span>
                                     </label>
                                     <Field
                                         type="text"
                                         name={name}
-                                        className="border border-gray-400 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="border border-gray-400 p-2 sm:p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
                                         placeholder={placeholder}
                                     />
-                                    <ErrorMessage name={name} component="div" className="text-red-500 text-sm mt-1" />
+                                    <ErrorMessage name={name} component="div" className="text-red-500 text-xs sm:text-sm mt-1" />
                                 </div>
                             ))}
 
                             {/* Radio Buttons */}
                             {Radiobuttons.map(({ name, label }) => (
                                 <div key={name} className="flex flex-col">
-                                    <label className="text-gray-700 font-medium mb-2">
+                                    <label className="text-gray-700 font-medium mb-1 sm:mb-2 text-sm sm:text-base">
                                         {label} <span className="text-red-500">*</span>
                                     </label>
-                                    <div className="flex items-center space-x-4">
+                                    <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-2 sm:space-y-0">
                                         {['yes', 'no'].map((option) => (
-                                            <button className='w-[178px] border px-3 py-2 rounded-md'>
-
-                                            <label key={option} className="flex items-center space-x-2">
-                                                <Field
-                                                    type="radio"
-                                                    name={name}
-                                                    value={option}
-                                                    className=" h-5 w-5 "
-                                                />
-                                                <span className="text-gray-600 capitalize text-[16px]">{option}</span>
-                                            </label>
+                                            <button key={option} className="w-full sm:w-[178px] border px-2 py-1 sm:px-3 sm:py-2 rounded-md">
+                                                <label className="flex items-center justify-center sm:justify-start space-x-2">
+                                                    <Field
+                                                        type="radio"
+                                                        name={name}
+                                                        value={option}
+                                                        className="h-4 w-4 sm:h-5 sm:w-5"
+                                                    />
+                                                    <span className="text-gray-600 capitalize text-sm sm:text-[16px]">{option}</span>
+                                                </label>
                                             </button>
-
                                         ))}
                                     </div>
-                                    <ErrorMessage name={name} component="div" className="text-red-500 text-sm mt-1" />
+                                    <ErrorMessage name={name} component="div" className="text-red-500 text-xs sm:text-sm mt-1" />
                                 </div>
                             ))}
 
                             {/* Dropdown */}
                             <div className="flex flex-col">
-                                <label className="text-gray-700 font-medium mb-2">
+                                <label className="text-gray-700 font-medium mb-1 sm:mb-2 text-sm sm:text-base">
                                     Opportunities you are interested in <span className="text-red-500">*</span>
                                 </label>
                                 <Field
                                     as="select"
                                     name="opportunities"
-                                    className="border border-gray-400 p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="border border-gray-400 p-2 sm:p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
                                 >
                                     <option value="" disabled>Select here</option>
                                     {['0-1 years', '1-3 years', '3-5 years', '5-10 years', '10+ years'].map((option) => (
                                         <option value={option} key={option}>{option}</option>
                                     ))}
                                 </Field>
-                                <ErrorMessage name="opportunities" component="div" className="text-red-500 text-sm mt-1" />
+                                <ErrorMessage name="opportunities" component="div" className="text-red-500 text-xs sm:text-sm mt-1" />
                             </div>
 
                             {/* Buttons */}
-                            <div className="flex justify-left items-center mt-8">
+                            <div className="flex flex-col sm:flex-row justify-left items-center mt-6 sm:mt-8 space-y-4 sm:space-y-0">
                                 <button
                                     type="button"
-                                    className="w-[179px] h-[52px] border border-[#0F283C] text-[#0F283C] font-bold text-[17.36px]  rounded-[2px]"
+                                    className="w-full sm:w-[179px] h-[42px] sm:h-[52px] border border-[#0F283C] text-[#0F283C] font-bold text-sm sm:text-[17.36px] rounded-[2px]"
                                     onClick={handlePrevious}
                                 >
                                     &lt; &lt; Previous
                                 </button>
                                 <button
                                     type="submit"
-                                    className="w-[179px] h-[52px] ml-4 bg-[#0B1F36] text-white font-bold text-[17.36px] rounded-[4px]"
+                                    className="w-full sm:w-[179px] h-[42px] sm:h-[52px] mt-0 sm:ml-4 bg-[#0B1F36] text-white font-bold text-sm sm:text-[17.36px] rounded-[4px]"
+                                    disabled={isPending}
                                 >
                                     Submit &gt;&gt;
                                 </button>

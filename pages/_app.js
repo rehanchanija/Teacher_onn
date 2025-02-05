@@ -1,14 +1,17 @@
-import Navbar from "@/components/Navbar/Navbar";
-import "../styles/globals.css";
 import Footer from "@/components/Footer.js/Footer";
+import Navbar from "@/components/Navbar/Navbar";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "../styles/globals.css";
+const queryClient = new QueryClient()
 
 export default function App({ Component, pageProps }) {
   return (
-    <div>
+    <QueryClientProvider client={queryClient}>
+
       <Navbar />
       <Component {...pageProps} />
-      <Footer /> 
+      <Footer />
 
-    </div>
+    </QueryClientProvider>
   );
 }
