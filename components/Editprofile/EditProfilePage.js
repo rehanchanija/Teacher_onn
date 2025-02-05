@@ -14,7 +14,7 @@ import EditProfileHeader from '../Atoms/EditProfileHeader';
 
 const formSections = ['Personal Info', 'Education', 'Subject', 'Experience', 'Teaching Detail', 'Profile Description', 'Course'];
 
-const EditProfile = () => {
+const EditProfilePage = () => {
     const [currentStep, setCurrentStep] = useState(0);
     const [formData, setFormData] = useState({
         personalInfo: {},
@@ -83,4 +83,4 @@ const EditProfile = () => {
     );
 };
 
-export default EditProfile;
+export default EditProfilePage;

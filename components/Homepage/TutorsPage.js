@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const TutorsPage = () => {
   return (
-    <div className="relative w-full font-gilroy overflow-hidden">
+    <div className="relative  w-full font-gilroy overflow-hidden">
 
       {/* Background sections */}
       <div className="bg-[#136FB6] h-[500px] sm:h-[600px] md:h-[700px] lg:h-[700px] w-full"></div>

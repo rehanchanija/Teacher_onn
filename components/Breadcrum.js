@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { Check } from 'lucide-react';
+import { FaCheck } from 'react-icons/fa';
 import Checked from '@/assets/icons/Checked';
 
 const Breadcrumb = ({ steps, currentStep }) => {
@@ -30,7 +30,7 @@ const Breadcrumb = ({ steps, currentStep }) => {
                                 <span className={`md:hidden w-12 h-12 flex items-center justify-center rounded-full border-2 ${
                                     index <= currentStep ? 'border-white' : 'border-gray-400'
                                 }`}>
-                                    {index < currentStep ? <Check className="w-6 h-6" /> : index + 1}
+                                    {index < currentStep ? <FaCheck className="w-6 h-6" /> : index + 1}
                                 {/* {index < currentStep && <div className=" w-1 h-8 bg-white mt-2"></div>} */}
 
                                 </span> 
