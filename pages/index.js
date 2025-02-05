@@ -10,12 +10,13 @@ import Premium from "@/components/Homepage/Premium";
 import Reveiw from "@/components/Homepage/Reveiw";
 import StudentTeaching from "@/components/Homepage/StudentTeaching";
 import Testimonals from "@/components/Homepage/Testimonal";
+import TutorsJob from "@/components/Homepage/TutorsJob";
 import TutorsPage from "@/components/Homepage/TutorsPage";
 
 export default function Home() {
   return (
     <div>
-      <div className="md:space-y-20 space-y-8">
+      {/* <div className="md:space-y-20 space-y-8">
         <TutorsPage />
         <Learning />
         <FeautureProfile />
@@ -39,10 +40,11 @@ export default function Home() {
         <OnlineStore />
         <Testimonals />
       </div>
-      <DirectionalClasses />
+      <DirectionalClasses /> */}
   
    
       {/* <EditProfile /> */}
+      <TutorsJob/>
     </div>
   );
 }

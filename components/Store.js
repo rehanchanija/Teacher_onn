@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -78,7 +78,7 @@ const Store = () => {
                         className="flex justify-between items-center w-full py-2 text-left font-medium"
                     >
                         Subject
-                        {expandedSections.subject ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                        {expandedSections.subject ? <FaChevronUp size={20} /> : <FaChevronDown size={20} />}
                     </button>
                     {expandedSections.subject && (
                         <div className="mt-2 space-y-2">

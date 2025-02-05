@@ -1,66 +1,21 @@
-const TutorsCard = () => {
+const TutorsCard = ({ bgColor }) => {
   return (
-    <div className="flex justify-between mx-2">
-      <div className="w-[412px] text-[#01354B] p-4 bg-[#E1F6CC] space-y-4 rounded-md ">
-        <h1 className="text-[20px] font-semibold pt-3">
-          Online Vedic Maths, Vedic Mathematics tutor required
-        </h1>
-        <div className="space-x-6">
-          <button className="border px-2 border-[#01354B]">Vedic Maths</button>
-          <button className="border px-2  border-[#01354B]">
-            Vedic Mathematics
-          </button>
-        </div>
-        <p className="text-[16px]">I am looking for a Vedic Maths Teacher.</p>
-        <div className="text-[#136FB6] pb-6 space-x-3">
-          <span>4 mins ago</span>
-          <span>Thane,Maharashtra,India</span>
-        </div>
-        <button className="text-[#136FB6] text-[17.36px]  border border-[#136FB6] w-full py-2 font-bold">
-          {" "}
-          Veiw Details
-        </button>
+    <div className={`w-[412px] text-[#01354B] p-4 ${bgColor} space-y-4 rounded-md m-3`}>
+      <h1 className="text-[20px] font-semibold pt-3">
+        Online Vedic Maths, Vedic Mathematics tutor required
+      </h1>
+      <div className="space-x-6">
+        <button className="border px-2 border-[#01354B]">Vedic Maths</button>
+        <button className="border px-2 border-[#01354B]">Vedic Mathematics</button>
       </div>
-      <div className="w-[412px] text-[#01354B] p-4 bg-[#E9EBF8] space-y-4 rounded-md ">
-        <h1 className="text-[20px] font-semibold pt-3">
-          Online Vedic Maths, Vedic Mathematics tutor required
-        </h1>
-        <div className="space-x-6">
-          <button className="border px-2 border-[#01354B]">Vedic Maths</button>
-          <button className="border px-2  border-[#01354B]">
-            Vedic Mathematics
-          </button>
-        </div>
-        <p className="text-[16px]">I am looking for a Vedic Maths Teacher.</p>
-        <div className="text-[#136FB6] pb-6 space-x-3">
-          <span>4 mins ago</span>
-          <span>Thane,Maharashtra,India</span>
-        </div>
-        <button className="text-[#136FB6] text-[17.36px]  border border-[#136FB6] w-full py-2 font-bold">
-          {" "}
-          Veiw Details
-        </button>
+      <p className="text-[16px]">I am looking for a Vedic Maths Teacher.</p>
+      <div className="text-[#136FB6] pb-6 space-x-3">
+        <span>4 mins ago</span>
+        <span>Thane, Maharashtra, India</span>
       </div>
-      <div className="w-[412px] text-[#01354B] p-4 bg-[#E6F1FF] space-y-4 rounded-md ">
-        <h1 className="text-[20px] font-semibold pt-3">
-          Online Vedic Maths, Vedic Mathematics tutor required
-        </h1>
-        <div className="space-x-6">
-          <button className="border px-2 border-[#01354B]">Vedic Maths</button>
-          <button className="border px-2  border-[#01354B]">
-            Vedic Mathematics
-          </button>
-        </div>
-        <p className="text-[16px]">I am looking for a Vedic Maths Teacher.</p>
-        <div className="text-[#136FB6] pb-6 space-x-3">
-          <span>4 mins ago</span>
-          <span>Thane,Maharashtra,India</span>
-        </div>
-        <button className="text-[#136FB6] text-[17.36px]  border border-[#136FB6] w-full py-2 font-bold">
-          {" "}
-          Veiw Details
-        </button>
-      </div>
+      <button className="text-[#136FB6] text-[17.36px] border border-[#136FB6] w-full py-2 font-bold">
+        View Details
+      </button>
     </div>
   );
 };
