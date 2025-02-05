@@ -14,6 +14,7 @@ const Footer = () => {
 
     "Bhandup",
     "Powai",
+    "Edit Profile"
   ];
   const Topics = [
     "CHEMISTRY",
@@ -59,7 +60,7 @@ const Footer = () => {
             <ul className=" text-[16px] list-inside ">
               {Learning.map((data, index) => (
                 <li key={index} className="py-1.5 px-1 list-disc ">
-                  <Link href="">{data}</Link>
+                  <Link href={data === "Edit Profile" ? "/edit-profile" : ""}>{data}</Link>
                 </li>
               ))}
             </ul>

@@ -3,6 +3,8 @@ import { useFormik } from "formik";
 import Image from "next/image";
 import { useState } from "react";
 import * as Yup from "yup";
+import { updateTutor } from "@/api/tutor.api";
+import { useMutation } from "@tanstack/react-query";
 
 const Subject = ({ handleNext, handlePrevious, formData, updateFormData }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,9 +20,21 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData }) => {
         { subject: "IGCSE 9-1 Chemistry" },
     ];
 
+    const { mutate, isPending } = useMutation({
+        mutationFn: updateTutor,
+        onSuccess: (data) => {
+            handleNext();
+            localStorage.setItem("tutor", JSON.stringify(data))
+            console.log("onSuccess", data)
+        },
+        onError: (error) => {
+            console.log("onError", error)
+        }
+    })
+
     const formik = useFormik({
         initialValues: formData || {
-            subject: "",
+            subjects: "",
             fromLevel: "",
             toLevel: "",
         },
@@ -30,8 +44,14 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData }) => {
             toLevel: Yup.string().required("Required"),
         }),
         onSubmit: (values) => {
-            updateFormData('subject', values);
-            handleNext();
+            mutate({
+                "subjects": {
+                    "subject": values.subject,
+                    "fromLevel": values.fromLevel,
+                    "toLevel": values.toLevel
+                }
+            });
+            updateFormData('subjects', values);
             console.log(values);
         },
     });
@@ -184,13 +204,14 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData }) => {
                                     type="button"
                                     onClick={handlePrevious}
                                 >
-                                      &lt;&lt; Previous
+                                    &lt;&lt; Previous
                                 </button>
                                 <button
                                     className="w-40 h-12 bg-[#0F283C] text-white font-bold rounded-md"
                                     type="submit"
+                                    disabled={isPending}
                                 >
-                                    Update &gt;&gt;
+                                    Save &gt;&gt;
                                 </button>
                             </div>
                         </form>

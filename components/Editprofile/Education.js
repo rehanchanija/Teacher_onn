@@ -2,6 +2,8 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/image";
 import * as Yup from "yup";
+import { updateTutor } from "@/api/tutor.api";
+import { useMutation } from "@tanstack/react-query";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -28,9 +30,32 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData }) => 
         score: Yup.string(),
     });
 
+    const { mutate, isPending } = useMutation({
+        mutationFn: updateTutor,
+        onSuccess: (data) => {
+            handleNext();
+            localStorage.setItem("tutor", JSON.stringify(data))
+            console.log("onSuccess", data)
+        },
+        onError: (error) => {
+            console.log("onError", error)
+        }
+    })
+
     const handleSubmit = (values) => {
-        updateFormData('education', values);
-        handleNext();
+        mutate({
+            "educationInfo": [{
+                "instituteWithCity": values.institutionName,
+                "degreeType": values.degreeType,
+                "degreeName": values.degreeName,
+                "startDate": values.startDate,
+                "endDate": values.endDate,
+                "association": values.association,
+                "speciality": values.speciality,
+                "score": values.score
+            }]
+        });
+        // updateFormData('education', values);
         console.log(values);
     };
 
@@ -40,13 +65,13 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData }) => 
                 <div className="flex flex-col md:flex-row gap-8 my-4">
                     {/* Profile Image Section */}
                     <div className="md:w-1/3">
-                        <div className="relative w-full h-60 bg-gray-200 border-dotted border-2 border-[#1BADFF] rounded-lg overflow-hidden">
+                        <div className="relative w-full md:h-60 bg-gray-200 border-dotted border-2 border-[#1BADFF] rounded-lg overflow-hidden">
                             <Image
                                 src="/degree.png"
                                 alt="Degree Placeholder"
                                 width={275}
                                 height={242}
-                                className="object-cover w-full h-full"
+                                className="md:object-cover  md:w-full h-full"
                             />
                         </div>
                     </div>
@@ -75,10 +100,10 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData }) => 
                                             <Field
                                                 type="text"
                                                 name={field}
-                                                className="mt-1 p-2 border border-gray-300 rounded w-full bg-white"
+                                                className="mt-1 p-2 md:p-3 border border-gray-300 rounded w-full bg-white text-sm md:text-base"
                                                 placeholder={`Enter ${field}`}
                                             />
-                                            <ErrorMessage name={field} component="p" className="text-red-500 text-sm" />
+                                            <ErrorMessage name={field} component="p" className="text-red-500 text-sm mt-1" />
                                         </div>
                                     ))}
                                     <div className="md:col-span-2 flex flex-col md:flex-row gap-4">
@@ -117,7 +142,8 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData }) => 
                                         </button>
                                         <button
                                             type="submit"
-                                            className="bg-[#0F283C] text-white py-3 md:px-10 px-6 rounded text-lg font-semibold"
+                                            className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
+                                            disabled={isPending}
                                         >
                                             Next &gt;
                                         </button>

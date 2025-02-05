@@ -68,13 +68,10 @@ const EditProfilePage = () => {
     };
 
     return (
-        <div >
+        <div className="bg-[#0F283C] mx-0 md:mx-12 rounded-lg md:block grid grid-cols-[80px,auto] ">
 
-<EditProfileHeader/>
-        <div className=" md:mx-12  flex md:block md:-mt-16  ">
             <Breadcrumb currentStep={currentStep} steps={formSections} />
-            <div className="bg-white  rounded shadow-md">{renderStep()}</div>
-        </div>
+            <div className="bg-white rounded shadow-md ">{renderStep()}</div>
         </div>
     );
 };
