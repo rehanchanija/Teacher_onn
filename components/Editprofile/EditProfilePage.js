@@ -10,8 +10,8 @@ import TeachingDetail from './TeachingDetail';
 
 const formSections = ['Personal Info', 'Education', 'Subject', 'Experience', 'Teaching Detail', 'Profile Description', 'Course'];
 
-const EditProfile = () => {
-    const [currentStep, setCurrentStep] = useState(6);
+const EditProfilePage = () => {
+    const [currentStep, setCurrentStep] = useState(0);
     const [formData, setFormData] = useState({
         personalInfo: {},
         education: {},
@@ -76,4 +76,4 @@ const EditProfile = () => {
     );
 };
 
-export default EditProfile;
+export default EditProfilePage;

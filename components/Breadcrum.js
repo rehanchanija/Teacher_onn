@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+import { FaCheck } from 'react-icons/fa';
 import Checked from '@/assets/icons/Checked';
 import { Check } from 'lucide-react';
 import { useRouter } from 'next/router';
@@ -26,13 +28,14 @@ const Breadcrumb = ({ steps, currentStep }) => {
                                 </span>
                                 {/* Checked icon for previous steps on larger screens */}
 
-                                <span className={`md:hidden w-12 h-12 flex items-center justify-center rounded-full border-2 ${index <= currentStep ? 'border-white' : 'border-gray-400'
-                                    }`}>
-                                    {index < currentStep ? <Check className="w-6 h-6" /> : index + 1}
-                                    {/* {index < currentStep && <div className=" w-1 h-8 bg-white mt-2"></div>} */}
+                                <span className={`md:hidden w-12 h-12 flex items-center justify-center rounded-full border-2 ${
+                                    index <= currentStep ? 'border-white' : 'border-gray-400'
+                                }`}>
+                                    {index < currentStep ? <FaCheck className="w-6 h-6" /> : index + 1}
+                                {/* {index < currentStep && <div className=" w-1 h-8 bg-white mt-2"></div>} */}
 
-                                </span>
-
+                                </span> 
+                                 
                             </button>
                             {index < steps.length - 1 && <span className="mx-2"></span>}
                         </li>

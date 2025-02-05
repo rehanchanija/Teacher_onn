@@ -47,7 +47,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-between items-center md:mx-8 my-4 mx-4 ">
+    <div className="flex justify-between items-center md:mx-8 my-4 mx-3 ">
       <div className="md:flex items-center">
         <Logo />
         <div className="font-semibold text-[18px] pl-12 text-[#515A60] ">

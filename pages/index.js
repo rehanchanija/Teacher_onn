@@ -21,7 +21,7 @@ export default function Home() {
         </div>
         <Premium />
       </div>
-      <div className="md:mx-12 mx- md:space-y-20 space-y-8">
+      <div className="md:mx-12  md:space-y-20 space-y-8">
 
 
         <StudentTeaching />
@@ -30,22 +30,10 @@ export default function Home() {
         <Testimonals />
       </div>
       <DirectionalClasses /> */}
-      {/* <PersonalInfo /> */}
-      {/* <Education />
-      <Subject />
-      <Course />
-      <Experience />
-      <PersonalInfo />
-      <ProfileDescription />
-      <Subject />
-      <TeachingDetail />
-      <MyProfile /> */}
-      {/* <Store /> */}
-      {/* <Footer /> */}
-      {/* <AdmissionEnroll /> */}
-      <MyProfile/>
-      {/* <EditProfileHeader /> */}
+  
+   
       {/* <EditProfile /> */}
+      <TutorsJob/>
     </div>
   );
 }
