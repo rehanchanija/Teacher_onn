@@ -41,8 +41,8 @@ export default function Home() {
         <Testimonals />
       </div>
       <DirectionalClasses />
-  
-   
+
+
       {/* <EditProfile /> */}
       <TutorsJob
       />

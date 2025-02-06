@@ -1,19 +1,45 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @font-face {
-    font-family: 'Gilroy';
-    src: url('/fonts/Gilroy-Regular.woff2') format('woff2'),
-         url('/fonts/Gilroy-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-  }
-  
-  @font-face {
-    font-family: 'Gilroy';
-    src: url('/fonts/Gilroy-Bold.woff2') format('woff2'),
-         url('/fonts/Gilroy-Bold.woff') format('woff');
-    font-weight: 700;
-    font-style: normal;
-  }
-  
+     font-family: 'Gilroy';
+     src: url('/fonts/Gilroy-Regular.woff2') format('woff2'),
+          url('/fonts/Gilroy-Regular.woff') format('woff');
+     font-weight: 400;
+     font-style: normal;
+}
+
+@font-face {
+     font-family: 'Gilroy';
+     src: url('/fonts/Gilroy-Bold.woff2') format('woff2'),
+          url('/fonts/Gilroy-Bold.woff') format('woff');
+     font-weight: 700;
+     font-style: normal;
+}
+
+*::-webkit-scrollbar {
+     display: none;
+}
+
+/* content: {
+     height: "auto",
+     zIndex: 1000, padding: 0,
+     margin: "auto",
+     position: "static",
+     // width: window.innerWidth > 768 ? "80%" : "90%",
+     width: "90%"
+
+
+   }, */
+.ReactModal__Content {
+     width: 90% !important;
+
+}
+
+@media screen and (min-width: 768px) {
+     .ReactModal__Content {
+          width: 80% !important;
+     }
+
+}

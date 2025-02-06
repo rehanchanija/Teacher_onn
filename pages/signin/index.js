@@ -1,15 +1,38 @@
-import { signin } from '@/api/auth.api';
+import { signin, signinStudent, signinTutor } from '@/api/auth.api';
 import { useMutation } from '@tanstack/react-query';
 import { useFormik } from 'formik';
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from 'next/router';
+import { useEffect, useRef, useState } from 'react';
 import * as Yup from 'yup';
 
 
-const SigninPage = ({ setIsModalOpen }) => {
+const SigninModal = ({ openModal, closeLoginModal }) => {
+    const [userlogin, setUserlogin] = useState(false);
     const router = useRouter()
-    const formik = useFormik({
+
+    const [isTutor, setIsTutor] = useState(false);
+    // Track if the user is signing up as a Tutor or Student
+    const modalRef = useRef();
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (modalRef.current && !modalRef.current.contains(event.target)) {
+                closeLoginModal();
+            }
+        };
+
+        if (openModal) {
+            document.addEventListener('click', handleClickOutside);
+        } else {
+            document.removeEventListener('click', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [openModal, closeLoginModal]); const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
@@ -24,32 +47,68 @@ const SigninPage = ({ setIsModalOpen }) => {
     });
 
     const { mutate, isPending } = useMutation({
-        mutationFn: signin,
+        mutationFn: isTutor ? signinTutor : signinStudent, // Using either signupTutor or signupStudent
+
         onSuccess: (data) => {
-            router.push('/')
-            console.log("onSuccess", data)
-            localStorage.setItem('tutor', JSON.stringify(data))
+            if (isTutor) {
+                localStorage.setItem('tutor', JSON.stringify(data))
+                router.push('/edit-profile')
+
+            } else {
+
+                localStorage.setItem('student', JSON.stringify(data))
+
+            }
+            closeLoginModal();
         },
         onError: (error) => {
-            console.log("onError", error)
+            console.log("Signup Error:", error);
         }
-    })
-
+    });
 
 
 
 
 
     return (
-        <div className="relative bg-[#136FB6] h-[110vh] pt-5 px-4">
-            <div className="absolute inset-0 bg-[#136FB6]" onClick={() => setIsModalOpen(false)} />
-            <div className="rounded-2xl flex sm:flex-row flex-col max-w-7xl mx-auto justify-center bg-white">
-                <div className="sm:w-[45%] space-y-4 z-20 bg-white p-8 mt-0 sm:rounded-2xl rounded-none sm:rounded-b-none rounded-b-2xl">
-                    <div className="flex items-center justify-between">
-                        <Image src="/Group 2.png" alt="logo" width={230} height={50} className="cursor-pointer" />
+        <div className=" h-full  ">
+            <div className="relative flex   h-full  justify-between  rounded-lg  w-full shadow-lg overflow-y-auto md:p-4 p-6  gap-x-8">
+                {/* Image on the Right */}
+                <div className="flex-1 hidden md:block  relative">
+                    <Image
+                        src="/image/home/tutorpag.png"
+                        alt="Top Right Image"
+                        fill
+                        className=" object-contain "
+                    />
+                </div>
+
+                {/* Signup Form on the Left */}
+                <div className=" flex-1 md:pr-8  h-full">
+
+
+                    <div className="md:flex justify-between items-center md:mb-4">
+                        <Image src="/Group 2.png" alt="Logo" width={230} height={50} className="cursor-pointer pt-4 md:pt-0" />
+                        <div className="flex items-center space-x-6 py-8">
+                            <button
+                                onClick={() => setIsTutor(true)}  // Set state to Tutor
+                                className={`border-[#E5E5E5] px-4 py-2 rounded-md text-xs font-semibold ${isTutor ? 'border-2' : ''}`}
+                            >
+                                Tutor
+                            </button>
+                            <button
+                                onClick={() => setIsTutor(false)}  // Set state to Student
+                                className={`border-[#E5E5E5] px-4 py-2 rounded-md text-xs font-semibold ${!isTutor ? 'border-2' : ''}`}
+                            >
+                                Student
+                            </button>
+                        </div>
+
                     </div>
-                    <p className="text-xl font-bold">Nice to see you! 😊</p>
-                    <form onSubmit={formik.handleSubmit}>
+
+                    <p className="text-xl font-bold  mb-4">Nice to see you! 😊</p>
+
+                    <form onSubmit={formik.handleSubmit} className='space-y-4'>
 
                         <div>
                             <p className="ml-2">Login</p>
@@ -91,17 +150,20 @@ const SigninPage = ({ setIsModalOpen }) => {
                             <p className="text-sm font-bold text-[#007AFF]">Forgot password?</p>
                         </div>
 
-                        <button type="submit" className="bg-[#007AFF] font-bold text-center py-3 w-full rounded-md text-white" disabled={isPending}>
+                        <button type="submit" className="bg-[#007AFF] font-bold text-center py-3 w-full rounded-md text-white" disabled={isPending}
+
+                        >
                             Sign in
                         </button>
 
                         <span className="flex items-center justify-center">
                             <p>Don&apos;t have an account?</p>
-                            <Link href="/signup">
-                                <button type="button">
-                                    <p className="text-[#007AFF] font-bold ml-2">Sign up now</p>
-                                </button>
-                            </Link>
+                            <button className="text-[#007AFF] font-bold ml-2"
+                                onClick={() => {
+                                    openModal()
+                                    closeLoginModal()
+                                }}
+                            >Sign up now</button>
                         </span>
 
                     </form>
@@ -111,4 +173,4 @@ const SigninPage = ({ setIsModalOpen }) => {
     );
 };
 
-export default SigninPage;
+export default SigninModal;
