@@ -1,16 +1,21 @@
 import { getTutor } from "@/api/tutor.api"
 import { useQuery } from "@tanstack/react-query"
+import { useRouter } from 'next/router'
 import Image from "next/image"
 
 
 
 const MyProfile = () => {
+    const tutor = JSON.parse(localStorage.getItem("tutor"));
 
-  const {data}= useQuery({
-  querykey: ["GET_TUTOR"],
-    queryFn: getTutor
-  })
-  console.log(data)
+
+    const { data } = useQuery({
+        querykey: ["GET_TUTOR"],
+        queryFn: getTutor
+    })
+
+    console.log(data)
+    const router = useRouter()
     return (
         <div className="min-h-screen flex flex-col">
             {/* Hero Banner */}
@@ -49,8 +54,8 @@ const MyProfile = () => {
                                             {data?.personalInfo?.fullName}
                                         </h2>
                                         <p className="text-[#667681] text-base" style={{ fontFamily: 'Gilroy-Medium' }}>
-                                        {data?.personalInfo?.speciality}
-                                            
+                                            {data?.personalInfo?.speciality}
+
                                         </p>
 
                                         {/* Rating */}
@@ -69,11 +74,11 @@ const MyProfile = () => {
                                         <div className="mt-4 space-y-2">
                                             <div className="flex items-center gap-2">
                                                 <span className="font-bold text-black">Fees:</span>
-                                                <span className="text-[#667681]">₹200–300/hour | (USD 2.39–3.59/hour)</span>
+                                                <span className="text-[#667681]">{data?.teachingDetails?.feeDetail}</span>
                                             </div>
                                             <div className="flex items-center gap-2">
                                                 <span className="font-bold text-black">Exp:</span>
-                                                <span className="text-[#667681]">2.0 Years</span>
+                                                <span className="text-[#667681]">{data?.teachingDetails?.totalYearOfExperience}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -87,8 +92,13 @@ const MyProfile = () => {
 
                                 {/* Action Buttons */}
                                 <div className="flex gap-3 mt-4">
-                                    <button className="flex-1 bg-[#121212] text-white h-11 rounded-md text-lg font-bold">
-                                        Book Now
+                                    <button className="flex-1 bg-[#121212] text-white h-11 rounded-md text-lg font-bold" onClick={() => {
+                                        if (tutor) {
+                                            router.push("/edit-profile")
+                                        } else { }
+                                    }}>
+
+                                        {tutor ? "Edit Profile" : "Book Now"}
                                     </button>
                                     <button className="w-24 border border-[#667681] text-[#667681] h-11 rounded-md text-lg">
                                         Share
@@ -102,7 +112,7 @@ const MyProfile = () => {
                                     About Me <span className="text-[#FF281B]">*</span>
                                 </h2>
                                 <p className="mt-2 text-[#81919C] text-base leading-relaxed">
-                                    I am Mohammed Salman from Kerala, India. I am graduated in History. Now doing Pg in history. I have more than 10 years experience in Islamic theology. I studied in a big mosque in Ponnani named Makhdhoomiyya da'wa college. Also, I graduated from Jamia Markazil Saquafathi Sunniyya in Kerala, India. I have teaching experience from 1 to 12th classes. I can teach both Qur'an and Islamic Sharia and theology. I am exploring and engaging in Islamic and Qur'an studies. I have deep knowledge in Islamic Sharia and theology. Now also training to teach.
+                                    {data?.profileDescription}
                                 </p>
                             </div>
 
@@ -134,7 +144,7 @@ const MyProfile = () => {
                                         <div className="flex flex-wrap gap-2 mt-1">
                                             {["English", "Hindi", "Urdu"].map((lang) => (
                                                 <span key={lang} className="bg-[#DAE7F1] px-3 py-1 rounded text-[#475967]">
-                                                   {data?.courses?.[0]?.language}
+                                                    {data?.courses?.[0]?.language}
                                                 </span>
                                             ))}
                                         </div>
@@ -151,15 +161,15 @@ const MyProfile = () => {
                                     Education Background <span className="text-[#FF281B]">*</span>
                                 </h2>
                                 {data?.educationInfo?.map((educationInfo, index) => (
-                                <div className="flex gap-4">
-                                    <Image src="/education.png" alt="Education" width={61} height={61} />
-                                    <div>
-                                        <h3 className="text-[#01354B] text-xl font-bold">{educationInfo?.degreeName}</h3>
-                                        <p className="text-[#81919C]">{educationInfo?.instituteWithCity}</p>
-                                        <p className="text-[#81919C]">{educationInfo?.startDate} – {educationInfo?.endDate}</p>
+                                    <div className="flex gap-4">
+                                        <Image src="/education.png" alt="Education" width={61} height={61} />
+                                        <div>
+                                            <h3 className="text-[#01354B] text-xl font-bold">{educationInfo?.degreeName}</h3>
+                                            <p className="text-[#81919C]">{educationInfo?.instituteWithCity}</p>
+                                            <p className="text-[#81919C]">{educationInfo?.startDate} – {educationInfo?.endDate}</p>
+                                        </div>
                                     </div>
-                                </div>
-                        ))}
+                                ))}
                             </div>
 
 
@@ -186,14 +196,18 @@ const MyProfile = () => {
                                 <h2 className="text-xl font-bold text-[#01354B] mb-4">
                                     Experience <span className="text-[#FF281B]">*</span>
                                 </h2>
-                                <div className="flex gap-4">
-                                    <Image src="/academic.png" alt="Experience" width={61} height={61} />
-                                    <div>
-                                        <h3 className="text-[#01354B] text-xl">Academic counselor</h3>
-                                        <p className="text-[#81919C]">Avodha Edutech</p>
-                                        <p className="text-[#81919C]">Feb, 2020 – Jul, 2023</p>
+                                {data?.experience?.map((experience, index) => (
+
+                                    <div className="flex gap-4">
+                                        <Image src="/academic.png" alt="Experience" width={61} height={61} />
+                                        <div>
+                                            <h3 className="text-[#01354B] text-xl">{experience?.designation}</h3>
+                                            <p className="text-[#81919C]">{experience?.organization}</p>
+                                            <p className="text-[#81919C]">{experience?.startDate} – {experience?.endDate}</p>
+                                        </div>
                                     </div>
-                                </div>
+                                ))}
+
                             </div>
 
                             {/* Reviews */}

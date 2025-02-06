@@ -7,7 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const Education = ({ handleNext, handlePrevious, formData, updateFormData }) => {
+const Education = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
     const initialValues = formData || {
         institutionName: "",
         degreeType: "",
@@ -18,6 +18,7 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData }) => 
         speciality: "",
         score: "",
     };
+    console.log(initialData)
 
     const validationSchema = Yup.object({
         institutionName: Yup.string().required("This field is required"),
@@ -62,6 +63,41 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData }) => 
     return (
         <div className="flex flex-col items-center">
             <div className="bg-[#F2F6FB] shadow-md rounded-lg p-6 w-full max-w-7xl">
+                <div className="p-4 sm:p-6 md:p-8 bg-[#F2F6FB]">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                        {initialData?.map((item, index) => (
+                            <div
+                                key={index}
+                                className="flex items-start gap-4 bg-white p-4 rounded border border-[#B4C2D3] shadow-sm"
+                            >
+                                <div className="flex-grow">
+                                    <h3 className="font-bold text-[#4E5865]">{item?.degreeType}</h3>
+                                    <p className="text-[#136AAD] text-sm">{item?.association}</p>
+                                </div>
+                                <div className="flex gap-2">
+                                    <button className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
+                                        <Image
+                                            src="/edit.png"
+                                            alt="Edit Icon"
+                                            width={32}
+                                            height={32}
+                                            className="mx-auto"
+                                        />
+                                    </button>
+                                    <button className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
+                                        <Image
+                                            src="/delete.png"
+                                            alt="Remove Icon"
+                                            width={32}
+                                            height={32}
+                                            className="mx-auto"
+                                        />
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
                 <div className="flex flex-col md:flex-row gap-8 my-4">
                     {/* Profile Image Section */}
                     <div className="md:w-1/3">
