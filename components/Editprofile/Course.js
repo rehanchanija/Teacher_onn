@@ -5,12 +5,8 @@ import * as Yup from "yup";
 import { updateTutor } from "@/api/tutor.api";
 import { useMutation } from "@tanstack/react-query";
 
-const Course = ({ handlePrevious, formData, updateFormData, handleSubmit }) => {
-    const educationData = [
-        { subject: "Course", location: "Noida, Uttar Pradesh, India · On-site" },
-        { subject: "Course", location: "Noida, Uttar Pradesh, India · On-site" },
-        { subject: "Course", location: "Noida, Uttar Pradesh, India · On-site" },
-    ];
+const Course = ({ handlePrevious, formData, updateFormData, handleSubmit, initialData }) => {
+
 
     const { mutate, isPending } = useMutation({
         mutationFn: updateTutor,
@@ -23,9 +19,10 @@ const Course = ({ handlePrevious, formData, updateFormData, handleSubmit }) => {
             console.log("onError", error)
         }
     })
+    console.log(initialData)
 
     const formik = useFormik({
-        initialValues:  {
+        initialValues: {
 
             Course_title: "",
             Description: "",
@@ -67,7 +64,6 @@ const Course = ({ handlePrevious, formData, updateFormData, handleSubmit }) => {
         },
     });
 
-    console.log(formik.values)
 
     return (
         <div className="w-full bg-white relative min-h-screen">
@@ -77,14 +73,14 @@ const Course = ({ handlePrevious, formData, updateFormData, handleSubmit }) => {
                     {/* Education Cards - Responsive Grid */}
                     <div className="p-4 sm:p-6 md:p-8 bg-[#F2F6FB]">
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                            {educationData.map((item, index) => (
+                            {initialData?.map((item, index) => (
                                 <div
                                     key={index}
                                     className="flex items-start gap-4 bg-white p-4 rounded border border-[#B4C2D3] shadow-sm"
                                 >
                                     <div className="flex-grow">
-                                        <h3 className="font-bold text-[#4E5865]">{item.subject}</h3>
-                                        <p className="text-[#136AAD] text-sm">{item.location}</p>
+                                        <h3 className="font-bold text-[#4E5865]">{item?.courseTitle}</h3>
+                                        <p className="text-[#136AAD] text-sm">{item?.courseDescription}</p>
                                     </div>
                                     <div className="flex gap-2">
                                         <button className="rounded-full w-8 h-8 sm:w-10 sm:h-10">

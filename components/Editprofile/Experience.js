@@ -6,13 +6,9 @@ import * as Yup from "yup";
 import { updateTutor } from "@/api/tutor.api";
 import { useMutation } from "@tanstack/react-query";
 
-const Experience = ({ handleNext, handlePrevious, formData, updateFormData }) => {
+const Experience = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const educationData = [
-        { subject: "Teacher / Professor", location: "Noida, Uttar Pradesh, India · On-site", grade: "Full-time · 2 yrs 5 mos" },
-        { subject: "Teacher / Professor", location: "Noida, Uttar Pradesh, India · On-site", grade: "Full-time · 2 yrs 5 mos" },
-        { subject: "Teacher / Professor", location: "Noida, Uttar Pradesh, India · On-site", grade: "Full-time · 2 yrs 5 mos" },
-    ];
+
 
     const validationSchema = Yup.object({
         organization: Yup.string().required("Required"),
@@ -47,9 +43,8 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData }) =>
             }
         });
         updateFormData('experience', values);
-        console.log(values);
     };
-
+    console.log(initialData)
     return (
         <div className="min-h-screen w-full bg-white">
             <div className="relative max-w-[1281px] mx-auto shadow-lg ">
@@ -100,14 +95,14 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData }) =>
                 {/* Education Cards */}
                 <div className="p-6 bg-[#F2F6FB]">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {educationData.map((item, index) => (
+                        {initialData?.map((item, index) => (
                             <div
                                 key={index}
                                 className="flex items-start gap-4 bg-white p-4 rounded-md border border-gray-300 shadow-sm"
                             >
                                 <div className="flex-grow">
-                                    <h3 className="font-bold text-gray-800">{item.subject}</h3>
-                                    <p className="text-sm text-gray-600">{item.location}</p>
+                                    <h3 className="font-bold text-gray-800">{item?.designation}</h3>
+                                    <p className="text-sm text-gray-600">{item?.organization}</p>
                                     {item.grade && <p className="text-sm text-gray-600">{item.grade}</p>}
                                 </div>
                                 <div className="flex gap-2">
@@ -171,7 +166,7 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData }) =>
                                         name: "startDate",
                                         type: "text",
                                     },
-                                   
+
                                     {
                                         label: "End Date (DD/MM/YYYY)",
                                         name: "endDate",

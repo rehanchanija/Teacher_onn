@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { updateTutor } from "@/api/tutor.api";
 import { useMutation } from "@tanstack/react-query";
 
-const Subject = ({ handleNext, handlePrevious, formData, updateFormData }) => {
+const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const educationData = [
         { subject: "ICSE Maths", grade: "(Grade 8 - Grade 10)" },
@@ -55,7 +55,7 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData }) => {
             console.log(values);
         },
     });
-
+    console.log(initialData)
     return (
         <div className=" w-full bg-white">
             {/* Main Content */}
@@ -108,14 +108,14 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData }) => {
                     {/* Education Cards */}
                     <div className="p-6 bg-[#F2F6FB]">
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {educationData.map((item, index) => (
+                            {educationData?.map((item, index) => (
                                 <div
                                     key={index}
                                     className="flex items-start gap-4 bg-white p-4 rounded-md border border-gray-300 shadow-sm"
                                 >
                                     <div className="flex-grow">
                                         <h3 className="font-bold text-gray-800">{item.subject}</h3>
-                                        {item.grade && <p className="text-sm text-gray-600">{item.grade}</p>}
+                                        {item.grade && <p className="text-sm text-gray-600">{item.fromLevel} - {item.toLevel}</p>}
                                     </div>
                                     <div className="flex gap-2">
                                         <button
@@ -155,7 +155,8 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData }) => {
                                 {[{
                                     label: "Subject",
                                     name: "subject",
-                                    options: educationData.map(item => item.subject)
+                                    options: initialData?.map(item => item?.subject)
+
                                 },
                                 {
                                     label: "From level",
@@ -180,7 +181,7 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData }) => {
                                             onBlur={formik.handleBlur}
                                         >
                                             <option value="">Select here</option>
-                                            {options.map((opt, i) => (
+                                            {initialData?.map((opt, i) => (
                                                 <option key={i} value={opt}>
                                                     {opt}
                                                 </option>

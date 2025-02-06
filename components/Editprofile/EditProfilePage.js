@@ -7,11 +7,13 @@ import PersonalInfo from './PersonalInfo';
 import ProfileDescription from './ProfileDescription';
 import Subject from './Subject';
 import TeachingDetail from './TeachingDetail';
+import { useQuery } from '@tanstack/react-query';
+import { getTutor } from '@/api/tutor.api';
 
 const formSections = ['Personal Info', 'Education', 'Subject', 'Experience', 'Teaching Detail', 'Profile Description', 'Course'];
 
 const EditProfilePage = () => {
-    const [currentStep, setCurrentStep] = useState(0);
+    const [currentStep, setCurrentStep] = useState(3);
     const [formData, setFormData] = useState({
         personalInfo: {},
         education: {},
@@ -46,32 +48,78 @@ const EditProfilePage = () => {
         }));
     };
 
+    const { data } = useQuery({
+        queryKey: ["GET_TUTOR"],
+        queryFn: getTutor
+    });
+
     const renderStep = () => {
         switch (currentStep) {
             case 0:
-                return <PersonalInfo handleNext={handleNext} handlePrevious={handlePrevious} formData={formData.personalInfo} updateFormData={(data) => updateFormData('personalInfo', data)} />;
+                return <PersonalInfo
+                    initialData={data?.personalInfo}
+                    handleNext={handleNext}
+                    handlePrevious={handlePrevious}
+                    formData={formData.personalInfo}
+                    updateFormData={(data) => updateFormData('personalInfo', data)}
+                />;
             case 1:
-                return <Education handleNext={handleNext} handlePrevious={handlePrevious} formData={formData.education} updateFormData={(data) => updateFormData('education', data)} />;
+                return <Education
+                    initialData={data?.education}
+                    handleNext={handleNext}
+                    handlePrevious={handlePrevious}
+                    formData={formData.education}
+                    updateFormData={(data) => updateFormData('education', data)}
+                />;
             case 2:
-                return <Subject handleNext={handleNext} handlePrevious={handlePrevious} formData={formData.subject} updateFormData={(data) => updateFormData('subject', data)} />;
+                return <Subject
+                    initialData={data?.subject}
+                    handleNext={handleNext}
+                    handlePrevious={handlePrevious}
+                    formData={formData.subject}
+                    updateFormData={(data) => updateFormData('subject', data)}
+                />;
             case 3:
-                return <Experience handleNext={handleNext} handlePrevious={handlePrevious} formData={formData.experience} updateFormData={(data) => updateFormData('experience', data)} />;
+                return <Experience
+                    initialData={data?.experience}
+                    handleNext={handleNext}
+                    handlePrevious={handlePrevious}
+                    formData={formData.experience}
+                    updateFormData={(data) => updateFormData('experience', data)}
+                />;
             case 4:
-                return <TeachingDetail handleNext={handleNext} handlePrevious={handlePrevious} formData={formData.teachingDetail} updateFormData={(data) => updateFormData('teachingDetail', data)} />;
+                return <TeachingDetail
+                    initialData={data?.teachingDetails}
+                    handleNext={handleNext}
+                    handlePrevious={handlePrevious}
+                    updateFormData={(data) => updateFormData('teachingDetail', data)}
+                />;
+
             case 5:
-                return <ProfileDescription handleNext={handleNext} handlePrevious={handlePrevious} formData={formData.profileDescription} updateFormData={(data) => updateFormData('profileDescription', data)} />;
+                return <ProfileDescription
+                    initialData={data?.profileDescription}
+                    handleNext={handleNext}
+                    handlePrevious={handlePrevious}
+                    formData={formData.profileDescription}
+                    updateFormData={(data) => updateFormData('profileDescription', data)}
+                />;
             case 6:
-                return <Course handleNext={handleNext} handlePrevious={handlePrevious} formData={formData.course} updateFormData={(data) => updateFormData('course', data)} handleSubmit={handleSubmit} />;
+                return <Course
+                    initialData={data?.courses}
+                    handleNext={handleNext}
+                    handlePrevious={handlePrevious}
+                    updateFormData={(data) => updateFormData('course', data)}
+                    handleSubmit={handleSubmit}
+                />;
             default:
                 return null;
         }
     };
-
+    console.log(data)
     return (
-        <div className="bg-[#0F283C] mx-0 md:mx-12 rounded-lg md:block grid grid-cols-[80px,auto] ">
-
+        <div className="bg-[#0F283C] mx-0 md:mx-12 rounded-lg md:block grid grid-cols-[80px,auto]">
             <Breadcrumb currentStep={currentStep} steps={formSections} />
-            <div className="bg-white rounded shadow-md ">{renderStep()}</div>
+            <div className="bg-white rounded shadow-md">{renderStep()}</div>
         </div>
     );
 };

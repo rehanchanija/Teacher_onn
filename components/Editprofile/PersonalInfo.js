@@ -8,7 +8,7 @@ import { useState } from "react";
 import * as Yup from "yup";
 
 
-const PersonalInfo = ({ handleNext, formData, updateFormData }) => {
+const PersonalInfo = ({ handleNext, formData, updateFormData, initialData }) => {
     // Validation schema remains the same
     const validationSchema = Yup.object({
         firstName: Yup.string().required("First name is required"),
@@ -24,17 +24,6 @@ const PersonalInfo = ({ handleNext, formData, updateFormData }) => {
         address: Yup.string().required("Address is required"),
     });
 
-    const initialValues = formData || {
-        firstName: "",
-        lastName: "",
-        mobileNumber: "",
-        specialty: "",
-        email: "",
-        city: "",
-        address: "",
-        image: "",
-    };
-
     const [previewImage, setPreviewImage] = useState(formData?.image || "/profilepic.png");
 
     const handleImageChange = (event, setFieldValue) => {
@@ -49,7 +38,7 @@ const PersonalInfo = ({ handleNext, formData, updateFormData }) => {
         }
     };
 
-    const handleSubmit = (values) => {
+    const onSubmit = (values) => {
         mutate({
             "personalInfo": {
                 "fullName": `${values.firstName} ${values.lastName}`,
@@ -92,32 +81,42 @@ const PersonalInfo = ({ handleNext, formData, updateFormData }) => {
         <div className="bg-gray-100 flex flex-col items-center px-4 sm:px-6 lg:px-8">
             {/* Form Section - Added horizontal padding for mobile */}
             <div className="bg-[#F2F6FB] shadow-md rounded-lg p-4 md:p-6 w-full max-w-7xl mt-4 md:mt-8">
-                <div className="flex flex-col md:flex-row gap-4 md:gap-8">
-                    {/* Profile Image Section */}
-                    <div className="md:w-1/3 flex flex-col items-center md:items-start">
-                        <div className="relative w-full max-w-xs md:w-full h-40 md:h-60 bg-gray-200 border-dotted border-2 border-[#1BADFF] rounded-lg overflow-hidden">
-                            <Image
-                                src={previewImage}
-                                alt="Profile Placeholder"
-                                width={275}
-                                height={242}
-                                className="object-cover w-full h-full"
-                                priority
-                            />
-                        </div>
-                        <p className="text-xs md:text-sm text-gray-600 mt-2 text-center md:text-left">
-                            Recommendation for JPG, PNG
-                        </p>
-                        <p className="text-xs md:text-sm text-gray-600 text-center md:text-left">
-                            Max Size 5MB
-                        </p>
+                <Formik
+                    initialValues={{
+                        firstName: initialData?.fullName?.split(" ")[0] || "",
+                        lastName: initialData?.fullName?.split(" ")[1] || "",
+                        mobileNumber: initialData?.mobileNumber || "",
+                        specialty: initialData?.speciality || "",
+                        email: initialData?.email || "",
+                        city: initialData?.city || "",
+                        address: initialData?.address || "",
+                        image: initialData?.image || previewImage,
+                    }}
+                    validationSchema={validationSchema}
+                    onSubmit={onSubmit}
+                    enableReinitialize
+                >
+                    {({ dirty, handleSubmit }) => (
+                        <div className="flex flex-col md:flex-row gap-4 md:gap-8">
+                            {/* Profile Image Section */}
+                            <div className="md:w-1/3 flex flex-col items-center md:items-start">
+                                <div className="relative w-full max-w-xs md:w-full h-40 md:h-60 bg-gray-200 border-dotted border-2 border-[#1BADFF] rounded-lg overflow-hidden">
+                                    <Image
+                                        src={previewImage}
+                                        alt="Profile Placeholder"
+                                        width={275}
+                                        height={242}
+                                        className="object-cover w-full h-full"
+                                        priority
+                                    />
+                                </div>
+                                <p className="text-xs md:text-sm text-gray-600 mt-2 text-center md:text-left">
+                                    Recommendation for JPG, PNG
+                                </p>
+                                <p className="text-xs md:text-sm text-gray-600 text-center md:text-left">
+                                    Max Size 5MB
+                                </p>
 
-                        <Formik
-                            initialValues={initialValues}
-                            validationSchema={validationSchema}
-                            onSubmit={handleSubmit}
-                        >
-                            {({ setFieldValue }) => (
                                 <>
                                     <input
                                         type="file"
@@ -133,19 +132,12 @@ const PersonalInfo = ({ handleNext, formData, updateFormData }) => {
                                         Choose Image
                                     </label>
                                 </>
-                            )}
-                        </Formik>
-                    </div>
+                            </div>
 
-                    {/* Form Fields Section - Mobile optimizations */}
-                    <div className="md:w-2/3">
-                        <Formik
-                            initialValues={initialValues}
-                            validationSchema={validationSchema}
-                            onSubmit={handleSubmit}
-                        >
-                            {() => (
-                                <Form className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+                            {/* Form Fields Section - Mobile optimizations */}
+                            <div className="md:w-2/3">
+                                <Form
+                                    className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                                     {["firstName", "lastName", "mobileNumber", "specialty", "email", "city", "address"].map((field, index) => (
                                         <div key={index} className={`${field === "address" ? "sm:col-span-2" : ""}`}>
                                             <label className="block text-sm font-medium text-gray-700 md:text-base">
@@ -166,17 +158,24 @@ const PersonalInfo = ({ handleNext, formData, updateFormData }) => {
                                     ))}
                                     <div className="sm:col-span-2 flex justify-start">
                                         <button
-                                            type="submit"
+                                            type="button"
+                                            onClick={() => {
+                                                if (dirty) {
+                                                    handleSubmit();
+                                                } else {
+                                                    handleNext()
+                                                }
+                                            }}
                                             className="bg-[#0F283C] text-white py-2.5 px-8 md:py-3 md:px-10 rounded text-base md:text-lg font-semibold w-full sm:w-auto" disabled={isPending}
                                         >
                                             Next &gt;
                                         </button>
                                     </div>
                                 </Form>
-                            )}
-                        </Formik>
-                    </div>
-                </div>
+                            </div>
+                        </div>
+                    )}
+                </Formik>
             </div>
         </div>
     );
