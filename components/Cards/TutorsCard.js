@@ -1,6 +1,6 @@
 const TutorsCard = ({ bgColor }) => {
   return (
-    <div className={`w-[412px] text-[#01354B] p-4 ${bgColor} space-y-4 rounded-md m-3`}>
+    <div className={` text-[#01354B] p-4 ${bgColor} space-y-4 rounded-md  `}>
       <h1 className="text-[20px] font-semibold pt-3">
         Online Vedic Maths, Vedic Mathematics tutor required
       </h1>

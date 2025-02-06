@@ -19,12 +19,12 @@ const Hamburg = () => {
         <div className="relative">
             {/* Hamburger Icon */}
             <div
-                className="w-8 h-8 flex flex-col justify-between items-center  relative z-10"
+                className="w-8 h-6 md:h-8 flex flex-col justify-between items-center  relative "
                 onClick={handleDropdownToggle}
             >
-                <div className="w-8 h-[4px] bg-black rounded-md"></div>
-                <div className="w-8 h-[4px] bg-black rounded-md"></div>
-                <div className="w-8 h-[4px] bg-black rounded-md"></div>
+                <div className="w-8   h-[4px] bg-black rounded-md"></div>
+                <div className="w-8  h-[4px] bg-black rounded-md"></div>
+                <div className="w-8  h-[4px] bg-black rounded-md"></div>
             </div>
 
             {/* Dropdown Menu */}
@@ -61,7 +61,7 @@ const Hamburg = () => {
                                     </button>
 
                                     <div className="flex items-center space-x-3 hover:bg-gray-100 p-2 ">
-                                        <Link href="/TeachersList"  onClick={handleCloseDropdown}>
+                                        <Link href="/TeachersList" onClick={handleCloseDropdown}>
                                             <button className="flex items-center space-x-3 w-full">
                                                 <Image
                                                     src="/teacher.png" // Replace with your icon image path
@@ -76,41 +76,41 @@ const Hamburg = () => {
                                 </div>
 
                                 <div>
-<Link href="/" onClick={handleCloseDropdown}>
-                                    <button className="flex items-center space-x-3 -mt-4 hover:bg-gray-100 p-2 ">
-                                        <Image
-                                            src="/wallet.png" // Replace with your icon image path
-                                            alt="Wallet Icon"
-                                            width={21}
-                                            height={21}
+                                    <Link href="/" onClick={handleCloseDropdown}>
+                                        <button className="flex items-center space-x-3 -mt-4 hover:bg-gray-100 p-2 ">
+                                            <Image
+                                                src="/wallet.png" // Replace with your icon image path
+                                                alt="Wallet Icon"
+                                                width={21}
+                                                height={21}
                                             />
-                                        <span className="text-[#667681] text-lg">Wallet</span>
-                                    </button>
-                                            </Link>
-<Link href="/" onClick={handleCloseDropdown}>
-                                  
-                                    <button className="flex items-center space-x-3 hover:bg-gray-100 p-2 ">
-                                        <Image
-                                            src="/jobs.png" // Replace with your icon image path
-                                            alt="jobs Icon"
-                                            width={21}
-                                            height={21}
-                                        />
-                                        <span className="text-[#667681] text-lg">Jobs</span>
-                                    </button>
+                                            <span className="text-[#667681] text-lg">Wallet</span>
+                                        </button>
+                                    </Link>
+                                    <Link href="/" onClick={handleCloseDropdown}>
+
+                                        <button className="flex items-center space-x-3 hover:bg-gray-100 p-2 ">
+                                            <Image
+                                                src="/jobs.png" // Replace with your icon image path
+                                                alt="jobs Icon"
+                                                width={21}
+                                                height={21}
+                                            />
+                                            <span className="text-[#667681] text-lg">Jobs</span>
+                                        </button>
                                     </Link >
 
                                     <Link href="/" onClick={handleCloseDropdown}>
 
-                                    <button className="flex items-center space-x-3 hover:bg-gray-100 p-2 ">
-                                        <Image
-                                            src="/setting.png" // Replace with your icon image path
-                                            alt="Settings Icon"
-                                            width={21}
-                                            height={21}
-                                        />
-                                        <span className="text-[#667681] text-lg">Settings</span>
-                                    </button>
+                                        <button className="flex items-center space-x-3 hover:bg-gray-100 p-2 ">
+                                            <Image
+                                                src="/setting.png" // Replace with your icon image path
+                                                alt="Settings Icon"
+                                                width={21}
+                                                height={21}
+                                            />
+                                            <span className="text-[#667681] text-lg">Settings</span>
+                                        </button>
                                     </Link>
                                     <Link href="/my-profile" onClick={handleCloseDropdown}>
                                         <button className="flex items-center space-x-3 hover:bg-gray-100 p-2 ">
@@ -126,16 +126,19 @@ const Hamburg = () => {
 
 
                                 </div>
-                                <Link href="/" onClick={handleCloseDropdown}>
-                                <button className="flex items-center space-x-3 bg-[#136FB6] text-white p-3   w-full rounded-b-md">
-                                    <Image
-                                        src="/logout.png" // Replace with your icon image path
-                                        alt="Log Out Icon"
-                                        width={21}
-                                        height={21}
-                                    />
-                                    <span className="md:text-lg">Log Out</span>
-                                </button>
+                                <Link href="/" onClick={() => {
+                                    localStorage.removeItem("userId"); // Remove user ID from localStorage
+                                    handleCloseDropdown(); // Close dropdown
+                                }}>
+                                    <button className="flex items-center space-x-3 bg-[#136FB6] text-white p-3 w-full rounded-b-md">
+                                        <Image
+                                            src="/logout.png" // Replace with your icon image path
+                                            alt="Log Out Icon"
+                                            width={21}
+                                            height={21}
+                                        />
+                                        <span className="md:text-lg">Log Out</span>
+                                    </button>
                                 </Link>
                             </div>
                         </div>
