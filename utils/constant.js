@@ -1,1 +1,1 @@
-export const API_URL = "http://192.168.1.17:3006"
+export const API_URL = "http://localhost:3006"

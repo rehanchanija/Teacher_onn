@@ -1,9 +1,27 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 const Hamburg = () => {
+    const router = useRouter()
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [tutor, setTutor] = useState();
+    const [userLogin, setUserLogin] = useState();
+
+
+
+    useEffect(() => {
+        setTutor(JSON.parse(localStorage.getItem("tutor")))
+        setUserLogin(JSON.parse(localStorage.getItem("tutor")))
+        setUserLogin(JSON.parse(localStorage.getItem("student")))
+
+    })
+
+    const logout = () => {
+        localStorage.clear()
+        router.push("/")
+    }
 
     // Toggle dropdown visibility
     const handleDropdownToggle = () => {
@@ -112,34 +130,39 @@ const Hamburg = () => {
                                             <span className="text-[#667681] text-lg">Settings</span>
                                         </button>
                                     </Link>
-                                    <Link href="/my-profile" onClick={handleCloseDropdown}>
-                                        <button className="flex items-center space-x-3 hover:bg-gray-100 p-2 ">
+                                    {tutor ?
+                                        <Link href="/my-profile" onClick={handleCloseDropdown}>
+                                            <button className="flex items-center space-x-3 hover:bg-gray-100 p-2 ">
+                                                <Image
+                                                    src="/profile.png" // Replace with your icon image path
+                                                    alt="Profile Icon"
+                                                    width={21}
+                                                    height={21}
+                                                />
+                                                <span className="text-[#667681] text-lg">View Profile</span>
+                                            </button>
+                                        </Link> : null
+                                    }
+
+                                </div>
+                                {userLogin ?
+                                    <Link href="/" onClick={() => {
+                                        handleCloseDropdown();
+                                        logout()// Close dropdown
+                                    }}>
+                                        <button className="flex items-center space-x-3 bg-[#136FB6] text-white p-3 w-full rounded-b-md"
+                                        >
                                             <Image
-                                                src="/profile.png" // Replace with your icon image path
-                                                alt="Profile Icon"
+                                                src="/logout.png" // Replace with your icon image path
+                                                alt="Log Out Icon"
                                                 width={21}
                                                 height={21}
                                             />
-                                            <span className="text-[#667681] text-lg">View Profile</span>
+                                            <span className="md:text-lg">Log Out</span>
                                         </button>
-                                    </Link>
+                                    </Link> : null
+                                }
 
-
-                                </div>
-                                <Link href="/" onClick={() => {
-                                    localStorage.removeItem("userId"); // Remove user ID from localStorage
-                                    handleCloseDropdown(); // Close dropdown
-                                }}>
-                                    <button className="flex items-center space-x-3 bg-[#136FB6] text-white p-3 w-full rounded-b-md">
-                                        <Image
-                                            src="/logout.png" // Replace with your icon image path
-                                            alt="Log Out Icon"
-                                            width={21}
-                                            height={21}
-                                        />
-                                        <span className="md:text-lg">Log Out</span>
-                                    </button>
-                                </Link>
                             </div>
                         </div>
                     </div>

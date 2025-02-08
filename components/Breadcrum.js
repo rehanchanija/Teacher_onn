@@ -6,7 +6,7 @@ const Breadcrumb = ({ steps, currentStep }) => {
     const router = useRouter();
 
     return (
-        <div className="relative md:rounded-lg bg-[#0F283C] border">
+        <div className="relative md:rounded-lg bg-[#0F283C] ">
             <div className="md:overflow-visible">
                 <ul className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-4    md:p-5 px-4 pt-12 md:whitespace-normal">
                     {steps.map((step, index) => (
@@ -26,14 +26,13 @@ const Breadcrumb = ({ steps, currentStep }) => {
                                 </span>
                                 {/* Checked icon for previous steps on larger screens */}
 
-                                <span className={`md:hidden w-12 h-12 flex items-center justify-center rounded-full border-2 ${
-                                    index <= currentStep ? 'border-white' : 'border-gray-400'
-                                }`}>
+                                <span className={`md:hidden w-12 h-12 flex items-center justify-center rounded-full border-2 ${index <= currentStep ? 'border-white' : 'border-gray-400'
+                                    }`}>
                                     {index < currentStep ? <FaCheck className="w-6 h-6" /> : index + 1}
-                                {/* {index < currentStep && <div className=" w-1 h-8 bg-white mt-2"></div>} */}
+                                    {/* {index < currentStep && <div className=" w-1 h-8 bg-white mt-2"></div>} */}
 
-                                </span> 
-                                 
+                                </span>
+
                             </button>
                             {index < steps.length - 1 && <span className="mx-2"></span>}
                         </li>

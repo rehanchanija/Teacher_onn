@@ -16,8 +16,10 @@ export const getTutor = async () => {
     console.log(id)
     const res = await axios.get(`${API_URL}/tutor/${id}`)
     return res.data
-
-
+}
+export const getFeaturedTutor = async () => {
+    const res = await axios.get(`${API_URL}/tutor/featured`)
+    return res.data
 }
 
 export const updateTutorEducationInfo = async (values) => {
