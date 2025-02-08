@@ -5,17 +5,26 @@ import Link from "next/link";
 import Hamburg from "./Hamburg";
 import Logo from "./Logo";
 import { useEffect, useState } from "react";
-import SignupModal from "@/pages/signupModel";
+import SignupModal from "@/components/signupModel";
 import ReactModal from "react-modal";
-import SigninModal from "@/pages/signin";
+import SigninModal from "@/components/signinModel";
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [LoginModelOpen, setLoginModelOpen] = useState(false);
+  const [student, setStudent] = useState(null);
+  const [tutor, setTutor] = useState(null);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const openLoginModal = () => setLoginModelOpen(true);
   const closeLoginModal = () => setLoginModelOpen(false);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setStudent(JSON.parse(localStorage.getItem("student")));
+      setTutor(JSON.parse(localStorage.getItem("tutor")));
+    }
+  }, []);
+
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -23,6 +32,7 @@ const Navbar = () => {
     { name: "IGCSE", href: "/igcse" },
     { name: "Store", href: "/store" },
   ];
+
 
   const NavLink = ({ href, children }) => (
     <Link href={href} className="hover:text-[#146CB0] hover:underline px-4 border-l-2 border-[#737373]">
@@ -41,27 +51,37 @@ const Navbar = () => {
         </div>
       </div>
       <div className="space-x-4 flex items-center">
-        <div className="hidden md:flex items-center border border-gray-300 rounded-md w-[176px] h-[48px]">
+        <div
+          style={{ width: tutor || student ? "480px" : "176px" }}
+          className="hidden md:flex items-center border border-gray-300 rounded-md w-[176px] h-[48px]">
           <div className="px-2">
             <Image src="/Vector2.png" alt="Search Icon" width={20} height={20} />
           </div>
           <div className="border-l border-[#8D979E] h-6 mx-2" />
           <input type="text" placeholder="Search" className="text-lg outline-none text-[#8D979E] bg-transparent w-full h-full pl-2" />
         </div>
-        <button
-          className="bg-[#136FB6] text-sm md:text-[16px] text-white font-semibold p-2 md:px-5 md:py-3 rounded-[4px]"
-          onClick={openModal}
-        >
-          Signup
-        </button>
+        {
+          tutor || student ? null :
+            <>
+              <button
+                className="bg-[#136FB6] text-sm md:text-[16px] text-white font-semibold p-2 md:px-5 md:py-3 rounded-[4px]"
+                onClick={openModal}
+              >
+                Signup
+              </button>
 
-        <button
-          onClick={openLoginModal}
 
-          className="bg-[#1BADFF] text-sm md:text-[16px] text-white font-semibold p-2 md:px-4 md:py-2.5 rounded-[4px] flex items-center ">
-          Login
-          <Image src="/image/Navbar/user.png" width={22} height={21} alt="User" className="md:block hidden" />
-        </button>
+              <button
+                onClick={openLoginModal}
+
+                className="bg-[#1BADFF] text-sm md:text-[16px] text-white font-semibold p-2 md:px-4 md:py-2.5 rounded-[4px] flex items-center ">
+                Login
+                <Image src="/image/Navbar/user.png" width={22} height={21} alt="User" className="md:block hidden" />
+              </button>
+            </>
+
+        }
+
         <ReactModal
           isOpen={isModalOpen}
           onRequestClose={closeModal}
@@ -112,6 +132,8 @@ const Navbar = () => {
                 zIndex: 1000, padding: 0,
                 margin: "auto",
                 position: "static",
+                borderRadius: "20px",
+
                 // width: window.innerWidth > 768 ? "80%" : "90%",
 
 
@@ -124,7 +146,7 @@ const Navbar = () => {
         </ReactModal>
         <Hamburg />
       </div>
-    </div>
+    </div >
   );
 };
 
