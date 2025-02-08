@@ -65,7 +65,7 @@ const EditProfilePage = () => {
                 />;
             case 1:
                 return <Education
-                    initialData={data?.education}
+                    initialData={data?.educationInfo}
                     handleNext={handleNext}
                     handlePrevious={handlePrevious}
                     formData={formData.education}
@@ -73,11 +73,10 @@ const EditProfilePage = () => {
                 />;
             case 2:
                 return <Subject
-                    initialData={data?.subject}
+                    initialData={data?.subjects}
                     handleNext={handleNext}
                     handlePrevious={handlePrevious}
-                    formData={formData.subject}
-                    updateFormData={(data) => updateFormData('subject', data)}
+                    updateFormData={(data) => updateFormData('subjects', data)}
                 />;
             case 3:
                 return <Experience
@@ -115,7 +114,6 @@ const EditProfilePage = () => {
                 return null;
         }
     };
-    console.log(data)
     return (
         <div className="bg-[#0F283C] mx-0 md:mx-12 rounded-lg md:block grid grid-cols-[80px,auto]">
             <Breadcrumb currentStep={currentStep} steps={formSections} />
