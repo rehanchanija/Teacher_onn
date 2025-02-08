@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import CourseAdviceCard from "../Cards/CorseAdviceCard";
+import CourseAdviceCard from "../Cards/CourseAdviceCard";
 
 const CourseAdvice = () => {
   return (
