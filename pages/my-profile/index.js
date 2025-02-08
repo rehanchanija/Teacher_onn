@@ -6,9 +6,8 @@ import Image from "next/image"
 
 
 const MyProfile = () => {
+
     const tutor = JSON.parse(localStorage.getItem("tutor"));
-
-
     const { data } = useQuery({
         querykey: ["GET_TUTOR"],
         queryFn: getTutor
@@ -92,11 +91,12 @@ const MyProfile = () => {
 
                                 {/* Action Buttons */}
                                 <div className="flex gap-3 mt-4">
-                                    <button className="flex-1 bg-[#121212] text-white h-11 rounded-md text-lg font-bold" onClick={() => {
-                                        if (tutor) {
-                                            router.push("/edit-profile")
-                                        } else { }
-                                    }}>
+                                    <button className="flex-1 bg-[#121212] text-white h-11 rounded-md text-lg font-bold"
+                                        onClick={() => {
+                                            if (tutor) {
+                                                router.push("/edit-profile")
+                                            } else { }
+                                        }}>
 
                                         {tutor ? "Edit Profile" : "Book Now"}
                                     </button>
