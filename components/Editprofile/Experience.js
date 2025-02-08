@@ -3,11 +3,11 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/image";
 import { useState } from "react";
 import * as Yup from "yup";
-import { updateTutor } from "@/api/tutor.api";
-import { useMutation } from "@tanstack/react-query";
+import { deleteTutorExperience, updateTutor, updateTutorExperience } from "@/api/tutor.api";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const Experience = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const queryClient = useQueryClient()
 
 
     const validationSchema = Yup.object({
@@ -20,8 +20,10 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
     });
 
     const { mutate, isPending } = useMutation({
-        mutationFn: updateTutor,
+        mutationFn: updateTutorExperience,
         onSuccess: (data) => {
+            queryClient.invalidateQueries(["GET_TUTOR"])
+
             handleNext();
             localStorage.setItem("tutor", JSON.stringify(data))
             console.log("onSuccess", data)
@@ -30,8 +32,19 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
             console.log("onError", error)
         }
     })
+    const { mutate: deleteExperience, } = useMutation({
+        mutationFn: deleteTutorExperience,
+        onSuccess: (data) => {
+            queryClient.invalidateQueries(["GET_TUTOR"])
+            localStorage.setItem("tutor", JSON.stringify(data))
+            console.log("onSuccess", data)
+        },
+        onError: (error) => {
+            console.log("onError", error)
+        }
+    })
 
-    const handleSave = (values) => {
+    const onSubmit = (values) => {
         mutate({
             "experience": {
                 "organization": values.organization,
@@ -48,51 +61,8 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
     return (
         <div className="min-h-screen w-full bg-white">
             <div className="relative max-w-[1281px] mx-auto shadow-lg ">
-                {/* Navigation */}
-                <div className="py-4 px-4 md:px-10 bg-white rounded-t-lg shadow">
-                    <div className="flex justify-between items-center">
-                        {/* Hamburger Icon */}
-                        <button
-                            className="text-gray-700 md:hidden focus:outline-none"
-                            onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            aria-label="Toggle Menu"
-                        >
-                            {isMenuOpen ? (
-                                <svg
-                                    className="w-8 h-8"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            ) : (
-                                <svg
-                                    className="w-8 h-8"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                </svg>
-                            )}
-                        </button>
-                    </div>
-                </div>
 
-                {/* Education Cards */}
+
                 <div className="p-6 bg-[#F2F6FB]">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {initialData?.map((item, index) => (
@@ -115,7 +85,9 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                             className="mx-auto"
                                         />
                                     </button>
-                                    <button className=" text-white rounded-full focus:outline-none" aria-label="Remove">
+                                    <button
+                                        onClick={() => deleteExperience({ id: item?._id })}
+                                        className=" text-white rounded-full focus:outline-none" aria-label="Remove">
                                         <Image
                                             src="/delete.png"
                                             alt="Remove Icon"
@@ -126,6 +98,7 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                     </button>
                                 </div>
                             </div>
+                            
                         ))}
                     </div>
                 </div>
@@ -136,7 +109,7 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                         Please add Teaching and Professional Experience.
                     </h3>
                     <Formik
-                        initialValues={formData || {
+                        initialValues={{
                             organization: "",
                             designation: "",
                             startDate: "",
@@ -145,9 +118,12 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                             jobDescription: "",
                         }}
                         validationSchema={validationSchema}
-                        onSubmit={handleSave}
+                        onSubmit={onSubmit}
+                        enableReinitialize
                     >
-                        {({ setFieldValue }) => (
+                        {({ dirty, handleSubmit }) => (
+
+
                             <Form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
                                 {[
                                     {
@@ -222,6 +198,15 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                     </button>
                                     <button
                                         type="submit"
+                                        onClick={() => {
+                                            if (dirty) {
+                                                console.log(dirty)
+
+                                                handleSubmit();
+                                            } else {
+                                                handleNext()
+                                            }
+                                        }}
                                         className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
                                         disabled={isPending}
                                     >
