@@ -2,26 +2,18 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/image";
 import * as Yup from "yup";
-import { updateTutor } from "@/api/tutor.api";
-import { useMutation } from "@tanstack/react-query";
+import { deleteTutorEducationInfo, updateTutor, updateTutorEducationInfo } from "@/api/tutor.api";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const Education = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
-    const initialValues = formData || {
-        institutionName: "",
-        degreeType: "",
-        degreeName: "",
-        startDate: null,
-        endDate: null,
-        association: "",
-        speciality: "",
-        score: "",
-    };
-    console.log(initialData)
+const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
+
+    const queryClient = useQueryClient()
+
 
     const validationSchema = Yup.object({
-        institutionName: Yup.string().required("This field is required"),
+        instituteWithCity: Yup.string().required("This field is required"),
         degreeType: Yup.string().required("This field is required"),
         degreeName: Yup.string().required("This field is required"),
         startDate: Yup.date().required("This field is required"),
@@ -32,8 +24,9 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData, initi
     });
 
     const { mutate, isPending } = useMutation({
-        mutationFn: updateTutor,
+        mutationFn: updateTutorEducationInfo,
         onSuccess: (data) => {
+            queryClient.invalidateQueries(["GET_TUTOR"])
             handleNext();
             localStorage.setItem("tutor", JSON.stringify(data))
             console.log("onSuccess", data)
@@ -43,10 +36,23 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData, initi
         }
     })
 
-    const handleSubmit = (values) => {
+    const { mutate: deleteEducationInfo, } = useMutation({
+        mutationFn: deleteTutorEducationInfo,
+        onSuccess: (data) => {
+            queryClient.invalidateQueries(["GET_TUTOR"])
+            localStorage.setItem("tutor", JSON.stringify(data))
+            console.log("onSuccess", data)
+        },
+        onError: (error) => {
+            console.log("onError", error)
+        }
+    })
+
+    const onSubmit = (values) => {
+
         mutate({
-            "educationInfo": [{
-                "instituteWithCity": values.institutionName,
+            "educationInfo": {
+                "instituteWithCity": values.instituteWithCity,
                 "degreeType": values.degreeType,
                 "degreeName": values.degreeName,
                 "startDate": values.startDate,
@@ -54,12 +60,11 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData, initi
                 "association": values.association,
                 "speciality": values.speciality,
                 "score": values.score
-            }]
+            }
         });
-        // updateFormData('education', values);
-        console.log(values);
-    };
 
+
+    };
     return (
         <div className="flex flex-col items-center">
             <div className="bg-[#F2F6FB] shadow-md rounded-lg p-6 w-full max-w-7xl">
@@ -84,7 +89,9 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData, initi
                                             className="mx-auto"
                                         />
                                     </button>
-                                    <button className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
+                                    <button
+                                        onClick={() => deleteEducationInfo({ id: item?._id })}
+                                        className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
                                         <Image
                                             src="/delete.png"
                                             alt="Remove Icon"
@@ -115,14 +122,26 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData, initi
                     {/* Form Fields Section */}
                     <div className="md:w-2/3">
                         <Formik
-                            initialValues={initialValues}
+                            initialValues={{
+                                instituteWithCity: "",
+                                degreeType: "",
+                                degreeName: "",
+                                startDate: null,
+                                endDate: null,
+                                association: "",
+                                speciality: "",
+                                score: "",
+                            }}
                             validationSchema={validationSchema}
-                            onSubmit={handleSubmit}
+                            onSubmit={onSubmit}
+                            enableReinitialize
+
                         >
-                            {({ setFieldValue, values }) => (
-                                <Form className="grid md:grid-cols-2 gap-4">
+                            {({ dirty, handleSubmit, setFieldValue, values, errors }) => (
+                                console.log(errors),
+                                <div className="grid md:grid-cols-2 gap-4">
                                     {[
-                                        "institutionName",
+                                        "instituteWithCity",
                                         "degreeType",
                                         "degreeName",
                                         "association",
@@ -148,7 +167,7 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData, initi
                                                 Start Date *
                                             </label>
                                             <DatePicker
-                                                selected={values.startDate}
+                                                selected={values?.startDate}
                                                 onChange={(date) => setFieldValue("startDate", date)}
                                                 className="mt-1 p-2 border border-gray-300 rounded w-full bg-white"
                                                 placeholderText="Select start date"
@@ -160,7 +179,7 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData, initi
                                                 End Date *
                                             </label>
                                             <DatePicker
-                                                selected={values.endDate}
+                                                selected={values?.endDate}
                                                 onChange={(date) => setFieldValue("endDate", date)}
                                                 className="mt-1 p-2 border border-gray-300 rounded w-full bg-white"
                                                 placeholderText="Select end date"
@@ -178,13 +197,22 @@ const Education = ({ handleNext, handlePrevious, formData, updateFormData, initi
                                         </button>
                                         <button
                                             type="submit"
+                                            onClick={() => {
+                                                if (dirty) {
+                                                    console.log(dirty)
+
+                                                    handleSubmit();
+                                                } else {
+                                                    handleNext()
+                                                }
+                                            }}
                                             className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
                                             disabled={isPending}
                                         >
                                             Next &gt;
                                         </button>
                                     </div>
-                                </Form>
+                                </div>
                             )}
                         </Formik>
                     </div>
