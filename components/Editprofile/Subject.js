@@ -1,29 +1,38 @@
 "use client";
-import { useFormik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/image";
 import { useState } from "react";
 import * as Yup from "yup";
-import { updateTutor } from "@/api/tutor.api";
-import { useMutation } from "@tanstack/react-query";
+import { deleteTutorSubject, updateTutorSubject } from "@/api/tutor.api";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const educationData = [
-        { subject: "ICSE Maths", grade: "(Grade 8 - Grade 10)" },
-        { subject: "IGCSE Maths" },
-        { subject: "ICSE Chemistry", grade: "(Grade 9 - Grade 10)" },
-        { subject: "IBDP Maths SL/HL" },
-        { subject: "IBDP Math SL/HL" },
-        { subject: "AS & A level Mathematics" },
-        { subject: "IGCSE Business studies" },
-        { subject: "IGCSE Economics" },
-        { subject: "IGCSE 9-1 Chemistry" },
-    ];
+    const queryClient = useQueryClient();
+
+    const validationSchema = Yup.object({
+        subjects: Yup.string().required("This field is required"),
+        fromLevel: Yup.string().required("This field is required"),
+        toLevel: Yup.string().required("This field is required"),
+    });
 
     const { mutate, isPending } = useMutation({
-        mutationFn: updateTutor,
+        mutationFn: updateTutorSubject,
         onSuccess: (data) => {
+            queryClient.invalidateQueries(["GET_TUTOR"])
             handleNext();
+
+            localStorage.setItem("tutor", JSON.stringify(data))
+            console.log("onSuccess", data)
+        },
+        onError: (error) => {
+            console.log("onError", error)
+        }
+    });
+
+    const { mutate: deleteSubject, } = useMutation({
+        mutationFn: deleteTutorSubject,
+        onSuccess: (data) => {
+            queryClient.invalidateQueries(["GET_TUTOR"])
             localStorage.setItem("tutor", JSON.stringify(data))
             console.log("onSuccess", data)
         },
@@ -32,209 +41,146 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
         }
     })
 
-    const formik = useFormik({
-        initialValues: formData || {
-            subjects: "",
-            fromLevel: "",
-            toLevel: "",
-        },
-        validationSchema: Yup.object({
-            subject: Yup.string().required("Required"),
-            fromLevel: Yup.string().required("Required"),
-            toLevel: Yup.string().required("Required"),
-        }),
-        onSubmit: (values) => {
-            mutate({
-                "subjects": {
-                    "subject": values.subject,
-                    "fromLevel": values.fromLevel,
-                    "toLevel": values.toLevel
-                }
-            });
-            updateFormData('subjects', values);
-            console.log(values);
-        },
-    });
-    console.log(initialData)
+    const onSubmit = (values) => {
+        mutate({
+            "subject": {
+                "subject": values.subjects,
+                "fromLevel": values.fromLevel,
+                "toLevel": values.toLevel
+            }
+        });
+        updateFormData('subjects', values);
+    };
+
+    const initialValues = formData || {
+        subjects: "",
+        fromLevel: "",
+        toLevel: "",
+    };
+    console.log(initialData, "abcd")
     return (
-        <div className=" w-full bg-white">
-            {/* Main Content */}
-            <div className="w-full bg-white">
-                <div className="relative max-w-[1281px] mx-auto shadow-lg">
-                    {/* Navigation */}
-                    <div className="py-4 px-4 md:px-10 bg-white rounded-t-lg shadow">
-                        <div className="flex justify-between items-center">
-                            {/* Hamburger Icon */}
-                            <button
-                                className="text-gray-700 md:hidden focus:outline-none"
-                                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                aria-label="Toggle Menu"
+        <div className="flex flex-col items-center">
+            <div className="bg-[#F2F6FB] shadow-md rounded-lg p-6 w-full max-w-7xl">
+                {/* Education Cards */}
+                <div className="p-4 sm:p-6 md:p-8 bg-[#F2F6FB]">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                        {initialData?.map((item, index) => (
+                            <div
+                                key={index}
+                                className="flex items-start gap-4 bg-white p-4 rounded border border-[#B4C2D3] shadow-sm"
                             >
-                                {isMenuOpen ? (
-                                    <svg
-                                        className="w-8 h-8"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M6 18L18 6M6 6l12 12"
-                                        />
-                                    </svg>
-                                ) : (
-                                    <svg
-                                        className="w-8 h-8"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M4 6h16M4 12h16M4 18h16"
-                                        />
-                                    </svg>
-                                )}
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* Education Cards */}
-                    <div className="p-6 bg-[#F2F6FB]">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {educationData?.map((item, index) => (
-                                <div
-                                    key={index}
-                                    className="flex items-start gap-4 bg-white p-4 rounded-md border border-gray-300 shadow-sm"
-                                >
-                                    <div className="flex-grow">
-                                        <h3 className="font-bold text-gray-800">{item.subject}</h3>
-                                        {item.grade && <p className="text-sm text-gray-600">{item.fromLevel} - {item.toLevel}</p>}
-                                    </div>
-                                    <div className="flex gap-2">
-                                        <button
-                                            className=" text-white rounded-full focus:outline-none"
-                                            aria-label="Edit"
-                                        >
-                                            <Image
-                                                src="/edit.png"
-                                                alt="Edit Icon"
-                                                width={42}
-                                                height={42}
-                                                className=" mx-auto"
-                                            />
-                                        </button>
-                                        <button
-                                            className=" text-white rounded-full focus:outline-none"
-                                            aria-label="Remove"
-                                        >
-                                            <Image
-                                                src="/delete.png"
-                                                alt="Remove Icon"
-                                                width={42}
-                                                height={42}
-                                                className=" mx-auto"
-                                            />
-                                        </button>
-                                    </div>
+                                <div className="flex-grow">
+                                    <h3 className="font-bold text-[#4E5865]">{item?.subject}</h3>
+                                    <p className="text-[#136AAD] text-sm">{item?.fromLevel} - {item?.toLevel}</p>
                                 </div>
-                            ))}
-                        </div>
+                                <div className="flex gap-2">
+                                    <button className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
+                                        <Image
+                                            src="/edit.png"
+                                            alt="Edit Icon"
+                                            width={32}
+                                            height={32}
+                                            className="mx-auto"
+                                        />
+                                    </button>
+                                    <button
+                                        onClick={() => deleteSubject({ id: item?._id })}
+
+                                        className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
+                                        <Image
+                                            src="/delete.png"
+                                            alt="Remove Icon"
+                                            width={32}
+                                            height={32}
+                                            className="mx-auto"
+                                        />
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
                     </div>
+                </div>
 
-                    {/* Add Education Form */}
-                    <div className="p-6 bg-[#F2F6FB]">
-                        <form onSubmit={formik.handleSubmit}>
+                {/* Add Subject Form */}
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={onSubmit}
+                >
+                    {({ dirty, handleSubmit }) => (
+                        <Form className="p-6 bg-[#F2F6FB]">
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
-                                {[{
-                                    label: "Subject",
-                                    name: "subject",
-                                    options: initialData?.map(item => item?.subject)
+                                <div>
+                                    <label className="block font-bold mb-1 text-gray-800">
+                                        Subject <span className="text-red-500">*</span>
+                                    </label>
+                                    <Field
+                                        as="select"
+                                        name="subjects"
+                                        className="w-full border border-gray-300 rounded-md p-2 bg-white text-gray-600"
+                                    >
+                                        <option value="">Select here</option>
+                                        {["subject 1", "subject 2", "subject 3"].map((opt, i) => (
+                                            <option key={i} value={opt}>{opt}</option>
+                                        ))}
+                                    </Field>
+                                    <ErrorMessage name="subjects" component="div" className="text-red-500 text-sm mt-1" />
+                                </div>
 
-                                },
-                                {
-                                    label: "From level",
-                                    name: "fromLevel",
-                                    options: ["Grade 1", "Grade 2", "Grade 3"],
-                                },
-                                {
-                                    label: "To level",
-                                    name: "toLevel",
-                                    options: ["Grade 1", "Grade 2", "Grade 3"],
-                                },
-                                ].map(({ label, name, options }, idx) => (
-                                    <div key={idx}>
-                                        <label className="block font-bold mb-1 text-gray-800">
-                                            {label} <span className="text-red-500">*</span>
-                                        </label>
-                                        <select
-                                            className="w-full border border-gray-300 rounded-md p-2 bg-white text-gray-600"
-                                            name={name}
-                                            value={formik.values[name]}
-                                            onChange={formik.handleChange}
-                                            onBlur={formik.handleBlur}
-                                        >
-                                            <option value="">Select here</option>
-                                            {initialData?.map((opt, i) => (
-                                                <option key={i} value={opt}>
-                                                    {opt}
-                                                </option>
-                                            ))}
-                                        </select>
-                                        {formik.touched[name] && formik.errors[name] ? (
-                                            <div className="text-red-500 text-sm">{formik.errors[name]}</div>
-                                        ) : null}
-                                    </div>
-                                ))}
+                                <div>
+                                    <label className="block font-bold mb-1 text-gray-800">
+                                        From Level <span className="text-red-500">*</span>
+                                    </label>
+                                    <Field
+                                        as="select"
+                                        name="fromLevel"
+                                        className="w-full border border-gray-300 rounded-md p-2 bg-white text-gray-600"
+                                    >
+                                        <option value="">Select here</option>
+                                        {["Grade 1", "Grade 2", "Grade 3"].map((opt, i) => (
+                                            <option key={i} value={opt}>{opt}</option>
+                                        ))}
+                                    </Field>
+                                    <ErrorMessage name="fromLevel" component="div" className="text-red-500 text-sm mt-1" />
+                                </div>
+
+                                <div>
+                                    <label className="block font-bold mb-1 text-gray-800">
+                                        To Level <span className="text-red-500">*</span>
+                                    </label>
+                                    <Field
+                                        as="select"
+                                        name="toLevel"
+                                        className="w-full border border-gray-300 rounded-md p-2 bg-white text-gray-600"
+                                    >
+                                        <option value="">Select here</option>
+                                        {["Grade 1", "Grade 2", "Grade 3"].map((opt, i) => (
+                                            <option key={i} value={opt}>{opt}</option>
+                                        ))}
+                                    </Field>
+                                    <ErrorMessage name="toLevel" component="div" className="text-red-500 text-sm mt-1" />
+                                </div>
                             </div>
 
-                            <p className="text-red-500 text-sm mt-2">
-                                If not in options above, add a new subject.
-                            </p>
-
-                            {/* Buttons */}
-                            <div className="flex justify-start items-center mt-6 gap-4">
+                            <div className="mt-6 flex justify-between">
                                 <button
-                                    className="w-40 h-12 border border-gray-700 text-gray-700 font-bold rounded-md"
                                     type="button"
                                     onClick={handlePrevious}
-                                >
-                                    &lt;&lt; Previous
+                                    className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:px-7 px-4  rounded-md font-bold"                                >
+                                    Previous
                                 </button>
                                 <button
-                                    className="w-40 h-12 bg-[#0F283C] text-white font-bold rounded-md"
-                                    type="submit"
+                                    type="button"
+                                    onClick={dirty ? handleSubmit : handleNext}
                                     disabled={isPending}
+                                    className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
                                 >
-                                    Save &gt;&gt;
+                                    {isPending ? "Saving..." : "Update >>"}
                                 </button>
                             </div>
-                        </form>
-
-                        {/* Clickable Divs */}
-                        <div className="mt-6">
-                            <h3 className="font-bold text-gray-800 mb-2">Quick Select:</h3>
-                            <div className="flex gap-4">
-                                {["Class", "Board"].map((item, idx) => (
-                                    <div
-                                        key={idx}
-                                        className="cursor-pointer border border-gray-300 rounded-md p-3 bg-white text-gray-600 hover:bg-gray-100"
-                                        onClick={() => formik.setFieldValue("subject", item)}
-                                    >
-                                        {item}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                    <div></div>
-                </div>
+                        </Form>
+                    )}
+                </Formik>
             </div>
         </div>
     );
