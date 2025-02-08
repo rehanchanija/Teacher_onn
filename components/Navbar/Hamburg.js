@@ -7,16 +7,16 @@ const Hamburg = () => {
     const router = useRouter()
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [tutor, setTutor] = useState();
-    const [userLogin, setUserLogin] = useState();
-
+    const [studentLogin, setstudentLogin] = useState();
+    const [TutorLogin, setTutorLogin] = useState();
 
 
     useEffect(() => {
         setTutor(JSON.parse(localStorage.getItem("tutor")))
-        setUserLogin(JSON.parse(localStorage.getItem("tutor")))
-        setUserLogin(JSON.parse(localStorage.getItem("student")))
+        setTutorLogin(JSON.parse(localStorage.getItem("tutor")))
+        setstudentLogin(JSON.parse(localStorage.getItem("student")))
+    }, [])
 
-    })
 
     const logout = () => {
         localStorage.clear()
@@ -145,7 +145,7 @@ const Hamburg = () => {
                                     }
 
                                 </div>
-                                {userLogin ?
+                                {TutorLogin || studentLogin ?
                                     <Link href="/" onClick={() => {
                                         handleCloseDropdown();
                                         logout()// Close dropdown

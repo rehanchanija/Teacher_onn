@@ -3,17 +3,20 @@ import Image from 'next/image';
 
 const TestimonialsCard = () => {
   return (
-    <div className="bg-[#FFFFFF] shadow-xl  shadow-[#E5ECF2]  md:mb-16 border space-y-2 border-blue-100 p-4 md:w-[360px]   rounded-lg ">
+    <div className="bg-[#FFFFFF]  shadow-xl md:mx-2  shadow-[#E5ECF2]  md:mb-16 border space-y-2 border-blue-100 p-4    rounded-lg ">
 
-      <div className='flex'>
+      <div className='flex  '>
 
         <Image
           src="/image/home/textomonialscard.png"
-          alt='reload' width={118}
+          alt='reload'
+          width={118}
           height={80}
-          className=""
         />
-        <RatingIcon />
+        <div className='flex-1 flex justify-end ' >
+
+          <RatingIcon />
+        </div>
 
       </div>
       <h2 className="text-[20px] font-semibold  ">ARYA GUPTA</h2>

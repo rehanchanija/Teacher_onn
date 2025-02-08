@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.66.0",
+    "@tanstack/react-query-devtools": "^5.66.0",
+    "@tanstack/react-query-next-experimental": "^5.66.0",
     "axios": "^1.7.9",
     "formik": "^2.4.6",
     "next": "15.1.3",
