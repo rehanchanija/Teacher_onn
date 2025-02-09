@@ -8,23 +8,17 @@ import { useEffect, useState } from "react";
 import SignupModal from "@/components/signupModel";
 import ReactModal from "react-modal";
 import SigninModal from "@/components/signinModel";
+import { useSelector } from "react-redux";
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [LoginModelOpen, setLoginModelOpen] = useState(false);
-  const [student, setStudent] = useState(null);
-  const [tutor, setTutor] = useState(null);
+  const { tutor, student } = useSelector((state) => state.auth);
+
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const openLoginModal = () => setLoginModelOpen(true);
   const closeLoginModal = () => setLoginModelOpen(false);
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setStudent(JSON.parse(localStorage.getItem("student")));
-      setTutor(JSON.parse(localStorage.getItem("tutor")));
-    }
-  }, []);
-
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -74,9 +68,10 @@ const Navbar = () => {
               <button
                 onClick={openLoginModal}
 
-                className="bg-[#1BADFF] text-sm md:text-[16px] text-white font-semibold p-2 md:px-4 md:py-2.5 rounded-[4px] flex items-center ">
-                Login
-                <Image src="/image/Navbar/user.png" width={22} height={21} alt="User" className="md:block hidden" />
+                className="bg-[#1BADFF] text-sm md:text-[16px] text-white font-semibold p-2 md:px-4 md:py-2.5 rounded-[4px] flex  ">
+                <span > Login
+                </span>
+                <Image src="/image/Navbar/user.png" width={22} height={21} alt="User" className="md:block hidden ml-1" />
               </button>
             </>
 

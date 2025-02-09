@@ -6,10 +6,12 @@ import { deleteTutorEducationInfo, updateTutor, updateTutorEducationInfo } from 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useDispatch } from "react-redux";
 
 const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
 
     const queryClient = useQueryClient()
+    const dispatch = useDispatch()
 
 
     const validationSchema = Yup.object({
@@ -28,7 +30,7 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
         onSuccess: (data) => {
             queryClient.invalidateQueries(["GET_TUTOR"])
             handleNext();
-            localStorage.setItem("tutor", JSON.stringify(data))
+            dispatch(setTutor(data))
             console.log("onSuccess", data)
         },
         onError: (error) => {
@@ -40,7 +42,7 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
         mutationFn: deleteTutorEducationInfo,
         onSuccess: (data) => {
             queryClient.invalidateQueries(["GET_TUTOR"])
-            localStorage.setItem("tutor", JSON.stringify(data))
+            dispatch(setTutor(data))
             console.log("onSuccess", data)
         },
         onError: (error) => {

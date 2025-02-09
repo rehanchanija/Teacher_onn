@@ -1,5 +1,7 @@
+import { Rating } from "@smastrom/react-rating";
 import Image from "next/image";
 import Link from "next/link";
+import '@smastrom/react-rating/style.css'
 
 const LiveClassesCard = ({ tutor }) => {
   const { educationInfo, personalinfo } = tutor
@@ -8,9 +10,12 @@ const LiveClassesCard = ({ tutor }) => {
       <Image src="/image/home/livecard.png" width={387} height={199} alt="" />
       <div className=" space-y-2 bg-white ">
         <div className="flex items-center pt-3 ">
-          <span href="" className="pr-2 text-[20px] text-[#778D9E]">
-            4.9 <span className="text-[#F8A401]">★★★★☆</span>
+          <span href="" className="pr-2 text-[20px] flex  text-[#778D9E]">
+            {tutor?.rating}
           </span>
+          <Rating readOnly value={tutor?.rating} style={{
+            width: "30%"
+          }} />
 
         </div>
         <p className="text-[20px] font-bold pt-1.5  ">
@@ -60,7 +65,7 @@ const LiveClassesCard = ({ tutor }) => {
           <span> TRIAL CLASS</span>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

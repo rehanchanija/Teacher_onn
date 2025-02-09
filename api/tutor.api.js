@@ -1,9 +1,10 @@
+import { store } from "@/store"
 import { API_URL } from "@/utils/constant"
 import axios from "axios"
 
 
 export const updateTutor = async (values) => {
-    const tutor = JSON.parse(localStorage.getItem("tutor"))
+    const tutor = store.getState().auth.tutor
     console.log(tutor)
     const id = tutor?._id
 
@@ -11,7 +12,7 @@ export const updateTutor = async (values) => {
     return res.data
 }
 export const getTutor = async () => {
-    const tutor = JSON.parse(localStorage.getItem("tutor"))
+    const tutor = store.getState().auth.tutor
     const id = tutor?._id
     console.log(id)
     const res = await axios.get(`${API_URL}/tutor/${id}`)
@@ -27,7 +28,7 @@ export const getExperienceTutor = async () => {
 }
 
 export const updateTutorEducationInfo = async (values) => {
-    const tutor = JSON.parse(localStorage.getItem("tutor"))
+    const tutor = store.getState().auth.tutor
     console.log(tutor)
     const id = tutor?._id
 
@@ -36,7 +37,7 @@ export const updateTutorEducationInfo = async (values) => {
 }
 
 export const updateTutorSubject = async (values) => {
-    const tutor = JSON.parse(localStorage.getItem("tutor"))
+    const tutor = store.getState().auth.tutor
     console.log(tutor)
     const id = tutor?._id
 
@@ -44,7 +45,7 @@ export const updateTutorSubject = async (values) => {
     return res.data
 }
 export const updateTutorExperience = async (values) => {
-    const tutor = JSON.parse(localStorage.getItem("tutor"))
+    const tutor = store.getState().auth.tutor
     console.log(tutor)
     const id = tutor?._id
 
@@ -53,7 +54,7 @@ export const updateTutorExperience = async (values) => {
 }
 
 export const updateTutorCourse = async (values) => {
-    const tutor = JSON.parse(localStorage.getItem("tutor"))
+    const tutor = store.getState().auth.tutor
     console.log(tutor)
     const id = tutor?._id
 
@@ -62,7 +63,7 @@ export const updateTutorCourse = async (values) => {
 }
 
 export const deleteTutorExperience = async (values) => {
-    const tutor = JSON.parse(localStorage.getItem("tutor"))
+    const tutor = store.getState().auth.tutor
     console.log(tutor)
     const tutorId = tutor?._id
 
@@ -71,7 +72,7 @@ export const deleteTutorExperience = async (values) => {
 }
 
 export const deleteTutorCourse = async (values) => {
-    const tutor = JSON.parse(localStorage.getItem("tutor"))
+    const tutor = store.getState().auth.tutor
     console.log(tutor)
     const tutorId = tutor?._id
 
@@ -80,7 +81,7 @@ export const deleteTutorCourse = async (values) => {
 }
 
 export const deleteTutorSubject = async (values) => {
-    const tutor = JSON.parse(localStorage.getItem("tutor"))
+    const tutor = store.getState().auth.tutor
     console.log(tutor)
     const tutorId = tutor?._id
 
@@ -89,7 +90,7 @@ export const deleteTutorSubject = async (values) => {
 }
 
 export const deleteTutorEducationInfo = async (values) => {
-    const tutor = JSON.parse(localStorage.getItem("tutor"))
+    const tutor = store.getState().auth.tutor
     console.log(tutor)
     const tutorId = tutor?._id
 

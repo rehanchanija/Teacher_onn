@@ -19,7 +19,7 @@ const Homepage = () => {
         <div>
             <div className="md:space-y-20 space-y-8">
                 <TutorsPage />
-                {/* <Learning />
+                <Learning />
                 <FeautureProfile />
                 <div className="md:mx-12 ">
                     <LiveClasses />
@@ -30,16 +30,16 @@ const Homepage = () => {
                 <div className="py-4  ">
 
                     <Reveiw />
-                </div> */}
+                </div>
                 <Premium />
             </div>
             <div className="md:mx-8   md:space-y-20 space-y-8">
 
 
-                {/* <StudentTeaching />
+                <StudentTeaching />
                 <AdmissionEnroll />
                 <OnlineStore />
-                <Testimonals /> */}
+                <Testimonals />
             </div>
             {/* <DirectionalClasses /> */}
 

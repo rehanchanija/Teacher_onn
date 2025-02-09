@@ -4,16 +4,19 @@ import Image from "next/image";
 import * as Yup from "yup";
 import { deleteTutorCourse, updateTutor, updateTutorCourse } from "@/api/tutor.api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useDispatch } from "react-redux";
+import { setTutor } from "@/store/slices/authSlice";
 
 const Course = ({ handlePrevious, formData, updateFormData, handleSubmit, initialData }) => {
     const queryClient = useQueryClient()
+    const dispatch = useDispatch()
 
     const { mutate, isPending } = useMutation({
         mutationFn: updateTutorCourse,
         onSuccess: (data) => {
             queryClient.invalidateQueries(["GET_TUTOR"])
             handleSubmit()
-            localStorage.setItem("tutor", JSON.stringify(data))
+            dispatch(setTutor(data))
             console.log("onSuccess", data)
         },
         onError: (error) => {
@@ -24,7 +27,7 @@ const Course = ({ handlePrevious, formData, updateFormData, handleSubmit, initia
         mutationFn: deleteTutorCourse,
         onSuccess: (data) => {
             queryClient.invalidateQueries(["GET_TUTOR"])
-            localStorage.setItem("tutor", JSON.stringify(data))
+            dispatch(setTutor(data))
             console.log("onSuccess", data)
         },
         onError: (error) => {
