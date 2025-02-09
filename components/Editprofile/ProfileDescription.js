@@ -4,15 +4,17 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { updateTutor } from "@/api/tutor.api";
 import { useMutation } from "@tanstack/react-query";
 import * as Yup from 'yup';
+import { setTutor } from "@/store/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 
 const ProfileDescription = ({ handleNext, handlePrevious, initialData }) => {
+    const dispatch = useDispatch();
     const { mutate, isPending } = useMutation({
         mutationFn: updateTutor,
         onSuccess: (data) => {
             handleNext();
-            localStorage.setItem("tutor", JSON.stringify(data));
-            console.log("onSuccess", data);
+            dispatch(setTutor(data))
         },
         onError: (error) => {
             console.log("onError", error);

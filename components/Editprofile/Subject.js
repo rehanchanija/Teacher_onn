@@ -5,15 +5,19 @@ import { useState } from "react";
 import * as Yup from "yup";
 import { deleteTutorSubject, updateTutorSubject } from "@/api/tutor.api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { setTutor } from "@/store/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
+    const dispatch = useDispatch()
+
     const [initialValues, setInitialValues] = useState({
         _id: "",
         subjects: "",
         fromLevel: "",
         toLevel: "",
 
-    })  
+    })
     const queryClient = useQueryClient();
 
     const validationSchema = Yup.object({
@@ -28,8 +32,7 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
             queryClient.invalidateQueries(["GET_TUTOR"])
             handleNext();
 
-            localStorage.setItem("tutor", JSON.stringify(data))
-            console.log("onSuccess", data)
+            dispatch(setTutor(data))
         },
         onError: (error) => {
             console.log("onError", error)
@@ -40,8 +43,7 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
         mutationFn: deleteTutorSubject,
         onSuccess: (data) => {
             queryClient.invalidateQueries(["GET_TUTOR"])
-            localStorage.setItem("tutor", JSON.stringify(data))
-            console.log("onSuccess", data)
+            dispatch(setTutor(data))
         },
         onError: (error) => {
             console.log("onError", error)
@@ -59,7 +61,7 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
         updateFormData('subjects', values);
     };
 
-    
+
     console.log(initialData,)
     return (
         <div className="flex flex-col items-center">
@@ -77,15 +79,15 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
                                     <p className="text-[#136AAD] text-sm">{item?.fromLevel} - {item?.toLevel}</p>
                                 </div>
                                 <div className="flex gap-2">
-                                    <button 
-                                    onClick={() => {
-                                        setInitialValues({
-                                            _id: item?._id,
-                                            subjects: item?.subject,
-                                            fromLevel: item?.fromLevel,
-                                            toLevel: item?.toLevel,
-                                        })
-                                    }}
+                                    <button
+                                        onClick={() => {
+                                            setInitialValues({
+                                                _id: item?._id,
+                                                subjects: item?.subject,
+                                                fromLevel: item?.fromLevel,
+                                                toLevel: item?.toLevel,
+                                            })
+                                        }}
                                         className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
                                         <Image
                                             src="/edit.png"

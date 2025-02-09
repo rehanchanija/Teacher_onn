@@ -13,7 +13,7 @@ import { getTutor } from '@/api/tutor.api';
 const formSections = ['Personal Info', 'Education', 'Subject', 'Experience', 'Teaching Detail', 'Profile Description', 'Course'];
 
 const EditProfilePage = () => {
-    const [currentStep, setCurrentStep] = useState(3);
+    const [currentStep, setCurrentStep] = useState(0);
     const [formData, setFormData] = useState({
         personalInfo: {},
         education: {},

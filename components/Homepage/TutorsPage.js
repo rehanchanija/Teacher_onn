@@ -10,8 +10,8 @@ const TutorsPage = () => {
 
       <div className="flex flex-col md:flex-row items-center justify-around  ">
         {/* Left section (Text on top on small screens) */}
-        <div className="order-2 md:order-1 md:text-left text-center bg-[#136FB6] text-white  sm:max-w-[80%] md:max-w-[600px] py-12 md:py-0 px-4 sm:px-8">
-          <h1 className="text-[28px]  sm:text-[40px] md:text-[50px] lg:text-[60px] font-gilroy leading-tight">
+        <div className="order-2 md:order-1 md:text-left text-center bg-[#136FB6] text-white  sm:max-w-[80%] md:max-w-[600px] py-12  md:py-0 px-4 sm:px-8">
+          <h1 className="text-[28px] mt-8 md:mt-0  sm:text-[40px] md:text-[50px] lg:text-[60px] font-gilroy leading-tight">
             Join Live Online Or
           </h1>
           <p className="text-[28px] sm:text-[40px] md:text-[50px] lg:text-[60px] font-gilroy-bold">
@@ -34,7 +34,7 @@ const TutorsPage = () => {
         </div>
 
         {/* Right section (Image moves up on small screens) */}
-        <div className="order-1 md:order-2 relative mt-6 md:mt-0">
+        <div className="order-1 md:order-2  relative mt-6 md:mt-0">
           <Image
             src="/image/home/tutorpag.png"
             alt="Top Right Image"
@@ -42,7 +42,7 @@ const TutorsPage = () => {
             height={684}
             className="w-[300px] sm:w-[400px] md:w-[465px] h-auto mx-auto"
           />
-          <div className="absolute top-[150px] sm:top-[200px] md:top-[246px] right-4 sm:right-8 md:right-auto md:left-[calc(50%+10px)] bg-white w-[180px] sm:w-[200px] md:w-[214px] h-auto p-4 rounded-[20px] shadow-md">
+          <div className="absolute left-2/4 md:translate-x-0 -translate-x-2/4 sm:top-[200px] md:top-[246px] right-4 sm:right-8 md:-left-36 -bottom-14 md:bottom-auto  bg-white w-[180px] sm:w-[200px] md:w-[214px] h-auto p-4 rounded-[20px] shadow-md">
             <ul className="space-y-2 sm:space-y-3">
               {["Customized Plan", "Science Lab", "Test Series", "8+ Lessons 4"].map((text, index) => (
                 <li key={index} className="flex items-center space-x-2">

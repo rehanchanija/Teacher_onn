@@ -8,6 +8,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { setTutor } from "@/store/slices/authSlice";
 
 const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
     const [initialValues, setInitialValues] = useState({

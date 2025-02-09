@@ -2,12 +2,13 @@ import { getTutor } from "@/api/tutor.api"
 import { useQuery } from "@tanstack/react-query"
 import { useRouter } from 'next/router'
 import Image from "next/image"
+import { useSelector } from "react-redux"
 
 
 
 const MyProfile = () => {
 
-    const tutor = JSON.parse(localStorage.getItem("tutor"));
+    const { tutor } = useSelector((state) => state.auth);
     const { data } = useQuery({
         querykey: ["GET_TUTOR"],
         queryFn: getTutor

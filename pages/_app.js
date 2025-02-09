@@ -10,8 +10,10 @@ import "../styles/globals.css";
 import { ToastContainer } from "react-toastify";
 import ReactModal from "react-modal";
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { store } from '@/store'
+import { store, persistor } from '@/store'
 import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react';
+
 
 ReactModal.setAppElement("#__next");
 const queryClient = new QueryClient()
@@ -22,15 +24,17 @@ export default function App({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        {/* <Hydrate state={pageProps.dehydratedState}> */}
-        <Navbar />
-        <Component {...pageProps} />
-        <ToastContainer />
-        <Footer />
-        {/* </Hydrate> */}
-        {/* <ReactQueryDevtools /> */}
-      </QueryClientProvider>
+      <PersistGate persistor={persistor}>
+        <QueryClientProvider client={queryClient}>
+          {/* <Hydrate state={pageProps.dehydratedState}> */}
+          <Navbar />
+          <Component {...pageProps} />
+          <ToastContainer />
+          <Footer />
+          {/* </Hydrate> */}
+          {/* <ReactQueryDevtools /> */}
+        </QueryClientProvider>
+      </PersistGate>
     </Provider>
   );
 }
