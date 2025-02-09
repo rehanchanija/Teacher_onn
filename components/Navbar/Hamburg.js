@@ -1,3 +1,4 @@
+import { setStudent, setTutor } from '@/store/slices/authSlice';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -16,7 +17,9 @@ const Hamburg = () => {
 
 
     const logout = () => {
-        dispatch(null)
+        dispatch(setStudent(null))
+        dispatch(setTutor(null))
+
         router.push("/")
     }
 

@@ -1,1 +1,1 @@
-export const API_URL = "http://localhost:3006"
+export const API_URL = "https://dc-backend-mocha.vercel.app"
