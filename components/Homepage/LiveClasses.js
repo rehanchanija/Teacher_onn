@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const LiveClasses = () => {
   const { data } = useQuery({
-    querykey: ["GET_TUTOR"],
+    querykey: ["GET_EXPERIENCE_TUTOR"],
     queryFn: getExperienceTutor,
   })
   console.log(data)
@@ -46,7 +46,7 @@ const LiveClasses = () => {
         </div>
       </div>
       <div className="grid md:grid-cols-3  grid-ols-2   ">
-        {data?.map((tutor, index) => (
+        {data?.map?.((tutor, index) => (
           <LiveClassesCard key={index} tutor={tutor} />
         ))}
       </div>

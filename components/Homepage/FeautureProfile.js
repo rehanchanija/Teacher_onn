@@ -85,7 +85,7 @@ const FeautureProfile = () => {
       </div>
       <div className="  px-12 pt-4 rounded-xl pb-4">
         <AppSlider settings={sliderSettings}>
-          {data?.map((tutor, index) => (
+          {data?.map?.((tutor, index) => (
             <FeauturedCard key={index} tutor={tutor} />
           ))}
         </AppSlider>

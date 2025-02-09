@@ -21,7 +21,7 @@ const MyProfile = () => {
             {/* Hero Banner */}
             <div className="w-full min-h-[180px] md:min-h-[236px] bg-[#136FB6] flex justify-center items-center text-center">
                 <div className="text-white px-4">
-                    <h1 className="text-3xl md:text-4xl lg:text-[60px] font-bold" style={{ fontFamily: 'Gilroy' }}>
+                    <h1 className="text-3xl md:text-4xl pb-4 lg:text-[60px] font-bold" style={{ fontFamily: 'Gilroy' }}>
                         MY PROFILE
                     </h1>
                     <p className="text-base md:text-lg lg:text-[20px]" style={{ fontFamily: 'Gilroy' }}>
