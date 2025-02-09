@@ -4,8 +4,11 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { updateTutor } from "@/api/tutor.api";
 import { useMutation } from "@tanstack/react-query";
+import { useDispatch } from 'react-redux';
+import { setTutor } from '@/store/slices/authSlice';
 
 const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialData }) => {
+    const dispatch = useDispatch()
     const Radiobuttons = [
         { name: 'travel', label: 'Are you willing to travel to Student?' },
         { name: 'onlineTeaching', label: 'Available for online teaching?' },
@@ -59,8 +62,8 @@ const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialDat
         mutationFn: updateTutor,
         onSuccess: (data) => {
             handleNext();
-            localStorage.setItem("tutor", JSON.stringify(data))
-            console.log("onSuccess", data)
+            dispatch(setTutor(data))
+
         },
         onError: (error) => {
             console.log("onError", error)

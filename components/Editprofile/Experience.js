@@ -5,8 +5,11 @@ import { useState } from "react";
 import * as Yup from "yup";
 import { deleteTutorExperience, updateTutor, updateTutorExperience } from "@/api/tutor.api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useDispatch } from "react-redux";
+import { setTutor } from "@/store/slices/authSlice";
 
 const Experience = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
+    const dispatch = useDispatch()
     const [initialValues, setInitialValues] = useState({
         _id: "",
         organization: "",
@@ -34,8 +37,7 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
             queryClient.invalidateQueries(["GET_TUTOR"])
 
             handleNext();
-            localStorage.setItem("tutor", JSON.stringify(data))
-            console.log("onSuccess", data)
+            dispatch(setTutor(data))
         },
         onError: (error) => {
             console.log("onError", error)
@@ -45,8 +47,7 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
         mutationFn: deleteTutorExperience,
         onSuccess: (data) => {
             queryClient.invalidateQueries(["GET_TUTOR"])
-            localStorage.setItem("tutor", JSON.stringify(data))
-            console.log("onSuccess", data)
+            dispatch(setTutor(data))
         },
         onError: (error) => {
             console.log("onError", error)
@@ -85,20 +86,20 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                     {item.grade && <p className="text-sm text-gray-600">{item.grade}</p>}
                                 </div>
                                 <div className="flex gap-2">
-                                    <button 
-                                     onClick={() => {
-                                        setInitialValues({
-                                            _id: item?._id,
-                                            organization: item?.organization,
-                                            designation: item?.designation,
-                                            startDate: item?.startDate,
-                                            endDate: item?.endDate,
-                                            association: item?.association,
-                                            jobDescription: item?.jobDescription,
-                                        })
-                                     }}
+                                    <button
+                                        onClick={() => {
+                                            setInitialValues({
+                                                _id: item?._id,
+                                                organization: item?.organization,
+                                                designation: item?.designation,
+                                                startDate: item?.startDate,
+                                                endDate: item?.endDate,
+                                                association: item?.association,
+                                                jobDescription: item?.jobDescription,
+                                            })
+                                        }}
 
-                                    className=" text-white rounded-full focus:outline-none" aria-label="Edit">
+                                        className=" text-white rounded-full focus:outline-none" aria-label="Edit">
                                         <Image
                                             src="/edit.png"
                                             alt="Edit Icon"
@@ -120,7 +121,7 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                     </button>
                                 </div>
                             </div>
-                            
+
                         ))}
                     </div>
                 </div>

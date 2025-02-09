@@ -1,15 +1,17 @@
 'use client';
 
 import { updateTutor } from "@/api/tutor.api";
+import { setTutor } from "@/store/slices/authSlice";
 import { useMutation } from "@tanstack/react-query";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/image";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 
 
 const PersonalInfo = ({ handleNext, formData, updateFormData, initialData }) => {
-    // Validation schema remains the same
+    const dispatch = useDispatch()
     const validationSchema = Yup.object({
         firstName: Yup.string().required("First name is required"),
         lastName: Yup.string().required("Last name is required"),
@@ -69,8 +71,7 @@ const PersonalInfo = ({ handleNext, formData, updateFormData, initialData }) => 
         mutationFn: updateTutor,
         onSuccess: (data) => {
             handleNext();
-            localStorage.setItem("tutor", JSON.stringify(data))
-            console.log("onSuccess", data)
+            dispatch(setTutor(data))
         },
         onError: (error) => {
             console.log("onError", error)
