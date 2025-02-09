@@ -29,8 +29,8 @@ const Footer = () => {
   ];
   return (
     <div>
-      <div className="bg-[#051B2C] md:flex   text-white md:px-14 py-12 px-4  ">
-        <div className="md:w-[348px] pt-2">
+      <div className="bg-[#051B2C] md:flex justify-between   text-white md:px-14 py-12 px-4  ">
+        <div className=" pt-2">
           <Image
             src="/image/footer/footer.png"
             width={240.18}
@@ -38,7 +38,7 @@ const Footer = () => {
             alt="reload"
             className="pb-8"
           />
-          <p className="pb-10 pt-4 text-[18px] ">
+          <p className="pb-10 pt-4 md:w-[348px] text-[18px] ">
             Direction Classes is a commitment to academic excellence and
             holistic development. We strive to create an environment that
             fosters curiosity, critical thinking, and a passion for learning.
@@ -54,8 +54,8 @@ const Footer = () => {
             className="pt-4 "
           />
         </div>
-        <div className="grid md:grid-cols-3 grid-cols-2 pt-8 md:pt-0  ">
-          <div className="w-[150px]  ">
+        <div className="grid md:grid-cols-3 grid-cols-2 md:pl-12 pt-8 md:pt-0  ">
+          <div className="  ">
             <h1 className=" font-semibold text-[22px] pb-5 ">Learning Path</h1>
             <ul className=" text-[16px] list-inside ">
               {Learning.map((data, index) => (
@@ -65,7 +65,7 @@ const Footer = () => {
               ))}
             </ul>
           </div>
-          <div className="w-[148px]   ">
+          <div className="   ">
             <h1 className=" font-semibold text-[22px] pb-5 ">Topics</h1>
             <ul className=" text-[16px] list-inside transition-all break-words ">
               {Topics.map((data, index) => (
@@ -77,7 +77,7 @@ const Footer = () => {
               ))}
             </ul>
           </div>
-          <div className="md:w-[336x] text-[16px]   ">
+          <div className=" text-[16px]   ">
             <h1 className=" font-semibold text-[22px] pb-5">Get In Touch</h1>
             <div className="flex pb-2 ">
               <Location />

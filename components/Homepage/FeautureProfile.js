@@ -1,14 +1,26 @@
 "use client";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
-
 import Image from "next/image";
 import AppSlider from "../AppSlider";
 import FeauturedCard from "../Cards/FeauturedCard";
+import { useQuery } from "@tanstack/react-query";
+import { getFeaturedTutor } from "@/api/tutor.api";
 
 const FeautureProfile = () => {
   const combos = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  // const { data } = useQuery({
+  //   queryKey: ["Featured_Tutor"], 
+  //   queryFn: getFeaturedTutor
+  // })
+  // console.log(data)
 
+  const { data } = useQuery({
+    querykey: ["GET_TUTOR"],
+    queryFn: getFeaturedTutor,
+  })
+
+  console.log(data)
   const sliderSettings = {
     // dots: true,
     infinite: true,
@@ -78,8 +90,8 @@ const FeautureProfile = () => {
       </div>
       <div className="  px-12 pt-4 rounded-xl pb-4">
         <AppSlider settings={sliderSettings}>
-          {combos.map((product, index) => (
-            <FeauturedCard key={index} />
+          {data?.map((tutor, index) => (
+            <FeauturedCard key={index} tutor={tutor} />
           ))}
         </AppSlider>
       </div>

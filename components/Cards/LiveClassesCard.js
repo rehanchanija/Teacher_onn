@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const LiveClassesCard = () => {
+const LiveClassesCard = ({ tutor }) => {
+  const { educationInfo, personalinfo } = tutor
   return (
     <div className="p-3 md:w-[360px]  bg-white shadow-2xl  m-3 px-2 md:mr-4  rounded-lg ">
       <Image src="/image/home/livecard.png" width={387} height={199} alt="" />
@@ -13,7 +14,7 @@ const LiveClassesCard = () => {
 
         </div>
         <p className="text-[20px] font-bold pt-1.5  ">
-          BTech Tuition - BTech 1st Year <br></br>Engineering....
+          {educationInfo[0]?.degreeName} <br></br>{educationInfo[0]?.degreeType}....
         </p>
         <span className="flex py-2">
           <Image
@@ -23,7 +24,7 @@ const LiveClassesCard = () => {
             alt="reload"
           />
           <p className="text-[16px] text-[#667681] px-2 ">
-            Sat, 6 Jul at 06:00pm IST
+            {educationInfo[0]?.startDate}
           </p>
         </span>
         <span className="flex space-x-5 pb-4">

@@ -21,6 +21,10 @@ export const getFeaturedTutor = async () => {
     const res = await axios.get(`${API_URL}/tutor/featured`)
     return res.data
 }
+export const getExperienceTutor = async () => {
+    const res = await axios.get(`${API_URL}/tutor/experience`)
+    return res.data
+}
 
 export const updateTutorEducationInfo = async (values) => {
     const tutor = JSON.parse(localStorage.getItem("tutor"))
