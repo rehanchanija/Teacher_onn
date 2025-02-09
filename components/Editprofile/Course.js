@@ -7,8 +7,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 import { setTutor } from "@/store/slices/authSlice";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";          // Import Toast CSS
 
-const Course = ({ handlePrevious, formData, updateFormData, handleSubmit, initialData }) => {
+
+const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, initialData }) => {
     const [initialValues, setInitialValues] = useState({
         _id: "",
         Course_title: "",
@@ -32,7 +35,8 @@ const Course = ({ handlePrevious, formData, updateFormData, handleSubmit, initia
             queryClient.invalidateQueries(["GET_TUTOR"])
             handleSubmit()
             dispatch(setTutor(data))
-            console.log("onSuccess", data)
+            toast.success("Course updated successfully! 🎉");  // Success Toast
+
         },
         onError: (error) => {
             console.log("onError", error)
