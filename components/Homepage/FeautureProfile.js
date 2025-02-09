@@ -11,7 +11,7 @@ const FeautureProfile = () => {
 
 
   const { data } = useQuery({
-    querykey: ["GET_TUTOR"],
+    querykey: ["GET_FEATURED_TUTOR"],
     queryFn: getFeaturedTutor,
   })
 
