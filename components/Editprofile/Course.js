@@ -4,8 +4,23 @@ import Image from "next/image";
 import * as Yup from "yup";
 import { deleteTutorCourse, updateTutor, updateTutorCourse } from "@/api/tutor.api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 
 const Course = ({ handlePrevious, formData, updateFormData, handleSubmit, initialData }) => {
+    const [initialValues, setInitialValues] = useState({
+        _id: "",
+        Course_title: "",
+        Description: "",
+        Price: "",
+        Duration: "",
+        Image: "",
+        certificateProvided: "",
+        MOD: "",
+        Group: "",
+        Cert: "",
+        CD: "",
+        LOI: "",
+    })
     const queryClient = useQueryClient()
 
     const { mutate, isPending } = useMutation({
@@ -44,7 +59,7 @@ const Course = ({ handlePrevious, formData, updateFormData, handleSubmit, initia
         CD: Yup.string().required("Required"),
         LOI: Yup.string().required("Required"),
     });
-
+console.log(initialValues)
 
 
     return (
@@ -63,7 +78,24 @@ const Course = ({ handlePrevious, formData, updateFormData, handleSubmit, initia
                                         <p className="text-[#136AAD] text-sm">{item?.courseDescription}</p>
                                     </div>
                                     <div className="flex gap-2">
-                                        <button className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
+                                        <button 
+                                        onClick={() => {
+                                            setInitialValues({
+                                                _id: item?._id,
+                                                Course_title: item?.courseTitle,
+                                                Description: item?.courseDescription,
+                                                Price: item?.coursePrice,
+                                                Duration: item?.courseDuration,
+                                                certificateProvided: item?.certificateProvided,
+                                                Image: item?.image,
+                                                MOD: item?.MOD,
+                                                Group: item?.Group,
+                                                Cert: item?.Cert,
+                                                CD: item?.CD,
+                                                LOI: item?.LOI,
+                                            })
+                                        }}  
+                                        className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
                                             <Image
                                                 src="/edit.png"
                                                 alt="Edit Icon"
@@ -92,17 +124,7 @@ const Course = ({ handlePrevious, formData, updateFormData, handleSubmit, initia
                     <div className="p-4 sm:p-6 md:p-8 bg-[#F2F6FB]">
                         <h3 className="mb-4 sm:mb-6 text-black font-bold">Please add Course I teach.</h3>
                         <Formik
-                            initialValues={{
-                                Course_title: "",
-                                Description: "",
-                                Price: "",
-                                Currency: "INR",
-                                MOD: "Option 1",
-                                Group: "Option 1",
-                                Cert: "Option 1",
-                                CD: "Option 1",
-                                LOI: "",
-                            }}
+                            initialValues={initialValues}
                             validationSchema={validationSchema}
                             enableReinitialize
                             onSubmit={(values) => {
@@ -164,7 +186,7 @@ const Course = ({ handlePrevious, formData, updateFormData, handleSubmit, initia
                                             />
                                             <Field
                                                 as="select"
-                                                name="Currency"
+                                                name="Currency"             
                                                 className="bg-[#9EB5C7] text-white text-sm px-2 outline-none cursor-pointer"
                                             >
                                                 <option value="INR">INR</option>

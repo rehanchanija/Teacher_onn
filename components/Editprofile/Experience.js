@@ -7,6 +7,15 @@ import { deleteTutorExperience, updateTutor, updateTutorExperience } from "@/api
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const Experience = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
+    const [initialValues, setInitialValues] = useState({
+        _id: "",
+        organization: "",
+        designation: "",
+        startDate: "",
+        endDate: "",
+        association: "",
+        jobDescription: "",
+    })
     const queryClient = useQueryClient()
 
 
@@ -76,7 +85,20 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                     {item.grade && <p className="text-sm text-gray-600">{item.grade}</p>}
                                 </div>
                                 <div className="flex gap-2">
-                                    <button className=" text-white rounded-full focus:outline-none" aria-label="Edit">
+                                    <button 
+                                     onClick={() => {
+                                        setInitialValues({
+                                            _id: item?._id,
+                                            organization: item?.organization,
+                                            designation: item?.designation,
+                                            startDate: item?.startDate,
+                                            endDate: item?.endDate,
+                                            association: item?.association,
+                                            jobDescription: item?.jobDescription,
+                                        })
+                                     }}
+
+                                    className=" text-white rounded-full focus:outline-none" aria-label="Edit">
                                         <Image
                                             src="/edit.png"
                                             alt="Edit Icon"
@@ -109,14 +131,7 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                         Please add Teaching and Professional Experience.
                     </h3>
                     <Formik
-                        initialValues={{
-                            organization: "",
-                            designation: "",
-                            startDate: "",
-                            endDate: "",
-                            association: "",
-                            jobDescription: "",
-                        }}
+                        initialValues={initialValues}
                         validationSchema={validationSchema}
                         onSubmit={onSubmit}
                         enableReinitialize
