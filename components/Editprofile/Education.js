@@ -6,6 +6,7 @@ import { deleteTutorEducationInfo, updateTutor, updateTutorEducationInfo } from 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 
 const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
@@ -21,6 +22,7 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
         score: "",
     })
     const queryClient = useQueryClient()
+    const dispatch = useDispatch()
 
 
     const validationSchema = Yup.object({
@@ -39,7 +41,7 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
         onSuccess: (data) => {
             queryClient.invalidateQueries(["GET_TUTOR"])
             handleNext();
-            localStorage.setItem("tutor", JSON.stringify(data))
+            dispatch(setTutor(data))
             console.log("onSuccess", data)
         },
         onError: (error) => {
@@ -51,7 +53,7 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
         mutationFn: deleteTutorEducationInfo,
         onSuccess: (data) => {
             queryClient.invalidateQueries(["GET_TUTOR"])
-            localStorage.setItem("tutor", JSON.stringify(data))
+            dispatch(setTutor(data))
             console.log("onSuccess", data)
         },
         onError: (error) => {
@@ -94,20 +96,20 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
                                 </div>
                                 <div className="flex gap-2">
                                     <button
-                                    onClick={() => {
-                                        setInitialValues({
-                                            _id: item?._id,
-                                            instituteWithCity: item?.instituteWithCity,
-                                            degreeType: item?.degreeType,
-                                            degreeName: item?.degreeName,
-                                            startDate: item?.startDate,
-                                            endDate: item?.endDate,
-                                            association: item?.association,
-                                            speciality: item?.speciality,
-                                            score: item?.score
-                                        })
-                                    }}
-                                    className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
+                                        onClick={() => {
+                                            setInitialValues({
+                                                _id: item?._id,
+                                                instituteWithCity: item?.instituteWithCity,
+                                                degreeType: item?.degreeType,
+                                                degreeName: item?.degreeName,
+                                                startDate: item?.startDate,
+                                                endDate: item?.endDate,
+                                                association: item?.association,
+                                                speciality: item?.speciality,
+                                                score: item?.score
+                                            })
+                                        }}
+                                        className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
                                         <Image
                                             src="/edit.png"
                                             alt="Edit Icon"

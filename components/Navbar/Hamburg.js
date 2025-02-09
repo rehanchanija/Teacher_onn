@@ -2,24 +2,21 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Hamburg = () => {
     const router = useRouter()
+    const dispatch = useDispatch();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [tutor, setTutor] = useState();
-    const [studentLogin, setstudentLogin] = useState();
-    const [TutorLogin, setTutorLogin] = useState();
+
+    const { tutor, student } = useSelector((state) => state.auth);
 
 
-    useEffect(() => {
-        setTutor(JSON.parse(localStorage.getItem("tutor")))
-        setTutorLogin(JSON.parse(localStorage.getItem("tutor")))
-        setstudentLogin(JSON.parse(localStorage.getItem("student")))
-    }, [])
+
 
 
     const logout = () => {
-        localStorage.clear()
+        dispatch(null)
         router.push("/")
     }
 
@@ -105,7 +102,7 @@ const Hamburg = () => {
                                             <span className="text-[#667681] text-lg">Wallet</span>
                                         </button>
                                     </Link>
-                                    <Link href="/" onClick={handleCloseDropdown}>
+                                    <Link href="/tutor-job" onClick={handleCloseDropdown}>
 
                                         <button className="flex items-center space-x-3 hover:bg-gray-100 p-2 ">
                                             <Image
@@ -145,7 +142,7 @@ const Hamburg = () => {
                                     }
 
                                 </div>
-                                {TutorLogin || studentLogin ?
+                                {tutor || student ?
                                     <Link href="/" onClick={() => {
                                         handleCloseDropdown();
                                         logout()// Close dropdown

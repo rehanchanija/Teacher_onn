@@ -1,13 +1,16 @@
 import { signupStudent, signupTutor } from '@/api/auth.api';
+import { setStudent, setTutor } from '@/store/slices/authSlice';
 import { useMutation } from '@tanstack/react-query';
 import { useFormik } from 'formik';
 import Image from "next/image";
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
 const SignupModal = ({ openLoginModal, closeModal }) => {
     const router = useRouter()
+    const dispatch = useDispatch();
 
     const [isTutor, setIsTutor] = useState(false);
     // Track if the user is signing up as a Tutor or Student
@@ -54,13 +57,12 @@ const SignupModal = ({ openLoginModal, closeModal }) => {
 
         onSuccess: (data) => {
             if (isTutor) {
-                localStorage.setItem('tutor', JSON.stringify(data))
+                dispatch(setTutor(data))
                 router.push('/edit-profile')
 
             } else {
-
-                localStorage.setItem('student', JSON.stringify(data))
-
+                dispatch(setStudent(data))
+                console.log(data)
             }
             closeModal();
         },

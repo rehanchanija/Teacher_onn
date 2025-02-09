@@ -8,12 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getFeaturedTutor } from "@/api/tutor.api";
 
 const FeautureProfile = () => {
-  const combos = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  // const { data } = useQuery({
-  //   queryKey: ["Featured_Tutor"], 
-  //   queryFn: getFeaturedTutor
-  // })
-  // console.log(data)
+
 
   const { data } = useQuery({
     querykey: ["GET_TUTOR"],

@@ -1,10 +1,12 @@
 import { signin, signinStudent, signinTutor } from '@/api/auth.api';
+import { setStudent, setTutor } from '@/store/slices/authSlice';
 import { useMutation } from '@tanstack/react-query';
 import { useFormik } from 'formik';
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
 
@@ -14,6 +16,7 @@ const SigninModal = ({ openModal, closeLoginModal }) => {
     const [isTutor, setIsTutor] = useState(false);
     // Track if the user is signing up as a Tutor or Student
     const modalRef = useRef();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -50,12 +53,11 @@ const SigninModal = ({ openModal, closeLoginModal }) => {
 
         onSuccess: (data) => {
             if (isTutor) {
-                localStorage.setItem('tutor', JSON.stringify(data))
+                dispatch(setTutor(data))
                 router.push('/edit-profile')
 
             } else {
-
-                localStorage.setItem('student', JSON.stringify(data))
+                dispatch(setStudent(data))
                 console.log(data)
             }
             closeLoginModal();

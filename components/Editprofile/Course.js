@@ -4,6 +4,8 @@ import Image from "next/image";
 import * as Yup from "yup";
 import { deleteTutorCourse, updateTutor, updateTutorCourse } from "@/api/tutor.api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useDispatch } from "react-redux";
+import { setTutor } from "@/store/slices/authSlice";
 import { useState } from "react";
 
 const Course = ({ handlePrevious, formData, updateFormData, handleSubmit, initialData }) => {
@@ -22,13 +24,14 @@ const Course = ({ handlePrevious, formData, updateFormData, handleSubmit, initia
         LOI: "",
     })
     const queryClient = useQueryClient()
+    const dispatch = useDispatch()
 
     const { mutate, isPending } = useMutation({
         mutationFn: updateTutorCourse,
         onSuccess: (data) => {
             queryClient.invalidateQueries(["GET_TUTOR"])
             handleSubmit()
-            localStorage.setItem("tutor", JSON.stringify(data))
+            dispatch(setTutor(data))
             console.log("onSuccess", data)
         },
         onError: (error) => {
@@ -39,7 +42,7 @@ const Course = ({ handlePrevious, formData, updateFormData, handleSubmit, initia
         mutationFn: deleteTutorCourse,
         onSuccess: (data) => {
             queryClient.invalidateQueries(["GET_TUTOR"])
-            localStorage.setItem("tutor", JSON.stringify(data))
+            dispatch(setTutor(data))
             console.log("onSuccess", data)
         },
         onError: (error) => {
@@ -59,7 +62,7 @@ const Course = ({ handlePrevious, formData, updateFormData, handleSubmit, initia
         CD: Yup.string().required("Required"),
         LOI: Yup.string().required("Required"),
     });
-console.log(initialValues)
+    console.log(initialValues)
 
 
     return (
@@ -78,24 +81,24 @@ console.log(initialValues)
                                         <p className="text-[#136AAD] text-sm">{item?.courseDescription}</p>
                                     </div>
                                     <div className="flex gap-2">
-                                        <button 
-                                        onClick={() => {
-                                            setInitialValues({
-                                                _id: item?._id,
-                                                Course_title: item?.courseTitle,
-                                                Description: item?.courseDescription,
-                                                Price: item?.coursePrice,
-                                                Duration: item?.courseDuration,
-                                                certificateProvided: item?.certificateProvided,
-                                                Image: item?.image,
-                                                MOD: item?.MOD,
-                                                Group: item?.Group,
-                                                Cert: item?.Cert,
-                                                CD: item?.CD,
-                                                LOI: item?.LOI,
-                                            })
-                                        }}  
-                                        className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
+                                        <button
+                                            onClick={() => {
+                                                setInitialValues({
+                                                    _id: item?._id,
+                                                    Course_title: item?.courseTitle,
+                                                    Description: item?.courseDescription,
+                                                    Price: item?.coursePrice,
+                                                    Duration: item?.courseDuration,
+                                                    certificateProvided: item?.certificateProvided,
+                                                    Image: item?.image,
+                                                    MOD: item?.MOD,
+                                                    Group: item?.Group,
+                                                    Cert: item?.Cert,
+                                                    CD: item?.CD,
+                                                    LOI: item?.LOI,
+                                                })
+                                            }}
+                                            className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
                                             <Image
                                                 src="/edit.png"
                                                 alt="Edit Icon"
@@ -186,7 +189,7 @@ console.log(initialValues)
                                             />
                                             <Field
                                                 as="select"
-                                                name="Currency"             
+                                                name="Currency"
                                                 className="bg-[#9EB5C7] text-white text-sm px-2 outline-none cursor-pointer"
                                             >
                                                 <option value="INR">INR</option>
