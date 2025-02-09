@@ -7,6 +7,13 @@ import { deleteTutorSubject, updateTutorSubject } from "@/api/tutor.api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
+    const [initialValues, setInitialValues] = useState({
+        _id: "",
+        subjects: "",
+        fromLevel: "",
+        toLevel: "",
+
+    })  
     const queryClient = useQueryClient();
 
     const validationSchema = Yup.object({
@@ -52,12 +59,8 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
         updateFormData('subjects', values);
     };
 
-    const initialValues = formData || {
-        subjects: "",
-        fromLevel: "",
-        toLevel: "",
-    };
-    console.log(initialData, "abcd")
+    
+    console.log(initialData,)
     return (
         <div className="flex flex-col items-center">
             <div className="bg-[#F2F6FB] shadow-md rounded-lg p-6 w-full max-w-7xl">
@@ -74,7 +77,16 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
                                     <p className="text-[#136AAD] text-sm">{item?.fromLevel} - {item?.toLevel}</p>
                                 </div>
                                 <div className="flex gap-2">
-                                    <button className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
+                                    <button 
+                                    onClick={() => {
+                                        setInitialValues({
+                                            _id: item?._id,
+                                            subjects: item?.subject,
+                                            fromLevel: item?.fromLevel,
+                                            toLevel: item?.toLevel,
+                                        })
+                                    }}
+                                        className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
                                         <Image
                                             src="/edit.png"
                                             alt="Edit Icon"
@@ -104,6 +116,7 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
                 {/* Add Subject Form */}
                 <Formik
                     initialValues={initialValues}
+                    enableReinitialize
                     validationSchema={validationSchema}
                     onSubmit={onSubmit}
                 >

@@ -7,9 +7,20 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
-
+    const [initialValues, setInitialValues] = useState({
+        _id: "",
+        instituteWithCity: "",
+        degreeType: "",
+        degreeName: "",
+        startDate: null,
+        endDate: null,
+        association: "",
+        speciality: "",
+        score: "",
+    })
     const queryClient = useQueryClient()
     const dispatch = useDispatch()
 
@@ -67,6 +78,8 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
 
 
     };
+
+    console.log(initialValues)
     return (
         <div className="flex flex-col items-center">
             <div className="bg-[#F2F6FB] shadow-md rounded-lg p-6 w-full max-w-7xl">
@@ -82,7 +95,21 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
                                     <p className="text-[#136AAD] text-sm">{item?.association}</p>
                                 </div>
                                 <div className="flex gap-2">
-                                    <button className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
+                                    <button
+                                        onClick={() => {
+                                            setInitialValues({
+                                                _id: item?._id,
+                                                instituteWithCity: item?.instituteWithCity,
+                                                degreeType: item?.degreeType,
+                                                degreeName: item?.degreeName,
+                                                startDate: item?.startDate,
+                                                endDate: item?.endDate,
+                                                association: item?.association,
+                                                speciality: item?.speciality,
+                                                score: item?.score
+                                            })
+                                        }}
+                                        className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
                                         <Image
                                             src="/edit.png"
                                             alt="Edit Icon"
@@ -124,16 +151,7 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
                     {/* Form Fields Section */}
                     <div className="md:w-2/3">
                         <Formik
-                            initialValues={{
-                                instituteWithCity: "",
-                                degreeType: "",
-                                degreeName: "",
-                                startDate: null,
-                                endDate: null,
-                                association: "",
-                                speciality: "",
-                                score: "",
-                            }}
+                            initialValues={initialValues}
                             validationSchema={validationSchema}
                             onSubmit={onSubmit}
                             enableReinitialize
