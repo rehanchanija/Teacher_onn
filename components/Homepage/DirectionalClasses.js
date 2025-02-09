@@ -24,7 +24,7 @@ const DirectionalClasses = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r pb-5 from-[#091E3A] via-[#2F80ED] to-[#2D9EE0] md:flex justify-around md:pt-10 md:px-8 md:mx-16 md:my-8 md:mb-24 md:rounded-xl">
+    <div className="bg-gradient-to-r pb-5 from-[#091E3A] via-[#2F80ED] to-[#2D9EE0] md:flex justify-around md:pt-10 md:px-8 md:mx-12 md:my-6 md:mb-16 md:rounded-xl">
       <div className="bg-[#CED3E6] md:mx-6 rounded-t-[4rem]">
         <div className="bg-[#091E3A] rounded-t-[4rem] mx-6 mt-4">
           <Image
