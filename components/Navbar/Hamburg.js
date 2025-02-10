@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { FaUserCircle } from 'react-icons/fa';
+import { FaUserLarge } from "react-icons/fa6";
 import { useDispatch, useSelector } from 'react-redux';
 
 const Hamburg = () => {
@@ -37,12 +39,9 @@ const Hamburg = () => {
         <div className="relative">
             {/* Hamburger Icon */}
             <div
-                className="w-8 h-6 md:h-8 flex flex-col justify-between items-center  relative "
                 onClick={handleDropdownToggle}
             >
-                <div className="w-8   h-[4px] bg-black rounded-md"></div>
-                <div className="w-8  h-[4px] bg-black rounded-md"></div>
-                <div className="w-8  h-[4px] bg-black rounded-md"></div>
+                <FaUserCircle size={40} color='#136FB6' />
             </div>
 
             {/* Dropdown Menu */}
