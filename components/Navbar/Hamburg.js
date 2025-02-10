@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { FaUserLarge } from "react-icons/fa6";
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const Hamburg = () => {
     const router = useRouter()
@@ -19,6 +20,7 @@ const Hamburg = () => {
 
 
     const logout = () => {
+        toast.success("Logged Out Successfully", { position: "top-right" })
         dispatch(setStudent(null))
         dispatch(setTutor(null))
 
