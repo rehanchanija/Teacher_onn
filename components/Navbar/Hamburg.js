@@ -130,7 +130,7 @@ const Hamburg = () => {
                                         </button>
                                     </Link>
                                     {tutor ?
-                                        <Link href="/my-profile" onClick={handleCloseDropdown}>
+                                        <Link href="/profile" onClick={handleCloseDropdown}>
                                             <button className="flex items-center space-x-3 hover:bg-gray-100 p-2 ">
                                                 <Image
                                                     src="/profile.png" // Replace with your icon image path
