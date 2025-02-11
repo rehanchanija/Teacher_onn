@@ -230,7 +230,7 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                         type="submit"
                                         className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
                                     >
-                                        {dirty ? ">> Save" : "Next >>"}
+                                        {dirty ? "Save >>" : "Next >>"}
                                     </button>
                                 </div>
                             </Form>
