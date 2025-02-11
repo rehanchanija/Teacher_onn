@@ -31,7 +31,9 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
         degreeType: Yup.string().required("This field is required"),
         degreeName: Yup.string().required("This field is required"),
         startDate: Yup.date().required("This field is required"),
-        endDate: Yup.date().required("This field is required"),
+        endDate: Yup.date()
+            .required("This field is required")
+            .min(Yup.ref('startDate'), 'End date should be greater than start date'),
         association: Yup.string().required("This field is required"),
         speciality: Yup.string(),
         score: Yup.string(),
