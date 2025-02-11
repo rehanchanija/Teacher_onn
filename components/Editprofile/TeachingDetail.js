@@ -6,9 +6,11 @@ import { updateTutor } from "@/api/tutor.api";
 import { useMutation } from "@tanstack/react-query";
 import { useDispatch } from 'react-redux';
 import { setTutor } from '@/store/slices/authSlice';
+import { useState } from "react";
 
 const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialData }) => {
     const dispatch = useDispatch()
+    const [originalValues, setOriginalValues] = useState(null);
     const Radiobuttons = [
         { name: 'travel', label: 'Are you willing to travel to Student?' },
         { name: 'onlineTeaching', label: 'Available for online teaching?' },
@@ -91,6 +93,11 @@ const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialDat
         updateFormData('teachingDetail', values);
     };
 
+    const handleCancel = (resetForm, setValues) => {
+        resetForm(); // Reset the form to its initial values
+        setValues(initialValues); // Ensure the form fields are set to the initial values
+    };
+
     return (
         <div className="w-full bg-white relative min-h-screen ">
             <div className="relative max-w-[1281px] mx-auto shadow-lg  sm:mt-0">
@@ -100,7 +107,7 @@ const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialDat
                         onSubmit={onSubmit}
                         enableReinitialize
                     >
-                        {({ dirty, handleSubmit }) => (
+                        {({ dirty, handleSubmit, resetForm, setValues }) => (
                             <Form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                                 {/* Form Fields */}
                                 {[
@@ -172,21 +179,20 @@ const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialDat
                                 <div className="col-span-1 sm:col-span-2 lg:col-span-3 flex justify-between items-center mt-4">
                                     <button
                                         type="button"
-                                        onClick={handlePrevious}
+                                        onClick={dirty ? () => handleCancel(resetForm, setValues) : handlePrevious}
                                         className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:px-7 px-4  rounded-md font-bold"
                                     >
-                                       &lt;&lt; Previous
+                                        {dirty ? 'Cancel' : '<< Previous'}
                                     </button>
                                     <button
                                         type="submit"
                                         className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
                                         disabled={!dirty}
                                     >
-                                        {isPending ? 'Loading...' : 'Next >>'}
+                                        {isPending ? 'Loading...' : dirty ? 'Save' : 'Next >>'}
                                     </button>
                                 </div>
 
-                               
                             </Form>
                         )}
                     </Formik>
