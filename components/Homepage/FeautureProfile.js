@@ -25,8 +25,9 @@ const FeautureProfile = () => {
     autoplay: true,
     autoplaySpeed: 4000,
     responsive: [
+
       {
-        breakpoint: 1024, // For screens less than 1024px
+        breakpoint: 900, // For screens less than 1024px
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
@@ -54,8 +55,8 @@ const FeautureProfile = () => {
   };
 
   return (
-    <div className="bg-[#146DB2]    ">
-      <div className="flex items-center md:px-12 pt-6">
+    <div className="bg-[#146DB2] space-y-4   ">
+      <div className="flex items-center  md:px-12 pt-6">
         <div className="pt-5">
           <Image
             src="/image/home/live1.png"
@@ -83,7 +84,7 @@ const FeautureProfile = () => {
           />
         </div>
       </div>
-      <div className="  px-12 pt-4 rounded-xl pb-4">
+      <div className="  px-8 pb-12 rounded-xl ">
         <AppSlider settings={sliderSettings}>
           {data?.map?.((tutor, index) => (
             <FeauturedCard key={index} tutor={tutor} />

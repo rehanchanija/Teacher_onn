@@ -1,8 +1,36 @@
 "use client";
-
 import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
+import ReactModal from 'react-modal';
+import SignupModal from '../signupModel';
+import SigninModal from '../signinModel';
 
 const TutorsPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [LoginModelOpen, setLoginModelOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+  const openLoginModal = () => setLoginModelOpen(true);
+  const closeLoginModal = () => setLoginModelOpen(false);
+
+  const modalRef = useRef();
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        closeLoginModal();
+      }
+    };
+
+    if (openModal) {
+      document.addEventListener('click', handleClickOutside);
+    } else {
+      document.removeEventListener('click', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [openModal]);
   return (
     <div className="relative w-full font-gilroy overflow-hidden">
       {/* Background section remains fixed */}
@@ -24,10 +52,15 @@ const TutorsPage = () => {
             At Direction Classes, we believe in empowering students through education and guiding them toward a successful future.
           </p>
           <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mt-6 md:mt-8">
-            <button className="bg-white text-[#1268AA] text-[12px] sm:text-[14px] md:text-[17px] w-full sm:w-[140px] md:w-[179px] h-[40px] md:h-[52px] rounded-[4px]">
+            <button
+              onClick={openModal}
+
+              className="bg-white text-[#1268AA] text-[12px] sm:text-[14px] md:text-[17px] w-full sm:w-[140px] md:w-[179px] h-[40px] md:h-[52px] rounded-[4px]">
               Join as a Student
             </button>
-            <button className="bg-[#1BADFF] text-white text-[12px] sm:text-[14px] md:text-[17px] w-full sm:w-[140px] md:w-[179px] h-[40px] md:h-[52px] rounded-[4px]">
+            <button
+              onClick={openModal}
+              className="bg-[#1BADFF] text-white text-[12px] sm:text-[14px] md:text-[17px] w-full sm:w-[140px] md:w-[179px] h-[40px] md:h-[52px] rounded-[4px]">
               Join as a Tutor
             </button>
           </div>
@@ -73,6 +106,51 @@ const TutorsPage = () => {
           </button>
         </div>
       </div>
+      <ReactModal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        preventScroll={true}
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0,0,0,0.8)",
+            justifyContent: "center",
+            alignContent: "center",
+          },
+          content: {
+            height: "auto",
+            zIndex: 1000,
+            padding: 0,
+            margin: "auto",
+            position: "static",
+            maxHeight: "90vh",
+            borderRadius: "20px",
+          },
+        }}
+      >
+        <SignupModal openLoginModal={openLoginModal} closeModal={closeModal} />
+      </ReactModal>
+      <ReactModal
+        isOpen={LoginModelOpen}
+        onRequestClose={closeLoginModal}
+        preventScroll={true}
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0,0,0,0.8)",
+            justifyContent: "center",
+            alignContent: "center",
+          },
+          content: {
+            height: "auto",
+            zIndex: 1000,
+            padding: 0,
+            margin: "auto",
+            position: "static",
+            borderRadius: "20px",
+          },
+        }}
+      >
+        <SigninModal openModal={openModal} closeLoginModal={closeLoginModal} />
+      </ReactModal>
     </div>
   );
 }
