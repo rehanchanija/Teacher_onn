@@ -194,7 +194,7 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
                                     onClick={() => dirty ? handleCancel(resetForm, setValues) : handlePrevious()}
                                     className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:px-7 px-4  rounded-md font-bold"
                                 >
-                                    {dirty ? "Cancel" : "< Previous"}
+                                    {dirty ? "<< Cancel" : "<< Previous"}
                                 </button>
                                 <button
                                     type="button"
@@ -208,7 +208,7 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
                                     disabled={isPending}
                                     className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
                                 >
-                                    {dirty ? "Save >" : "Next >"}
+                                    {dirty ? "Save >>" : "Next >>"}
                                 </button>
                             </div>
                         </Form>
