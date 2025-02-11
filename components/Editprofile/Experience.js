@@ -31,7 +31,7 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
         startDate: Yup.date().required("Required"),
         endDate: Yup.date()
             .required("Required")
-            .min(Yup.ref('startDate'), 'End date must be later than start date'),
+            .min(Yup.ref('startDate'), 'End date should be greater than start date'),
         association: Yup.string().required("Required"),
         jobDescription: Yup.string().required("Required"),
     });
