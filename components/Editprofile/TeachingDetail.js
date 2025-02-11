@@ -169,30 +169,24 @@ const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialDat
                                     <ErrorMessage name="opportunities" component="div" className="text-red-500 text-xs sm:text-sm mt-1" />
                                 </div>
 
-                                {/* Buttons */}
-                                <div className="flex flex-col sm:flex-row justify-left items-center mt-6 sm:mt-8 space-y-4 sm:space-y-0">
+                                <div className="col-span-1 sm:col-span-2 lg:col-span-3 flex justify-between items-center mt-4">
                                     <button
                                         type="button"
-                                        className="w-full sm:w-[179px] h-[42px] sm:h-[52px] border border-[#0F283C] text-[#0F283C] font-bold text-sm sm:text-[17.36px] rounded-[2px]"
                                         onClick={handlePrevious}
+                                        className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:px-7 px-4  rounded-md font-bold"
                                     >
-                                        &lt; &lt; Previous
+                                       &lt;&lt; Previous
                                     </button>
                                     <button
-                                        type="button"
-                                        onClick={() => {
-                                            if (dirty) {
-                                                handleSubmit();
-                                            } else {
-                                                handleNext()
-                                            }
-                                        }}
-                                        className="w-full sm:w-[179px] h-[42px] sm:h-[52px] mt-0 sm:ml-4 bg-[#0B1F36] text-white font-bold text-sm sm:text-[17.36px] rounded-[4px]"
-                                        disabled={isPending}
+                                        type="submit"
+                                        className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
+                                        disabled={!dirty}
                                     >
-                                        Submit &gt;&gt;
+                                        {isPending ? 'Loading...' : 'Next >>'}
                                     </button>
                                 </div>
+
+                               
                             </Form>
                         )}
                     </Formik>
