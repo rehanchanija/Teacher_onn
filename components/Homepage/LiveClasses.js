@@ -13,8 +13,7 @@ const LiveClasses = () => {
 
   return (
     <div className="bg-white mx-2 ">
-      <div className="flex items-center  md:mb-6"
-      >
+      <div className="flex items-center  md:mb-6">
         <div className="pb-6 hidden md:block ">
           <Image
             src="/image/home/live1.png"
@@ -23,7 +22,7 @@ const LiveClasses = () => {
             alt="a"
           />
         </div>
-        <div className=" pb-6 md:w-[46.3rem] text-center mx-auto ">
+        <div className=" pb-6  text-center mx-auto ">
           <Link href="" className="text-[#1BADFF] text-[20px]">
             ~ Live Classes ~
           </Link>
@@ -45,12 +44,12 @@ const LiveClasses = () => {
           />
         </div>
       </div>
-      <div className="grid md:grid-cols-3     ">
+      <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3">
         {data?.map?.((tutor, index) => (
           <LiveClassesCard key={index} tutor={tutor} />
         ))}
       </div>
-    </div >
+    </div>
   );
 };
 
