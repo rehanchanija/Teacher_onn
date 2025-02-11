@@ -118,15 +118,15 @@ const ProfileDescription = ({ handleNext, handlePrevious, initialData }) => {
                                         <button
                                             type="button"
                                             onClick={dirty ? handleCancel : handlePrevious}
-                                            className="bg-[#136AAD] text-white px-8 py-2 rounded hover:bg-[#1259A0]"
+                                            className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:px-7 px-4 rounded-md font-bold"
                                         >
-                                            {dirty ? "Cancel" : "Previous"}
+                                            {dirty ? "<< Cancel" : "<< Previous"}
                                         </button>
                                         <button
                                             type="submit"
-                                            className="bg-[#136AAD] text-white px-8 py-2 rounded hover:bg-[#1259A0]"
+                                            className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
                                         >
-                                            {dirty ? "Save" : "Next"}
+                                            {dirty ? "Save >>" : "Next >>"}
                                         </button>
                                     </div>
                                 </Form>
