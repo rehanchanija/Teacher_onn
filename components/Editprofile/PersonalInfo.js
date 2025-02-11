@@ -157,7 +157,7 @@ const PersonalInfo = ({ handleNext, formData, updateFormData, initialData }) => 
                                             />
                                         </div>
                                     ))}
-                                    <div className="sm:col-span-2 flex justify-start">
+                                    <div className="sm:col-span-2 flex justify-end">
                                         <button
                                             type="button"
                                             onClick={() => {
@@ -169,7 +169,7 @@ const PersonalInfo = ({ handleNext, formData, updateFormData, initialData }) => 
                                             }}
                                             className="bg-[#0F283C] text-white py-2.5 px-8 md:py-3 md:px-10 rounded text-base md:text-lg font-semibold w-full sm:w-auto" disabled={isPending}
                                         >
-                                            Next &gt;
+                                            {dirty ? '<< Save' : 'Next >>'} 
                                         </button>
                                     </div>
                                 </Form>
