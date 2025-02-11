@@ -21,10 +21,10 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
         association: "",
         speciality: "",
         score: "",
-    })
+    });
+    const [originalValues, setOriginalValues] = useState(null);
     const queryClient = useQueryClient()
     const dispatch = useDispatch()
-
 
     const validationSchema = Yup.object({
         instituteWithCity: Yup.string().required("This field is required"),
@@ -63,7 +63,6 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
     })
 
     const onSubmit = (values) => {
-
         mutate({
             "educationInfo": {
                 "instituteWithCity": values.instituteWithCity,
@@ -76,11 +75,13 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
                 "score": values.score
             }
         });
-
-
     };
 
-    console.log(initialValues)
+    const handleCancel = (resetForm, setValues) => {
+        resetForm(); // Reset the form to its initial values
+        setValues(initialValues); // Ensure the form fields are set to the initial values
+    };
+
     return (
         <div className="flex flex-col items-center">
             <div className="bg-[#F2F6FB] shadow-md rounded-lg p-6 w-full max-w-7xl">
@@ -108,7 +109,18 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
                                                 association: item?.association,
                                                 speciality: item?.speciality,
                                                 score: item?.score
-                                            })
+                                            });
+                                            setOriginalValues({
+                                                _id: item?._id,
+                                                instituteWithCity: item?.instituteWithCity,
+                                                degreeType: item?.degreeType,
+                                                degreeName: item?.degreeName,
+                                                startDate: item?.startDate,
+                                                endDate: item?.endDate,
+                                                association: item?.association,
+                                                speciality: item?.speciality,
+                                                score: item?.score
+                                            });
                                         }}
                                         className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
                                         <Image
@@ -156,9 +168,8 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
                             validationSchema={validationSchema}
                             onSubmit={onSubmit}
                             enableReinitialize
-
                         >
-                            {({ dirty, handleSubmit, setFieldValue, values, errors }) => (
+                            {({ dirty, handleSubmit, setFieldValue, values, errors, resetForm, setValues }) => (
                                 console.log(errors),
                                 <div className="grid md:grid-cols-2 gap-4">
                                     {[
@@ -208,29 +219,28 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
                                             <ErrorMessage name="endDate" component="p" className="text-red-500 text-sm" />
                                         </div>
                                     </div>
-                                    <div className="sm:col-span-2 flex justify-start gap-6">
+                                    {/* Button section */}
+                                    <div className="sm:col-span-2 flex justify-between gap-6">
                                         <button
                                             type="button"
-                                            onClick={handlePrevious}
-                                            className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:px-7 px-4  rounded-md font-bold"
+                                            onClick={() => dirty ? handleCancel(resetForm, setValues) : handlePrevious()}
+                                            className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:px-7 px-4 rounded-md font-bold"
                                         >
-                                            &lt; Previous
+                                            {dirty ? "Cancel" : "< Previous"}
                                         </button>
                                         <button
                                             type="submit"
                                             onClick={() => {
                                                 if (dirty) {
-                                                    console.log(dirty)
-
                                                     handleSubmit();
                                                 } else {
-                                                    handleNext()
+                                                    handleNext();
                                                 }
                                             }}
                                             className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
                                             disabled={isPending}
                                         >
-                                            Next &gt;
+                                            {dirty ? "Save >" : "Next >"}
                                         </button>
                                     </div>
                                 </div>
