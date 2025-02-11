@@ -7,6 +7,8 @@ import { deleteTutorExperience, updateTutor, updateTutorExperience } from "@/api
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 import { setTutor } from "@/store/slices/authSlice";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const Experience = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
     const dispatch = useDispatch()
@@ -14,8 +16,8 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
         _id: "",
         organization: "",
         designation: "",
-        startDate: "",
-        endDate: "",
+        startDate: null,
+        endDate: null,
         association: "",
         jobDescription: "",
     })
@@ -26,8 +28,8 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
     const validationSchema = Yup.object({
         organization: Yup.string().required("Required"),
         designation: Yup.string().required("Required"),
-        startDate: Yup.string().required("Required"),
-        endDate: Yup.string().required("Required"),
+        startDate: Yup.date().required("Required"),
+        endDate: Yup.date().required("Required"),
         association: Yup.string().required("Required"),
         jobDescription: Yup.string().required("Required"),
     });
@@ -97,8 +99,8 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                                 _id: item?._id,
                                                 organization: item?.organization,
                                                 designation: item?.designation,
-                                                startDate: item?.startDate,
-                                                endDate: item?.endDate,
+                                                startDate: item?.startDate ? new Date(item?.startDate) : null,
+                                                endDate: item?.endDate ? new Date(item?.endDate) : null,
                                                 association: item?.association,
                                                 jobDescription: item?.jobDescription,
                                             })
@@ -151,7 +153,7 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                         onSubmit={onSubmit}
                         enableReinitialize
                     >
-                        {({ dirty, handleSubmit, resetForm, setValues }) => (
+                        {({ dirty, handleSubmit, resetForm, setValues, setFieldValue, values }) => (
 
 
                             <Form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
@@ -170,13 +172,13 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                     {
                                         label: "Start Date (DD/MM/YYYY)",
                                         name: "startDate",
-                                        type: "text",
+                                        type: "date",
                                     },
 
                                     {
                                         label: "End Date (DD/MM/YYYY)",
                                         name: "endDate",
-                                        type: "text",
+                                        type: "date",
                                     },
                                     {
                                         label: "Association",
@@ -207,12 +209,23 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                                 ))}
                                             </Field>
                                         ) : (
-                                            <Field
-                                                type={type}
-                                                name={name}
-                                                className="text-black w-full border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB]"
-                                                placeholder="Enter here"
-                                            />
+                                            type === "date" ? (
+                                                <DatePicker
+                                                    selected={values[name]}
+                                                    onChange={(date) => setFieldValue(name, date)}
+                                                    name={name}
+                                                    className="text-black w-full border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB]"
+                                                    placeholderText="Select Date"
+                                                    dateFormat="MM/dd/yyyy"
+                                                />
+                                            ) : (
+                                                <Field
+                                                    type={type}
+                                                    name={name}
+                                                    className="text-black w-full border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB]"
+                                                    placeholder="Enter here"
+                                                />
+                                            )
                                         )}
                                         <ErrorMessage name={name} component="div" className="text-red-500 text-sm" />
                                     </div>
