@@ -99,7 +99,7 @@ const ProfileDescription = ({ handleNext, handlePrevious, initialData }) => {
                                 </div>
 
                                 {/* Navigation Buttons */}
-                                <div className="flex flex-col md:flex-row justify-start gap-2">
+                                <div className="flex flex-col md:flex-row justify-between gap-2">
                                     <button
                                         type="button"
                                         className="px-4 md:px-6 py-2 border border-[#0F283C] font-bold text-[#0F283C] w-full md:w-[179px] h-[52px] rounded text-base"
