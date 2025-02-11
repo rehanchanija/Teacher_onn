@@ -36,7 +36,7 @@ const Homepage = () => {
             <div className="md:mx-8   md:space-y-20 space-y-8">
 
 
-                <StudentTeaching />
+                {/* <StudentTeaching /> */}
                 <AdmissionEnroll />
                 <OnlineStore />
                 <Testimonals />

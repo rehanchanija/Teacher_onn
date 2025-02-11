@@ -13,7 +13,7 @@ const SignupModal = ({ openLoginModal, closeModal }) => {
     const router = useRouter()
     const dispatch = useDispatch();
 
-    const [isTutor, setIsTutor] = useState(false);
+    const [isTutor, setIsTutor] = useState(null);
     // Track if the user is signing up as a Tutor or Student
     const modalRef = useRef();
 
@@ -48,7 +48,6 @@ const SignupModal = ({ openLoginModal, closeModal }) => {
             mobileNumber: Yup.string().required('Phone is required'),
         }),
         onSubmit: (values) => {
-            // Call the appropriate API based on the selected user type (Tutor or Student)
             mutate(values);
         },
     });
@@ -57,22 +56,22 @@ const SignupModal = ({ openLoginModal, closeModal }) => {
         mutationFn: isTutor ? signupTutor : signupStudent, // Using either signupTutor or signupStudent
 
         onSuccess: (data) => {
-            toast.success('Signup Successful', { position: 'top-center' });
+            toast.success('Signup Successful', { position: 'top-right' });
             console.log("Signup Tutor Successful:", data);
             closeModal();
             router.push('/')
             dispatch(setTutor(data))
         },
         onError: (error) => {
-            console.log("Signup Error:", error);
+            toast.error('Signup Failed', { position: 'top-center' });
         }
     });
 
     return (
         <div className="    ">
-            <div className="relative flex   justify-between    w-full shadow-lg overflow-y-auto md:p-4 p-6 gap-x-8">
+            <div className="relative flex   justify-between  px-8  w-full shadow-lg overflow-y-auto md:p-4 p-6 gap-x-8">
                 {/* Image on the Right */}
-                <div className="flex-1 hidden md:block  relative">
+                <div className="flex-1 aspect-[0.68/1] hidden md:block  relative">
                     <Image
                         src="/image/home/tutorpag.png"
                         alt="Top Right Image"
@@ -82,25 +81,26 @@ const SignupModal = ({ openLoginModal, closeModal }) => {
                 </div>
 
                 {/* Signup Form on the Left */}
-                <div className=" flex-1 md:pr-8 md:pt-6  h-full">
+                <div className=" flex-1 md:pt-8 p-6  h-full">
 
 
                     <div className="md:flex justify-between items-center md:pt-2">
                         <Image src="/Group 2.png" alt="Logo" width={230} height={50} className="cursor-pointer" />
-                        <div className="flex items-center space-x-6 py-6">
-                            <button
-                                onClick={() => setIsTutor(true)}  // Set state to Tutor
-                                className={`border-[#E5E5E5] px-4 py-2 rounded-md text-xs font-semibold ${isTutor ? 'border-2' : ''}`}
-                            >
-                                Tutor
-                            </button>
-                            <button
-                                onClick={() => setIsTutor(false)}  // Set state to Student
-                                className={`border-[#E5E5E5] px-4 py-2 rounded-md text-xs font-semibold ${!isTutor ? 'border-2' : ''}`}
-                            >
-                                Student
-                            </button>
-                        </div>
+                        <button
+                            onClick={() => setIsTutor(true)}
+                            className={`px-4 py-2 rounded-md text-xs font-semibold transition-all duration-300 border-2 
+        ${isTutor === true ? 'border-[#E5E5E5] ' : 'border-transparent hover:border-[#E5E5E5]'}`}
+                        >
+                            Tutor
+                        </button>
+
+                        <button
+                            onClick={() => setIsTutor(false)}
+                            className={`px-4 py-2 rounded-md text-xs font-semibold transition-all duration-300 border-2 
+        ${isTutor === false ? 'border-[#E5E5E5] ' : 'border-transparent hover:border-[#E5E5E5]'}`}
+                        >
+                            Student
+                        </button>
 
                     </div>
 
