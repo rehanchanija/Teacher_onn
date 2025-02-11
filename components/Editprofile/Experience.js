@@ -222,15 +222,15 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                     <button
                                         type="button"
                                         onClick={() => dirty ? handleCancel(resetForm, setValues) : handlePrevious()}
-                                        className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#136AAD] hover:bg-[#136AAD] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#136AAD]"
+                                        className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:px-7 px-4 rounded-md font-bold"
                                     >
-                                        {dirty ? "Cancel" : "Previous"}
+                                        {dirty ? "<< Cancel" : "<< Previous"}
                                     </button>
                                     <button
                                         type="submit"
-                                        className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#136AAD] hover:bg-[#136AAD] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#136AAD]"
+                                        className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
                                     >
-                                        {dirty ? "Save" : "Next"}
+                                        {dirty ? ">> Save" : "Next >>"}
                                     </button>
                                 </div>
                             </Form>
