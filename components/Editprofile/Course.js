@@ -26,6 +26,7 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
         CD: "",
         LOI: "",
     })
+    const [originalValues, setOriginalValues] = useState(null)
     const queryClient = useQueryClient()
     const dispatch = useDispatch()
 
@@ -69,6 +70,11 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
     console.log(initialValues)
 
 
+    const handleCancel = (resetForm, setValues) => {
+        resetForm(); // Reset the form to its initial values
+        setValues(initialValues); // Ensure the form fields are set to the initial values
+    };
+
     return (
         <div className="w-full bg-white relative min-h-screen">
             <div className="w-full bg-white">
@@ -100,7 +106,21 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
                                                     Cert: item?.Cert,
                                                     CD: item?.CD,
                                                     LOI: item?.LOI,
-                                                })
+                                                });
+                                                setOriginalValues({
+                                                    _id: item?._id,
+                                                    Course_title: item?.courseTitle,
+                                                    Description: item?.courseDescription,
+                                                    Price: item?.coursePrice,
+                                                    Duration: item?.courseDuration,
+                                                    certificateProvided: item?.certificateProvided,
+                                                    Image: item?.image,
+                                                    MOD: item?.MOD,
+                                                    Group: item?.Group,
+                                                    Cert: item?.Cert,
+                                                    CD: item?.CD,
+                                                    LOI: item?.LOI,
+                                                });
                                             }}
                                             className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
                                             <Image
@@ -152,7 +172,7 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
                                 updateFormData('course', values);
                             }}
                         >
-                            {({ dirty, }) => (
+                            {({ dirty, resetForm, setValues }) => (
                                 <Form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                                     <div>
                                         <label className="block font-bold mb-2 text-[#4E5865]">
@@ -284,26 +304,16 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
                                     <div className="col-span-full flex justify-between mt-6 gap-4">
                                         <button
                                             type="button"
-                                            onClick={handlePrevious}
+                                            onClick={() => dirty ? handleCancel(resetForm, setValues) : handlePrevious()}
                                             className="w-40 h-12 border border-gray-700 text-gray-700 font-bold rounded-md"
                                         >
-                                            &lt;&lt; Previous
+                                            {dirty ? "Cancel" : "&lt;&lt; Previous"}
                                         </button>
                                         <button
                                             type="submit"
-                                            onClick={() => {
-                                                if (dirty) {
-                                                    console.log(dirty)
-
-                                                    handleSubmit();
-                                                } else {
-                                                    handleNext()
-                                                }
-                                            }}
-                                            className="w-40 h-12 bg-[#0F283C] text-white font-bold rounded-md"
-                                            disabled={isPending}
+                                            className="w-40 h-12 bg-[#136AAD] text-white font-bold rounded-md"
                                         >
-                                            Submit &gt;&gt;
+                                            {dirty ? "Save" : "Next >>"}
                                         </button>
                                     </div>
                                 </Form>
