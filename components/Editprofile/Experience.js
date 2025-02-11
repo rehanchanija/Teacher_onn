@@ -19,6 +19,7 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
         association: "",
         jobDescription: "",
     })
+    const [originalValues, setOriginalValues] = useState(null);
     const queryClient = useQueryClient()
 
 
@@ -68,6 +69,10 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
         updateFormData('experience', values);
     };
     console.log(initialData)
+    const handleCancel = (resetForm, setValues) => {
+        resetForm();
+        setValues(initialValues);
+    };
     return (
         <div className="min-h-screen w-full bg-white">
             <div className="relative max-w-[1281px] mx-auto shadow-lg ">
@@ -97,6 +102,15 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                                 association: item?.association,
                                                 jobDescription: item?.jobDescription,
                                             })
+                                            setOriginalValues({
+                                                _id: item?._id,
+                                                organization: item?.organization,
+                                                designation: item?.designation,
+                                                startDate: item?.startDate,
+                                                endDate: item?.endDate,
+                                                association: item?.association,
+                                                jobDescription: item?.jobDescription,
+                                            });
                                         }}
 
                                         className=" text-white rounded-full focus:outline-none" aria-label="Edit">
@@ -137,7 +151,7 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                         onSubmit={onSubmit}
                         enableReinitialize
                     >
-                        {({ dirty, handleSubmit }) => (
+                        {({ dirty, handleSubmit, resetForm, setValues }) => (
 
 
                             <Form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
@@ -207,26 +221,16 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                 <div className="col-span-full flex justify-between mt-6">
                                     <button
                                         type="button"
-                                        onClick={handlePrevious}
-                                        className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
+                                        onClick={() => dirty ? handleCancel(resetForm, setValues) : handlePrevious()}
+                                        className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#136AAD] hover:bg-[#136AAD] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#136AAD]"
                                     >
-                                        &lt; Previous
+                                        {dirty ? "Cancel" : "Previous"}
                                     </button>
                                     <button
                                         type="submit"
-                                        onClick={() => {
-                                            if (dirty) {
-                                                console.log(dirty)
-
-                                                handleSubmit();
-                                            } else {
-                                                handleNext()
-                                            }
-                                        }}
-                                        className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
-                                        disabled={isPending}
+                                        className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#136AAD] hover:bg-[#136AAD] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#136AAD]"
                                     >
-                                        Next &gt;
+                                        {dirty ? "Save" : "Next"}
                                     </button>
                                 </div>
                             </Form>
