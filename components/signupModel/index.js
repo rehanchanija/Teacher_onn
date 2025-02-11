@@ -9,11 +9,11 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 
-const SignupModal = ({ openLoginModal, closeModal }) => {
+const SignupModal = ({ openLoginModal, closeModal, defaultRole }) => {
     const router = useRouter()
     const dispatch = useDispatch();
 
-    const [isTutor, setIsTutor] = useState(null);
+    const [isTutor, setIsTutor] = useState(defaultRole === 'tutor');
     // Track if the user is signing up as a Tutor or Student
     const modalRef = useRef();
 
@@ -70,8 +70,9 @@ const SignupModal = ({ openLoginModal, closeModal }) => {
     return (
         <div className="    ">
             <div className="relative flex   justify-between  px-8  w-full shadow-lg overflow-y-auto md:p-4 p-6 gap-x-8">
-                {/* Image on the Right */}
-                <div className="flex-1 aspect-[0.68/1] hidden md:block  relative">
+
+                {isTutor ? <div className="flex-1 aspect-[0.68/1] hidden md:block  relative">
+
                     <Image
                         src="/image/home/tutorpage.png"
                         alt="Top Right Image"
@@ -79,12 +80,24 @@ const SignupModal = ({ openLoginModal, closeModal }) => {
                         className=" "
                     />
                 </div>
+                    : <div className="flex-1 hidden md:inline relative  w-full h-screen">
+                        <Image
+                            src="/image/home/studentimage.png"  // Adjust path as needed
+                            alt="Right Side Full Image"
+                            layout="fill"
+                            objectFit="cover"
+                            className="absolute top-0 left-0 rounded "
+                        />
+                    </div>
+                }
+
 
                 {/* Signup Form on the Left */}
                 <div className=" flex-1 md:pt-8 p-6  h-full">
 
 
-                    <div className="md:flex justify-between items-center md:pt-2">
+                    <div className="sm:flex sm:pace-y-0 space-y-6 justify-between items-center md:pb-4 md:pt-2">
+
                         <Image src="/Group 2.png" alt="Logo" width={230} height={50} className="cursor-pointer" />
                         <button
                             onClick={() => setIsTutor(true)}
