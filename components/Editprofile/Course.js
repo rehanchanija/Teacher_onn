@@ -277,7 +277,7 @@ const Course = ({ handlePrevious, formData, updateFormData, handleSubmit, initia
                                         <ErrorMessage name="CD" component="div" className="text-red-500" />
                                     </div>
 
-                                    <div className="col-span-full flex justify-start items-center mt-6 gap-4">
+                                    <div className="col-span-full flex justify-between mt-6 gap-4">
                                         <button
                                             type="button"
                                             onClick={handlePrevious}
@@ -299,7 +299,7 @@ const Course = ({ handlePrevious, formData, updateFormData, handleSubmit, initia
                                             className="w-40 h-12 bg-[#0F283C] text-white font-bold rounded-md"
                                             disabled={isPending}
                                         >
-                                            Save &gt;&gt;
+                                            Submit &gt;&gt;
                                         </button>
                                     </div>
                                 </Form>
