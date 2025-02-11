@@ -4,13 +4,13 @@ import Link from "next/link";
 import '@smastrom/react-rating/style.css'
 
 const LiveClassesCard = ({ tutor }) => {
-  const { educationInfo, personalinfo } = tutor
+  const { educationInfo } = tutor
   return (
-    <div className="p-3 md:w-[360px]  bg-white shadow-2xl  m-3 px-2 md:mr-4  rounded-lg ">
-      <Image src="/image/home/livecard.png" width={387} height={199} alt="" />
-      <div className=" space-y-2 bg-white ">
+    <div className="px-2.5 py-3  m-2  bg-white shadow-2xl     rounded-[11.69px] ">
+      <Image src="/image/home/livecard.png" width={387} height={199} alt="" className="rounded-[10px]" />
+      <div className=" bg-white space-y-1  ">
         <div className="flex items-center pt-3 ">
-          <span href="" className="pr-2 text-[20px] flex  text-[#778D9E]">
+          <span href="" className="pr-2 text-[22px] flex  text-[#778D9E]">
             {tutor?.rating}
           </span>
           <Rating readOnly value={tutor?.rating} style={{
@@ -18,47 +18,14 @@ const LiveClassesCard = ({ tutor }) => {
           }} />
 
         </div>
-        <p className="text-[20px] font-bold pt-1.5  ">
-          {educationInfo[0]?.degreeName} <br></br>{educationInfo[0]?.degreeType}....
+        <p className="text-[20px] font-bold pb-3  ">
+          {educationInfo[0]?.degreeName} {educationInfo[0]?.degreeType}
         </p>
-        <span className="flex py-2">
-          <Image
-            src="/image/home/msg.png"
-            width={20}
-            height={19.5}
-            alt="reload"
-          />
-          <p className="text-[16px] text-[#667681] px-2 ">
-            {educationInfo[0]?.startDate}
-          </p>
-        </span>
-        <span className="flex space-x-5 pb-4">
-          <h2 className="text-[18px] border-r-2 pr-3 border-gray-400">
-            Class <br /> starts in
-          </h2>
-          <Image
-            src="/image/home/hour.png"
-            width={36}
-            height={36}
-            alt="reload"
-          />
-          <Image
-            src="/image/home/min.png"
-            width={41.94}
-            height={44.34}
-            alt="reload"
-          />
-          <Image
-            src="/image/home/sec.png"
-            width={41.94}
-            height={44.34}
-            alt="reload"
-          />
-        </span>
-        <button className="bg-[#1BADFF] text-white font-semibold w-full  py-4 rounded-[4px] text-[17.36px] ">
+
+        <button className="bg-[#1BADFF] text-white font-semibold w-full   py-3 rounded-[4px] text-[17.36px] ">
           <Link href="">Register Now</Link>
         </button>
-        <div className="text-center space-x-1 pb-2 text-[14px]">
+        <div className="text-center space-x-1 pt-1 pb-1 text-[14px]">
           <Link href="" className="text-[#146DB2]">
             FREE
           </Link>

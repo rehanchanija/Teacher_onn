@@ -3,7 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { FaUserCircle } from 'react-icons/fa';
+import { FaUserLarge } from "react-icons/fa6";
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const Hamburg = () => {
     const router = useRouter()
@@ -17,6 +20,7 @@ const Hamburg = () => {
 
 
     const logout = () => {
+        toast.success("Logged Out Successfully", { position: "top-right" })
         dispatch(setStudent(null))
         dispatch(setTutor(null))
 
@@ -37,12 +41,9 @@ const Hamburg = () => {
         <div className="relative">
             {/* Hamburger Icon */}
             <div
-                className="w-8 h-6 md:h-8 flex flex-col justify-between items-center  relative "
                 onClick={handleDropdownToggle}
             >
-                <div className="w-8   h-[4px] bg-black rounded-md"></div>
-                <div className="w-8  h-[4px] bg-black rounded-md"></div>
-                <div className="w-8  h-[4px] bg-black rounded-md"></div>
+                <FaUserCircle size={40} color='#136FB6' />
             </div>
 
             {/* Dropdown Menu */}
@@ -131,7 +132,7 @@ const Hamburg = () => {
                                         </button>
                                     </Link>
                                     {tutor ?
-                                        <Link href="/my-profile" onClick={handleCloseDropdown}>
+                                        <Link href="/profile" onClick={handleCloseDropdown}>
                                             <button className="flex items-center space-x-3 hover:bg-gray-100 p-2 ">
                                                 <Image
                                                     src="/profile.png" // Replace with your icon image path

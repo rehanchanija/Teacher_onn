@@ -45,12 +45,12 @@ const LiveClasses = () => {
           />
         </div>
       </div>
-      <div className="grid md:grid-cols-3  grid-ols-2   ">
+      <div className="grid md:grid-cols-3     ">
         {data?.map?.((tutor, index) => (
           <LiveClassesCard key={index} tutor={tutor} />
         ))}
       </div>
-    </div>
+    </div >
   );
 };
 

@@ -139,7 +139,9 @@ const Navbar = () => {
 
           <SigninModal openModal={openModal} closeLoginModal={closeLoginModal} />
         </ReactModal>
-        <Hamburg />
+        {tutor || student ?
+          <Hamburg /> : null
+        }
       </div>
     </div >
   );

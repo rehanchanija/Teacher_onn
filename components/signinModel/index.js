@@ -3,10 +3,10 @@ import { setStudent, setTutor } from '@/store/slices/authSlice';
 import { useMutation } from '@tanstack/react-query';
 import { useFormik } from 'formik';
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 
 
@@ -52,18 +52,14 @@ const SigninModal = ({ openModal, closeLoginModal }) => {
         mutationFn: isTutor ? signinTutor : signinStudent, // Using either signupTutor or signupStudent
 
         onSuccess: (data) => {
-            if (isTutor) {
-                dispatch(setTutor(data))
-                router.push('/edit-profile')
+            toast.success('Login Successful', { position: 'top-center' });
+            dispatch(setTutor(data));
+            closeModal();
+            router.push('/edit-profile')
 
-            } else {
-                dispatch(setStudent(data))
-                console.log(data)
-            }
-            closeLoginModal();
         },
         onError: (error) => {
-            console.log("Signup Error:", error);
+            console.log("login Error:", error);
         }
     });
 
