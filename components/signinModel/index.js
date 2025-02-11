@@ -67,7 +67,7 @@ const SigninModal = ({ openModal, closeLoginModal }) => {
                 {/* Image on the Right */}
                 <div className=" flex-1 pt-12 border md:flex items-end  w-[50%] hidden  relative">
                     <Image
-                        src="/image/home/tutorpageee.png"
+                        src="/image/home/tutorpage2.png"
                         alt="Top Right Image"
                         fill
                         className=" object-contain    "

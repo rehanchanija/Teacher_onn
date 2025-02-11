@@ -39,7 +39,7 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
 
         },
         onError: (error) => {
-            console.log("onError", error)
+            toast.error("Course update failed! 🎉");  // Error Toast
         }
     })
     const { mutate: deleteCourse, } = useMutation({
@@ -47,10 +47,10 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
         onSuccess: (data) => {
             queryClient.invalidateQueries(["GET_TUTOR"])
             dispatch(setTutor(data))
-            console.log("onSuccess", data)
+            toast.success("Course deleted successfully! 🎉");  // Success Toast
         },
         onError: (error) => {
-            console.log("onError", error)
+            toast.error("Course delete failed! 🎉");  // Error
         }
     })
     console.log(initialData)

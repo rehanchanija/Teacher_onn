@@ -73,7 +73,7 @@ const SignupModal = ({ openLoginModal, closeModal }) => {
                 {/* Image on the Right */}
                 <div className="flex-1 aspect-[0.68/1] hidden md:block  relative">
                     <Image
-                        src="/image/home/tutorpag.png"
+                        src="/image/home/tutorpage.png"
                         alt="Top Right Image"
                         fill
                         className=" "

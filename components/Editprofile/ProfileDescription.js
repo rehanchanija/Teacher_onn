@@ -6,6 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import * as Yup from 'yup';
 import { setTutor } from "@/store/slices/authSlice";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 
 const ProfileDescription = ({ handleNext, handlePrevious, initialData }) => {
@@ -15,9 +16,10 @@ const ProfileDescription = ({ handleNext, handlePrevious, initialData }) => {
         onSuccess: (data) => {
             handleNext();
             dispatch(setTutor(data))
+            toast.success('Profile Description Updated Successfully', { position: 'top-center' });
         },
         onError: (error) => {
-            console.log("onError", error);
+            toast.error('Profile Description Update Failed', { position: 'top-center' });
         }
     });
 
@@ -29,7 +31,6 @@ const ProfileDescription = ({ handleNext, handlePrevious, initialData }) => {
     const onSubmit = (values) => {
         mutate({ profileDescription: values.profileDescription });
     };
-    console.log(initialData)
 
     return (
         <div className="w-full bg-white relative min-h-screen">

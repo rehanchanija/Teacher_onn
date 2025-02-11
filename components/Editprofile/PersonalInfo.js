@@ -7,6 +7,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/image";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 
 
@@ -72,9 +73,10 @@ const PersonalInfo = ({ handleNext, formData, updateFormData, initialData }) => 
         onSuccess: (data) => {
             handleNext();
             dispatch(setTutor(data))
+            toast.success("Personal Info Updated Successfully", { position: "top-center" })
         },
         onError: (error) => {
-            console.log("onError", error)
+            toast.error("Error Updating Personal Info", { position: "top-center" })
         }
     })
 

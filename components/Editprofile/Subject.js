@@ -7,6 +7,7 @@ import { deleteTutorSubject, updateTutorSubject } from "@/api/tutor.api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { setTutor } from "@/store/slices/authSlice";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
     const dispatch = useDispatch()
@@ -33,9 +34,10 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
             handleNext();
 
             dispatch(setTutor(data))
+            toast.success('Subject Updated Successfully', { position: 'top-center' });
         },
         onError: (error) => {
-            console.log("onError", error)
+            toast.error('Subject Update Failed', { position: 'top-center' });
         }
     });
 

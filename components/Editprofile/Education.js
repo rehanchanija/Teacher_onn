@@ -9,6 +9,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { setTutor } from "@/store/slices/authSlice";
+import { toast } from "react-toastify";
 
 const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
     const [initialValues, setInitialValues] = useState({
@@ -43,10 +44,11 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
             queryClient.invalidateQueries(["GET_TUTOR"])
             handleNext();
             dispatch(setTutor(data))
-            console.log("onSuccess", data)
+            toast.success("Education Info Updated Successfully")
         },
         onError: (error) => {
-            console.log("onError", error)
+            toast.error("Error Updating Education Info")
+
         }
     })
 
@@ -55,10 +57,10 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
         onSuccess: (data) => {
             queryClient.invalidateQueries(["GET_TUTOR"])
             dispatch(setTutor(data))
-            console.log("onSuccess", data)
+            toast.success("Education Info Deleted Successfully")
         },
         onError: (error) => {
-            console.log("onError", error)
+            toast.error("Error Deleting Education Info")
         }
     })
 

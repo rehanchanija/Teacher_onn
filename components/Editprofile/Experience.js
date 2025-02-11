@@ -7,6 +7,7 @@ import { deleteTutorExperience, updateTutor, updateTutorExperience } from "@/api
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 import { setTutor } from "@/store/slices/authSlice";
+import { toast } from "react-toastify";
 
 const Experience = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
     const dispatch = useDispatch()
@@ -38,9 +39,10 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
 
             handleNext();
             dispatch(setTutor(data))
+            toast.success("Experience Added Successfully", { position: "top-center" });
         },
         onError: (error) => {
-            console.log("onError", error)
+            toast.error("Error in adding Experience", { position: "top-center" });
         }
     })
     const { mutate: deleteExperience, } = useMutation({
@@ -48,6 +50,7 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
         onSuccess: (data) => {
             queryClient.invalidateQueries(["GET_TUTOR"])
             dispatch(setTutor(data))
+            toast.success("Experience Deleted Successfully", { position: "top-center" });
         },
         onError: (error) => {
             console.log("onError", error)

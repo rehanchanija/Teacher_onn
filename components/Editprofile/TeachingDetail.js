@@ -6,6 +6,7 @@ import { updateTutor } from "@/api/tutor.api";
 import { useMutation } from "@tanstack/react-query";
 import { useDispatch } from 'react-redux';
 import { setTutor } from '@/store/slices/authSlice';
+import { toast } from 'react-toastify';
 
 const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialData }) => {
     const dispatch = useDispatch()
@@ -63,10 +64,11 @@ const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialDat
         onSuccess: (data) => {
             handleNext();
             dispatch(setTutor(data))
+            toast.success('Teaching Details Updated Successfully', { position: 'top-center' });
 
         },
         onError: (error) => {
-            console.log("onError", error)
+            toast.error('Teaching Details Update Failed', { position: 'top-center' });
         }
     })
 
