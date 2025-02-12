@@ -1,14 +1,14 @@
 "use client";
 
+import SigninModal from "@/components/signinModel";
+import SignupModal from "@/components/signupModel";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import ReactModal from "react-modal";
+import { useSelector } from "react-redux";
 import Hamburg from "./Hamburg";
 import Logo from "./Logo";
-import { useEffect, useState } from "react";
-import SignupModal from "@/components/signupModel";
-import ReactModal from "react-modal";
-import SigninModal from "@/components/signinModel";
-import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,8 +30,9 @@ const Navbar = () => {
   const NavLink = ({ href, children, index }) => (
     <Link
       href={href}
-      className={`hover:text-[#146CB0] hover:underline underline-offset-[2px] px-4 ${index === 0 ? "" : "border-l-2 border-[#737373]"
-        }`}
+      className={`hover:text-[#146CB0] hover:underline underline-offset-[2px] px-4 ${
+        index === 0 ? "" : "border-l-2 border-[#737373]"
+      }`}
     >
       {children}
     </Link>
@@ -55,7 +56,12 @@ const Navbar = () => {
           className="hidden md:flex items-center border border-gray-300 rounded-md w-[176px] h-[48px]"
         >
           <div className="px-2">
-            <Image src="/Vector2.png" alt="Search Icon" width={20} height={20} />
+            <Image
+              src="/Vector2.png"
+              alt="Search Icon"
+              width={20}
+              height={20}
+            />
           </div>
           <div className="border-l border-[#8D979E] h-6 mx-2" />
           <input
@@ -103,12 +109,15 @@ const Navbar = () => {
               padding: 0,
               margin: "auto",
               position: "static",
-              height: "90vh",
+              maxHeight: "90vh",
               borderRadius: "20px",
             },
           }}
         >
-          <SignupModal openLoginModal={openLoginModal} closeModal={closeModal} />
+          <SignupModal
+            openLoginModal={openLoginModal}
+            closeModal={closeModal}
+          />
         </ReactModal>
         <ReactModal
           isOpen={LoginModelOpen}
@@ -127,17 +136,17 @@ const Navbar = () => {
               position: "static",
               borderRadius: "20px",
               height: "90vh",
-
             },
           }}
         >
-          <SigninModal openModal={openModal} closeLoginModal={closeLoginModal} />
+          <SigninModal
+            openModal={openModal}
+            closeLoginModal={closeLoginModal}
+          />
         </ReactModal>
         <div className="">
-
           <Hamburg />
         </div>
-
       </div>
     </div>
   );
