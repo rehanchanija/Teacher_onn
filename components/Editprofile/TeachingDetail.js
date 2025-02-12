@@ -45,10 +45,10 @@ const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialDat
     };
 
     const validationSchema = Yup.object({
-        charge: Yup.string().required('Required'),
-        minFee: Yup.string().required('Required'),
-        maxFee: Yup.string().required('Required'),
-        feeDetails: Yup.string().required('Required'),
+        charge: Yup.number().required('Required'),
+        minFee: Yup.number().required('Required'),
+        maxFee: Yup.number().required('Required'),
+        feeDetails: Yup.number().required('Required'),
         totalExperience: Yup.string().required('Required'),
         teachingExperience: Yup.string().required('Required'),
         onlineTeachingExperience: Yup.string().required('Required'),
