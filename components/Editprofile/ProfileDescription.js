@@ -24,12 +24,16 @@ const ProfileDescription = ({ handleNext, handlePrevious, initialData }) => {
     });
 
     const validationSchema = Yup.object().shape({
-        profileDescription: Yup.string().required("Profile description is required"),
-        isCheck: Yup.boolean().required("Please check the box"),
+        profileDescription: Yup.string(),
+        isCheck: Yup.boolean()
     });
 
     const onSubmit = (values) => {
-        mutate({ profileDescription: values.profileDescription });
+        if (values.profileDescription) {
+            mutate({ profileDescription: values.profileDescription });
+        } else {
+            handleNext();
+        }
     };
 
     return (
