@@ -309,12 +309,14 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
                                         >
                                             {dirty ? "<< Cancel" : "<< Previous"}
                                         </button>
-                                        <button
-                                            type="submit"
-                                            className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
-                                        >
-                                            {dirty ? "Save >>" : "Next >>"}
-                                        </button>
+                                        {dirty && (
+                                            <button
+                                                type="submit"
+                                                className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
+                                            >
+                                                Save
+                                            </button>
+                                        )}
                                     </div>
                                 </Form>
                             )}
