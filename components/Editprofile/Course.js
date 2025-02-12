@@ -9,7 +9,20 @@ import { setTutor } from "@/store/slices/authSlice";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";          // Import Toast CSS
+import Select from 'react-select';
 
+const languageOptions = [
+    { value: 'en', label: 'English' },
+    { value: 'hi', label: 'Hindi' },
+    { value: 'ta', label: 'Tamil' },
+    { value: 'te', label: 'Telugu' },
+    { value: 'ml', label: 'Malayalam' },
+    { value: 'kn', label: 'Kannada' },
+    { value: 'mr', label: 'Marathi' },
+    { value: 'gu', label: 'Gujarati' },
+    { value: 'bn', label: 'Bengali' },
+    { value: 'pa', label: 'Punjabi' },
+];
 
 const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, initialData }) => {
     const [initialValues, setInitialValues] = useState({
@@ -24,7 +37,7 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
         Group: "",
         Cert: "",
         CD: "",
-        LOI: "",
+        LOI: [],
     })
     const [originalValues, setOriginalValues] = useState(null)
     const queryClient = useQueryClient()
@@ -59,13 +72,13 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
     const validationSchema = Yup.object({
         Course_title: Yup.string().required("Required"),
         Description: Yup.string().required("Required"),
-        Price: Yup.string().required("Required"),
+        Price: Yup.number().required("Required"),
         Currency: Yup.string().required("Required"),
         MOD: Yup.string().required("Required"),
         Group: Yup.string().required("Required"),
         Cert: Yup.string().required("Required"),
         CD: Yup.string().required("Required"),
-        LOI: Yup.string().required("Required"),
+        LOI: Yup.array().min(1, "At least one language is required"),
     });
     console.log(initialValues)
 
@@ -166,7 +179,7 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
                                         "groupSize": values.Group,
                                         "certificateProvided": values.Cert,
                                         "courseDuration": values.CD,
-                                        "language": values.LOI
+                                        "language": values.LOI.map(lang => lang.value).join(',')
                                     }
                                 });
                                 updateFormData('course', values);
@@ -274,13 +287,25 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
 
                                     <div>
                                         <label className="block font-bold mb-2 text-[#4E5865]">
-                                            Language Of Instructions <span className="text-red-500">*</span>
+                                            Languages of Instruction <span className="text-red-500">*</span>
                                         </label>
                                         <Field
-                                            type="text"
                                             name="LOI"
-                                            className="w-full border border-gray-300 rounded p-2 bg-[#F2F6FB] sm:p-2.5"
-                                            placeholder="Enter here"
+                                            component={({ form, field }) => (
+                                                <Select
+                                                    {...field}
+                                                    options={languageOptions}
+                                                    isMulti
+                                                    className="w-full"
+                                                    classNamePrefix="select"
+                                                    placeholder="Select languages"
+                                                    onChange={(selectedOptions) => {
+                                                        form.setFieldValue(field.name, selectedOptions);
+                                                    }}
+                                                    onBlur={() => form.setFieldTouched(field.name, true)}
+                                                    value={field.value}
+                                                />
+                                            )}
                                         />
                                         <ErrorMessage name="LOI" component="div" className="text-red-500" />
                                     </div>
