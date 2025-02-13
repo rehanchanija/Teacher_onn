@@ -205,6 +205,7 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
                                                 onChange={(date) => setFieldValue("startDate", date)}
                                                 className="mt-1 p-2 border border-gray-300 rounded w-full bg-white"
                                                 placeholderText="Select start date"
+                                                
                                             />
                                             <ErrorMessage name="startDate" component="p" className="text-red-500 text-sm" />
                                         </div>
@@ -217,6 +218,7 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
                                                 onChange={(date) => setFieldValue("endDate", date)}
                                                 className="mt-1 p-2 border border-gray-300 rounded w-full bg-white"
                                                 placeholderText="Select end date"
+                                                minDate={values?.startDate}
                                             />
                                             <ErrorMessage name="endDate" component="p" className="text-red-500 text-sm" />
                                         </div>
