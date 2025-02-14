@@ -7,14 +7,14 @@ const FeauturedCard = ({ tutor }) => {
   const { personalInfo } = tutor;
 
   return (
-    <div className="sm:mx-3 max-w-full max-h-full mx-auto bg-white shadow-2xl rounded-[10px] ">
-      <div className="w-full">
+    <div className="sm:mx-3   mx-auto bg-white shadow-2xl rounded-lg ">
+      <div className="">
         <Image
           src="/image/home/cards.png"
           width={294}
-          height={442}
+          height={296}
           alt="Featured Tutor"
-          className="rounded-[10px] w-full h-auto object-cover"
+          className=" w-full h-auto "
         />
       </div>
       <div className="bg-white space-y-2 px-6 pb-4 rounded-b-[10px]">

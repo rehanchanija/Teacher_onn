@@ -164,7 +164,7 @@ const Hamburg = () => {
                                         </button>
                                     </Link>
                                 ) : null}
-                                <div className="pl-2 text-[#667681] flex flex-col md:hidden text-lg items-start hover:bg-gray-100">
+                                <div className="pl-2 text-[#667681] flex flex-col lg::hidden text-lg items-start hover:bg-gray-100">
                                     {navLinks.map((link, index) => (
                                         <Link key={link.href} href={link.href} className="pb-3 flex  items-center space-x-3">
                                             <link.icon size={20} />

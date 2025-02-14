@@ -7,7 +7,7 @@ const LiveClassesCard = ({ tutor }) => {
   const { educationInfo, experience } = tutor;
 
   return (
-    <div className="max-w-full  mx-auto md:mx-2 my-2 px-2.5 py-3  bg-white shadow-2xl rounded-[11.69px]">
+    <div className=" m-2 p-2.5  bg-white shadow-2xl rounded-[11.69px]">
       <div className="w-full">
         <Image
           src="/image/home/livecard.png"
@@ -31,7 +31,7 @@ const LiveClassesCard = ({ tutor }) => {
             {tutor?.rating}
           </span>
         </div>
-        <p className="text-[20px] font-bold pb-1">
+        <p className="text-[20px] font-bold pb-1 truncate">
           {educationInfo[0]?.degreeName} {educationInfo[0]?.degreeType}
         </p>
         <p className="text-[20px] font-bold pb-3">

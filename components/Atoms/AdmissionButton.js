@@ -5,7 +5,7 @@ import Link from "next/link";
 const AdmissionButton = () => {
   return (
     // <div></div>
-    <div className="text-[20px] grid md:grid-cols-2 gap-4 font-medium md:pt-6 ">
+    <div className="text-[20px] grid grid-cols-1 lg:grid-cols-2 gap-4 font-medium md:pt-6 ">
       <div className="flex items-center space-x-2">
         <button className="bg-[#7B82CA] text-2xl text-white p-2 rounded-full ">
           <Link href="">

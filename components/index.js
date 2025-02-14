@@ -13,35 +13,39 @@ import StudentTeaching from "@/components/Homepage/StudentTeaching";
 import Testimonals from "@/components/Homepage/Testimonal";
 import TutorsPage from "@/components/Homepage/TutorsPage";
 import { dehydrate, QueryClient } from '@tanstack/react-query'
+import TutorHome from './Homepage/TutorHome';
 
 const Homepage = () => {
     return (
         <div>
-            <div className="md:space-y-20 space-y-8">
+            <div className="md:space-y-0 space-y-8">
                 <TutorsPage />
-                <Learning />
-                <FeautureProfile />
-                <div className="md:mx-12 ">
-                    <LiveClasses />
-                </div>
-                <div className="md:mx-8 ">
-                    <CourseAdvice />
-                </div>
-                <div className="py-4  ">
-
-                    <Reveiw />
-                </div>
-                <Premium />
+                <TutorHome />
             </div>
-            <div className="md:mx-8   md:space-y-20 space-y-8">
+
+            <div className='pt-40 pb-20'>
+                <Learning />
+
+            </div>
+            <FeautureProfile />
+            <div className="md:mx-12 pt-24 ">
+                <LiveClasses />
+            </div>
+            <div className="md:mx-12 mx-4 pt-24">
+                <CourseAdvice />
+            </div>
+            <div className="pt-24 pb-24  ">
+                <Reveiw />
+            </div>
+            <Premium />
+            <div className=" space-y-[6rem]">
 
 
-                {/* <StudentTeaching /> */}
                 <AdmissionEnroll />
                 <OnlineStore />
                 <Testimonals />
+                <DirectionalClasses />
             </div>
-            {/* <DirectionalClasses /> */}
 
 
 

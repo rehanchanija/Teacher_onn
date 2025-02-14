@@ -1,26 +1,37 @@
 import Link from "next/link";
 import ReveiwIcon from "../Atoms/ReveiwIcon";
+import RatingIcon from "@/assets/icons/RatingIcon";
+import { Rating } from "@smastrom/react-rating";
 
 const ReveiwCard = () => {
   const images = ["reveiw1", "reveiw2", "reveiw3"];
   const image = [1, 2, 3]
   return (
-    <div className="border-l-2 border-r-2 md:border-r-0 m-3 border-[#D9D9D9] bg-gradient-to-b from-custom-gray to-custom-blue p-6 md:p-2">
-      <div className="w-[167px]  text-white mx-6 ">
-        <span className="flex space-x-2 ">
-          <Link href="" className="pr-2  text-[22px] pb-6  ">
-            4.9  <span className="text-[#F8A401] text-2xl">★★★★☆</span>
-          </Link>
+    <div className="flex ">
+      <div className="hidden md:block h-full w-[4px] bg-gradient-to-b from-[#D9D9D9] to-[#3691D8]" />
 
+      <div className="text-center flex flex-col items-center  text-white ">
+        <div className="flex justify-center items-center space-x-2 pb-4  ">
 
-        </span>
-        <div className="flex ">
+          <Rating
+            readOnly
+            value={4}
+            style={{
+              width: "40%",
+            }}
+          />
+          <span href="" className="  text-[24px]  ">
+            4.9
+          </span>
+
+        </div>
+        <div className="flex justify-center -space-x-2">
           {images.map((img, index) => (
             <ReveiwIcon image={img} key={index} />
           ))}
         </div>
-        <h1 className="text-[40px] font-bold   ">500M + </h1>
-        <span className="text-[22px] "> Student Reveiws</span>
+        <h1 className="xl:text-[40px] text-[30px] font-bold   ">500M + </h1>
+        <span className="xl:text-[22px] text-[20px] "> Student Reveiws</span>
       </div>
     </div>
   );

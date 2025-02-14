@@ -42,36 +42,14 @@ const CourseAdviceCard = () => {
     "Spoken Online IT Coaching",
     "Online Exam Entrance Coaching",
   ];
-  const categories = [
-    'All Category',
-    'Online Classes',
-    'Tuition',
-    'Languages',
-    'Hobby Classes',
-    'IT Courses',
-    'Exam Coaching'
-  ];
+
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
   };
   return (
 
     <div>
-      <div className="md:flex flex-wrap hidden  mb-8 text-[#9FAAB2]  font-semibold">
-        {categories.map((category) => (
-          <button
-            key={category}
-            onClick={() => handleCategoryClick(category)}
 
-            className="px-3 py-2 rounded-full text-[18px] "
-          >
-            {category}
-          </button>
-        ))}
-        <button className="ml-auto text-[16px] border border-[#6C757C] px-4 py-2 rounded">
-          Popular Course
-        </button>
-      </div>
 
 
 
@@ -84,11 +62,11 @@ const CourseAdviceCard = () => {
               <span className="w-1.5 h-1.5 bg-[#136FB6] rounded-full text-[22px] " />
               Tuitions
             </h3>
-            <div className="pt-2 mx-3 md:mx-0 ">
+            <div className="pt-2 mx-1 md:mx-0 ">
               {Tuition.map((item, index) => (
                 <button
                   key={index}
-                  className="p-2 m-1 md:m-2  text-[#8397A6] text-[18px]  text-left border w-[148px] rounded-sm border-[#9EB5C7]"
+                  className="p-2 m-1 md:m-2  text-[#8397A6] md:text-[18px]  text-left border w-[140px] sm:w-[148px] rounded-md border-[#9EB5C7]"
                 >
                   <Link href="/">{item}</Link>
                 </button>
@@ -106,7 +84,7 @@ const CourseAdviceCard = () => {
               {Languages.map((item, index) => (
                 <button
                   key={index}
-                  className="  px-3 py-2  m-2  text-[#8397A6] text-[18px] text-left border rounded-sm border-[#9EB5C7]"
+                  className="  px-4 py-2  m-1 md:m-2  text-[#8397A6] md:text-[18px] text-left border rounded-md border-[#9EB5C7]"
                   aria-label={`Select ${item}`}
                 >
                   <Link href="/">{item}</Link>
@@ -128,7 +106,7 @@ const CourseAdviceCard = () => {
               {Hobbies.map((item, index) => (
                 <button
                   key={index}
-                  className="px-3 py-2 md:mx-2 m-1 md:my-2 text-[#8397A6] text-[18px] text-left border rounded-sm border-[#9EB5C7]"
+                  className="px-3 py-2 md:m-2 m-1  text-[#8397A6] md:text-[18px] text-left border rounded-md border-[#9EB5C7]"
                   aria-label={`Select ${item}`}
                 >
                   <Link href="/">{item}</Link>
@@ -144,11 +122,11 @@ const CourseAdviceCard = () => {
               More{" "}
             </h3>
 
-            <div className=" pt-2 mx-3 md:mx-0 flex flex-col md:block ">
+            <div className="pb-4 pt-2 mx-3 md:mx-0 flex  flex-wrap md:block ">
               {More.map((item, index) => (
                 <button
                   key={index}
-                  className="px-3 py-2 mx-2.5 my-2.5 text-[#8397A6] text-[18px] text-left border rounded-sm border-[#9EB5C7]"
+                  className="px-3 py-2  m-1 md:m-2 text-[#8397A6] md:text-[18px] text-left border rounded-md border-[#9EB5C7]"
                   aria-label={`Select ${item}`}
                 >
                   <Link href="/">{item}</Link>{" "}
