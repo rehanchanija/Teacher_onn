@@ -4,25 +4,23 @@ const Premium = () => {
   return (
     <div className="bg-[#EDF7FF]">
 
-      <div className="md:flex  md:justify-between items-center max-w-6xl px-4 md:px-6 mx-auto py-4">
-        <div className="md:pt-12 md:pl-8 py-4 w-full md:w-auto">
-          <div className="w-full ">
-            <Image
-              src="/image/home/lady.png"
-              width={429}
-              height={534}
-              alt="Reload"
-              className="w-full h-auto md:w-[429px] lg:w-[400px]" // Updated image width for larger screens
-            />
-          </div>
+      <div className="md:flex  md:justify-between  items-center max-w-6xl  mx-auto py-4">
+        <div className="w-[50%] lg:pt-16 mx-auto">
+          <Image
+            src="/image/home/lady.png"
+            width={429}
+            height={504}
+            alt="Reload"
+            className=" " // Updated image width for larger screens
+          />
         </div>
-        <div className="md:w-[647px] md:pt-2  md:px-0">
+        <div className=" md:pl-16 pl-0 ">
           <div>
-            <p className="text-[36px]  text-[#0F283C] font-extrabold md:leading-[68px] py-4 md:py-8">
+            <p className="lg:text-[50px] text-center md:text-left text-[30px] text-[#0F283C] font-extrabold md:leading-[68px]  py-4 md:py-8">
               Premium <span className="text-[#146DB2]"> Learning </span>Experience
             </p>
 
-            <div className="flex flex-col md:flex-row space-y-6 px-4 md:space-y-0 md:space-x-8 py-6">
+            <div className="flex flex-col pl-4 md:pl-0 md:flex-row space-y-6  md:space-y-0 md:space-x-8 py-6">
               <div className="bg-[#0F283C] w-[60px] h-[60px] md:w-[102px] md:h-[101px] rounded-2xl p-4 md:p-6">
                 <Image
                   src="/image/home/hearts.png"
@@ -42,7 +40,7 @@ const Premium = () => {
               </div>
             </div>
 
-            <div className="flex flex-col  px-4  md:flex-row space-y-6 md:space-y-0 md:space-x-8 py-6">
+            <div className="flex flex-col pl-4  md:pl-0 md:flex-row space-y-6 md:space-y-0 md:space-x-8 py-6">
               <div className="bg-[#0F283C] w-[60px] h-[60px] md:w-[102px] md:h-[101px] rounded-2xl p-4 md:p-6">
                 <Image
                   src="/image/home/puzzle.png"

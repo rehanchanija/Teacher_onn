@@ -35,7 +35,7 @@ const Testimonals = () => {
   };
 
   return (
-    <div className="space-y-8  max-w-6xl mx-auto md:mt-0 md:mb-0 mb-12 px-4 md:px-12 ">
+    <div className="space-y-8  max-w-6xl mx-auto md:mt-0 md:mb-0 mb-12 lg:px-12 xl:px-0  ">
       <div className="md:flex items-center justify-between space-y-4">
         <div className="xl:w-[729px] md:w-[512px] mt-8 text-center md:text-left ">
           <Link href="" className="text-[#1BADFF] text-[18px]">

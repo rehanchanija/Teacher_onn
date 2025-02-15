@@ -4,16 +4,17 @@ import Link from "next/link";
 const OnlineStore = () => {
   return (
     <div className="bg-[#146DB2] ">
-      <div className="md:flex md:justify-between max-w-6xl mx-auto md:space-x-12 space-x-4 space-y-3 md:p-8 rounded-2xl ">
-        <div className="pt-4">
+      <div className="md:flex justify-between max-w-6xl mx-auto md:space-x-24 space-x-4 space-y-3  p-3 rounded-2xl ">
+        <div className="md:flex md:flx-col  items-center ">
           <Image
             src="/image/home/onlinestore.png"
             width={618}
             height={411.95}
             alt="reload"
+            className=""
           />
         </div>
-        <div className="md:w-[513px] text-white pb-6  ">
+        <div className=" text-white md:w-[50%] pt-6 pb-8  ">
           <h1 className=" text-[50px] pb-4  font-semibold  ">Online Store</h1>
           <p className="text-white pb-4  text-[20px]   ">
             Established with a vision to provide high-quality and accessible
