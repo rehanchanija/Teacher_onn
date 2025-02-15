@@ -44,7 +44,7 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
             queryClient.invalidateQueries(["GET_TUTOR"])
             handleNext();
             dispatch(setTutor(data))
-            toast.success("Education Info Updated Successfully")
+            toast.success("Education Info Updated Successfully", { position: "top-center" })
         },
         onError: (error) => {
             toast.error("Error Updating Education Info")
@@ -57,7 +57,7 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
         onSuccess: (data) => {
             queryClient.invalidateQueries(["GET_TUTOR"])
             dispatch(setTutor(data))
-            toast.success("Education Info Deleted Successfully")
+            toast.success("Education Info Deleted Successfully", { position: "top-center" })
         },
         onError: (error) => {
             toast.error("Error Deleting Education Info")

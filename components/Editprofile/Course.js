@@ -35,7 +35,7 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
             queryClient.invalidateQueries(["GET_TUTOR"])
             handleSubmit()
             dispatch(setTutor(data))
-            toast.success("Course updated successfully! 🎉");  // Success Toast
+            toast.success("Course updated successfully! 🎉", { position: "top-center" });  // Success Toast
 
         },
         onError: (error) => {
@@ -47,7 +47,7 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
         onSuccess: (data) => {
             queryClient.invalidateQueries(["GET_TUTOR"])
             dispatch(setTutor(data))
-            toast.success("Course deleted successfully! 🎉");  // Success Toast
+            toast.success("Course deleted successfully! 🎉", { position: "top-center" });  // Success Toast
         },
         onError: (error) => {
             toast.error("Course delete failed! 🎉");  // Error

@@ -1,5 +1,5 @@
-import { signinStudent, signinTutor } from "@/api/auth.api";
-import { setTutor } from "@/store/slices/authSlice";
+import { signin, signinStudent, signinTutor } from "@/api/auth.api";
+import { setStudent, setTutor } from "@/store/slices/authSlice";
 import { useMutation } from "@tanstack/react-query";
 import { useFormik } from "formik";
 import Image from "next/image";
@@ -50,12 +50,20 @@ const SigninModal = ({ openModal, closeLoginModal }) => {
   });
 
   const { mutate, isPending } = useMutation({
-    mutationFn: isTutor ? signinTutor : signinStudent,
+    mutationFn: signin,
+
     onSuccess: (data) => {
+
+      if (data?.student) {
+        dispatch(setStudent(data))
+      } else if (data?.tutor) {
+        dispatch(setTutor(data))
+        router.push("/edit-profile");
+
+      }
+
       toast.success("Login Successful", { position: "top-center" });
-      dispatch(setTutor(data));
       closeLoginModal();
-      router.push("/edit-profile");
     },
     onError: (error) => {
       toast.error("Login Failed", error, { position: "top-center" });
