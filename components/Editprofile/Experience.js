@@ -1,27 +1,28 @@
 "use client";
+import { deleteTutorExperience, updateTutorExperience } from "@/api/tutor.api";
+import { setTutor } from "@/store/slices/authSlice";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/image";
 import { useState } from "react";
-import * as Yup from "yup";
-import { deleteTutorExperience, updateTutor, updateTutorExperience } from "@/api/tutor.api";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useDispatch } from "react-redux";
-import { setTutor } from "@/store/slices/authSlice";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useDispatch } from "react-redux";
+import * as Yup from "yup";
 
+
+const options = ["Option 1", "Option 2", "Option 3"]
 const Experience = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
     const dispatch = useDispatch()
     const [initialValues, setInitialValues] = useState({
         _id: "",
         organization: "",
-        designation: "",
+        designation: options[0],
         startDate: null,
         endDate: null,
-        association: "",
+        association: options[0],
         jobDescription: "",
     })
-    const [originalValues, setOriginalValues] = useState(null);
     const queryClient = useQueryClient()
 
 
@@ -75,7 +76,6 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
     console.log(initialData)
     const handleCancel = (resetForm, setValues) => {
         resetForm();
-        setValues(initialValues);
     };
     return (
         <div className="min-h-screen w-full bg-white">
@@ -96,6 +96,7 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                 </div>
                                 <div className="flex gap-2">
                                     <button
+                                        disabled
                                         onClick={() => {
                                             setInitialValues({
                                                 _id: item?._id,
@@ -106,15 +107,7 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                                 association: item?.association,
                                                 jobDescription: item?.jobDescription,
                                             })
-                                            setOriginalValues({
-                                                _id: item?._id,
-                                                organization: item?.organization,
-                                                designation: item?.designation,
-                                                startDate: item?.startDate,
-                                                endDate: item?.endDate,
-                                                association: item?.association,
-                                                jobDescription: item?.jobDescription,
-                                            });
+                                           
                                         }}
 
                                         className=" text-white rounded-full focus:outline-none" aria-label="Edit">
@@ -156,6 +149,7 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                         enableReinitialize
                     >
                         {({ dirty, handleSubmit, resetForm, setValues, setFieldValue, values }) => (
+                            console.log(dirty),
 
 
                             <Form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
@@ -242,7 +236,14 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                         {dirty ? "<< Cancel" : "<< Previous"}
                                     </button>
                                     <button
-                                        type="submit"
+                                        type="button"
+                                        onClick={() => {
+                                            if (dirty) {
+                                                handleSubmit();
+                                            } else {
+                                                handleNext();
+                                            }
+                                        }}
                                         className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
                                     >
                                         {dirty ? "Save >>" : "Next >>"}
