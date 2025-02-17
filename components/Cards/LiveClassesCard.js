@@ -7,9 +7,19 @@ const LiveClassesCard = ({ tutor }) => {
   const { educationInfo, experience } = tutor;
   console.log(tutor, "tutor");
 
+  // Get the current year
+  const currentYear = new Date().getFullYear();
+
   // Calculate total years of experience
-  const totalExperience = experience?.length > 0 ?
-    (parseInt(experience[0]?.endDate) - parseInt(experience[0]?.startDate)) : "present";
+  let totalExperience = "Fresher (No Experience)";
+  if (experience?.length > 0) {
+    const startYear = parseInt(experience[0]?.startDate);
+    let endYear = experience[0]?.endDate === "present" ? currentYear : parseInt(experience[0]?.endDate);
+    
+    if (startYear < endYear) {
+      totalExperience = `${endYear - startYear} years of Experience`;
+    }
+  }
 
   return (
     <div className="m-2 p-2.5 bg-white shadow-2xl rounded-[11.69px]">
@@ -36,8 +46,8 @@ const LiveClassesCard = ({ tutor }) => {
         <p className="text-[20px] font-bold pb-1 truncate">
           {educationInfo[0]?.degreeName} {educationInfo[0]?.degreeType}
         </p>
-        <p className="text-[20px] font-bold pb-3">
-          {totalExperience} Years of Experience
+        <p className="md:text-[20px] text-[16px] font-medium pb-3">
+          {totalExperience}
         </p>
 
         <button className="mx-1 bg-[#1BADFF] text-white font-semibold w-full py-3 rounded-[4px] text-[17.36px]">

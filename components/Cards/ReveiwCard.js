@@ -1,6 +1,5 @@
 import Link from "next/link";
 import ReveiwIcon from "../Atoms/ReveiwIcon";
-import RatingIcon from "@/assets/icons/RatingIcon";
 import { Rating } from "@smastrom/react-rating";
 
 const ReveiwCard = () => {
@@ -34,11 +33,11 @@ const ReveiwCard = () => {
             readOnly
             value={4}
             style={{
-              width: "20%",
+              width: "30%",
             }}
           />
 
-          <span href="" className="  text-[20px]  ">
+          <span href="" className="  text-[26px] md:text-[20px]  ">
             4.9
           </span>
 
@@ -48,8 +47,8 @@ const ReveiwCard = () => {
             <ReveiwIcon image={img} key={index} />
           ))}
         </div>
-        <h1 className="xl:text-[40px] text-[18px] md:text-[30px] font-bold  pt-2 ">500M + </h1>
-        <span className="xl:text-[22px]  text-[14px] md:text-[20px] "> Student Reveiws</span>
+        <h1 className="xl:text-[40px] text-[26px] md:text-[30px] font-bold  pt-2 ">500M + </h1>
+        <span className="xl:text-[22px] text-[24px]   md:text-[20px] "> Student Reveiws</span>
       </div>
     </div>
   );

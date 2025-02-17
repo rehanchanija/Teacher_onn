@@ -29,7 +29,7 @@ const Footer = () => {
   ];
   return (
     <div className="bg-[#051B2C]">
-      <div className=" md:flex justify-between  max-w-6xl mx-auto text-white md:px-12 py-12 pl-8 md:pl-0  ">
+      <div className=" md:flex justify-between  max-w-6xl mx-auto text-white md:px-12 py-12 pl-8  ">
         <div className=" pt-2">
           <Image
             src="/image/footer/footer.png"

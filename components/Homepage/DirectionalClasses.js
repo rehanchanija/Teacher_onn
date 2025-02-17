@@ -24,16 +24,21 @@ const DirectionalClasses = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-[#091E3A] via-[#2F80ED]   to-[#2D9EE0] mx-4 md:mx-12 rounded-2xl">
+    <div className="md:mx-8 mx-4 
+     ">
 
-      <div className=" md:flex max-w-6xl mx-auto justify-around   md:rounded-xl">
+      <div className="flex flex-col md:flex-row max-w-6xl mx-auto justify-around bg-gradient-to-r from-[#091E3A] via-[#2F80ED]    to-[#2D9EE0]   rounded-2xl  md:rounded-xl">
+      <div className="order-1 md:order-none">
+
         <Image
           src="/image/home/direction-classes.png"
           width={425}
           height={490}
           alt="businessman"
-        />
-        <div className="w-full lg:w-[50%]  pt-6 md:pt-12 px-4 text-white pl-4 md:pl-8">
+          className=""
+          />
+          </div>
+        <div className="w-full lg:w-[50%]    pt-6 md:pt-12 px-4 text-white pl-4 md:pl-8">
           <Link href="#" className="pt-2 font-medium text-[14px] md:text-[18px]">
             ~ JOIN US NOW ~
           </Link>
@@ -41,7 +46,7 @@ const DirectionalClasses = () => {
           <p className="pb-6 text-[14px] md:text-[20px]">
             YOUR ONE STOP PLACE THOSE WO WANT TO GET A+ GRADE IN ALL SUBJECTS IN THEIR BOARDS
           </p>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}> 
             <div className="flex flex-col md:flex-row space-y-4  md:space-y-0 mb-4 md:space-x-4  md:mx-0 ">
               {/* Name Input */}
               <input

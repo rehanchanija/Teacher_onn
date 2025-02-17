@@ -78,7 +78,7 @@ const TutorsPage = () => {
         {/* Right section (Image on top on small screens) */}
         <div className="relative mt-6 md:mt-0">
           <Image
-            src="/image/home/tutorpag.png"
+            src="/image/home/tutorpage.png"
             alt="Top Right Image"
             width={465}
             height={684}
