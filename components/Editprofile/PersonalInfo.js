@@ -12,7 +12,6 @@ import * as Yup from "yup";
 
 const PersonalInfo = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
     const dispatch = useDispatch()
-    const [originalValues, setOriginalValues] = useState(null);
     const validationSchema = Yup.object({
         firstName: Yup.string().required("First name is required"),
         lastName: Yup.string().required("Last name is required"),
@@ -178,7 +177,8 @@ const PersonalInfo = ({ handleNext, handlePrevious, formData, updateFormData, in
                                             {dirty && (
                                                 <button
                                                     type="button"
-                                                    onClick={() => handleCancel(resetForm, setValues)}
+                                                    onClick={dirty ? resetForm : handlePrevious}
+
                                                     className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:px-7 px-4 rounded-md font-bold"
                                                 >
                                                     {'<< Cancel'}
