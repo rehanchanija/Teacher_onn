@@ -47,28 +47,28 @@ const TutorsPage = () => {
         {/* Left section (Text below on small screens) */}
         <div className="text-center md:text-left text-white sm:max-w-[80%] md:max-w-[600px] py-12 md:py-8 
         pr-4 sm:pr-8">
-          <h1 className="text-[28px] mt-8 md:mt-0 md:text-[38px]  lg:text-[60px] font-gilroy leading-tight">
+          <h1 className="text-[30px] mt-8 md:mt-0 md:text-[40px]  xl:text-[60px] font-gilroy leading-tight">
             Join Live Online Or
           </h1>
-          <p className="text-[28px] md:text-[32px] lg:text-[60px] font-gilroy-bold">
+          <p className="text-[30px] md:text-[40px] xl:text-[60px] font-bold">
             <span className="border-b-3 sm:border-b-4 border-[#1BADFF]">Offline</span> Classes with
           </p>
-          <p className="text-[28px] md:text-[32px] lg:text-[60px] font-gilroy-bold">
+          <p className="text-[30px] font-bold md:text-[40px] xl:text-[60px] ">
             The <span className="text-[#1BADFF]">Best Tutors</span>
           </p>
-          <p className="text-white text-[12px]  md:text-[16px] text lg:text-[20px] mt-4 md:mt-8">
+          <p className="text-white text-[14px]  md:text-[20px] text xl:text-[20px] mt-4 md:mt-8">
             At Direction Classes, we believe in empowering students through education and guiding them toward a successful future.
           </p>
-          <div className="flex flex-col font-semibold sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mt-6 md:mt-8">
+          <div className="flex flex-col font-medium sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mt-6 md:mt-8">
             <button
               onClick={() => openModal('student')}
-              className="bg-white text-[#1268AA] text-[12px] sm:text-[14px] md:text-[17px] w-full md:w-[160px] h-[40px] md:h-[52px] rounded-[4px]"
+              className="bg-white text-[#1268AA] text-[14px]  md:text-[17px] w-full md:w-[160px] h-[40px] md:h-[52px] rounded-[4px]"
             >
               Join as a Student
             </button>
             <button
               onClick={() => openModal('tutor')}
-              className="bg-[#1BADFF] text-white text-[12px]  md:text-[17px] w-full  md:w-[160px] h-[40px] md:h-[52px] rounded-[4px]"
+              className="bg-[#1BADFF] text-white text-[14px]  md:text-[17px] w-full  md:w-[160px] h-[40px] md:h-[52px] rounded-[4px]"
             >
               Join as a Tutor
             </button>

@@ -39,13 +39,13 @@ const AdmissionButton = () => {
         <h1>8+ more lessons</h1>
       </div>
       <div className="flex space-x-4 pt-6 pb-4 md:pb-0">
-        <button className="bg-[#1BADFF]   md:px-8 px-6 rounded md:py-2 text-white md:text-[17.36px] ">
-          <Link href="">Enroll Now</Link>
+        <button className="bg-[#1BADFF]  font-medium px-6 text-[14px] text-white rounded py-3 md:text-[17.36px] ">
+          <Link href="">Enroll now</Link>
         </button>
         <Image
           src="/image/home/vectorblack.png"
-          width={49.22}
-          height={59.77}
+          width={49.66}
+          height={60.67}
           alt="reload"
         />
       </div>

@@ -16,7 +16,7 @@ const Premium = () => {
         </div>
         <div className=" md:pl-16 pl-0 pt-6 md:pt-0 ">
           <div>
-            <p className="lg:text-[50px] text-center md:text-left text-[30px] text-[#0F283C] font-bold md:leading-[68px]  py-4 md:py-8">
+            <p className="xl:text-[50px] text-center md:text-left text-[30px] md:text-[40px] text-[#0F283C] font-bold md:leading-[68px]  py-4 md:py-8">
               Premium <span className="text-[#146DB2]"> Learning </span>Experience
             </p>
 

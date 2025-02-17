@@ -5,12 +5,14 @@ import '@smastrom/react-rating/style.css';
 
 const LiveClassesCard = ({ tutor }) => {
   const { educationInfo, experience } = tutor;
+  console.log(tutor, "tutor");
 
-  const calculateExperienceDuration = (startYear, endYear) => {
-    return endYear - startYear;
-  };
+  // Calculate total years of experience
+  const totalExperience = experience?.length > 0 ?
+    (parseInt(experience[0]?.endDate) - parseInt(experience[0]?.startDate)) : "present";
+
   return (
-    <div className=" m-2 p-2.5  bg-white shadow-2xl rounded-[11.69px]">
+    <div className="m-2 p-2.5 bg-white shadow-2xl rounded-[11.69px]">
       <div className="w-full">
         <Image
           src="/image/home/livecard.png"
@@ -25,9 +27,7 @@ const LiveClassesCard = ({ tutor }) => {
           <Rating
             readOnly
             value={tutor?.rating}
-            style={{
-              width: "30%",
-            }}
+            style={{ width: "30%" }}
           />
           <span className="pl-2 text-[22px] flex text-[#778D9E]">
             {tutor?.rating}
@@ -37,11 +37,9 @@ const LiveClassesCard = ({ tutor }) => {
           {educationInfo[0]?.degreeName} {educationInfo[0]?.degreeType}
         </p>
         <p className="text-[20px] font-bold pb-3">
-          {educationInfo[0]?.startYear} - {educationInfo[0]?.endYear}
+          {totalExperience} Years of Experience
         </p>
-        <p className="text-[20px] font-bold pb-3">
-          Experience: {calculateExperienceDuration(experience?.startDate, experience?.endDate)} years
-        </p>
+
         <button className="mx-1 bg-[#1BADFF] text-white font-semibold w-full py-3 rounded-[4px] text-[17.36px]">
           <Link href="">Register Now</Link>
         </button>

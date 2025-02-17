@@ -46,22 +46,23 @@ const Testimonals = () => {
             <h1 className="xl:text-[50px] md:text-[40px] pt-2 sm:leading-[50px] text-[30px] pb-3 xl:leading-[60px] font-bold text-[#0F283C]">
               Trusted by Thousands of <span className="text-[#146DB2]">Students and Parents</span>
             </h1>
-            <p className="text-[#667681] pb-4 text-[16px] md:text-[20px]">
+            <p className="text-[#667681] pb-4 text-[14px] md:text-[20px]">
               Don’t take our word for it. Trust our customers.
             </p>
           </div>
           <div className="flex justify-center  space-x-6 mb-4">
             <button
-              className="text-[#1268AA] py- border-[#1268AA] border-[1.5px] px-4  md:text-[17.36px] font-bold rounded-md transform transition-transform duration-300 hover:scale-110"
+              className="text-[#1268AA] py-3 border-[#1268AA] border-[1.5px] px-3 text-[14px] md:text-[17.36px] font-medium rounded-md transform transition-transform duration-300 hover:scale-110"
               onClick={prevSlide}
             >
-              <span className="md:px-3 px-1 font-bold">&lt;</span> Previous
+              <span className="md:px-3 px-1 ">&lt;</span> Previous
             </button>
             <button
-              className="bg-[#1BADFF] py-4 text-white px-4 md:px-6 md:text-[17.36px] font-bold rounded-md transform transition-transform duration-300 hover:scale-110"
+              className="
+bg-[#1BADFF]  font-medium px-6 text-[14px]  py-3 md:text-[17.36px]  text-white             rounded-md transform transition-transform duration-300 hover:scale-110"
               onClick={nextSlide}
             >
-              Next <span className="md:px-3 px-1 font-bold">&gt;</span>
+              Next <span className="md:px-3 px-1">&gt;</span>
             </button>
           </div>
         </div>

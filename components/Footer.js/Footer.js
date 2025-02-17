@@ -100,7 +100,7 @@ const Footer = () => {
               <EmailIcon />
               <div className="pl-4 ">
                 <h1 className="text-[#1BADFF]">Email Us:</h1>
-                <span> +91 99877 58132</span>
+                <span> dc_tutor@gmail.com</span>
               </div>
             </div>
           </div>

@@ -67,7 +67,7 @@ const FeautureProfile = () => {
             />
           </div>
           <div className=" pb-6    text-center  ">
-            <h1 className="xl:text-[50px] md:text-[40px] text-[30px] pb-4 font-semibold text-white ">
+            <h1 className="xl:text-[50px] md:text-[40px] text-[30px] pb-4 font-bold text-white ">
               Featured Profiles
             </h1>
             <p className="text-white px-2 text-[14px] md:text-[20px]    ">

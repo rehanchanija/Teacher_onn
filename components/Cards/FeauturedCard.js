@@ -32,7 +32,7 @@ const FeauturedCard = ({ tutor }) => {
               width: "45%",
             }}
           />
-          <Link href="" className="pl-2 text-[18px] text-[#146DB2]">
+          <Link href="" className="pl-2 text-[14px] xl:text-[18px] text-[#146DB2]">
             799 Reviews
           </Link>
         </div>
