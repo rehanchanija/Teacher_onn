@@ -1,16 +1,14 @@
 'use client';
 
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import * as Yup from 'yup';
 import { updateTutor } from "@/api/tutor.api";
-import { useMutation } from "@tanstack/react-query";
-import { useDispatch } from 'react-redux';
 import { setTutor } from '@/store/slices/authSlice';
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { useDispatch } from 'react-redux';
+import * as Yup from 'yup';
 
 const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialData }) => {
     const dispatch = useDispatch()
-    const [originalValues, setOriginalValues] = useState(null);
     const Radiobuttons = [
         { name: 'travel', label: 'Are you willing to travel to Student?' },
         { name: 'onlineTeaching', label: 'Available for online teaching?' },
@@ -185,9 +183,15 @@ const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialDat
                                         {dirty ? '<< Cancel' : '<< Previous'}
                                     </button>
                                     <button
-                                        type="submit"
+                                        type="button"
+                                        onClick={() => {
+                                            if (dirty) {
+                                                handleSubmit();
+                                            } else {
+                                                handleNext();
+                                            }
+                                        }}
                                         className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
-                                        disabled={!dirty}
                                     >
                                         {isPending ? 'Loading...' : dirty ? 'Save >>' : 'Next >>'}
                                     </button>
