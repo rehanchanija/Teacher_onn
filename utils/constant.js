@@ -1,1 +1,1 @@
-export const API_URL = "http://192.168.1.17:3006"
+export const API_URL = "https://dc-backend-mocha.vercel.app"

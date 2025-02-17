@@ -11,7 +11,8 @@ const ReveiwCard = () => {
       <div className="hidden md:block h-full w-[4px] bg-gradient-to-b from-[#D9D9D9] to-[#3691D8]" />
 
       <div className="text-center flex flex-col items-center  text-white ">
-        <div className="flex justify-center items-center space-x-2 pb-4  ">
+        <div className="hidden md:flex justify-center items-center space-x-2 pb-4  ">
+
 
           <Rating
             readOnly
@@ -20,7 +21,24 @@ const ReveiwCard = () => {
               width: "40%",
             }}
           />
+
           <span href="" className="  text-[24px]  ">
+            4.9
+          </span>
+
+        </div>
+        <div className="flex justify-center items-center md:hidden space-x-2 pb-4  ">
+
+
+          <Rating
+            readOnly
+            value={4}
+            style={{
+              width: "20%",
+            }}
+          />
+
+          <span href="" className="  text-[20px]  ">
             4.9
           </span>
 
@@ -30,8 +48,8 @@ const ReveiwCard = () => {
             <ReveiwIcon image={img} key={index} />
           ))}
         </div>
-        <h1 className="xl:text-[40px] text-[30px] font-bold   ">500M + </h1>
-        <span className="xl:text-[22px] text-[20px] "> Student Reveiws</span>
+        <h1 className="xl:text-[40px] text-[20px] md:text-[30px] font-bold   ">500M + </h1>
+        <span className="xl:text-[22px]  text-[14px] md:text-[20px] "> Student Reveiws</span>
       </div>
     </div>
   );

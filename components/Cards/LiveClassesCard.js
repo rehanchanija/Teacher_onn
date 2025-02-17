@@ -6,6 +6,9 @@ import '@smastrom/react-rating/style.css';
 const LiveClassesCard = ({ tutor }) => {
   const { educationInfo, experience } = tutor;
 
+  const calculateExperienceDuration = (startYear, endYear) => {
+    return endYear - startYear;
+  };
   return (
     <div className=" m-2 p-2.5  bg-white shadow-2xl rounded-[11.69px]">
       <div className="w-full">
@@ -19,7 +22,6 @@ const LiveClassesCard = ({ tutor }) => {
       </div>
       <div className="bg-white space-y-1">
         <div className="flex items-center pt-3">
-
           <Rating
             readOnly
             value={tutor?.rating}
@@ -35,7 +37,10 @@ const LiveClassesCard = ({ tutor }) => {
           {educationInfo[0]?.degreeName} {educationInfo[0]?.degreeType}
         </p>
         <p className="text-[20px] font-bold pb-3">
-          {educationInfo[0]?.startDate} - {educationInfo[0]?.endDate}
+          {educationInfo[0]?.startYear} - {educationInfo[0]?.endYear}
+        </p>
+        <p className="text-[20px] font-bold pb-3">
+          Experience: {calculateExperienceDuration(experience?.startDate, experience?.endDate)} years
         </p>
         <button className="mx-1 bg-[#1BADFF] text-white font-semibold w-full py-3 rounded-[4px] text-[17.36px]">
           <Link href="">Register Now</Link>

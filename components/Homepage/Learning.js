@@ -6,7 +6,7 @@ const Learning = () => {
 
       <div className="mx-auto flex max-w-6xl flex-col md:flex-row  ">
         {/* First Section */}
-        <div className="flex flex-row items-center pl-4">
+        <div className="flex flex-row items-center ">
           <p className="text-[32px] md:text-[50px] font-bold leading-tight ">
             Online <span className="text-[#146DB2]"> Learning </span>
             Designed For <br className="hidden md:block" />
@@ -16,8 +16,8 @@ const Learning = () => {
         </div>
 
 
-        <div className="flex flex-col md:flex-row  justify-center   gap-6 md:pl-6 w-full">
-          <div className="  w-full md:w-auto space-y-4 p-4 md:p-6 flex flex-col items-start ">
+        <div className="flex flex-col md:flex-row  justify-center pt-8 md:pt-0  gap-6 md:pl-6 w-full">
+          <div className="  w-full md:w-auto space-y-4  md:p-6 flex flex-col items-start ">
             <Image src="/image/home/icon.png" width={56} height={61} alt="icon" />
             <h1 className="text-[18px] md:text-[26px] font-bold leading-[28px] md:leading-[32px]">
               User-friendly  platform to learn
@@ -29,7 +29,7 @@ const Learning = () => {
           </div>
 
           {/* Third Section */}
-          <div className="  w-full md:w-auto space-y-4 p-4 md:p-6 flex flex-col items-start  ">
+          <div className="  w-full md:w-auto space-y-4  md:p-6 flex flex-col items-start  ">
             <Image src="/image/home/icon.png" width={56} height={61} alt="icon" />
             <h1 className="text-[18px] md:text-[26px] font-bold leading-[28px] md:leading-[32px]">
               Packed with modern  Technology.

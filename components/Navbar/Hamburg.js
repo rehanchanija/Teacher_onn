@@ -74,7 +74,15 @@ const Hamburg = () => {
                                     <div className="mx-2">
                                         <h1 className="text-[22px] font-bold text-[#1667A5]">Accounts</h1>
                                     </div>
-                                    <button className="flex items-center space-x-3 hover:bg-gray-100 p-2 ">
+                                    <div className="pl-2 pt-2 space-y-4 text-[#667681] flex flex-col md:hidden text-lg items-start hover:bg-gray-100">
+                                        {navLinks.map((link, index) => (
+                                            <Link key={link.href} href={link.href} className=" flex  items-center space-x-3">
+                                                <link.icon size={20} />
+                                                <span>{link.name}</span>
+                                            </Link>
+                                        ))}
+                                    </div>
+                                    <button className="flex items-center pt-4  space-x-3 hover:bg-gray-100 p-2 ">
                                         <Image
                                             src="/client.png" // Replace with your icon image path
                                             alt="Student Icon"
@@ -164,14 +172,7 @@ const Hamburg = () => {
                                         </button>
                                     </Link>
                                 ) : null}
-                                <div className="pl-2 text-[#667681] flex flex-col lg::hidden text-lg items-start hover:bg-gray-100">
-                                    {navLinks.map((link, index) => (
-                                        <Link key={link.href} href={link.href} className="pb-3 flex  items-center space-x-3">
-                                            <link.icon size={20} />
-                                            <span>{link.name}</span>
-                                        </Link>
-                                    ))}
-                                </div>
+
                             </div>
                         </div>
                     </div>

@@ -33,17 +33,16 @@ const DirectionalClasses = () => {
           height={490}
           alt="businessman"
         />
-        <div className="w-full lg:w-[50%] text-[20px] pt-6 md:pt-12 px-4 text-white pl-4 md:pl-8">
-          <Link href="#" className="pt-2 text-[14px] md:text-[18px]">
+        <div className="w-full lg:w-[50%]  pt-6 md:pt-12 px-4 text-white pl-4 md:pl-8">
+          <Link href="#" className="pt-2 font-medium text-[14px] md:text-[18px]">
             ~ JOIN US NOW ~
           </Link>
-          <h1 className="md:text-[50px] text-[30px] pb-3 font-semibold">DIRECTION CLASSES</h1>
-          <p className="pb-4 text-[14px] md:text-[20px]">
-            YOUR ONE-STOP PLACE FOR THOSE WHO WANT TO GET A+ GRADE IN ALL
-            SUBJECTS IN THEIR BOARDS
+          <h1 className="xl:text-[50px] text-[30px] md:text-[40px] pb-3 font-bold">DIRECTION CLASSES</h1>
+          <p className="pb-6 text-[14px] md:text-[20px]">
+            YOUR ONE STOP PLACE THOSE WO WANT TO GET A+ GRADE IN ALL SUBJECTS IN THEIR BOARDS
           </p>
           <form onSubmit={handleSubmit}>
-            <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 mb-4 md:space-x-4  md:mx-0 ">
+            <div className="flex flex-col md:flex-row space-y-4  md:space-y-0 mb-4 md:space-x-4  md:mx-0 ">
               {/* Name Input */}
               <input
                 type="text"
@@ -81,11 +80,11 @@ const DirectionalClasses = () => {
 
             <br />
             {/* Submit Button */}
-            <div className="pb-4">
+            <div className="pb-10">
 
               <button
                 type="submit"
-                className=" bg-white text-[#1268AA] w-full md:w-[120px]  md:px-6 font-semibold mx-auto rounded py-3 text-[17.36px]"
+                className=" bg-white text-[#1268AA] w-full md:w-auto  md:px-8 font-semibold mx-auto rounded py-3 text-[17.36px]"
               >
                 Send Message
               </button>

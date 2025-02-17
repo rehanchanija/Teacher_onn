@@ -28,17 +28,17 @@ const Homepage = () => {
 
             </div>
             <FeautureProfile />
-            <div className="md:mx-12 pt-24 ">
+            <div className="md:mx-12 md:pt-24 pt-16">
                 <LiveClasses />
             </div>
-            <div className="md:mx-12 mx-4 pt-24">
+            <div className="md:mx-12  pt-16 md:pt-24">
                 <CourseAdvice />
             </div>
             <div className="pt-24 pb-24  ">
                 <Reveiw />
             </div>
             <Premium />
-            <div className=" space-y-[6rem]">
+            <div className=" pb-24 ">
 
 
                 <AdmissionEnroll />

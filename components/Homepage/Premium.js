@@ -14,13 +14,13 @@ const Premium = () => {
             className=" " // Updated image width for larger screens
           />
         </div>
-        <div className=" md:pl-16 pl-0 ">
+        <div className=" md:pl-16 pl-0 pt-6 md:pt-0 ">
           <div>
-            <p className="lg:text-[50px] text-center md:text-left text-[30px] text-[#0F283C] font-extrabold md:leading-[68px]  py-4 md:py-8">
+            <p className="lg:text-[50px] text-center md:text-left text-[30px] text-[#0F283C] font-bold md:leading-[68px]  py-4 md:py-8">
               Premium <span className="text-[#146DB2]"> Learning </span>Experience
             </p>
 
-            <div className="flex flex-col pl-4 md:pl-0 md:flex-row space-y-6  md:space-y-0 md:space-x-8 py-6">
+            <div className="flex flex-col px-6 md:px-0 md:flex-row space-y-6  md:space-y-0 md:space-x-8 py-6">
               <div className="bg-[#0F283C] w-[60px] h-[60px] md:w-[102px] md:h-[101px] rounded-2xl p-4 md:p-6">
                 <Image
                   src="/image/home/hearts.png"
@@ -31,16 +31,16 @@ const Premium = () => {
                 />
               </div>
               <div>
-                <h1 className="text-[26px] text-[#0F283C] font-black">
+                <h1 className="md:text-[26px] text-[22px] text-[#0F283C] font-bold">
                   Easily Accessible
                 </h1>
-                <p className="text-[#667681] text-[24px] pt-2 md:pt-4">
+                <p className="text-[#667681] text-[16px] md:text-[24px] pt-2 md:pt-4">
                   Learning will feel very comfortable with Courslab.
                 </p>
               </div>
             </div>
 
-            <div className="flex flex-col pl-4  md:pl-0 md:flex-row space-y-6 md:space-y-0 md:space-x-8 py-6">
+            <div className="flex flex-col px-6  md:px-0 md:flex-row space-y-6 md:space-y-0 md:space-x-8 py-6">
               <div className="bg-[#0F283C] w-[60px] h-[60px] md:w-[102px] md:h-[101px] rounded-2xl p-4 md:p-6">
                 <Image
                   src="/image/home/puzzle.png"
@@ -51,10 +51,10 @@ const Premium = () => {
                 />
               </div>
               <div>
-                <h1 className="text-[26px] text-[#0F283C] font-black">
+                <h1 className="md:text-[26px] text-[22px] text-[#0F283C] font-bold">
                   Fun Learning Experience
                 </h1>
-                <p className="text-[#667681] text-[24px] pt-2 md:pt-4">
+                <p className="text-[#667681] text-[16px] md:text-[24px] pt-2 md:pt-4">
                   Learning will feel very comfortable with Courslab.
                 </p>
               </div>

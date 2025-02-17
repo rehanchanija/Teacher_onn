@@ -58,11 +58,11 @@ const SignupModal = ({ openLoginModal, closeModal, defaultRole }) => {
     mutationFn: isTutor ? signupTutor : signupStudent, // Using either signupTutor or signupStudent
 
     onSuccess: (data) => {
-      if (!isTutor) {
-        dispatch(setStudent(data))
-      } else if (isTutor) {
+      if (isTutor) {
         dispatch(setTutor(data))
         router.push("/edit-profile");
+      } else if (!isTutor) {
+        dispatch(setStudent(data))
 
       }
       toast.success("Signup Successful", { position: "top-right" });

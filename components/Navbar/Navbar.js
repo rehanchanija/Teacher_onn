@@ -43,7 +43,7 @@ const Navbar = () => {
       <div className="  flex justify-between items-center     my-5 ">
         <div className="md:flex items-center">
           <Logo />
-          <div className="font-semibold text-[14px] lg:text-[18px] pl-6 xl:pl-12 text-[#515A60] hidden lg:flex items-center space-x-2">
+          <div className="font-semibold text-[14px] lg:text-[18px] pl-6 xl:pl-12 text-[#515A60] hidden md:flex items-center space-x-2">
             {navLinks.map((link, index) => (
               <NavLink key={link.href} href={link.href} index={index}>
                 {link.name}

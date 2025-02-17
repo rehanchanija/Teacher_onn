@@ -29,7 +29,7 @@ const Footer = () => {
   ];
   return (
     <div className="bg-[#051B2C]">
-      <div className=" md:flex justify-between  max-w-6xl mx-auto text-white md:px-12 py-12 px-4  ">
+      <div className=" md:flex justify-between  max-w-6xl mx-auto text-white md:px-12 py-12 pl-8 md:pl-0  ">
         <div className=" pt-2">
           <Image
             src="/image/footer/footer.png"
@@ -38,13 +38,13 @@ const Footer = () => {
             alt="reload"
             className="pb-8"
           />
-          <p className="pb-10 pt-4 md:w-[348px] text-[18px] ">
+          <p className="pb-10 pt-4 md:w-[348px] text-[14px] md:text-[18px] ">
             Direction Classes is a commitment to academic excellence and
             holistic development. We strive to create an environment that
             fosters curiosity, critical thinking, and a passion for learning.
           </p>
-          <Link href="" className="font-semibold text-[22px]">
-            Follow us on Social Media:
+          <Link href="" className="font-bold text-[18px] md:text-[22px]">
+            Follow us on Social Media :
           </Link>
           <Image
             src="/image/footer/socialmedia.png"
