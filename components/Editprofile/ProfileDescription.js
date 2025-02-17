@@ -1,22 +1,16 @@
 "use client";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
 import { updateTutor } from "@/api/tutor.api";
 import { useMutation } from "@tanstack/react-query";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from 'yup';
-import { setTutor } from "@/store/slices/authSlice";
-import { useDispatch } from "react-redux";
-import { useState, useEffect } from 'react';
 
 const ProfileDescription = ({ handleNext, handlePrevious, initialData }) => {
-    const dispatch = useDispatch();
-    const [originalValues, setOriginalValues] = useState(null);
 
     const { mutate, isPending } = useMutation({
         mutationFn: updateTutor,
         onSuccess: (data) => {
             handleNext();
-            dispatch(setTutor(data))
         },
         onError: (error) => {
             console.log("onError", error);
@@ -24,8 +18,8 @@ const ProfileDescription = ({ handleNext, handlePrevious, initialData }) => {
     });
 
     const validationSchema = Yup.object().shape({
-        profileDescription: Yup.string(),
-        isCheck: Yup.boolean()
+        profileDescription: Yup.string().required("Profile description is required"),
+        isCheck: Yup.bool().oneOf([true], 'Please check this box')
     });
 
     const onSubmit = (values) => {
@@ -72,20 +66,12 @@ const ProfileDescription = ({ handleNext, handlePrevious, initialData }) => {
                         onSubmit={onSubmit}
                         enableReinitialize
                     >
-                        {({ dirty, handleSubmit, resetForm, setValues, values }) => {
+                        {({ dirty, handleSubmit, resetForm, setValues, values, errors }) => {
+                            console.log(errors  )
                             // Set original values when form is initialized
-                            useEffect(() => {
-                                if (!originalValues) {
-                                    setOriginalValues(values);
-                                }
-                            }, [values]);
+                            
 
-                            const handleCancel = () => {
-                                resetForm();
-                                if (originalValues) {
-                                    setValues(originalValues);
-                                }
-                            };
+                
 
                             return (
                                 <Form>
@@ -96,8 +82,13 @@ const ProfileDescription = ({ handleNext, handlePrevious, initialData }) => {
                                             name="profileDescription"
                                             className="w-full h-64 p-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                                             placeholder="Write your profile description here..."
+
                                         />
+                                        <ErrorMessage name="profileDescription" component="div" className="text-red-500 text-sm" />
+
+                                    
                                     </div>
+                                    
 
                                     {/* Power Profile Section */}
                                     <div className="inline-block bg-[#18A61E] py-2 px-4 md:px-10 rounded mb-4">
@@ -109,25 +100,32 @@ const ProfileDescription = ({ handleNext, handlePrevious, initialData }) => {
                                     {/* Checkbox */}
                                     <div className="mb-6">
                                         <label className="flex items-center">
-                                            <Field type="checkbox" name="noContactDetails" className="mr-2" />
+                                            <Field type="checkbox" name="isCheck" className="mr-2" />
                                             <span className="text-base text-[#4E5865]">
                                                 I have not shared any contact details (Email, Phone, Skype, Website, etc)
                                             </span>
                                         </label>
-                                        <ErrorMessage name="noContactDetails" component="div" className="text-red-500 text-sm" />
+                                        <ErrorMessage name="isCheck" component="div" className="text-red-500 text-sm" />
                                     </div>
 
                                     {/* Navigation Buttons */}
                                     <div className="flex justify-between mt-6">
                                         <button
                                             type="button"
-                                            onClick={dirty ? handleCancel : handlePrevious}
+                                            onClick={dirty ? resetForm : handlePrevious}
                                             className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:px-7 px-4 rounded-md font-bold"
                                         >
                                             {dirty ? "<< Cancel" : "<< Previous"}
                                         </button>
                                         <button
-                                            type="submit"
+                                            type="button"
+                                            onClick={() => {
+                                                if (dirty) {
+                                                    handleSubmit();
+                                                } else {
+                                                    handleNext();
+                                                }
+                                            }}
                                             className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
                                         >
                                             {dirty ? "Save >>" : "Next >>"}
