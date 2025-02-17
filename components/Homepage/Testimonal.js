@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import AppSlider from "../AppSlider";
 import TestimonialsCard from "../Cards/TestimonialsCard";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const Testimonals = () => {
   const sliderRef = useRef(null);
@@ -50,19 +51,28 @@ const Testimonals = () => {
               Don’t take our word for it. Trust our customers.
             </p>
           </div>
-          <div className="flex justify-center  space-x-6 mb-4">
+          <div className="flex justify-center font-medium space-x-6 mb-4">
             <button
-              className="text-[#1268AA] py-3 border-[#1268AA] border-[1.5px] px-3 text-[14px] md:text-[17.36px] font-medium rounded-md transform transition-transform duration-300 hover:scale-110"
+              className="flex items-center text-[#1268AA] py-3 border-[#1268AA] border-[1.5px] px-4 text-[14px] md:text-[17.36px] font-medium rounded-md transform transition-transform duration-300 hover:scale-110"
               onClick={prevSlide}
             >
-              <span className="md:px-3 px-1 ">&lt;</span> Previous
+              <span className="md:pr-3 pr-2 pt-[1px] ">
+              <IoIosArrowBack />
+                </span> 
+              Previous
             </button>
             <button
-              className="
-bg-[#1BADFF]  font-medium px-6 text-[14px]  py-3 md:text-[17.36px]  text-white             rounded-md transform transition-transform duration-300 hover:scale-110"
+              className=" flex items-center
+bg-[#1BADFF]  font-medium px-5 text-[14px]  py-3 md:text-[17.36px]  text-white             rounded-md transform transition-transform duration-300 hover:scale-110"
               onClick={nextSlide}
             >
-              Next <span className="md:px-3 px-1">&gt;</span>
+
+Next 
+              <span className="md:pl-3 pl-2 pt-[1px] ">
+              
+<IoIosArrowForward />
+              </span>
+
             </button>
           </div>
         </div>
