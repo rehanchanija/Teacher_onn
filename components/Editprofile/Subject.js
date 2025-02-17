@@ -1,12 +1,12 @@
 "use client";
+import { deleteTutorSubject, updateTutorSubject } from "@/api/tutor.api";
+import { setTutor } from "@/store/slices/authSlice";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/image";
 import { useState } from "react";
-import * as Yup from "yup";
-import { deleteTutorSubject, updateTutorSubject } from "@/api/tutor.api";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { setTutor } from "@/store/slices/authSlice";
 import { useDispatch } from "react-redux";
+import * as Yup from "yup";
 
 const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
     const dispatch = useDispatch()
@@ -18,7 +18,6 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
         toLevel: "",
 
     })
-    const [originalValues, setOriginalValues] = useState(null);
     const queryClient = useQueryClient();
 
     const validationSchema = Yup.object({
@@ -92,12 +91,7 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
                                                 fromLevel: item?.fromLevel,
                                                 toLevel: item?.toLevel,
                                             })
-                                            setOriginalValues({
-                                                _id: item?._id,
-                                                subjects: item?.subject,
-                                                fromLevel: item?.fromLevel,
-                                                toLevel: item?.toLevel,
-                                            });
+                                            
                                         }}
                                         className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
                                         <Image
