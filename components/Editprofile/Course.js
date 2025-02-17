@@ -1,15 +1,15 @@
 "use client";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import Image from "next/image";
-import * as Yup from "yup";
-import { deleteTutorCourse, updateTutor, updateTutorCourse } from "@/api/tutor.api";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useDispatch } from "react-redux";
+import { deleteTutorCourse, updateTutorCourse } from "@/api/tutor.api";
 import { setTutor } from "@/store/slices/authSlice";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import Image from "next/image";
 import { useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";          // Import Toast CSS
+import { useDispatch } from "react-redux";
 import Select from 'react-select';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Import Toast CSS
+import * as Yup from "yup";
 
 const languageOptions = [
     { value: 'en', label: 'English' },
@@ -39,7 +39,6 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
         CD: "",
         LOI: [],
     })
-    const [originalValues, setOriginalValues] = useState(null)
     const queryClient = useQueryClient()
     const dispatch = useDispatch()
 
@@ -120,20 +119,7 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
                                                     CD: item?.CD,
                                                     LOI: item?.LOI,
                                                 });
-                                                setOriginalValues({
-                                                    _id: item?._id,
-                                                    Course_title: item?.courseTitle,
-                                                    Description: item?.courseDescription,
-                                                    Price: item?.coursePrice,
-                                                    Duration: item?.courseDuration,
-                                                    certificateProvided: item?.certificateProvided,
-                                                    Image: item?.image,
-                                                    MOD: item?.MOD,
-                                                    Group: item?.Group,
-                                                    Cert: item?.Cert,
-                                                    CD: item?.CD,
-                                                    LOI: item?.LOI,
-                                                });
+                                                
                                             }}
                                             className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
                                             <Image
@@ -329,7 +315,7 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
                                     <div className="col-span-full flex justify-between mt-6 gap-4">
                                         <button
                                             type="button"
-                                            onClick={() => dirty ? handleCancel(resetForm, setValues) : handlePrevious()}
+                                            onClick={dirty ? resetForm : handlePrevious}
                                             className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:px-7 px-4 rounded-md font-bold"
                                         >
                                             {dirty ? "<< Cancel" : "<< Previous"}
