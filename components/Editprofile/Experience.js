@@ -213,6 +213,8 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                                     className="text-black w-full border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB]"
                                                     placeholderText="Select Date"
                                                     dateFormat="MM/dd/yyyy"
+                                                minDate={values?.startDate}
+                                                    
                                                 />
                                             ) : (
                                                 <Field
