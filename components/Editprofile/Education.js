@@ -1,14 +1,14 @@
 "use client";
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import Image from "next/image";
-import * as Yup from "yup";
-import { deleteTutorEducationInfo, updateTutor, updateTutorEducationInfo } from "@/api/tutor.api";
+import { deleteTutorEducationInfo, updateTutorEducationInfo } from "@/api/tutor.api";
+import { setTutor } from "@/store/slices/authSlice";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { ErrorMessage, Field, Formik } from "formik";
+import Image from "next/image";
+import { useState } from "react";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch } from "react-redux";
-import { useState } from "react";
-import { setTutor } from "@/store/slices/authSlice";
+import * as Yup from "yup";
 
 const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
     const [initialValues, setInitialValues] = useState({
@@ -22,7 +22,6 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
         speciality: "",
         score: "",
     });
-    const [originalValues, setOriginalValues] = useState(null);
     const queryClient = useQueryClient()
     const dispatch = useDispatch()
 
@@ -112,17 +111,7 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
                                                 speciality: item?.speciality,
                                                 score: item?.score
                                             });
-                                            setOriginalValues({
-                                                _id: item?._id,
-                                                instituteWithCity: item?.instituteWithCity,
-                                                degreeType: item?.degreeType,
-                                                degreeName: item?.degreeName,
-                                                startDate: item?.startDate,
-                                                endDate: item?.endDate,
-                                                association: item?.association,
-                                                speciality: item?.speciality,
-                                                score: item?.score
-                                            });
+                                          
                                         }}
                                         className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
                                         <Image
