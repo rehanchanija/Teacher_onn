@@ -2,8 +2,14 @@ import { Rating } from "@smastrom/react-rating";
 import Image from "next/image";
 import Link from "next/link";
 import '@smastrom/react-rating/style.css';
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { setTutor } from "@/store/slices/authSlice";
 
 const LiveClassesCard = ({ tutor }) => {
+  // const router = useRouter();
+  // const dispatch = useDispatch();
+
   const { educationInfo, experience } = tutor;
   console.log(tutor, "tutor");
 
@@ -20,7 +26,10 @@ const LiveClassesCard = ({ tutor }) => {
       totalExperience = `${endYear - startYear} years of Experience`;
     }
   }
-
+  // const handleRegister = () => {
+  //   // dispatch(setTutor(tutor)); // Save selected tutor in Redux
+  //   router.push("/profile"); // Navigate to the profile page
+  // };
   return (
     <div className="m-2 p-2.5 bg-white shadow-2xl rounded-[11.69px]">
       <div className="w-full">
@@ -50,8 +59,12 @@ const LiveClassesCard = ({ tutor }) => {
           {totalExperience}
         </p>
 
-        <button className="mx-1 bg-[#1BADFF] text-white font-semibold w-full py-3 rounded-[4px] text-[17.36px]">
-          <Link href="">Register Now</Link>
+        <button
+              // onClick={handleRegister}
+              
+
+        className="mx-1 bg-[#1BADFF] text-white font-semibold w-full py-3 rounded-[4px] text-[17.36px]">
+          Register Now
         </button>
         <div className="text-center space-x-1 pt-1 pb-1 text-[14px]">
           <Link href="" className="text-[#146DB2]">

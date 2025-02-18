@@ -53,7 +53,7 @@ const Navbar = () => {
         </div>
         <div className="space-x-4 flex items-center">
           <div
-            style={{ width: tutor || student ? "480px" : "150px" }}
+            style={{ width: tutor || student ? "440px" : "150px" }}
             className="hidden md:flex items-center border border-gray-300 rounded-md p-2"
           >
             <div className="p-1">
@@ -68,7 +68,7 @@ const Navbar = () => {
             <input
               type="text"
               placeholder="Search"
-              className="text-lg outline-none text-[#8D979E] bg-transparent w-full h-full pl-2"
+              className="text-lg outline-none border-l-2 text-[#8D979E] bg-transparent w-full h-full pl-2"
             />
           </div>
           {tutor || student ? null : (

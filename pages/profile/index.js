@@ -7,6 +7,7 @@ import { useSelector } from "react-redux"
 
 
 const MyProfile = () => {
+    const router = useRouter()
 
     const { tutor } = useSelector((state) => state.auth);
     const { data } = useQuery({
@@ -15,13 +16,12 @@ const MyProfile = () => {
     })
 
     console.log(data)
-    const router = useRouter()
     return (
         <div className="min-h-screen flex flex-col">
             {/* Hero Banner */}
             <div className="w-full min-h-[180px] md:min-h-[236px] bg-[#136FB6] flex justify-center items-center text-center">
                 <div className="text-white px-4">
-                    <h1 className="text-4xl pb-4 lg:text-[60px] font-bold" style={{ fontFamily: 'Gilroy' }}>
+                    <h1 className="md:text-[40px] text-[30px] pb-2 xl:text-[60px] font-bold" style={{ fontFamily: 'Gilroy' }}>
                         {data?.personalInfo?.fullName}
                     </h1>
                     <p className="text-lg lg:text-[20px]" style={{ fontFamily: 'Gilroy' }}>
