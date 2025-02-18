@@ -59,17 +59,15 @@ const SignupModal = ({ openLoginModal, closeModal, defaultRole }) => {
 
     onSuccess: (data) => {
       if (isTutor) {
-        dispatch(setTutor(data))
+        dispatch(setTutor(data));
         router.push("/edit-profile");
+        return;
       } else if (!isTutor) {
-        dispatch(setStudent(data))
-
+        dispatch(setStudent(data));
       }
       toast.success("Signup Successful", { position: "top-right" });
       closeModal();
-
       router.push("/");
-      dispatch(setTutor(data));
     },
     onError: (error) => {
       toast.error("Signup Failed", { position: "top-right" });
@@ -120,10 +118,11 @@ const SignupModal = ({ openLoginModal, closeModal, defaultRole }) => {
               <button
                 onClick={() => setIsTutor(true)}
                 className={`px-4 py-2 rounded-md text-xs font-semibold transition-all duration-300 border-2 
-        ${isTutor === true
-                    ? "border-[#E5E5E5] "
-                    : "border-transparent hover:border-b-[#E5E5E5] hover:rounded-none"
-                  }`}
+        ${
+          isTutor === true
+            ? "border-[#E5E5E5] "
+            : "border-transparent hover:border-b-[#E5E5E5] hover:rounded-none"
+        }`}
               >
                 Tutor
               </button>
@@ -131,10 +130,11 @@ const SignupModal = ({ openLoginModal, closeModal, defaultRole }) => {
               <button
                 onClick={() => setIsTutor(false)}
                 className={`px-4 py-2 rounded-md text-xs font-semibold transition-all duration-300 border-2 
-        ${isTutor === false
-                    ? "border-[#E5E5E5] "
-                    : "border-transparent hover:border-b-[#E5E5E5] hover:rounded-none"
-                  }`}
+        ${
+          isTutor === false
+            ? "border-[#E5E5E5] "
+            : "border-transparent hover:border-b-[#E5E5E5] hover:rounded-none"
+        }`}
               >
                 Student
               </button>
