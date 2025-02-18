@@ -1,15 +1,28 @@
 "use client";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import Image from "next/image";
-import * as Yup from "yup";
-import { deleteTutorCourse, updateTutor, updateTutorCourse } from "@/api/tutor.api";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useDispatch } from "react-redux";
+import { deleteTutorCourse, updateTutorCourse } from "@/api/tutor.api";
 import { setTutor } from "@/store/slices/authSlice";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import Image from "next/image";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import Select from 'react-select';
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";          // Import Toast CSS
+import "react-toastify/dist/ReactToastify.css"; // Import Toast CSS
+import * as Yup from "yup";
 
+const languageOptions = [
+    { value: 'en', label: 'English' },
+    { value: 'hi', label: 'Hindi' },
+    { value: 'ta', label: 'Tamil' },
+    { value: 'te', label: 'Telugu' },
+    { value: 'ml', label: 'Malayalam' },
+    { value: 'kn', label: 'Kannada' },
+    { value: 'mr', label: 'Marathi' },
+    { value: 'gu', label: 'Gujarati' },
+    { value: 'bn', label: 'Bengali' },
+    { value: 'pa', label: 'Punjabi' },
+];
 
 const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, initialData }) => {
     const [initialValues, setInitialValues] = useState({
@@ -24,7 +37,7 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
         Group: "",
         Cert: "",
         CD: "",
-        LOI: "",
+        LOI: [],
     })
     const queryClient = useQueryClient()
     const dispatch = useDispatch()
@@ -58,16 +71,21 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
     const validationSchema = Yup.object({
         Course_title: Yup.string().required("Required"),
         Description: Yup.string().required("Required"),
-        Price: Yup.string().required("Required"),
+        Price: Yup.number().required("Required"),
         Currency: Yup.string().required("Required"),
         MOD: Yup.string().required("Required"),
         Group: Yup.string().required("Required"),
         Cert: Yup.string().required("Required"),
         CD: Yup.string().required("Required"),
-        LOI: Yup.string().required("Required"),
+        LOI: Yup.array().min(1, "At least one language is required"),
     });
     console.log(initialValues)
 
+
+    const handleCancel = (resetForm, setValues) => {
+        resetForm(); // Reset the form to its initial values
+        setValues(initialValues); // Ensure the form fields are set to the initial values
+    };
 
     return (
         <div className="w-full bg-white relative min-h-screen">
@@ -100,7 +118,8 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
                                                     Cert: item?.Cert,
                                                     CD: item?.CD,
                                                     LOI: item?.LOI,
-                                                })
+                                                });
+                                                
                                             }}
                                             className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
                                             <Image
@@ -146,13 +165,13 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
                                         "groupSize": values.Group,
                                         "certificateProvided": values.Cert,
                                         "courseDuration": values.CD,
-                                        "language": values.LOI
+                                        "language": values.LOI.map(lang => lang.value).join(',')
                                     }
                                 });
                                 updateFormData('course', values);
                             }}
                         >
-                            {({ dirty, }) => (
+                            {({ dirty, resetForm, setValues }) => (
                                 <Form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                                     <div>
                                         <label className="block font-bold mb-2 text-[#4E5865]">
@@ -254,13 +273,25 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
 
                                     <div>
                                         <label className="block font-bold mb-2 text-[#4E5865]">
-                                            Language Of Instructions <span className="text-red-500">*</span>
+                                            Languages of Instruction <span className="text-red-500">*</span>
                                         </label>
                                         <Field
-                                            type="text"
                                             name="LOI"
-                                            className="w-full border border-gray-300 rounded p-2 bg-[#F2F6FB] sm:p-2.5"
-                                            placeholder="Enter here"
+                                            component={({ form, field }) => (
+                                                <Select
+                                                    {...field}
+                                                    options={languageOptions}
+                                                    isMulti
+                                                    className="w-full"
+                                                    classNamePrefix="select"
+                                                    placeholder="Select languages"
+                                                    onChange={(selectedOptions) => {
+                                                        form.setFieldValue(field.name, selectedOptions);
+                                                    }}
+                                                    onBlur={() => form.setFieldTouched(field.name, true)}
+                                                    value={field.value}
+                                                />
+                                            )}
                                         />
                                         <ErrorMessage name="LOI" component="div" className="text-red-500" />
                                     </div>
@@ -281,30 +312,22 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
                                         <ErrorMessage name="CD" component="div" className="text-red-500" />
                                     </div>
 
-                                    <div className="col-span-full flex justify-start items-center mt-6 gap-4">
+                                    <div className="col-span-full flex justify-between mt-6 gap-4">
                                         <button
                                             type="button"
-                                            onClick={handlePrevious}
-                                            className="w-40 h-12 border border-gray-700 text-gray-700 font-bold rounded-md"
+                                            onClick={dirty ? resetForm : handlePrevious}
+                                            className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:px-7 px-4 rounded-md font-bold"
                                         >
-                                            &lt;&lt; Previous
+                                            {dirty ? "<< Cancel" : "<< Previous"}
                                         </button>
-                                        <button
-                                            type="submit"
-                                            onClick={() => {
-                                                if (dirty) {
-                                                    console.log(dirty)
-
-                                                    handleSubmit();
-                                                } else {
-                                                    handleNext()
-                                                }
-                                            }}
-                                            className="w-40 h-12 bg-[#0F283C] text-white font-bold rounded-md"
-                                            disabled={isPending}
-                                        >
-                                            Save &gt;&gt;
-                                        </button>
+                                        {dirty && (
+                                            <button
+                                                type="submit"
+                                                className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
+                                            >
+                                                Save
+                                            </button>
+                                        )}
                                     </div>
                                 </Form>
                             )}

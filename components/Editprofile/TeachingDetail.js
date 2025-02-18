@@ -1,11 +1,11 @@
 'use client';
 
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import * as Yup from 'yup';
 import { updateTutor } from "@/api/tutor.api";
-import { useMutation } from "@tanstack/react-query";
-import { useDispatch } from 'react-redux';
 import { setTutor } from '@/store/slices/authSlice';
+import { useMutation } from "@tanstack/react-query";
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { useDispatch } from 'react-redux';
+import * as Yup from 'yup';
 
 const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialData }) => {
     const dispatch = useDispatch()
@@ -43,10 +43,10 @@ const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialDat
     };
 
     const validationSchema = Yup.object({
-        charge: Yup.string().required('Required'),
-        minFee: Yup.string().required('Required'),
-        maxFee: Yup.string().required('Required'),
-        feeDetails: Yup.string().required('Required'),
+        charge: Yup.number().required('Required'),
+        minFee: Yup.number().required('Required'),
+        maxFee: Yup.number().required('Required'),
+        feeDetails: Yup.number().required('Required'),
         totalExperience: Yup.string().required('Required'),
         teachingExperience: Yup.string().required('Required'),
         onlineTeachingExperience: Yup.string().required('Required'),
@@ -91,6 +91,11 @@ const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialDat
         updateFormData('teachingDetail', values);
     };
 
+    const handleCancel = (resetForm, setValues) => {
+        resetForm(); // Reset the form to its initial values
+        setValues(initialValues); // Ensure the form fields are set to the initial values
+    };
+
     return (
         <div className="w-full bg-white relative min-h-screen ">
             <div className="relative max-w-[1281px] mx-auto shadow-lg  sm:mt-0">
@@ -100,7 +105,7 @@ const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialDat
                         onSubmit={onSubmit}
                         enableReinitialize
                     >
-                        {({ dirty, handleSubmit }) => (
+                        {({ dirty, handleSubmit, resetForm, setValues }) => (
                             <Form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                                 {/* Form Fields */}
                                 {[
@@ -169,14 +174,13 @@ const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialDat
                                     <ErrorMessage name="opportunities" component="div" className="text-red-500 text-xs sm:text-sm mt-1" />
                                 </div>
 
-                                {/* Buttons */}
-                                <div className="flex flex-col sm:flex-row justify-left items-center mt-6 sm:mt-8 space-y-4 sm:space-y-0">
+                                <div className="col-span-1 sm:col-span-2 lg:col-span-3 flex justify-between items-center mt-4">
                                     <button
                                         type="button"
-                                        className="w-full sm:w-[179px] h-[42px] sm:h-[52px] border border-[#0F283C] text-[#0F283C] font-bold text-sm sm:text-[17.36px] rounded-[2px]"
-                                        onClick={handlePrevious}
+                                        onClick={dirty ? () => handleCancel(resetForm, setValues) : handlePrevious}
+                                        className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:px-7 px-4  rounded-md font-bold"
                                     >
-                                        &lt; &lt; Previous
+                                        {dirty ? '<< Cancel' : '<< Previous'}
                                     </button>
                                     <button
                                         type="button"
@@ -184,15 +188,15 @@ const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialDat
                                             if (dirty) {
                                                 handleSubmit();
                                             } else {
-                                                handleNext()
+                                                handleNext();
                                             }
                                         }}
-                                        className="w-full sm:w-[179px] h-[42px] sm:h-[52px] mt-0 sm:ml-4 bg-[#0B1F36] text-white font-bold text-sm sm:text-[17.36px] rounded-[4px]"
-                                        disabled={isPending}
+                                        className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
                                     >
-                                        Submit &gt;&gt;
+                                        {isPending ? 'Loading...' : dirty ? 'Save >>' : 'Next >>'}
                                     </button>
                                 </div>
+
                             </Form>
                         )}
                     </Formik>
