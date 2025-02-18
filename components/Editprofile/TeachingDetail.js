@@ -5,6 +5,8 @@ import { setTutor } from '@/store/slices/authSlice';
 import { useMutation } from "@tanstack/react-query";
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
+import { setTutor } from '@/store/slices/authSlice';
+import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 
 const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialData }) => {
@@ -63,10 +65,11 @@ const TeachingDetail = ({ handleNext, handlePrevious, updateFormData, initialDat
         onSuccess: (data) => {
             handleNext();
             dispatch(setTutor(data))
+            toast.success('Teaching Details Updated Successfully', { position: 'top-center' });
 
         },
         onError: (error) => {
-            console.log("onError", error)
+            toast.error('Teaching Details Update Failed', { position: 'top-center' });
         }
     })
 

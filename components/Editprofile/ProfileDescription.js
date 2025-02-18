@@ -4,6 +4,9 @@ import { updateTutor } from "@/api/tutor.api";
 import { useMutation } from "@tanstack/react-query";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from 'yup';
+import { setTutor } from "@/store/slices/authSlice";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const ProfileDescription = ({ handleNext, handlePrevious, initialData }) => {
 
@@ -11,9 +14,10 @@ const ProfileDescription = ({ handleNext, handlePrevious, initialData }) => {
         mutationFn: updateTutor,
         onSuccess: (data) => {
             handleNext();
+            toast.success('Profile Description Updated Successfully', { position: 'top-center' });
         },
         onError: (error) => {
-            console.log("onError", error);
+            toast.error('Profile Description Update Failed', { position: 'top-center' });
         }
     });
 

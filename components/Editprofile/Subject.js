@@ -6,6 +6,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/image";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 
 const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
@@ -33,9 +34,10 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
             handleNext();
 
             dispatch(setTutor(data))
+            toast.success('Subject Updated Successfully', { position: 'top-center' });
         },
         onError: (error) => {
-            console.log("onError", error)
+            toast.error('Subject Update Failed', { position: 'top-center' });
         }
     });
 

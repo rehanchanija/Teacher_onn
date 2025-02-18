@@ -5,9 +5,9 @@ import Link from "next/link";
 const AdmissionButton = () => {
   return (
     // <div></div>
-    <div className="text-[20px] grid md:grid-cols-2 gap-4 font-medium md:pt-6 ">
+    <div className="md:text-[20px] text-[16px] grid grid-cols-1 md:grid-cols-2 gap-4 font-medium md:pt-6 pt-2 ">
       <div className="flex items-center space-x-2">
-        <button className="bg-[#7B82CA] text-2xl text-white p-2 rounded-full ">
+        <button className="bg-[#7B82CA]   p-2 rounded-full ">
           <Link href="">
             <CheckedIcon />
           </Link>
@@ -38,14 +38,14 @@ const AdmissionButton = () => {
         </button>
         <h1>8+ more lessons</h1>
       </div>
-      <div className="flex space-x-4 pt-6">
-        <button className="bg-[#1BADFF]     w-[179.36px]  rounded py-2 text-white text-[17.36px] ">
-          <Link href="">Enroll Now</Link>
+      <div className="flex space-x-4 pt-6 pb-4 md:pb-0">
+        <button className="bg-[#1BADFF]  font-medium px-6 text-[14px] text-white rounded py-3 md:text-[17.36px] ">
+          <Link href="">Enroll now</Link>
         </button>
         <Image
           src="/image/home/vectorblack.png"
-          width={49.22}
-          height={59.77}
+          width={49.66}
+          height={60.67}
           alt="reload"
         />
       </div>

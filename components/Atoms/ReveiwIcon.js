@@ -9,7 +9,14 @@ const ReveiwIcon = (props) => {
         width={61}
         height={61}
         alt=""
-        className=" "
+        className="hidden xl:block"
+      />
+      <Image
+        src={`/image/home/${props.image}.png`}
+        width={46}
+        height={40}
+        alt=""
+        className="xl:hidden"
       />
     </div>
   );

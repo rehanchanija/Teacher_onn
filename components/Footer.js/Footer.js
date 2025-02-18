@@ -28,8 +28,8 @@ const Footer = () => {
     "ENGLISH",
   ];
   return (
-    <div>
-      <div className="bg-[#051B2C] md:flex justify-between   text-white md:px-14 py-12 px-4  ">
+    <div className="bg-[#051B2C]">
+      <div className=" md:flex justify-between  max-w-6xl mx-auto text-white md:px-12 py-12 pl-8  ">
         <div className=" pt-2">
           <Image
             src="/image/footer/footer.png"
@@ -38,13 +38,13 @@ const Footer = () => {
             alt="reload"
             className="pb-8"
           />
-          <p className="pb-10 pt-4 md:w-[348px] text-[18px] ">
+          <p className="pb-10 pt-4 md:w-[348px] text-[14px] md:text-[18px] ">
             Direction Classes is a commitment to academic excellence and
             holistic development. We strive to create an environment that
             fosters curiosity, critical thinking, and a passion for learning.
           </p>
-          <Link href="" className="font-semibold text-[22px]">
-            Follow us on Social Media:
+          <Link href="" className="font-bold text-[18px] md:text-[22px]">
+            Follow us on Social Media :
           </Link>
           <Image
             src="/image/footer/socialmedia.png"
@@ -54,10 +54,10 @@ const Footer = () => {
             className="pt-4 "
           />
         </div>
-        <div className="grid md:grid-cols-3 grid-cols-2 md:pl-12 pt-8 md:pt-0  ">
+        <div className="grid md:grid-cols-3 grid-cols-2 md:pl-4 pt-8 md:pt-0  ">
           <div className="  ">
             <h1 className=" font-semibold text-[22px] pb-5 ">Learning Path</h1>
-            <ul className=" text-[16px] list-inside ">
+            <ul className=" xl:text-[16px] text-[14px] list-inside ">
               {Learning.map((data, index) => (
                 <li key={index} className="py-1.5 px-1 list-disc ">
                   <Link href={data === "Edit Profile" ? "/edit-profile" : ""}>{data}</Link>
@@ -67,7 +67,7 @@ const Footer = () => {
           </div>
           <div className="   ">
             <h1 className=" font-semibold text-[22px] pb-5 ">Topics</h1>
-            <ul className=" text-[16px] list-inside transition-all break-words ">
+            <ul className=" xl:text-[16px] text-[14px] list-inside transition-all break-words ">
               {Topics.map((data, index) => (
                 <li key={index} className="py-1.5 px-1 list-disc  ">
                   <Link href="" className="">
@@ -77,7 +77,7 @@ const Footer = () => {
               ))}
             </ul>
           </div>
-          <div className=" text-[16px]   ">
+          <div className=" text-[16px] pl-4 pt-6 md:pt-0 ">
             <h1 className=" font-semibold text-[22px] pb-5">Get In Touch</h1>
             <div className="flex pb-2 ">
               <Location />
@@ -100,7 +100,7 @@ const Footer = () => {
               <EmailIcon />
               <div className="pl-4 ">
                 <h1 className="text-[#1BADFF]">Email Us:</h1>
-                <span> +91 99877 58132</span>
+                <span> dc_tutor@gmail.com</span>
               </div>
             </div>
           </div>

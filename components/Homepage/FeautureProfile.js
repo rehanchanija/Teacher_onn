@@ -25,10 +25,11 @@ const FeautureProfile = () => {
     autoplay: true,
     autoplaySpeed: 4000,
     responsive: [
+
       {
         breakpoint: 1024, // For screens less than 1024px
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 4,
           slidesToScroll: 1,
           infinite: true,
           // dots: true,
@@ -37,7 +38,7 @@ const FeautureProfile = () => {
       {
         breakpoint: 768, // For screens less than 768px
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 1,
           dots: false,
         },
@@ -54,41 +55,43 @@ const FeautureProfile = () => {
   };
 
   return (
-    <div className="bg-[#146DB2]    ">
-      <div className="flex items-center md:px-12 pt-6">
-        <div className="pt-5">
-          <Image
-            src="/image/home/live1.png"
-            width={191.37}
-            height={136.59}
-            alt="a"
-          />
+    <div className="bg-[#146DB2]">
+      <div className=" space-y-4  max-w-6xl mx-auto  ">
+        <div className="flex items-center   px-2 pt-6">
+          <div className="pt-5 hidden md:block">
+            <Image
+              src="/image/home/live1.png"
+              width={191.37}
+              height={136.59}
+              alt="a"
+            />
+          </div>
+          <div className=" pb-6    text-center  ">
+            <h1 className="xl:text-[50px] md:text-[40px] text-[30px] pb-4 font-bold text-white ">
+              Featured Profiles
+            </h1>
+            <p className="text-white px-2 text-[14px] md:text-[20px]    ">
+              Established with a vision to provide high-quality and accessible
+              education,  our platform is designed to cater to the diverse learning
+              needs of students.
+            </p>
+          </div>
+          <div className="pt-5 hidden md:block">
+            <Image
+              src="/image/home/live2.png"
+              width={191.37}
+              height={136.59}
+              alt="a"
+            />
+          </div>
         </div>
-        <div className=" pb-6 md:w-[46.3rem]    text-center mx-auto ">
-          <h1 className="md:text-[50px] text-[30px] pb-4 font-semibold text-white ">
-            Featured Profiles
-          </h1>
-          <p className="text-white px-2 md:text-[20px] text-lg   ">
-            Established with a vision to provide high-quality and accessible
-            education, our platform is designed to cater to the diverse learning
-            needs of students.
-          </p>
+        <div className=" pb-12 px-8  ">
+          <AppSlider settings={sliderSettings}>
+            {data?.map?.((tutor, index) => (
+              <FeauturedCard key={index} tutor={tutor} />
+            ))}
+          </AppSlider>
         </div>
-        <div className="pt-5">
-          <Image
-            src="/image/home/live2.png"
-            width={191.37}
-            height={136.59}
-            alt="a"
-          />
-        </div>
-      </div>
-      <div className="  px-12 pt-4 rounded-xl pb-4">
-        <AppSlider settings={sliderSettings}>
-          {data?.map?.((tutor, index) => (
-            <FeauturedCard key={index} tutor={tutor} />
-          ))}
-        </AppSlider>
       </div>
     </div>
   );

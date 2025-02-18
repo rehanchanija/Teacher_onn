@@ -8,6 +8,8 @@ import { useState } from "react";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch } from "react-redux";
+import { setTutor } from "@/store/slices/authSlice";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
 
 
@@ -44,9 +46,10 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
 
             handleNext();
             dispatch(setTutor(data))
+            toast.success("Experience Added Successfully", { position: "top-center" });
         },
         onError: (error) => {
-            console.log("onError", error)
+            toast.error("Error in adding Experience", { position: "top-center" });
         }
     })
     const { mutate: deleteExperience, } = useMutation({
@@ -54,6 +57,7 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
         onSuccess: (data) => {
             queryClient.invalidateQueries(["GET_TUTOR"])
             dispatch(setTutor(data))
+            toast.success("Experience Deleted Successfully", { position: "top-center" });
         },
         onError: (error) => {
             console.log("onError", error)

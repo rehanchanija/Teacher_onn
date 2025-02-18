@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const TestimonialsCard = () => {
   return (
-    <div className="bg-[#FFFFFF]  shadow-xl md:mx-2  shadow-[#E5ECF2]  md:mb-16 border space-y-2 border-blue-100 p-4    rounded-lg ">
+    <div className="bg-[#FFFFFF] md:mx-2 mx-6 shadow-xl   shadow-[#E5ECF2]   border space-y-2 border-blue-100 p-4    rounded-lg ">
 
       <div className='flex  '>
 
@@ -19,10 +19,11 @@ const TestimonialsCard = () => {
         </div>
 
       </div>
-      <h2 className="text-[20px] font-semibold  ">ARYA GUPTA</h2>
-      <p className="text-[#667681]  text-[16px]">“The coaching classes were crucial to my academic success. The professors emphasized critical analysis and effective answering techniques, while the DC test papers deepened my understanding. Nikita mam’s innovative teaching strategies and practical tips greatly enhanced my performance.</p>
+      <h2 className="md:text-[20px] font-semibold  ">ARYA GUPTA</h2>
+      <p className="text-[#667681] text-[14px] md:text-[16px]">“The coaching classes were crucial to my academic success. The professors emphasized critical analysis and effective answering techniques, while the DC test papers deepened my understanding. Nikita mam’s innovative teaching strategies and practical tips greatly enhanced my performance.</p>
     </div>
   );
 };
 
-export default TestimonialsCard;
+
+export default TestimonialsCard; 

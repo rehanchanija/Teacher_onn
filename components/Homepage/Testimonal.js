@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import AppSlider from "../AppSlider";
 import TestimonialsCard from "../Cards/TestimonialsCard";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const Testimonals = () => {
   const sliderRef = useRef(null);
@@ -35,40 +36,53 @@ const Testimonals = () => {
   };
 
   return (
-    <div className="space-y-8 mt-12 md:mt-0 md:mb-0 mb-12 mx-4">
-      <div className="md:flex items-center justify-between space-y-4">
-        <div className="md:w-[729px] mt-8 text-center md:text-left ">
-          <Link href="" className="text-[#1BADFF] text-[18px]">
-            ~ TESTIMONIALS ~
-          </Link>
-          <h1 className="text-[3.1rem] pb-3 leading-[63.1px] font-extrabold text-[#0F283C]">
-            Trusted by Thousands of <span className="text-[#146DB2]">Students and Parents</span>
-          </h1>
-          <p className="text-[#667681] pb-4 text-[20px]">
-            Don’t take our word for it. Trust our customers.
-          </p>
+    <div className="md:mt-24 mt-20 mb-24 md:px-12">
+
+      <div className="space-y-8   max-w-6xl mx-auto    ">
+        <div className="md:flex items-center justify-between space-y-4">
+          <div className="xl:w-[729px] md:w-[512px]  text-center px-4 md:text-left ">
+            <Link href="" className="text-[#1BADFF]  text-[18px]">
+              ~ TESTIMONIALS ~
+            </Link>
+            <h1 className="xl:text-[50px] md:text-[40px] pt-2 sm:leading-[50px] text-[30px] pb-3 xl:leading-[60px] font-bold text-[#0F283C]">
+              Trusted by Thousands of <span className="text-[#146DB2]">Students and Parents</span>
+            </h1>
+            <p className="text-[#667681] pb-4 text-[14px] md:text-[20px]">
+              Don’t take our word for it. Trust our customers.
+            </p>
+          </div>
+          <div className="flex justify-center font-medium space-x-6 mb-4">
+            <button
+              className="flex items-center text-[#1268AA] py-3 border-[#1268AA] border-[1.5px] px-4 text-[14px] md:text-[17.36px] font-medium rounded-md transform transition-transform duration-300 hover:scale-110"
+              onClick={prevSlide}
+            >
+              <span className="md:pr-3 pr-2 pt-[1px] ">
+              <IoIosArrowBack />
+                </span> 
+              Previous
+            </button>
+            <button
+              className=" flex items-center
+bg-[#1BADFF]  font-medium px-5 text-[14px]  py-3 md:text-[17.36px]  text-white             rounded-md transform transition-transform duration-300 hover:scale-110"
+              onClick={nextSlide}
+            >
+
+Next 
+              <span className="md:pl-3 pl-2 pt-[1px] ">
+              
+<IoIosArrowForward />
+              </span>
+
+            </button>
+          </div>
         </div>
-        <div className="flex justify-center space-x-6 mb-4">
-          <button
-            className="text-[#1268AA] py-3 border-[#1268AA] border px-6 text-[17.36px] font-bold rounded-md transform transition-transform duration-300 hover:scale-110"
-            onClick={prevSlide}
-          >
-            <span className="px-2 font-bold">&lt;</span> Previous
-          </button>
-          <button
-            className="bg-[#1BADFF] py-3 text-white px-6 text-[17.36px] font-bold rounded-md transform transition-transform duration-300 hover:scale-110"
-            onClick={nextSlide}
-          >
-            Next <span className="px-2 font-bold">&gt;</span>
-          </button>
+        <div >
+          <AppSlider ref={sliderRef} settings={sliderSettings}>
+            {combos.map((_, index) => (
+              <TestimonialsCard key={index} />
+            ))}
+          </AppSlider>
         </div>
-      </div>
-      <div>
-        <AppSlider ref={sliderRef} settings={sliderSettings}>
-          {combos.map((_, index) => (
-            <TestimonialsCard key={index} />
-          ))}
-        </AppSlider>
       </div>
     </div>
   );
