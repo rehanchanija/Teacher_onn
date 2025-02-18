@@ -1,20 +1,18 @@
+import {
+  postgraduateDegrees,
+  schoolClasses,
+  undergraduateDegrees,
+} from "@/utils/constant";
 import Link from "next/link";
 import { useState } from "react";
 
 const CourseAdviceCard = () => {
-  const [selectedCategory, setSelectedCategory] = useState('All Category');
+  const [selectedCategory, setSelectedCategory] = useState("All Category");
 
   const Tuition = [
-    "Class 12 Tuition",
-    "Class 7 Tuition",
-    "Class 11 Tuition",
-    "Class 6 Tuition",
-    "Class 10 Tuition",
-    "Class I-V Tuition",
-    "Class 9 Tuition",
-    "Class 8 Tuition",
-    "BCom Tuition",
-    "BTech Tuition",
+    ...schoolClasses.map((item) => `${item} Tuitions`),
+    ...undergraduateDegrees.slice(0, 3).map((item) => `${item} Tuitions`),
+    ...postgraduateDegrees.slice(0, 3).map((item) => `${item} Tuitions`),
   ];
   const Languages = [
     "Spoken English",
@@ -47,18 +45,15 @@ const CourseAdviceCard = () => {
     setSelectedCategory(category);
   };
   return (
-
     <div>
-
-
-
-
       <div className=" md:space-x-8 space-y-4 md:space-y-0 md:flex justify-between  ">
         {/* Tuitions Section */}
         <div className="md:w-[50%] bg-[#F6FBFF] md:p-4  border-t-4 border-t-[#146DB2]   rounded-lg space-y-6 ">
           <div className=" mt-2 pl-3 md:pl-0 md:mt-0">
-            <h3 className="text-[#136FB6] text-[22px] font-semibold mx-2   mb-2 flex 
-            items-center justify-between w-[6.8rem]">
+            <h3
+              className="text-[#136FB6] text-[22px] font-semibold mx-2   mb-2 flex 
+            items-center justify-between w-[6.8rem]"
+            >
               <span className="w-1.5 h-1.5 bg-[#136FB6] rounded-full text-[22px] " />
               Tuitions
             </h3>
@@ -66,7 +61,7 @@ const CourseAdviceCard = () => {
               {Tuition.map((item, index) => (
                 <button
                   key={index}
-                  className="p-2 m-1 md:m-2  text-[#8397A6] md:text-[18px]  text-left border w-[140px] sm:w-[148px] rounded-md border-[#9EB5C7]"
+                  className="p-2 m-1 md:m-2  text-[#8397A6] md:text-[18px]  text-left border rounded-md border-[#9EB5C7]"
                 >
                   <Link href="/">{item}</Link>
                 </button>
