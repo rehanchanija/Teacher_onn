@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 
 
-const PersonalInfo = ({ handleNext, formData, updateFormData, initialData }) => {
+const PersonalInfo = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
     const dispatch = useDispatch()
     const validationSchema = Yup.object({
         firstName: Yup.string().required("First name is required"),
@@ -39,6 +39,21 @@ const PersonalInfo = ({ handleNext, formData, updateFormData, initialData }) => 
             };
             reader.readAsDataURL(file);
         }
+    };
+
+    const handleCancel = (resetForm, setValues) => {
+        resetForm(); // Reset the form to its initial values
+        setPreviewImage(formData?.image || "/profilepic.png");
+        setValues({
+            firstName: initialData?.fullName?.split(" ")[0] || "",
+            lastName: initialData?.fullName?.split(" ")[1] || "",
+            mobileNumber: initialData?.mobileNumber || "",
+            specialty: initialData?.speciality || "",
+            email: initialData?.email || "",
+            city: initialData?.city || "",
+            address: initialData?.address || "",
+            image: initialData?.image || previewImage,
+        });
     };
 
     const onSubmit = (values) => {
@@ -99,7 +114,7 @@ const PersonalInfo = ({ handleNext, formData, updateFormData, initialData }) => 
                     onSubmit={onSubmit}
                     enableReinitialize
                 >
-                    {({ dirty, handleSubmit }) => (
+                    {({ dirty, handleSubmit, resetForm, setValues }) => (
                         <div className="flex flex-col md:flex-row gap-4 md:gap-8">
                             {/* Profile Image Section */}
                             <div className="md:w-1/3 flex flex-col items-center md:items-start">
@@ -126,7 +141,7 @@ const PersonalInfo = ({ handleNext, formData, updateFormData, initialData }) => 
                                         id="profileImage"
                                         accept="image/*"
                                         className="hidden"
-                                        onChange={(event) => handleImageChange(event, setFieldValue)}
+                                        onChange={(event) => handleImageChange(event, setValues)}
                                     />
                                     <label
                                         htmlFor="profileImage"
@@ -159,7 +174,19 @@ const PersonalInfo = ({ handleNext, formData, updateFormData, initialData }) => 
                                             />
                                         </div>
                                     ))}
-                                    <div className="sm:col-span-2 flex justify-start">
+                                    <div className="sm:col-span-2 flex justify-between">
+                                        <div>
+                                            {dirty && (
+                                                <button
+                                                    type="button"
+                                                    onClick={dirty ? resetForm : handlePrevious}
+
+                                                    className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:px-7 px-4 rounded-md font-bold"
+                                                >
+                                                    {'<< Cancel'}
+                                                </button>
+                                            )}
+                                        </div>
                                         <button
                                             type="button"
                                             onClick={() => {
@@ -169,9 +196,10 @@ const PersonalInfo = ({ handleNext, formData, updateFormData, initialData }) => 
                                                     handleNext()
                                                 }
                                             }}
-                                            className="bg-[#0F283C] text-white py-2.5 px-8 md:py-3 md:px-10 rounded text-base md:text-lg font-semibold w-full sm:w-auto" disabled={isPending}
+                                            className="bg-[#0F283C] text-white py-2.5 px-8 md:py-3 md:px-10 rounded text-base md:text-lg font-semibold w-full sm:w-auto" 
+                                            disabled={isPending}
                                         >
-                                            Next &gt;
+                                            {dirty ? 'Save >>' : 'Next >>'}
                                         </button>
                                     </div>
                                 </Form>

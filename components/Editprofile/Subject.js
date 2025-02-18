@@ -1,13 +1,13 @@
 "use client";
+import { deleteTutorSubject, updateTutorSubject } from "@/api/tutor.api";
+import { setTutor } from "@/store/slices/authSlice";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/image";
 import { useState } from "react";
-import * as Yup from "yup";
-import { deleteTutorSubject, updateTutorSubject } from "@/api/tutor.api";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { setTutor } from "@/store/slices/authSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import * as Yup from "yup";
 
 const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
     const dispatch = useDispatch()
@@ -63,6 +63,10 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
         updateFormData('subjects', values);
     };
 
+    const handleCancel = (resetForm, setValues) => {
+        resetForm(); // Reset the form to its initial values
+        setValues(initialValues); // Ensure the form fields are set to the initial values
+    };
 
     console.log(initialData,)
     return (
@@ -89,6 +93,7 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
                                                 fromLevel: item?.fromLevel,
                                                 toLevel: item?.toLevel,
                                             })
+                                            
                                         }}
                                         className="rounded-full w-8 h-8 sm:w-10 sm:h-10">
                                         <Image
@@ -124,7 +129,7 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
                     validationSchema={validationSchema}
                     onSubmit={onSubmit}
                 >
-                    {({ dirty, handleSubmit }) => (
+                    {({ dirty, handleSubmit, setValues, resetForm }) => (
                         <Form className="p-6 bg-[#F2F6FB]">
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
                                 <div>
@@ -179,20 +184,27 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
                                 </div>
                             </div>
 
-                            <div className="mt-6 flex justify-between">
+                            <div className="sm:col-span-2 flex justify-between gap-6 mt-5">
                                 <button
                                     type="button"
-                                    onClick={handlePrevious}
-                                    className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:px-7 px-4  rounded-md font-bold"                                >
-                                    Previous
+                                    onClick={() => dirty ? handleCancel(resetForm, setValues) : handlePrevious()}
+                                    className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:px-7 px-4  rounded-md font-bold"
+                                >
+                                    {dirty ? "<< Cancel" : "<< Previous"}
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={dirty ? handleSubmit : handleNext}
+                                    onClick={() => {
+                                        if (dirty) {
+                                            handleSubmit();
+                                        } else {
+                                            handleNext();
+                                        }
+                                    }}
                                     disabled={isPending}
                                     className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
                                 >
-                                    {isPending ? "Saving..." : "Update >>"}
+                                    {dirty ? "Save >>" : "Next >>"}
                                 </button>
                             </div>
                         </Form>

@@ -1,23 +1,28 @@
 "use client";
+import { deleteTutorExperience, updateTutorExperience } from "@/api/tutor.api";
+import { setTutor } from "@/store/slices/authSlice";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/image";
 import { useState } from "react";
-import * as Yup from "yup";
-import { deleteTutorExperience, updateTutor, updateTutorExperience } from "@/api/tutor.api";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch } from "react-redux";
 import { setTutor } from "@/store/slices/authSlice";
 import { toast } from "react-toastify";
+import * as Yup from "yup";
 
+
+const options = ["Option 1", "Option 2", "Option 3"]
 const Experience = ({ handleNext, handlePrevious, formData, updateFormData, initialData }) => {
     const dispatch = useDispatch()
     const [initialValues, setInitialValues] = useState({
         _id: "",
         organization: "",
-        designation: "",
-        startDate: "",
-        endDate: "",
-        association: "",
+        designation: options[0],
+        startDate: null,
+        endDate: null,
+        association: options[0],
         jobDescription: "",
     })
     const queryClient = useQueryClient()
@@ -26,8 +31,10 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
     const validationSchema = Yup.object({
         organization: Yup.string().required("Required"),
         designation: Yup.string().required("Required"),
-        startDate: Yup.string().required("Required"),
-        endDate: Yup.string().required("Required"),
+        startDate: Yup.date().required("Required"),
+        endDate: Yup.date()
+            .required("Required")
+            .min(Yup.ref('startDate'), 'End date should be greater than start date'),
         association: Yup.string().required("Required"),
         jobDescription: Yup.string().required("Required"),
     });
@@ -71,6 +78,9 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
         updateFormData('experience', values);
     };
     console.log(initialData)
+    const handleCancel = (resetForm, setValues) => {
+        resetForm();
+    };
     return (
         <div className="min-h-screen w-full bg-white">
             <div className="relative max-w-[1281px] mx-auto shadow-lg ">
@@ -90,16 +100,18 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                 </div>
                                 <div className="flex gap-2">
                                     <button
+                                        disabled
                                         onClick={() => {
                                             setInitialValues({
                                                 _id: item?._id,
                                                 organization: item?.organization,
                                                 designation: item?.designation,
-                                                startDate: item?.startDate,
-                                                endDate: item?.endDate,
+                                                startDate: item?.startDate ? new Date(item?.startDate) : null,
+                                                endDate: item?.endDate ? new Date(item?.endDate) : null,
                                                 association: item?.association,
                                                 jobDescription: item?.jobDescription,
                                             })
+                                           
                                         }}
 
                                         className=" text-white rounded-full focus:outline-none" aria-label="Edit">
@@ -140,7 +152,8 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                         onSubmit={onSubmit}
                         enableReinitialize
                     >
-                        {({ dirty, handleSubmit }) => (
+                        {({ dirty, handleSubmit, resetForm, setValues, setFieldValue, values }) => (
+                            console.log(dirty),
 
 
                             <Form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
@@ -159,13 +172,13 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                     {
                                         label: "Start Date (DD/MM/YYYY)",
                                         name: "startDate",
-                                        type: "text",
+                                        type: "date",
                                     },
 
                                     {
                                         label: "End Date (DD/MM/YYYY)",
                                         name: "endDate",
-                                        type: "text",
+                                        type: "date",
                                     },
                                     {
                                         label: "Association",
@@ -196,12 +209,25 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                                 ))}
                                             </Field>
                                         ) : (
-                                            <Field
-                                                type={type}
-                                                name={name}
-                                                className="text-black w-full border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB]"
-                                                placeholder="Enter here"
-                                            />
+                                            type === "date" ? (
+                                                <DatePicker
+                                                    selected={values[name]}
+                                                    onChange={(date) => setFieldValue(name, date)}
+                                                    name={name}
+                                                    className="text-black w-full border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB]"
+                                                    placeholderText="Select Date"
+                                                    dateFormat="MM/dd/yyyy"
+                                                minDate={values?.startDate}
+                                                    
+                                                />
+                                            ) : (
+                                                <Field
+                                                    type={type}
+                                                    name={name}
+                                                    className="text-black w-full border border-gray-300 rounded-[2px] p-2.5 bg-[#F2F6FB]"
+                                                    placeholder="Enter here"
+                                                />
+                                            )
                                         )}
                                         <ErrorMessage name={name} component="div" className="text-red-500 text-sm" />
                                     </div>
@@ -210,26 +236,23 @@ const Experience = ({ handleNext, handlePrevious, formData, updateFormData, init
                                 <div className="col-span-full flex justify-between mt-6">
                                     <button
                                         type="button"
-                                        onClick={handlePrevious}
-                                        className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
+                                        onClick={() => dirty ? handleCancel(resetForm, setValues) : handlePrevious()}
+                                        className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:px-7 px-4 rounded-md font-bold"
                                     >
-                                        &lt; Previous
+                                        {dirty ? "<< Cancel" : "<< Previous"}
                                     </button>
                                     <button
-                                        type="submit"
+                                        type="button"
                                         onClick={() => {
                                             if (dirty) {
-                                                console.log(dirty)
-
                                                 handleSubmit();
                                             } else {
-                                                handleNext()
+                                                handleNext();
                                             }
                                         }}
                                         className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
-                                        disabled={isPending}
                                     >
-                                        Next &gt;
+                                        {dirty ? "Save >>" : "Next >>"}
                                     </button>
                                 </div>
                             </Form>

@@ -1,21 +1,19 @@
 "use client";
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
 import { updateTutor } from "@/api/tutor.api";
 import { useMutation } from "@tanstack/react-query";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from 'yup';
 import { setTutor } from "@/store/slices/authSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
-
 const ProfileDescription = ({ handleNext, handlePrevious, initialData }) => {
-    const dispatch = useDispatch();
+
     const { mutate, isPending } = useMutation({
         mutationFn: updateTutor,
         onSuccess: (data) => {
             handleNext();
-            dispatch(setTutor(data))
             toast.success('Profile Description Updated Successfully', { position: 'top-center' });
         },
         onError: (error) => {
@@ -25,11 +23,15 @@ const ProfileDescription = ({ handleNext, handlePrevious, initialData }) => {
 
     const validationSchema = Yup.object().shape({
         profileDescription: Yup.string().required("Profile description is required"),
-        isCheck: Yup.boolean().required("Please check the box"),
+        isCheck: Yup.bool().oneOf([true], 'Please check this box')
     });
 
     const onSubmit = (values) => {
-        mutate({ profileDescription: values.profileDescription });
+        if (values.profileDescription) {
+            mutate({ profileDescription: values.profileDescription });
+        } else {
+            handleNext();
+        }
     };
 
     return (
@@ -68,62 +70,74 @@ const ProfileDescription = ({ handleNext, handlePrevious, initialData }) => {
                         onSubmit={onSubmit}
                         enableReinitialize
                     >
-                        {({ dirty, handleSubmit }) => (
+                        {({ dirty, handleSubmit, resetForm, setValues, values, errors }) => {
+                            console.log(errors  )
+                            // Set original values when form is initialized
+                            
 
-                            <Form>
-                                {/* Profile Description Editor */}
-                                <div className="border border-[#0F283C] rounded-lg p-4 md:p-8 bg-[#F2F6FB] mb-6 text-[#0F283C]">
-                                    <Field
-                                        as="textarea"
-                                        name="profileDescription"
-                                        className="w-full h-64 p-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        placeholder="Write your profile description here..."
-                                    />
-                                </div>
+                
 
-                                {/* Power Profile Section */}
-                                <div className="inline-block bg-[#18A61E] py-2 px-4 md:px-10 rounded mb-4">
-                                    <p className="text-white text-base font-semibold italic">
-                                        Power Profile: 95.5%
-                                    </p>
-                                </div>
+                            return (
+                                <Form>
+                                    {/* Profile Description Editor */}
+                                    <div className="border border-[#0F283C] rounded-lg p-4 md:p-8 bg-[#F2F6FB] mb-6 text-[#0F283C]">
+                                        <Field
+                                            as="textarea"
+                                            name="profileDescription"
+                                            className="w-full h-64 p-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            placeholder="Write your profile description here..."
 
-                                {/* Checkbox */}
-                                <div className="mb-6">
-                                    <label className="flex items-center">
-                                        <Field type="checkbox" name="noContactDetails" className="mr-2" />
-                                        <span className="text-base text-[#4E5865]">
-                                            I have not shared any contact details (Email, Phone, Skype, Website, etc)
-                                        </span>
-                                    </label>
-                                    <ErrorMessage name="noContactDetails" component="div" className="text-red-500 text-sm" />
-                                </div>
+                                        />
+                                        <ErrorMessage name="profileDescription" component="div" className="text-red-500 text-sm" />
 
-                                {/* Navigation Buttons */}
-                                <div className="flex flex-col md:flex-row justify-start gap-2">
-                                    <button
-                                        type="button"
-                                        className="px-4 md:px-6 py-2 border border-[#0F283C] font-bold text-[#0F283C] w-full md:w-[179px] h-[52px] rounded text-base"
-                                        onClick={handlePrevious}
-                                    >
-                                        &lt;&lt; Previous
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => {
-                                            if (dirty) {
-                                                handleSubmit();
-                                            } else {
-                                                handleNext()
-                                            }
-                                        }}
-                                        className="px-4 md:px-6 py-2 bg-[#0B1F36] text-white rounded w-full md:w-[179px] h-[52px] font-bold text-base"
-                                    >
-                                        Next &gt;&gt;
-                                    </button>
-                                </div>
-                            </Form>
-                        )}
+                                    
+                                    </div>
+                                    
+
+                                    {/* Power Profile Section */}
+                                    <div className="inline-block bg-[#18A61E] py-2 px-4 md:px-10 rounded mb-4">
+                                        <p className="text-white text-base font-semibold italic">
+                                            Power Profile: 95.5%
+                                        </p>
+                                    </div>
+
+                                    {/* Checkbox */}
+                                    <div className="mb-6">
+                                        <label className="flex items-center">
+                                            <Field type="checkbox" name="isCheck" className="mr-2" />
+                                            <span className="text-base text-[#4E5865]">
+                                                I have not shared any contact details (Email, Phone, Skype, Website, etc)
+                                            </span>
+                                        </label>
+                                        <ErrorMessage name="isCheck" component="div" className="text-red-500 text-sm" />
+                                    </div>
+
+                                    {/* Navigation Buttons */}
+                                    <div className="flex justify-between mt-6">
+                                        <button
+                                            type="button"
+                                            onClick={dirty ? resetForm : handlePrevious}
+                                            className="bg-transparent border border-[#0F283C] text-[#0F283C] py-2 md:px-7 px-4 rounded-md font-bold"
+                                        >
+                                            {dirty ? "<< Cancel" : "<< Previous"}
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                if (dirty) {
+                                                    handleSubmit();
+                                                } else {
+                                                    handleNext();
+                                                }
+                                            }}
+                                            className="bg-[#0F283C] text-white py-2 md:py-3 px-6 md:px-10 rounded text-sm md:text-lg font-semibold"
+                                        >
+                                            {dirty ? "Save >>" : "Next >>"}
+                                        </button>
+                                    </div>
+                                </Form>
+                            );
+                        }}
                     </Formik>
                 </div>
             </div>
