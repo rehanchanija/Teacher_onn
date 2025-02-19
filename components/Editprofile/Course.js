@@ -6,7 +6,6 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import Image from "next/image";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import Select from 'react-select';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Import Toast CSS
 import * as Yup from "yup";

@@ -7,6 +7,7 @@ const FeauturedCard = ({ tutor }) => {
   const { personalInfo } = tutor;
 
   return (
+    <Link href={`/profile/${tutor?._id}/`} className="cursor-pointer"> 
     <div className="sm:mx-3   mx-auto bg-white shadow-2xl rounded-lg ">
       <div className="">
         <Image
@@ -38,6 +39,7 @@ const FeauturedCard = ({ tutor }) => {
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 

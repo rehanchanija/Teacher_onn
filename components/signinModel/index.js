@@ -55,9 +55,9 @@ const SigninModal = ({ openModal, closeLoginModal }) => {
     onSuccess: (data) => {
 
       if (data?.student) {
-        dispatch(setStudent(data))
+        dispatch(setStudent(data?.student))
       } else if (data?.tutor) {
-        dispatch(setTutor(data))
+        dispatch(setTutor(data?.tutor))
         router.push("/edit-profile");
 
       }
