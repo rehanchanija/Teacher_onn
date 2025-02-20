@@ -107,7 +107,7 @@ const Hamburg = () => {
                   </button>
 
                   <div className="flex items-center space-x-3 hover:bg-gray-100 p-2 ">
-                    <Link href="/TeachersList" onClick={handleCloseDropdown}>
+                    <Link href="/teacher-list" onClick={handleCloseDropdown}>
                       <button className="flex items-center space-x-3 w-full">
                         <Image
                           src="/teacher.png" // Replace with your icon image path

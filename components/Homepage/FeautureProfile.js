@@ -15,7 +15,6 @@ const FeautureProfile = () => {
     queryFn: getFeaturedTutor,
   })
 
-  console.log(data)
   const sliderSettings = {
     // dots: true,
     infinite: true,

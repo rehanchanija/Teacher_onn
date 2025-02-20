@@ -1,5 +1,5 @@
 import { signupStudent, signupTutor } from "@/api/auth.api";
-import { setTutor } from "@/store/slices/authSlice";
+import { setStudent, setTutor } from "@/store/slices/authSlice";
 import { useMutation } from "@tanstack/react-query";
 import { useFormik } from "formik";
 import Image from "next/image";
@@ -14,7 +14,6 @@ const SignupModal = ({ openLoginModal, closeModal, defaultRole }) => {
   const dispatch = useDispatch();
 
   const [isTutor, setIsTutor] = useState(defaultRole === "tutor");
-  // Track if the user is signing up as a Tutor or Student
   const modalRef = useRef();
 
   useEffect(() => {
@@ -61,7 +60,6 @@ const SignupModal = ({ openLoginModal, closeModal, defaultRole }) => {
       if (isTutor) {
         dispatch(setTutor(data));
         router.push("/edit-profile");
-        return;
       } else if (!isTutor) {
         dispatch(setStudent(data));
       }
