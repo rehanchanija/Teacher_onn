@@ -9,7 +9,7 @@ const LiveClasses = () => {
     querykey: ["GET_EXPERIENCE_TUTOR"],
     queryFn: getExperienceTutor,
   })
-  console.log(data, "data")
+  console.log(data)
 
   return (
     <div className="bg-white">

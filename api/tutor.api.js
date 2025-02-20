@@ -10,11 +10,25 @@ export const updateTutor = async (values) => {
   const res = await axios.patch(`${API_URL}/tutor/update/${id}`, values);
   return res.data;
 };
+
+export const getAllTutor = async ( ) => {
+    const res = await axios.get(`${API_URL}/tutor`);
+    return res.data;
+  };
+ 
 export const getTutor = async ({ queryKey }) => {
   const tutorId = queryKey[1];
   const res = await axios.get(`${API_URL}/tutor/${tutorId}`);
   return res.data;
 };
+export const postConnections = async ({studentId, tutorId}) => {
+  console.log(tutorId, studentId)
+  const res = await axios.post(`${API_URL}/connections`, {studentId, tutorId})
+  return res.data
+}
+
+
+
 export const getFeaturedTutor = async () => {
   const res = await axios.get(`${API_URL}/tutor/featured`);
   return res.data;

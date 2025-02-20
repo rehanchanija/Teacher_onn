@@ -1,8 +1,9 @@
-import { getTutor } from "@/api/tutor.api";
-import { useQuery } from "@tanstack/react-query";
+import { getTutor, postConnections } from "@/api/tutor.api";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const MyProfile = () => {
   const router = useRouter();
@@ -10,11 +11,28 @@ const MyProfile = () => {
   console.log(router.query);
 
   const { tutor } = useSelector((state) => state.auth);
+  const { student } = useSelector((state) => state.auth);
+
   const { data } = useQuery({
     queryKey: ["GET_TUTOR", router.query.id],
     queryFn: getTutor,
     enabled: !!router.query.id,
   });
+  console.log(data)
+  const { mutate } = useMutation({
+    mutationFn: postConnections,
+    onSuccess: () => {
+      toast.success("You have successfully connected with the tutor!")
+    },
+    onError: (error) => {
+      toast.error("something went wrong", error, { position: "top-center" });
+    },
+  })
+
+  const handleBookNow = () => {
+    console.log(data._id, student?._id)
+    mutate({ tutorId: data?._id, studentId: student?._id })
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -60,7 +78,7 @@ const MyProfile = () => {
                       className="text-xl md:text-[20px] font-bold text-[#01354B]"
                       style={{ fontFamily: "Gilroy-Bold" }}
                     >
-                      {data?.personalInfo?.fullName}
+                      {data?.personalInfo?.fullName}x
                     </h2>
                     <p
                       className="text-[#667681] text-base"
@@ -69,7 +87,6 @@ const MyProfile = () => {
                       {data?.personalInfo?.speciality}
                     </p>
 
-                    {/* Rating */}
                     <div className="flex items-center gap-2 mt-2">
                       <div className="flex">
                         {[...Array(5)].map((_, i) => (
@@ -118,17 +135,22 @@ const MyProfile = () => {
 
                 {/* Action Buttons */}
                 <div className="flex gap-3 mt-4">
-                  <button
-                    className="flex-1 bg-[#121212] text-white h-11 rounded-md text-lg font-bold"
-                    onClick={() => {
-                      if (tutor) {
-                        router.push("/edit-profile");
-                      } else {
-                      }
-                    }}
-                  >
-                    {tutor?._id === data?._id ? "Edit Profile" : "Book Now"}
-                  </button>
+                  {(tutor?._id === data?._id || student) && (
+                    <button
+                      className="flex-1 bg-[#121212] text-white h-11 rounded-md text-lg font-bold"
+                      onClick={() => {
+
+                        if (tutor) {
+                          router.push("/edit-profile");
+                        }
+                        else if (student) {
+                          handleBookNow()
+                        }
+                      }}
+                    >
+                      {tutor?._id === data?._id ? "Edit Profile" : "Book Now"}
+                    </button>
+                  )}
                   <button className="w-24 border border-[#667681] text-[#667681] h-11 rounded-md text-lg">
                     Share
                   </button>

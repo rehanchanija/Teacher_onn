@@ -63,7 +63,8 @@ const CourseAdviceCard = () => {
                   key={index}
                   className="p-2 m-1 md:m-2  text-[#8397A6] md:text-[18px]  text-left border rounded-md border-[#9EB5C7]"
                 >
-                  <Link href="/">{item}</Link>
+                  <Link href={`/teacher-list?filter=${item}`}>
+                  {item}</Link>
                 </button>
               ))}
             </div>
