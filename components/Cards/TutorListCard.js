@@ -1,28 +1,34 @@
 import Link from "next/link";
-import PersonalInfo from "../Editprofile/PersonalInfo";
 
-const TeacherListCard = ({ tutor }) => {
+const TeacherListCard = ({ tutor , level}) => {
+  console.log(level)
   const { personalInfo, educationInfo, profileDescription,subjects,teachingDetails } = tutor;
-  console.log(tutor)
+  console.log(subjects)
+  const sortedSubject = subjects?.sort((a, _) => {
+    const classANumberFrom = parseInt(a?.fromLevel.split("-")[1]) // 3
+    const classANumberTo = parseInt(a?.toLevel.split("-")[1]) // 8
+    const classArange = new Array(classANumberTo - classANumberFrom + 1).fill().map((_, idx) => classANumberFrom + idx)
+    const levelNUmber = parseInt(level.split("-")[1])
+    return classArange.includes(levelNUmber) ? -1 : 1
+  })
+
+  console.log(sortedSubject)
   return (
     <div className=" text-[#01354B]  border p-4 bg-[#EFF7FC] space-y-4 rounded-md ">
       <h1 className="text-[20px] truncate font-semibold pt-3">
         {personalInfo?.fullName}
-        <span className="text-[16px] pl-2 text-[#1BADFF]">
+        <span className="text-[12px] pl-2 text-[#1BADFF]">
           ({educationInfo[0]?.degreeName})
         </span>
       </h1>
-      <div className="space-x-6">
+      <div className=" h-[60px] ">
         {
-          subjects?.slice(0,2).map((data)=>(
-            <button className="border px-2 border-[#01354B]">
-              {data?.subject}
+          sortedSubject?.slice(0,2 ).map((data)=>(
+            <button className="border m-1 rounded-xl px-2 text-xs py-1 border-[#01354B]">
+              {data?.subject} {data?.fromLevel} - {data?.toLevel}
             </button>
           ))
         }
-        
-      
-       
       </div>
    
       <p className="text-[16px] text-[#667681]">
