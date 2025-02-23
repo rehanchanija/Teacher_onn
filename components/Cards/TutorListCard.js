@@ -12,7 +12,6 @@ const TeacherListCard = ({ tutor , level}) => {
     return classArange.includes(levelNUmber) ? -1 : 1
   })
 
-  console.log(sortedSubject)
   return (
     <div className=" text-[#01354B]  border p-4 bg-[#EFF7FC] space-y-4 rounded-md ">
       <h1 className="text-[20px] truncate font-semibold pt-3">

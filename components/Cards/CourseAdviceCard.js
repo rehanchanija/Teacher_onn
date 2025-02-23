@@ -18,14 +18,14 @@ const CourseAdviceCard = () => {
     { name: 'Class 12', slug: 'class-12' },
   ];
   const Languages = [
-    "Spoken English",
-    "IELTS",
-    "French Language",
-    "PTE",
-    "Spanish Language",
-    "TOEFL",
-    "German Language",
-    "Hindi Language",
+    { name: "Spoken English", slug: "spoken-english" },
+    { name: "IELTS", slug: "ielts" },
+    { name: "French Language", slug: "french-language" },
+    { name: "PTE", slug: "pte" },
+    { name: "Spanish Language", slug: "spanish-language" },
+    { name: "TOEFL", slug: "toefl" },
+    { name: "German Language", slug: "german-language" },
+    { name: "Hindi Language", slug: "hindi-language" },
   ];
 
   const Hobbies = [
@@ -81,9 +81,13 @@ const CourseAdviceCard = () => {
                 <button
                   key={index}
                   className="  px-4 py-2  m-1 md:m-2  text-[#8397A6] md:text-[18px] text-left border rounded-md border-[#9EB5C7]"
-                  aria-label={`Select ${item}`}
+                  // aria-label={`Select ${item}`}
                 >
-                  <Link href="/">{item}</Link>
+                  <Link
+                    href={`/teacher-list?level=${classLevels[index].slug}&subject=${item.slug}`}
+                  >
+                    {item.name}
+                  </Link>
                 </button>
               ))}
             </div>
