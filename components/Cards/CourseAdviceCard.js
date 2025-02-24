@@ -1,8 +1,12 @@
+import {
+  postgraduateDegrees,
+  schoolClasses,
+  undergraduateDegrees,
+} from "@/utils/constant";
 import Link from "next/link";
 import { useState } from "react";
 
 const CourseAdviceCard = () => {
-
   const classLevels = [
     { name: 'Class 1', slug: 'class-1' },
     { name: 'Class 2', slug: 'class-2' },
@@ -46,14 +50,15 @@ const CourseAdviceCard = () => {
 
  
   return (
-
     <div>
       <div className=" md:space-x-8 space-y-4 md:space-y-0 md:flex justify-between  ">
         {/* Tuitions Section */}
         <div className="md:w-[50%] bg-[#F6FBFF] md:p-4  border-t-4 border-t-[#146DB2]   rounded-lg space-y-6 ">
           <div className=" mt-2 pl-3 md:pl-0 md:mt-0">
-            <h3 className="text-[#136FB6] text-[22px] font-semibold mx-2   mb-2 flex 
-            items-center justify-between w-[6.8rem]">
+            <h3
+              className="text-[#136FB6] text-[22px] font-semibold mx-2   mb-2 flex 
+            items-center justify-between w-[6.8rem]"
+            >
               <span className="w-1.5 h-1.5 bg-[#136FB6] rounded-full text-[22px] " />
               Tuitions
             </h3>
@@ -61,7 +66,7 @@ const CourseAdviceCard = () => {
               {classLevels.map((item, index) => (
                 <button
                   key={index}
-                  className="p-2 m-1 md:m-2  text-[#8397A6] md:text-[18px]  text-left border  rounded-md border-[#9EB5C7]"
+                  className="p-2 m-1 md:m-2  text-[#8397A6] md:text-[18px]  text-left border rounded-md border-[#9EB5C7]"
                 >
                   <Link href={`/teacher-list?level=${item.slug}`}>
                   {item.name} Tution</Link>
