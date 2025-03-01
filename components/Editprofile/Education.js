@@ -95,7 +95,8 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
     <div className="flex flex-col items-center">
       <div className="bg-[#F2F6FB] shadow-md rounded-lg p-6 w-full max-w-7xl">
         <div className="p-4 sm:p-6 md:p-8 bg-[#F2F6FB]">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+            
             {initialData?.map((item, index) => (
               <div
                 key={index}
@@ -149,20 +150,14 @@ const Education = ({ handleNext, handlePrevious, formData, initialData }) => {
             ))}
           </div>
         </div>
-        <div className="flex flex-col md:flex-row gap-8 my-4">
-          {/* Profile Image Section */}
-          <div className="md:w-1/3">
-            <div className="relative w-full md:h-60 bg-gray-200 border-dotted border-2 border-[#1BADFF] rounded-lg overflow-hidden">
-              <Image
-                src="/degree.png"
-                alt="Degree Placeholder"
-                width={275}
-                height={242}
-                className="md:object-cover  md:w-full h-full"
-              />
-            </div>
-          </div>
+        <div>
+ <h1 className="text-base md:text-xl font-semibold ml-5 md:ml-8">Add Education/Certification</h1>
 
+        </div>
+        
+        <div className="flex flex-col md:flex-row gap-8 my-4 mx-5 md:mx-8">
+          
+          
           {/* Form Fields Section */}
           <div className="md:w-2/3">
             <Formik

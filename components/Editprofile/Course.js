@@ -42,7 +42,7 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
         Group: "",
         Cert: "",
         CD: "",
-        LOI: [],
+        Lan: [],
     })
     const queryClient = useQueryClient()
     const dispatch = useDispatch()
@@ -71,7 +71,7 @@ const Course = ({ handlePrevious, handleNext, updateFormData, handleSubmit, init
             toast.error("Course delete failed! 🎉");  // Error
         }
     })
-    console.log(initialData)
+    
 
     const validationSchema = Yup.object({
         Course_title: Yup.string().required("Required"),
