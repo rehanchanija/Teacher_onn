@@ -5,6 +5,7 @@ import { setTutor } from "@/store/slices/authSlice";
 import { useMutation } from "@tanstack/react-query";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
+import Select from "react-select";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 
@@ -28,24 +29,27 @@ const TeachingDetail = ({
       label: "Are you a full-time teacher employed by a school/college?",
     },
   ];
-  console.log(initialData);
+  
+  const languageOptions = [
+    { value: 'en', label: 'English' },
+    { value: 'hi', label: 'Hindi' },
+    { value: 'ta', label: 'Tamil' },
+    { value: 'te', label: 'Telugu' },
+    { value: 'ml', label: 'Malayalam' },
+    { value: 'kn', label: 'Kannada' },
+    { value: 'mr', label: 'Marathi' },
+    { value: 'gu', label: 'Gujarati' },
+    { value: 'bn', label: 'Bengali' },
+    { value: 'pa', label: 'Punjabi' },
+    { value: 'ur', label: 'Urdu' },
+    { value: 'or', label: 'Oriya' },
+    { value: 'as', label: 'Assamese' },
+    { value: 'ma', label: 'Maithili' },
+    { value: 'sa', label: 'Sanskrit' },
+  ];
 
-  const initialValues = {
-    charge: initialData?.teachingDetails?.charge || "",
-    minFee: initialData?.teachingDetails?.minimumFee || "",
-    maxFee: initialData?.teachingDetails?.maximumFee || "",
-    feeDetails: initialData?.teachingDetails?.feeDetails || "",
-    totalExperience: initialData?.teachingDetails?.totalExperience || "",
-    teachingExperience: initialData?.teachingDetails?.teachingExperience || "",
-    onlineTeachingExperience:
-      initialData?.teachingDetails?.onlineTeachingExperience || "",
-    travel: initialData?.teachingDetails?.travel || "no",
-    onlineTeaching: initialData?.teachingDetails?.onlineTeaching || "no",
-    digitalPen: initialData?.teachingDetails?.digitalPen || "no",
-    homeworkHelp: initialData?.teachingDetails?.homeworkHelp || "no",
-    fullTimeTeacher: initialData?.teachingDetails?.fullTimeTeacher || "no",
-    opportunities: initialData?.teachingDetails?.opportunities || "",
-  };
+  
+
 
   const isCheck = {
     travel: false,
@@ -56,10 +60,10 @@ const TeachingDetail = ({
   };
 
   const validationSchema = Yup.object({
-    charge: Yup.number().required("Required"),
-    minFee: Yup.number().required("Required"),
-    maxFee: Yup.number().required("Required"),
-    feeDetails: Yup.number().required("Required"),
+    charge: Yup.string().required("Required"),
+    minFee: Yup.string().required("Required"),
+    maxFee: Yup.string().required("Required"),
+    feeDetails: Yup.string().required("Required"),
     totalExperience: Yup.string().required("Required"),
     teachingExperience: Yup.string().required("Required"),
     onlineTeachingExperience: Yup.string().required("Required"),
@@ -92,7 +96,7 @@ const TeachingDetail = ({
         minimumFee: values.minFee,
         maximumFee: values.maxFee,
         feeDetail: values.feeDetails,
-        "totalYearOfExperience ": values.totalExperience,
+        totalYearOfExperience : values.totalExperience,
         yearOfOfflineTeachingExperience: values.teachingExperience,
         yearOfOnlineTeachingExperience: values.onlineTeachingExperience,
         willingToTravelToStudent: values.travel,
@@ -108,18 +112,51 @@ const TeachingDetail = ({
 
   const handleCancel = (resetForm, setValues) => {
     resetForm(); // Reset the form to its initial values
-    setValues(initialValues); // Ensure the form fields are set to the initial values
+    setValues({
+      charge: initialData?.teachingDetails?.charge || "",
+      minFee: initialData?.teachingDetails?.minimumFee || "",
+      maxFee: initialData?.teachingDetails?.maximumFee || "",
+      feeDetails: initialData?.teachingDetails?.feeDetails || "",
+      totalExperience: initialData?.teachingDetails?.totalExperience || "",
+      teachingExperience: initialData?.teachingDetails?.teachingExperience || "",
+      onlineTeachingExperience:
+        initialData?.teachingDetails?.onlineTeachingExperience || "",
+      travel: initialData?.teachingDetails?.travel || "no",
+      onlineTeaching: initialData?.teachingDetails?.onlineTeaching || "no",
+      digitalPen: initialData?.teachingDetails?.digitalPen || "no",
+      homeworkHelp: initialData?.teachingDetails?.homeworkHelp || "no",
+      fullTimeTeacher: initialData?.teachingDetails?.fullTimeTeacher || "no",
+      opportunities: initialData?.teachingDetails?.opportunities || "",
+      language: initialData?.teachingDetails?.language || "",
+    });
   };
+  console.log(initialData)
 
   return (
-    <div className="w-full bg-white relative min-h-screen ">
+    <div className="w-full bg-white relative min-h-screen">
       <div className="relative max-w-[1281px] mx-auto shadow-lg  sm:mt-0">
         <div className="p-4 sm:p-8 bg-[#F2F6FB]">
           <h3 className="mb-4 sm:mb-6 text-[black] font-semibold text-lg sm:text-xl">
             Please enter your teaching details.
           </h3>
           <Formik
-            initialValues={initialValues}
+            initialValues={{
+              charge: initialData?.teachingDetails?.charge || "",
+              minFee: initialData?.teachingDetails?.minimumFee || "",
+              maxFee: initialData?.teachingDetails?.maximumFee || "",
+              feeDetails: initialData?.teachingDetails?.feeDetails || "",
+              totalExperience: initialData?.teachingDetails?.totalExperience || "",
+              teachingExperience: initialData?.teachingDetails?.teachingExperience || "",
+              onlineTeachingExperience:
+                initialData?.teachingDetails?.onlineTeachingExperience || "",
+              travel: initialData?.teachingDetails?.travel || "no",
+              onlineTeaching: initialData?.teachingDetails?.onlineTeaching || "no",
+              digitalPen: initialData?.teachingDetails?.digitalPen || "no",
+              homeworkHelp: initialData?.teachingDetails?.homeworkHelp || "no",
+              fullTimeTeacher: initialData?.teachingDetails?.fullTimeTeacher || "no",
+              opportunities: initialData?.teachingDetails?.opportunities || "",
+              language: initialData?.teachingDetails?.language || "",
+            }}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
             enableReinitialize
@@ -215,6 +252,31 @@ const TeachingDetail = ({
                     />
                   </div>
                 ))}
+
+<div>
+                                        <label className="block font-bold mb-2  text-[#4E5865]">
+                                            Languages of Teaching <span className="text-red-500">*</span>
+                                        </label>
+                                        <Field
+                                            name="LOI"
+                                            component={({ form, field }) => (
+                                                <Select
+                                                    {...field}
+                                                    options={languageOptions}
+                                                    isMulti
+                                                    className="w-full"
+                                                    classNamePrefix="select"
+                                                    placeholder="Select languages"
+                                                    onChange={(selectedOptions) => {
+                                                        form.setFieldValue(field.name, selectedOptions);
+                                                    }}
+                                                    onBlur={() => form.setFieldTouched(field.name, true)}
+                                                    value={field.value}
+                                                />
+                                            )}
+                                        />
+                                        <ErrorMessage name="LOI" component="div" className="text-red-500" />
+                                    </div>
 
                 {/* Dropdown */}
                 <div className="flex flex-col">

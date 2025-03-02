@@ -154,6 +154,7 @@ const PersonalInfo = ({ handleNext, handlePrevious, formData, updateFormData, in
 
                             {/* Form Fields Section - Mobile optimizations */}
                             <div className="md:w-2/3">
+                            {/* <h1 className="text-xl font-semibold mb-10">add your personal information</h1> */}
                                 <Form
                                     className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                                     {["firstName", "lastName", "mobileNumber", "specialty", "email", "city", "address"].map((field, index) => (

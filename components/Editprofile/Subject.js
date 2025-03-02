@@ -121,7 +121,10 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
                         ))}
                     </div>
                 </div>
+                <div>
+ <h1 className="text-base md:text-xl font-semibold ml-5 md:ml-7">Please add subjects below.</h1>
 
+        </div>
                 {/* Add Subject Form */}
                 <Formik
                     initialValues={initialValues}
@@ -142,7 +145,16 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
                                         className="w-full border border-gray-300 rounded-md p-2 bg-white text-gray-600"
                                     >
                                         <option value="">Select here</option>
-                                        {["subject 1", "subject 2", "subject 3"].map((opt, i) => (
+                                        {[ 'Mathematics',
+  'Physics',
+  'Chemistry',
+  'Biology',
+  'History',
+  'Geography',
+  'Political Science',
+  'Economics',
+  'Computer Science',
+  'English',].map((opt, i) => (
                                             <option key={i} value={opt}>{opt}</option>
                                         ))}
                                     </Field>
@@ -159,7 +171,7 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
                                         className="w-full border border-gray-300 rounded-md p-2 bg-white text-gray-600"
                                     >
                                         <option value="">Select here</option>
-                                        {["Grade 1", "Grade 2", "Grade 3"].map((opt, i) => (
+                                        {["Class 1", "Class 2", "Class 3", "Class 4", "Class 5", "Class 6", "Class 7", "Class 8", "Class 9", "Class 10", "Class 11", "Class 12"].map((opt, i) => (
                                             <option key={i} value={opt}>{opt}</option>
                                         ))}
                                     </Field>
@@ -176,7 +188,7 @@ const Subject = ({ handleNext, handlePrevious, formData, updateFormData, initial
                                         className="w-full border border-gray-300 rounded-md p-2 bg-white text-gray-600"
                                     >
                                         <option value="">Select here</option>
-                                        {["Grade 1", "Grade 2", "Grade 3"].map((opt, i) => (
+                                        {["Class 1", "Class 2", "Class 3", "Class 4", "Class 5", "Class 6", "Class 7", "Class 8", "Class 9", "Class 10", "Class 11", "Class 12"].map((opt, i) => (
                                             <option key={i} value={opt}>{opt}</option>
                                         ))}
                                     </Field>
