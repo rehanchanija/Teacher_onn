@@ -11,8 +11,9 @@ export const updateTutor = async (values) => {
   return res.data;
 };
 
-export const getAllTutor = async ( ) => {
-    const res = await axios.get(`${API_URL}/tutor`);
+export const getAllTutor = async ({queryKey} ) => {
+  const  level = queryKey[1]||'';
+    const res = await axios.get(`${API_URL}/tutor?level=${level}`);
     return res.data;
   };
  

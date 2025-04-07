@@ -4,10 +4,14 @@ import TeacherListCard from "@/components/Cards/TutorListCard";
 import { useQuery } from "@tanstack/react-query";
 import { getAllTutor, getTutor } from "@/api/tutor.api";
 import Loader from "@/components/Loader";
+import { useRouter } from "next/router";
 
 const TeacherList = () => {
+    const router=useRouter();
+    const level=router.query?.level;
+    console.log(router.query);
     const { data, isLoading } = useQuery({
-        queryKey: ["GET-ALL-TUTOR"],
+        queryKey: ["GET-ALL-TUTOR",level],
         refetchOnWindowFocus: false,
         queryFn: getAllTutor,
     })
@@ -45,7 +49,7 @@ const TeacherList = () => {
             {/* Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-10 pt-16">
                 {currentCards?.map?.((tutor, index) => (
-                    <TeacherListCard key={tutor._id || index} tutor={tutor} />
+                    <TeacherListCard  key={tutor._id || index} tutor={tutor} level={level}/>
                 ))}
             </div>
 

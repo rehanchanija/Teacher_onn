@@ -2,7 +2,6 @@ import { Rating } from "@smastrom/react-rating";
 import Image from "next/image";
 import Link from "next/link";
 import '@smastrom/react-rating/style.css';
-import { useSelector } from "react-redux";
 
 
 const LiveClassesCard = ({ tutor }) => {
