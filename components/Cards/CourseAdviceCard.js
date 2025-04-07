@@ -4,9 +4,11 @@ import {
   undergraduateDegrees,
 } from "@/utils/constant";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getClasses, getStates, getBoard, getCity, getSubjects } from "@/api/tutor.api";
 
 const CourseAdviceCard = () => {
+<<<<<<< HEAD
   const classLevels = [
     { name: 'Class 1', slug: 'class-1' },
     { name: 'Class 2', slug: 'class-2' },
@@ -21,6 +23,43 @@ const CourseAdviceCard = () => {
     { name: 'Class 11', slug: 'class-11' },
     { name: 'Class 12', slug: 'class-12' },
   ];
+=======
+  const [classLevels, setClassLevels] = useState([]);
+  const [states, setStates] = useState([]);
+  const [boards, setBoards] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [classesData, statesData, boardsData, citiesData, subjectsData] =
+          await Promise.all([
+            getClasses(),
+            getStates(),
+            getBoard(),
+            getCity(),
+            getSubjects(),
+          ]);
+        console.log(classesData, "classesData");
+        setClassLevels(classesData || []);
+        console.log(classLevels, "classLevels");
+        setStates(statesData || []);
+        setBoards(boardsData || []);
+        setCities(citiesData || []);
+        setSubjects(subjectsData || []);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+>>>>>>> 99458cd (Refactor tutor API and components for improved readability and functionality; add new API endpoints for subjects, cities, boards, and states.)
   const Languages = [
     { name: "Spoken English", slug: "spoken-english" },
     { name: "IELTS", slug: "ielts" },
@@ -48,6 +87,7 @@ const CourseAdviceCard = () => {
     "Online Exam Entrance Coaching",
   ];
 
+<<<<<<< HEAD
  
   return (
     <div>
@@ -60,36 +100,55 @@ const CourseAdviceCard = () => {
             items-center justify-between w-[6.8rem]"
             >
               <span className="w-1.5 h-1.5 bg-[#136FB6] rounded-full text-[22px] " />
+=======
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      <div className="md:space-x-8 space-y-4 md:space-y-0 md:flex justify-between flex-wrap">
+        {/* First Column */}
+        <div className="md:w-[48%] bg-[#F6FBFF] md:p-4 border-t-4 border-t-[#146DB2] rounded-lg space-y-6">
+          {/* Tuitions Section */}
+          <div className="mt-2 pl-3 md:pl-0 md:mt-0">
+            <h3 className="text-[#136FB6] text-[22px] font-semibold mx-2 mb-2 flex items-center justify-between w-[6.8rem]">
+              <span className="w-1.5 h-1.5 bg-[#136FB6] rounded-full text-[22px]" />
+>>>>>>> 99458cd (Refactor tutor API and components for improved readability and functionality; add new API endpoints for subjects, cities, boards, and states.)
               Tuitions
             </h3>
-            <div className="pt-2  pl-1 md:pl-0">
+            <div className="pt-2 pl-1 md:pl-0">
               {classLevels.map((item, index) => (
                 <button
                   key={index}
+<<<<<<< HEAD
                   className="p-2 m-1 md:m-2  text-[#8397A6] md:text-[18px]  text-left border rounded-md border-[#9EB5C7]"
+=======
+                  className="p-2 m-1 md:m-2 text-[#8397A6] md:text-[18px] text-left border rounded-md border-[#9EB5C7]"
+>>>>>>> 99458cd (Refactor tutor API and components for improved readability and functionality; add new API endpoints for subjects, cities, boards, and states.)
                 >
-                  <Link href={`/teacher-list?level=${item.slug}`}>
-                  {item.name} Tution</Link>
+                  <Link href={`/teacher-list?level=${item.name?.toLowerCase().replace(/ /g, '-')}`}>
+                    {item.name} Tution
+                  </Link>
                 </button>
               ))}
             </div>
           </div>
 
           {/* Languages Section */}
-          <div className=" mt-2 pl-2 md:pl-0 md:mt-0">
-            <h3 className="text-[#136FB6]  md:mx-2 mx-4 text-[22px] font-semibold  mb-3 flex items-center justify-between w-[8.5rem]">
+          <div className="mt-2 pl-2 md:pl-0 md:mt-0">
+            <h3 className="text-[#136FB6] md:mx-2 mx-4 text-[22px] font-semibold mb-3 flex items-center justify-between w-[8.5rem]">
               <span className="w-1.5 h-1.5 bg-[#136FB6] rounded-full text-[22px]" />
               Languages
             </h3>
-            <div className=" pt-2 mx-2 md:mx-0 mb-4 pb-4 md:pb-0 md:mb-0">
+            <div className="pt-2 mx-2 md:mx-0 mb-4 pb-4 md:pb-0 md:mb-0">
               {Languages.map((item, index) => (
                 <button
                   key={index}
-                  className="  px-4 py-2  m-1 md:m-2  text-[#8397A6] md:text-[18px] text-left border rounded-md border-[#9EB5C7]"
-                  // aria-label={`Select ${item}`}
+                  className="px-4 py-2 m-1 md:m-2 text-[#8397A6] md:text-[18px] text-left border rounded-md border-[#9EB5C7]"
                 >
                   <Link
-                    href={`/teacher-list?level=${classLevels[index].slug}&subject=${item.slug}`}
+                    href={`/teacher-list?level=${[index].slug}&subject=${item.slug}`}
                   >
                     {item.name}
                   </Link>
@@ -97,21 +156,94 @@ const CourseAdviceCard = () => {
               ))}
             </div>
           </div>
+
+          {/* Subjects Section */}
+          <div className="mt-2 pl-2 md:pl-0 md:mt-0">
+            <h3 className="text-[#136FB6] md:mx-2 mx-4 text-[22px] font-semibold mb-3 flex items-center justify-between w-[8.5rem]">
+              <span className="w-1.5 h-1.5 bg-[#136FB6] rounded-full text-[22px]" />
+              Subjects
+            </h3>
+            <div className="pt-2 mx-2 md:mx-0 mb-4 pb-4 md:pb-0 md:mb-0">
+              {subjects?.map((item, index) => (
+                <button
+                  key={index}
+                  className="px-4 py-2 m-1 md:m-2 text-[#8397A6] md:text-[18px] text-left border rounded-md border-[#9EB5C7]"
+                >
+                  <Link href={`/teacher-list?subject=${item.name?.toLowerCase().replace(/ /g, '-')}`}>
+                    {item.name}
+                  </Link>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
-        <div
-          className="md:w-[50%] bg-[#F6FBFF] md:p-4  border-t-4 border-t-[#1BADFF]                        
-       rounded-lg space-y-6 shadow-[#1BADFF]"
-        >
-          <div className=" mt-2 pl-3 md:pl-0 md:mt-0">
-            <h3 className="text-[#136FB6] mx-2 text-[22px] font-semibold  mb-2 flex items-center justify-between w-[6.8rem]">
+
+        {/* Second Column */}
+        <div className="md:w-[48%] bg-[#F6FBFF] md:p-4 border-t-4 border-t-[#1BADFF] rounded-lg space-y-6">
+          {/* States Section */}
+          <div className="mt-2 pl-3 md:pl-0 md:mt-0">
+            <h3 className="text-[#136FB6] mx-2 text-[22px] font-semibold mb-2 flex items-center justify-between w-[6.8rem]">
+              <span className="w-1.5 h-1.5 bg-[#136FB6] rounded-full text-[22px]" />
+              States
+            </h3>
+            <div className="pl-1 md:pl-0 md:mx-0 pt-2">
+              {states?.map((item, index) => (
+                <button
+                  key={index}
+                  className="px-3 py-2 md:m-2 m-1 text-[#8397A6] md:text-[18px] text-left border rounded-md border-[#9EB5C7]"
+                >
+                  <Link href={`/teacher-list?state=${item.name?.toLowerCase().replace(/ /g, '-')}`}>{item.name}</Link>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Cities Section */}
+          <div className="mt-2 pl-3 md:pl-0 md:mt-0">
+            <h3 className="text-[#136FB6] mx-2 text-[22px] font-semibold mb-2 flex items-center justify-between w-[6.8rem]">
+              <span className="w-1.5 h-1.5 bg-[#136FB6] rounded-full text-[22px]" />
+              Cities
+            </h3>
+            <div className="pl-1 md:pl-0 md:mx-0 pt-2">
+              {cities?.map((item, index) => (
+                <button
+                  key={index}
+                  className="px-3 py-2 md:m-2 m-1 text-[#8397A6] md:text-[18px] text-left border rounded-md border-[#9EB5C7]"
+                >
+                  <Link href={`/teacher-list?city=${item.name?.toLowerCase().replace(/ /g, '-')}`}>{item.name}</Link>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Boards Section */}
+          <div className="mt-2 pl-3 md:pl-0 md:mt-0">
+            <h3 className="text-[#136FB6] mx-2 text-[22px] font-semibold mb-2 flex items-center justify-between w-[6.8rem]">
+              <span className="w-1.5 h-1.5 bg-[#136FB6] rounded-full text-[22px]" />
+              Boards
+            </h3>
+            <div className="pl-1 md:pl-0 md:mx-0 pt-2">
+              {boards?.map((item, index) => (
+                <button
+                  key={index}
+                  className="px-3 py-2 md:m-2 m-1 text-[#8397A6] md:text-[18px] text-left border rounded-md border-[#9EB5C7]"
+                >
+                  <Link href={`/teacher-list?board=${item.name?.toLowerCase().replace(/ /g, '-')}`}>{item.name}</Link>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-2 pl-3 md:pl-0 md:mt-0">
+            <h3 className="text-[#136FB6] mx-2 text-[22px] font-semibold mb-2 flex items-center justify-between w-[6.8rem]">
               <span className="w-1.5 h-1.5 bg-[#136FB6] rounded-full text-[22px]" />
               Hobbies{" "}
             </h3>
-            <div className=" pl-1 md:pl-0   md:mx-0 pt-2   ">
+            <div className="pl-1 md:pl-0 md:mx-0 pt-2">
               {Hobbies.map((item, index) => (
                 <button
                   key={index}
-                  className="px-3 py-2 md:m-2 m-1  text-[#8397A6] md:text-[18px] text-left border rounded-md border-[#9EB5C7]"
+                  className="px-3 py-2 md:m-2 m-1 text-[#8397A6] md:text-[18px] text-left border rounded-md border-[#9EB5C7]"
                   aria-label={`Select ${item}`}
                 >
                   <Link href="/">{item}</Link>
@@ -120,18 +252,18 @@ const CourseAdviceCard = () => {
             </div>
           </div>
 
-          {/* Languages Section */}
-          <div className="pl-3 md:pl-0 ">
-            <h3 className="text-[#136FB6] text-[22px] font-semibold mx-2  mb-1 flex items-center justify-between w-[5rem]">
+          {/* More Section */}
+          <div className="pl-3 md:pl-0">
+            <h3 className="text-[#136FB6] text-[22px] font-semibold mx-2 mb-1 flex items-center justify-between w-[5rem]">
               <span className="w-1.5 h-1.5 bg-[#136FB6] rounded-full text-[22px]" />
               More{" "}
             </h3>
 
-            <div className="pb-4 pt-2 mx-1 md:mx-0 flex  flex-wrap md:block ">
+            <div className="pb-4 pt-2 mx-1 md:mx-0 flex flex-wrap md:block">
               {More.map((item, index) => (
                 <button
                   key={index}
-                  className="px-3 py-2  m-1 md:m-2 text-[#8397A6] md:text-[18px] text-left border rounded-md border-[#9EB5C7]"
+                  className="px-3 py-2 m-1 md:m-2 text-[#8397A6] md:text-[18px] text-left border rounded-md border-[#9EB5C7]"
                   aria-label={`Select ${item}`}
                 >
                   <Link href="/">{item}</Link>{" "}

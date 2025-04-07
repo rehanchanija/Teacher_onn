@@ -11,20 +11,20 @@ export const updateTutor = async (values) => {
   return res.data;
 };
 
-export const getAllTutor = async ({queryKey} ) => {
-  const  level = queryKey[1]||'';
-    const res = await axios.get(`${API_URL}/tutor?level=${level}`);
-    return res.data;
-  };
- 
+export const getAllTutor = async ({ queryKey }) => {
+  const level = queryKey[1] || '';
+  const res = await axios.get(`${API_URL}/tutor?level=${level}`);
+  return res.data;
+};
+
 export const getTutor = async ({ queryKey }) => {
   const tutorId = queryKey[1];
   const res = await axios.get(`${API_URL}/tutor/${tutorId}`);
   return res.data;
 };
-export const postConnections = async ({studentId, tutorId}) => {
+export const postConnections = async ({ studentId, tutorId }) => {
   console.log(tutorId, studentId)
-  const res = await axios.post(`${API_URL}/connections`, {studentId, tutorId})
+  const res = await axios.post(`${API_URL}/connections`, { studentId, tutorId })
   return res.data
 }
 
@@ -121,5 +121,30 @@ export const deleteTutorEducationInfo = async (values) => {
   const res = await axios.delete(
     `${API_URL}/tutor/delete/educationInfo/${tutorId}/${values.id}`
   );
+  return res.data;
+};
+
+export const getSubjects = async () => {
+  const res = await axios.get(`${API_URL}/subject`);
+  return res.data;
+};
+
+export const getCity = async () => {
+  const res = await axios.get(`${API_URL}/city`);
+  return res.data;
+};
+
+export const getBoard = async () => {
+  const res = await axios.get(`${API_URL}/board`);
+  return res.data;
+};
+
+export const getClasses = async () => {
+  const res = await axios.get(`${API_URL}/classes`);
+  return res.data;
+};
+
+export const getStates = async () => {
+  const res = await axios.get(`${API_URL}/state`);
   return res.data;
 };

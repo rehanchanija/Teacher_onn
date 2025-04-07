@@ -18,21 +18,21 @@ const MyProfile = () => {
     queryFn: getTutor,
     enabled: !!router.query.id,
   });
-  console.log(data)
+  console.log(data);
   const { mutate } = useMutation({
     mutationFn: postConnections,
     onSuccess: () => {
-      toast.success("You have successfully connected with the tutor!")
+      toast.success("You have successfully connected with the tutor!");
     },
     onError: (error) => {
       toast.error("something went wrong", error, { position: "top-center" });
     },
-  })
+  });
 
   const handleBookNow = () => {
-    console.log(data._id, student?._id)
-    mutate({ tutorId: data?._id, studentId: student?._id })
-  }
+    console.log(data._id, student?._id);
+    mutate({ tutorId: data?._id, studentId: student?._id });
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -139,12 +139,10 @@ const MyProfile = () => {
                     <button
                       className="flex-1 bg-[#121212] text-white h-11 rounded-md text-lg font-bold"
                       onClick={() => {
-
                         if (tutor) {
                           router.push("/edit-profile");
-                        }
-                        else if (student) {
-                          handleBookNow()
+                        } else if (student) {
+                          handleBookNow();
                         }
                       }}
                     >
