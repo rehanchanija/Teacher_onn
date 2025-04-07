@@ -8,22 +8,6 @@ import { useState, useEffect } from "react";
 import { getClasses, getStates, getBoard, getCity, getSubjects } from "@/api/tutor.api";
 
 const CourseAdviceCard = () => {
-<<<<<<< HEAD
-  const classLevels = [
-    { name: 'Class 1', slug: 'class-1' },
-    { name: 'Class 2', slug: 'class-2' },
-    { name: 'Class 3', slug: 'class-3' },
-    { name: 'Class 4', slug: 'class-4' },
-    { name: 'Class 5', slug: 'class-5' },
-    { name: 'Class 6', slug: 'class-6' },
-    { name: 'Class 7', slug: 'class-7' },
-    { name: 'Class 8', slug: 'class-8' },
-    { name: 'Class 9', slug: 'class-9' },
-    { name: 'Class 10', slug: 'class-10' },
-    { name: 'Class 11', slug: 'class-11' },
-    { name: 'Class 12', slug: 'class-12' },
-  ];
-=======
   const [classLevels, setClassLevels] = useState([]);
   const [states, setStates] = useState([]);
   const [boards, setBoards] = useState([]);
@@ -59,7 +43,6 @@ const CourseAdviceCard = () => {
     fetchData();
   }, []);
 
->>>>>>> 99458cd (Refactor tutor API and components for improved readability and functionality; add new API endpoints for subjects, cities, boards, and states.)
   const Languages = [
     { name: "Spoken English", slug: "spoken-english" },
     { name: "IELTS", slug: "ielts" },
@@ -87,8 +70,7 @@ const CourseAdviceCard = () => {
     "Online Exam Entrance Coaching",
   ];
 
-<<<<<<< HEAD
- 
+
   return (
     <div>
       <div className=" md:space-x-8 space-y-4 md:space-y-0 md:flex justify-between  ">
@@ -100,32 +82,13 @@ const CourseAdviceCard = () => {
             items-center justify-between w-[6.8rem]"
             >
               <span className="w-1.5 h-1.5 bg-[#136FB6] rounded-full text-[22px] " />
-=======
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  return (
-    <div>
-      <div className="md:space-x-8 space-y-4 md:space-y-0 md:flex justify-between flex-wrap">
-        {/* First Column */}
-        <div className="md:w-[48%] bg-[#F6FBFF] md:p-4 border-t-4 border-t-[#146DB2] rounded-lg space-y-6">
-          {/* Tuitions Section */}
-          <div className="mt-2 pl-3 md:pl-0 md:mt-0">
-            <h3 className="text-[#136FB6] text-[22px] font-semibold mx-2 mb-2 flex items-center justify-between w-[6.8rem]">
-              <span className="w-1.5 h-1.5 bg-[#136FB6] rounded-full text-[22px]" />
->>>>>>> 99458cd (Refactor tutor API and components for improved readability and functionality; add new API endpoints for subjects, cities, boards, and states.)
               Tuitions
             </h3>
             <div className="pt-2 pl-1 md:pl-0">
               {classLevels.map((item, index) => (
                 <button
                   key={index}
-<<<<<<< HEAD
                   className="p-2 m-1 md:m-2  text-[#8397A6] md:text-[18px]  text-left border rounded-md border-[#9EB5C7]"
-=======
-                  className="p-2 m-1 md:m-2 text-[#8397A6] md:text-[18px] text-left border rounded-md border-[#9EB5C7]"
->>>>>>> 99458cd (Refactor tutor API and components for improved readability and functionality; add new API endpoints for subjects, cities, boards, and states.)
                 >
                   <Link href={`/teacher-list?level=${item.name?.toLowerCase().replace(/ /g, '-')}`}>
                     {item.name} Tution
