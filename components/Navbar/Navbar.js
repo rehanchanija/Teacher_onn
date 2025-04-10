@@ -24,7 +24,7 @@ const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "About Us", href: "/about" },
     { name: "IGCSE", href: "/igcse" },
-    { name: "Store", href: "/store" },
+    { name: "Store", href: "/storePage" },
   ];
 
   const NavLink = ({ href, children, index }) => (

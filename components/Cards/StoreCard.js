@@ -1,35 +1,51 @@
-import Image from "next/image";
-import Link from "next/link";
+'use client';
+
+import { FaShoppingCart } from 'react-icons/fa';
+import { Rating } from '@smastrom/react-rating';
+import '@smastrom/react-rating/style.css';
+import Image from 'next/image';
 
 const StoreCard = () => {
   return (
-    <div className="p-3 md:w-[360px]  bg-[#D9E8F3] shadow-2xl  m-3 px-2 md:mr-4  rounded-lg ">
-      <Image src="/image/home/StoreCard.png" width={387} height={199} alt="" />
-      <div className=" space-y-2 px-2">
-        <h1 className="text-[20px] font-semibold pt-3">Bad Habits</h1>
-        <div className="flex items-center pt-3 ">
-          <span
-            href=""
-            className="p-1 mr-2 text-[14px] bg-[#1BADFF] text-white"
-          >
-            By VIJAY ANAND{" "}
-          </span>
-          <span className="text-[#F8A401]">★★★★☆ (79)</span>
-        </div>
-        <ol className="text-[#136EB4]">
-          <li className="text-[16px] font-bold pt-1.5  ">
-            Beginner | Intermediate | Expert | Adult/Casual learning{" "}
-          </li>
-          <li className="text-[16px] font-bold pt-1.5  ">Activity | Music</li>
-        </ol>
-        <p className="flex item-center py-2">
-          <span className="text-[24px] text-black pr-2 font-bold ">$282</span>
-          <span className="text-[20px] pt-[6px] text-[#667681] ">$500 </span>
-          <span className="text-[18px] pt-[6px] pl-2 text-red-500">(-43%)</span>
-        </p>
+    <div className="max-w-xs rounded-xl shadow-lg border border-gray-200 p-4 bg-white hover:shadow-xl transition-all">
+      <Image
+        src="/book.png"
+        width={300}
+        height={160}
+        alt="book"
+        className="w-full h-40 object-cover rounded-lg"
+      />
 
-        <button className="border border-[#136EB4] text-[#136EB4] font-semibold w-full  py-4 rounded-[4px] text-[17.36px] ">
-          <Link href="">Add to Cart</Link>
+      <div className="mt-4 space-y-2">
+        <h2 className="text-lg font-semibold text-gray-800">Bad Habits</h2>
+
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-[#136EB4] font-medium">By VIJAY ANAND</span>
+          <Rating style={{ maxWidth: 100 }} value={4.5} readOnly />
+          <span className="text-sm text-gray-500">(79)</span>
+        </div>
+
+        <div className="text-xs text-[#136EB4] flex flex-wrap gap-x-2">
+          <span>Beginner</span> |
+          <span>Intermediate</span> |
+          <span>Expert</span> |
+          <span>Adult/Casual learning</span>
+        </div>
+
+        <div className="text-xs text-[#136EB4] flex gap-3">
+          <span>Activity</span>
+          <span>Music</span>
+        </div>
+
+        <div className="flex items-baseline gap-2 mt-2">
+          <span className="text-lg font-semibold text-gray-800">₹282</span>
+          <span className="text-sm line-through text-gray-400">₹500</span>
+          <span className="text-sm text-red-500">(-43%)</span>
+        </div>
+
+        <button className="w-full flex items-center justify-center gap-2 mt-3 py-2 px-4 text-sm font-medium text-[#136EB4] border border-[#136EB4] rounded-lg hover:bg-[#136EB4] hover:text-white transition">
+          <FaShoppingCart />
+          Add to Cart
         </button>
       </div>
     </div>
